@@ -103,7 +103,7 @@ const PrinciplesSection = () => {
             <p className="text-white/70 text-sm leading-relaxed">
               In a world drowning in content, trust has become the scarcest
               resource. For corporations, this trust gap shows up in ESG reporting, 
-              CSR communications, and internal alignment — not just marketing.
+              CSR communications, and internal alignment, not just marketing.
             </p>
           </div>
           <div>
@@ -121,7 +121,7 @@ const PrinciplesSection = () => {
             </h4>
             <p className="text-white/70 text-sm leading-relaxed">
               Real people. Real stories. Real outcomes. Protected voices and 
-              authentic narratives—no stock footage, no generic scripts, no synthetic content.
+              authentic narratives: no stock footage, no generic scripts, no synthetic content.
             </p>
           </div>
         </motion.div>

@@ -51,7 +51,7 @@ const ServicesPreviewSection = () => {
             Videos That Move People to Action
           </h2>
           <p className="text-white/70 max-w-2xl mx-auto text-lg mb-4">
-            We work with nonprofits and corporations that need storytelling systems — not one-off content — 
+            We work with nonprofits and corporations that need storytelling systems, not one-off content, 
             to support funding, reporting, and stakeholder trust.
           </p>
           <p className="text-white/60 max-w-2xl mx-auto text-base">
