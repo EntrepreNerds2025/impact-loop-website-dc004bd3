@@ -48,7 +48,7 @@ const FounderSection = () => {
               Rovonn Russell
             </h2>
             <p className="text-xl text-white/80 font-serif italic mb-6">
-              Founder & Impact Story Director
+              Founder, Storytelling Systems Designer
             </p>
             <div className="space-y-4 text-white/70 leading-relaxed">
               <p>
@@ -64,6 +64,10 @@ const FounderSection = () => {
               <p>
                 "Every organization has stories worth telling. My job is to help you
                 tell them in a way that builds real trust—not just content."
+              </p>
+              <p>
+                His work supports nonprofits and corporate teams navigating trust, 
+                accountability, and public scrutiny in an AI-saturated world.
               </p>
             </div>
             <div className="mt-8">

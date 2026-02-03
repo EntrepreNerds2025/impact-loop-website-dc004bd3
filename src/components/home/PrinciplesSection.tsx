@@ -61,8 +61,8 @@ const PrinciplesSection = () => {
             What Makes Impact Loop Different
           </h2>
           <p className="text-white/80 max-w-2xl mx-auto text-lg">
-            We don't just make videos. We build storytelling systems that turn
-            your real-world impact into trust infrastructure.
+            We don't just make videos. We build storytelling systems for organizations and corporations 
+            that are accountable to funders, stakeholders, employees, and the public.
           </p>
         </motion.div>
 
@@ -102,7 +102,8 @@ const PrinciplesSection = () => {
             </h4>
             <p className="text-white/70 text-sm leading-relaxed">
               In a world drowning in content, trust has become the scarcest
-              resource. We help you earn it through authentic stories.
+              resource. For corporations, this trust gap shows up in ESG reporting, 
+              CSR communications, and internal alignment — not just marketing.
             </p>
           </div>
           <div>
