@@ -11,8 +11,8 @@ const services = [
     tagline: "Build internal storytelling capacity",
     description:
       "Equip your team with the skills to identify, capture, and share impact stories on an ongoing basis.",
-    forWho: "Organizations wanting to build sustainable in-house storytelling capabilities",
-    problem: "Your team sees impactful moments but doesn't know how to capture them effectively",
+    forWho: "Organizations and corporate teams responsible for impact, communications, or trust who want sustainable in-house storytelling capabilities",
+    problem: "Your team sees impactful moments but lacks a shared standard for capturing them in a way that holds up to internal and external scrutiny",
     outcomes: [
       "Story identification frameworks",
       "Interview techniques training",
@@ -27,8 +27,8 @@ const services = [
     tagline: "Self-guided system materials",
     description:
       "Access our complete storytelling framework, templates, and guides to implement at your own pace.",
-    forWho: "Self-starters who want proven systems without hands-on guidance",
-    problem: "You know stories matter but lack a structured approach to capturing them",
+    forWho: "Self-starters and teams in nonprofits or corporate CSR/ESG functions who want proven systems without hands-on guidance",
+    problem: "You know stories matter, but your organization lacks a consistent, defensible approach to capturing and using them",
     outcomes: [
       "Story Standard guidelines",
       "Story Types catalog",
@@ -43,8 +43,8 @@ const services = [
     tagline: "Guided implementation",
     description:
       "Work directly with Impact Loop to implement a storytelling system tailored to your organization.",
-    forWho: "Organizations ready to invest in a custom storytelling infrastructure",
-    problem: "You need expert guidance to build a system that fits your unique context",
+    forWho: "Organizations and corporate teams ready to invest in storytelling infrastructure that aligns with their mission, reporting, and accountability needs",
+    problem: "You need expert guidance to build a storytelling system that fits your context, stakeholders, and risk environment",
     outcomes: [
       "Custom framework adaptation",
       "Team training sessions",
@@ -58,8 +58,8 @@ const services = [
     title: "Video as Proof",
     tagline: "Limited availability production",
     description:
-      "Full-service cinematic video production for organizations ready to capture their most important stories.",
-    forWho: "Organizations with high-stakes storytelling needs (funding, campaigns, milestones)",
+      "Video production is offered selectively as part of a broader storytelling system — not as standalone content. Full-service cinematic video production for organizations ready to capture their most important stories.",
+    forWho: "Organizations with high-stakes storytelling needs, where credibility, scrutiny, and long-term reuse matter",
     problem: "You have stories that need professional-grade production to do them justice",
     outcomes: [
       "Cinematic video production",

@@ -46,15 +46,21 @@ const About = () => {
               </h2>
               <div className="prose prose-lg max-w-none text-impact-dark/70">
                 <p className="text-xl leading-relaxed mb-6">
-                  The nonprofit sector is facing a trust crisis. Traditional fundraising
-                  methods are losing effectiveness. Generic marketing content gets
-                  ignored. And AI-generated messaging is making audiences more
-                  skeptical than ever.
+                  Organizations across sectors are facing a trust crisis. Nonprofits
+                  are seeing declining fundraising effectiveness. Corporations are
+                  navigating increased ESG scrutiny, skepticism around CSR messaging,
+                  and rising expectations for proof. At the same time, AI-generated
+                  content is making all audiences more skeptical than ever.
                 </p>
                 <p className="leading-relaxed mb-6">
                   At the same time, there's never been more demand for proof. Funders
                   want to see real outcomes. Community members want to hear from real
                   people. Boards want tangible evidence of impact.
+                </p>
+                <p className="leading-relaxed mb-6">
+                  For corporate teams, this pressure shows up in sustainability
+                  reporting, CSR communications, and internal alignment — where
+                  credibility matters as much as clarity.
                 </p>
                 <p className="leading-relaxed">
                   Impact Loop bridges this gap. We help organizations capture authentic
@@ -103,6 +109,7 @@ const About = () => {
                     <li>• Capture real stories from real people</li>
                     <li>• Show the transformation you create</li>
                     <li>• Deploy strategically for maximum effect</li>
+                    <li>• Stand up to scrutiny from funders, stakeholders, and leadership</li>
                   </ul>
                 </div>
               </div>

@@ -9,7 +9,7 @@ const bookingTypes = [
     duration: "30-45 minutes",
     description:
       "A focused conversation to understand your storytelling challenges and explore potential solutions.",
-    ideal: "Organizations exploring whether Impact Loop is right for them",
+    ideal: "Nonprofit leaders, CSR teams, and communications directors exploring whether Impact Loop is the right fit",
   },
   {
     icon: Calendar,
@@ -17,7 +17,7 @@ const bookingTypes = [
     duration: "30 minutes",
     description:
       "Discuss your team's training needs and explore workshop options for building internal capacity.",
-    ideal: "Teams wanting to develop storytelling skills in-house",
+    ideal: "Internal teams responsible for impact reporting, communications, or stakeholder trust",
   },
   {
     icon: Clock,
@@ -25,7 +25,7 @@ const bookingTypes = [
     duration: "45 minutes",
     description:
       "Deep dive into implementing a custom storytelling system for your organization.",
-    ideal: "Organizations ready to invest in storytelling infrastructure",
+    ideal: "Organizations and corporate teams ready to invest in storytelling infrastructure that supports accountability and long-term trust",
   },
 ];
 
