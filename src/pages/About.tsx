@@ -59,12 +59,12 @@ const About = () => {
                 </p>
                 <p className="leading-relaxed mb-6">
                   For corporate teams, this pressure shows up in sustainability
-                  reporting, CSR communications, and internal alignment — where
+                  reporting, CSR communications, and internal alignment, where
                   credibility matters as much as clarity.
                 </p>
                 <p className="leading-relaxed">
                   Impact Loop bridges this gap. We help organizations capture authentic
-                  stories that serve as proof of their work—and deploy them
+                  stories that serve as proof of their work and deploy them
                   strategically to build lasting trust with every audience that matters.
                 </p>
               </div>
@@ -137,7 +137,7 @@ const About = () => {
                   that grows with your organization.
                 </p>
                 <p className="leading-relaxed mb-6">
-                  We don't just make videos—we help you build a repeatable process for
+                  We don't just make videos. We help you build a repeatable process for
                   identifying, capturing, and deploying the stories that matter most.
                   This means:
                 </p>
@@ -148,7 +148,7 @@ const About = () => {
                   <li>A strategy for using stories across all your communications</li>
                 </ul>
                 <p className="leading-relaxed">
-                  The result? An organization that doesn't just have content—but has a
+                  The result? An organization that doesn't just have content, but has a
                   library of proof that compounds in value over time.
                 </p>
               </div>

@@ -58,7 +58,7 @@ const services = [
     title: "Video as Proof",
     tagline: "Limited availability production",
     description:
-      "Video production is offered selectively as part of a broader storytelling system — not as standalone content. Full-service cinematic video production for organizations ready to capture their most important stories.",
+      "Video production is offered selectively as part of a broader storytelling system, not as standalone content. Full-service cinematic video production for organizations ready to capture their most important stories.",
     forWho: "Organizations with high-stakes storytelling needs, where credibility, scrutiny, and long-term reuse matter",
     problem: "You have stories that need professional-grade production to do them justice",
     outcomes: [

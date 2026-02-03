@@ -63,7 +63,7 @@ const FounderSection = () => {
               </p>
               <p>
                 "Every organization has stories worth telling. My job is to help you
-                tell them in a way that builds real trust—not just content."
+                tell them in a way that builds real trust, not just content."
               </p>
               <p>
                 His work supports nonprofits and corporate teams navigating trust, 

@@ -72,7 +72,7 @@ const HeroSection = () => {
             className="text-white/70 text-lg md:text-xl max-w-2xl mx-auto mb-4 leading-relaxed"
           >
             Impact Loop helps organizations and corporations turn real human impact into trusted
-            narratives — without sounding generic, performative, or synthetic.
+            narratives, without sounding generic, performative, or synthetic.
           </motion.p>
 
           {/* Supporting Line */}

@@ -171,7 +171,7 @@ const Bookings = () => {
                   </div>
                   <h4 className="font-semibold text-impact-dark mb-2">We Recommend</h4>
                   <p className="text-impact-dark/60 text-sm">
-                    You leave with clarity on next steps—whether with us or on your own.
+                    You leave with clarity on next steps, whether with us or on your own.
                   </p>
                 </div>
               </div>
