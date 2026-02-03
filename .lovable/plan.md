@@ -1,84 +1,71 @@
 
 
-# System Authority Copy Upgrades + Framework Text Fix
+# Corporate Positioning Upgrades: About, Services, and Bookings Pages
 
 ## Overview
-Implement the remaining system authority repositioning changes while keeping existing corporate language. Also remove "proven framework used" from the Framework section since the framework hasn't been used by organizations yet.
+These surgical copy edits strengthen corporate positioning across the About, Services, and Bookings pages while maintaining nonprofit relevance. The goal is to make CSR/ESG leads feel understood without alienating the nonprofit audience.
 
 ---
 
 ## Changes by File
 
-### 1. HeroSection.tsx
+### 1. About.tsx
 
-**Add Authority-Anchoring Line:**
-After the supporting line "Built for nonprofits, CSR teams...", add a new motion element:
-> "We combine storytelling standards, systems, and selective video production to help organizations earn trust at scale."
+**"Why Now" Section - First Paragraph (lines 48-52):**
+- Current: "The nonprofit sector is facing a trust crisis. Traditional fundraising methods are losing effectiveness. Generic marketing content gets ignored. And AI-generated messaging is making audiences more skeptical than ever."
+- New: "Organizations across sectors are facing a trust crisis. Nonprofits are seeing declining fundraising effectiveness. Corporations are navigating increased ESG scrutiny, skepticism around CSR messaging, and rising expectations for proof. At the same time, AI-generated content is making all audiences more skeptical than ever."
 
----
+**After "Demand for Proof" Paragraph (line 57):**
+Add new paragraph:
+> "For corporate teams, this pressure shows up in sustainability reporting, CSR communications, and internal alignment — where credibility matters as much as clarity."
 
-### 2. PrinciplesSection.tsx
-
-**Reframe Icon Grid (6 cards):**
-
-| Current | New Title | New Description |
-|---------|-----------|-----------------|
-| Impact Storytelling | Story Standards | A consistent methodology for capturing authentic narratives. |
-| Funding Ready Content | Proof-Backed Narratives | Stories structured as evidence, not just content. |
-| Cinematic Quality | Selective Craft, Not Volume | Quality over quantity. Every story earns its place. |
-| Strategic Videos | System-Led Production | Video as an output of a larger storytelling infrastructure. |
-| Confident Coverage | Ethical Story Governance | Protecting human voice in an AI-saturated world. |
-| Community Trust | Long-Term Trust Building | Compounding credibility through consistent, authentic storytelling. |
-
-**Update Three-Column Section:**
-- Change "Human First" to "Human Voice Protection"
-- Update description to: "Real people. Real stories. Real outcomes. Protected voices and authentic narratives—no stock footage, no generic scripts, no synthetic content."
+**"The Shift" Section - Add Bullet to "The Impact Loop Way" (line 105):**
+Add one more list item:
+> "Stand up to scrutiny from funders, stakeholders, and leadership"
 
 ---
 
-### 3. ImpactStatsSection.tsx
+### 2. Services.tsx
 
-**Complete Reframe - Remove Generic Stats:**
-- New headline: "What Changes When Stories Are Built With Proof"
-- Three qualitative outcomes (no percentages):
-  1. "Clearer conversations with funders and stakeholders"
-  2. "Stronger internal alignment around your mission"  
-  3. "Higher reuse and consistency across communications"
-- Context line: "Industry benchmarks suggest that authentic, story-driven content consistently outperforms generic messaging."
+**Service 1 - Workshops & Training (lines 14-15):**
+- forWho Current: "Organizations wanting to build sustainable in-house storytelling capabilities"
+- forWho New: "Organizations and corporate teams responsible for impact, communications, or trust who want sustainable in-house storytelling capabilities"
+- problem Current: "Your team sees impactful moments but doesn't know how to capture them effectively"
+- problem New: "Your team sees impactful moments but lacks a shared standard for capturing them in a way that holds up to internal and external scrutiny"
 
----
+**Service 2 - Framework Kit Access (lines 30-31):**
+- forWho Current: "Self-starters who want proven systems without hands-on guidance"
+- forWho New: "Self-starters and teams in nonprofits or corporate CSR/ESG functions who want proven systems without hands-on guidance"
+- problem Current: "You know stories matter but lack a structured approach to capturing them"
+- problem New: "You know stories matter, but your organization lacks a consistent, defensible approach to capturing and using them"
 
-### 4. ServicesPreviewSection.tsx
+**Service 3 - System Setup Pilot (lines 46-47):**
+- forWho Current: "Organizations ready to invest in a custom storytelling infrastructure"
+- forWho New: "Organizations and corporate teams ready to invest in storytelling infrastructure that aligns with their mission, reporting, and accountability needs"
+- problem Current: "You need expert guidance to build a system that fits your unique context"
+- problem New: "You need expert guidance to build a storytelling system that fits your context, stakeholders, and risk environment"
 
-**Section Label:**
-- Change "What We Create" to "How We Work"
-
-**Update Intro (after the first paragraph about nonprofits/corporations):**
-- Change: "Every production is designed with your strategic goals in mind—whether that's funding, awareness, or community building."
-- To: "Video is one output of a larger system. We produce selectively, guided by a clear storytelling standard."
-
-**Add Footer Line (after service cards, before CTA):**
-> "Video production is offered as part of a broader storytelling system, not as standalone content."
-
----
-
-### 5. FrameworkPreviewSection.tsx
-
-**Headline Update:**
-- Change: "A System for Storytelling"
-- To: "The Storytelling Standard Behind the Work"
-
-**Intro Paragraph Update (remove "proven framework used"):**
-- Current: "Access our proven framework used by nonprofits, CSR teams, and impact-led corporations to identify, capture, and deploy stories that stand up to scrutiny."
-- New: "Access our framework for nonprofits, CSR teams, and impact-led corporations to identify, capture, and deploy stories that stand up to scrutiny."
+**Service 4 - Video as Proof (lines 62-63):**
+- Add framing sentence to description: "Video production is offered selectively as part of a broader storytelling system — not as standalone content. Full-service cinematic video production for organizations ready to capture their most important stories."
+- forWho Current: "Organizations with high-stakes storytelling needs (funding, campaigns, milestones)"
+- forWho New: "Organizations with high-stakes storytelling needs, where credibility, scrutiny, and long-term reuse matter"
+- problem remains the same (already strong)
 
 ---
 
-### 6. FounderSection.tsx
+### 3. Bookings.tsx
 
-**First Paragraph Update:**
-- Current: "With over a decade of experience in documentary filmmaking and nonprofit communications, Rovonn founded Impact Loop to bridge the gap between authentic storytelling and strategic impact."
-- New: "With over a decade of experience in documentary filmmaking and organizational communications, Rovonn founded Impact Loop to design systems that protect human stories in an AI-saturated world."
+**Storytelling Diagnostic (line 12):**
+- ideal Current: "Organizations exploring whether Impact Loop is right for them"
+- ideal New: "Nonprofit leaders, CSR teams, and communications directors exploring whether Impact Loop is the right fit"
+
+**Workshop Discovery Call (line 20):**
+- ideal Current: "Teams wanting to develop storytelling skills in-house"
+- ideal New: "Internal teams responsible for impact reporting, communications, or stakeholder trust"
+
+**System Pilot Call (line 28):**
+- ideal Current: "Organizations ready to invest in storytelling infrastructure"
+- ideal New: "Organizations and corporate teams ready to invest in storytelling infrastructure that supports accountability and long-term trust"
 
 ---
 
@@ -86,12 +73,9 @@ After the supporting line "Built for nonprofits, CSR teams...", add a new motion
 
 | File | Changes |
 |------|---------|
-| HeroSection.tsx | Add authority-anchoring framing sentence |
-| PrinciplesSection.tsx | Reframe all 6 icon cards + "Human First" → "Human Voice Protection" |
-| ImpactStatsSection.tsx | Complete reframe - qualitative outcomes instead of stats |
-| ServicesPreviewSection.tsx | "What We Create" → "How We Work", reframe intro, add footer |
-| FrameworkPreviewSection.tsx | New headline + remove "proven framework used" |
-| FounderSection.tsx | Update first paragraph |
+| About.tsx | Expand opening paragraph, add corporate pressure paragraph, add scrutiny bullet |
+| Services.tsx | Update forWho and problem for all 4 services, add framing to Video as Proof |
+| Bookings.tsx | Update "Ideal for" descriptions on all 3 booking types |
 
-All changes preserve existing corporate language and maintain the premium visual design.
+All changes are copy updates only. No structural or layout modifications required.
 
