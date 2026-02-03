@@ -71,8 +71,8 @@ const VideoPortfolioSection = () => {
             Your Mission. <span className="text-gradient">In Motion.</span>
           </h2>
           <p className="text-white/60 max-w-2xl mx-auto text-lg">
-            Explore our portfolio of impact stories that have helped organizations
-            build trust and secure funding.
+            These stories were created using a repeatable standard designed to protect 
+            credibility in both nonprofit and corporate environments.
           </p>
         </motion.div>
 

@@ -50,7 +50,11 @@ const ServicesPreviewSection = () => {
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
             Videos That Move People to Action
           </h2>
-          <p className="text-white/70 max-w-2xl mx-auto text-lg">
+          <p className="text-white/70 max-w-2xl mx-auto text-lg mb-4">
+            We work with nonprofits and corporations that need storytelling systems — not one-off content — 
+            to support funding, reporting, and stakeholder trust.
+          </p>
+          <p className="text-white/60 max-w-2xl mx-auto text-base">
             Every production is designed with your strategic goals in mind—whether
             that's funding, awareness, or community building.
           </p>

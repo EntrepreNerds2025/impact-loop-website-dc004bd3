@@ -69,10 +69,20 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="text-white/70 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
+            className="text-white/70 text-lg md:text-xl max-w-2xl mx-auto mb-4 leading-relaxed"
           >
-            Impact Loop helps organizations turn real human impact into trusted
-            narratives without sounding generic or synthetic.
+            Impact Loop helps organizations and corporations turn real human impact into trusted
+            narratives — without sounding generic, performative, or synthetic.
+          </motion.p>
+
+          {/* Supporting Line */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="text-white/50 text-base max-w-xl mx-auto mb-10"
+          >
+            Built for nonprofits, CSR teams, and impact-led organizations responsible for trust.
           </motion.p>
 
           {/* CTAs */}

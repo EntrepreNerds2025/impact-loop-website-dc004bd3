@@ -45,8 +45,8 @@ const FrameworkPreviewSection = () => {
             A System for Storytelling
           </h2>
           <p className="text-impact-dark/60 max-w-2xl mx-auto text-lg">
-            Access our proven framework for identifying, capturing, and deploying
-            impact stories that build lasting trust.
+            Access our proven framework used by nonprofits, CSR teams, and impact-led corporations 
+            to identify, capture, and deploy stories that stand up to scrutiny.
           </p>
         </motion.div>
 
