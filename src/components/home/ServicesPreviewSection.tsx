@@ -45,7 +45,7 @@ const ServicesPreviewSection = () => {
           className="text-center mb-16"
         >
           <p className="text-white/60 font-medium text-sm uppercase tracking-widest mb-4">
-            What We Create
+            How We Work
           </p>
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
             Videos That Move People to Action
@@ -55,8 +55,7 @@ const ServicesPreviewSection = () => {
             to support funding, reporting, and stakeholder trust.
           </p>
           <p className="text-white/60 max-w-2xl mx-auto text-base">
-            Every production is designed with your strategic goals in mind—whether
-            that's funding, awareness, or community building.
+            Video is one output of a larger system. We produce selectively, guided by a clear storytelling standard.
           </p>
         </motion.div>
 
@@ -83,12 +82,22 @@ const ServicesPreviewSection = () => {
           ))}
         </div>
 
+        {/* Footer Line */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="text-center mt-10 text-white/50 text-sm max-w-xl mx-auto"
+        >
+          Video production is offered as part of a broader storytelling system, not as standalone content.
+        </motion.p>
+
         {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="text-center mt-12"
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="text-center mt-8"
         >
           <Link
             to="/services"

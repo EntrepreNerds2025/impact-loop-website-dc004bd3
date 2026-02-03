@@ -80,9 +80,19 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="text-white/50 text-base max-w-xl mx-auto mb-10"
+            className="text-white/50 text-base max-w-xl mx-auto mb-4"
           >
             Built for nonprofits, CSR teams, and impact-led organizations responsible for trust.
+          </motion.p>
+
+          {/* Authority-Anchoring Line */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            className="text-white/40 text-sm max-w-2xl mx-auto mb-10"
+          >
+            We combine storytelling standards, systems, and selective video production to help organizations earn trust at scale.
           </motion.p>
 
           {/* CTAs */}

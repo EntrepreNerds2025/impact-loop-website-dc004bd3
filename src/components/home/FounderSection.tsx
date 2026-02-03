@@ -53,8 +53,8 @@ const FounderSection = () => {
             <div className="space-y-4 text-white/70 leading-relaxed">
               <p>
                 With over a decade of experience in documentary filmmaking and
-                nonprofit communications, Rovonn founded Impact Loop to bridge the
-                gap between authentic storytelling and strategic impact.
+                organizational communications, Rovonn founded Impact Loop to design 
+                systems that protect human stories in an AI-saturated world.
               </p>
               <p>
                 Having worked with organizations across Canada, he's seen firsthand

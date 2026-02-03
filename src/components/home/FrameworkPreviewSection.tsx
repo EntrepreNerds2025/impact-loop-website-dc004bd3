@@ -42,10 +42,10 @@ const FrameworkPreviewSection = () => {
             The Framework
           </p>
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-impact-dark mb-4">
-            A System for Storytelling
+            The Storytelling Standard Behind the Work
           </h2>
           <p className="text-impact-dark/60 max-w-2xl mx-auto text-lg">
-            Access our proven framework used by nonprofits, CSR teams, and impact-led corporations 
+            Access our framework for nonprofits, CSR teams, and impact-led corporations 
             to identify, capture, and deploy stories that stand up to scrutiny.
           </p>
         </motion.div>
