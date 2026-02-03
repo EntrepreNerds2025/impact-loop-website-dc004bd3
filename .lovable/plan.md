@@ -1,228 +1,92 @@
 
 
-# Impact Loop - Premium Website with Light Client Access
+# Surgical Copy Edits: Corporate Trust Positioning
 
 ## Overview
-A cinematic, premium website that positions Impact Loop as a storytelling systems company. Combines the visual excellence of the original impactloop.ca with a lightweight, secure client access system for framework materials and resources — without becoming a SaaS dashboard.
+These are targeted text changes to strengthen corporate positioning without structural modifications. The goal is to make CSR/ESG leads feel understood while maintaining nonprofit relevance.
 
 ---
 
-## Part 1: Public Website (No Login Required)
+## Changes by File
 
-### Homepage
-- **Hero Section**: Full-screen video background with dark overlay
-  - Headline: "Real Stories. Real Proof. Real Trust."
-  - Subheadline: "Impact Loop helps organizations turn real human impact into trusted narratives without sounding generic or synthetic."
-  - Two CTAs: "Book a Storytelling Diagnostic" + "Explore the Framework"
-- **What Makes Impact Loop Different**: System principles section (blue background)
-- **Video Portfolio Grid**: 2x3 grid with looping GIF previews, Vimeo lightbox with autoplay
-- **Framework Preview**: Teaser cards for the framework (locked content indicators)
-- **Client Logos**: Horizontal logo bar
-- **Impact Statistics**: "22X Higher Impact" section
-- **Founder Section**: Rovonn Russell bio with photo (purple background)
-- **Footer**: Navigation, contact info, login link
+### 1. HeroSection.tsx
 
-### About Page
-- Why Impact Loop exists now
-- The shift from content to trust
-- Storytelling as infrastructure philosophy
-- Founder credibility section
-- CTA: Book a diagnostic
+**Subheadline Update:**
+- Current: "Impact Loop helps organizations turn real human impact into trusted narratives without sounding generic or synthetic."
+- New: "Impact Loop helps organizations and corporations turn real human impact into trusted narratives — without sounding generic, performative, or synthetic."
 
-### Work/Portfolio Page
-- Filterable video portfolio grid
-- Individual project pages with:
-  - Vimeo embed
-  - Story context
-  - What changed / outcomes
-  - How trust was protected
-- CTA: "See the process behind this work"
-
-### Services Page
-Services presented as pathways, not packages:
-1. **Workshops & Training** - Build internal storytelling capacity
-2. **Framework Kit Access** - Self-guided system materials
-3. **System Setup (Pilot)** - Guided implementation
-4. **Video as Proof** - Limited availability production
-
-Each includes: who it's for, problem solved, outcomes, CTA
-
-### Bookings Page (Public)
-- Embedded booking system (Calendly or native)
-- Booking types:
-  - Storytelling Diagnostic (30-45 min)
-  - Workshop Discovery Call
-  - System Pilot Call
-- Intake form integration
+**Add Supporting Line (after subheadline):**
+- "Built for nonprofits, CSR teams, and impact-led organizations responsible for trust."
 
 ---
 
-## Part 2: Authentication & User Roles
+### 2. PrinciplesSection.tsx
 
-### Role Structure (Supabase)
-| Role | Access Level |
-|------|-------------|
-| Visitor | Public pages only |
-| Free Member | Email signup, limited resources |
-| Client | Full framework kit access |
-| Subscriber | Future system access |
-| Admin | Full management access |
+**Intro Copy Update:**
+- Current: "Most organizations produce content. Very few operate with a storytelling standard. Impact Loop builds the systems that make trust repeatable."
+- New: "We don't just make videos. We build storytelling systems for organizations and corporations that are accountable to funders, stakeholders, employees, and the public."
 
-### Auth Features
-- Email/password login
-- Magic link option
-- Login link in footer + header
-- Secure role-based access control
-- No complex onboarding flow
+**"Beyond Content" Section - Add Corporate Signal:**
+After "In a world drowning in content, trust has become the scarcest resource." add:
+- "For corporations, this trust gap shows up in ESG reporting, CSR communications, and internal alignment — not just marketing."
 
 ---
 
-## Part 3: Client Access Area (Post-Login)
+### 3. FrameworkPreviewSection.tsx
 
-**Design Philosophy**: This is NOT a dashboard. Clean, calm, link-based navigation. Premium feel, not software UI.
-
-### Client Access Landing
-Simple page with clear sections:
-1. **Start Here** → Orientation
-2. **Framework Modules** → Core content
-3. **Templates & Downloads** → Resources
-4. **Book a Session** → Scheduling
-5. **Account** → Profile management
-
-### Start Here Section
-- Welcome message
-- Short orientation text
-- Recommended order: Story Standard → Story Types → Intake Prompts
-- CTA to book onboarding call
-
-### Framework Modules
-- Card-style module list
-- Each card shows: title, description, access level indicator
-- "Open Module" button
-- Links to: Gamma documents, PDFs, or hosted pages
-- Locked indicators for unpurchased content
-
-### Templates & Downloads
-- Filterable resource list
-- Categories: Templates, Checklists, Guides
-- Each resource: description, format badge, download button
-- Access control based on user role
-
-### Book a Session
-- Embedded booking with auto-filled user info
-- Same booking types as public, but personalized
-
-### Account Page
-- Email display
-- Purchased products list
-- Current access level
-- Logout button
-- No analytics or tracking visible
+**Intro Paragraph Update:**
+- Current: "Access our proven framework for identifying, capturing, and deploying impact stories that build lasting trust."
+- New: "Access our proven framework used by nonprofits, CSR teams, and impact-led corporations to identify, capture, and deploy stories that stand up to scrutiny."
 
 ---
 
-## Part 4: Resource Management (Admin)
+### 4. ServicesPreviewSection.tsx
 
-### Resource Library Structure
-Database fields for each resource:
-- Title
-- Summary
-- Type (PDF, doc, video, checklist)
-- Category
-- Tags
-- Access Level (public / free / paid)
-- File URL or embed URL
-- Published toggle
-
-### Admin Capabilities
-- Add/edit/delete resources
-- Manage module content
-- View user list and roles
-- Manual role assignment
+**Add Clarifying Sentence (near top of section intro):**
+- "We work with nonprofits and corporations that need storytelling systems — not one-off content — to support funding, reporting, and stakeholder trust."
 
 ---
 
-## Part 5: Payments (Stripe Integration)
+### 5. VideoPortfolioSection.tsx
 
-### Products
-1. **Framework Kit** - One-time purchase
-2. **Workshop Tickets** - Event-based (if needed)
-3. **Subscription** - Future-ready structure
-
-### Purchase Flow
-1. User clicks "Get Framework Kit"
-2. Stripe Checkout opens
-3. Payment processed
-4. Webhook updates user role to "Client"
-5. Confirmation email sent
-6. Immediate access to locked content
+**Update Portfolio Intro (credibility line above grid):**
+- Current: "Each story below was captured, reviewed, and approved using our storytelling standard."
+- New: "These stories were created using a repeatable standard designed to protect credibility in both nonprofit and corporate environments."
 
 ---
 
-## Part 6: Technical Architecture
+### 6. FounderSection.tsx
 
-### Frontend
-- React with TypeScript
-- Tailwind CSS for styling
-- Framer Motion or CSS animations for smooth reveals
-- Lazy loading for video/GIF performance
-- Fully responsive design
+**Title Update:**
+- Current: "Founder, Storytelling Systems Designer"
+- Confirm this is already updated (from previous changes)
 
-### Backend (Supabase)
-- **Auth**: User authentication with role management
-- **Database Tables**:
-  - `profiles` - User info
-  - `user_roles` - Role assignments
-  - `resources` - Framework materials
-  - `modules` - Framework modules
-  - `purchases` - Payment records
-- **Row Level Security**: Role-based content access
-- **Storage**: For downloadable files
-
-### Integrations
-- **Stripe**: Payment processing + webhooks
-- **Vimeo**: Video embeds in lightbox modals
-- **Calendly** (or native): Booking system
+**Add Bio Sentence:**
+After existing bio paragraphs, add:
+- "His work supports nonprofits and corporate teams navigating trust, accountability, and public scrutiny in an AI-saturated world."
 
 ---
 
-## Visual Design Principles
-- Dark hero sections with motion video
-- Blue (#4F5BD5) and purple (#7C3AED) accent sections
-- Clean serif + sans-serif typography pairing
-- Generous whitespace
-- Subtle scroll animations
-- No stock-photo marketing visuals
-- Premium, calm, intentional feel
+## Language Guidelines (Applied Throughout)
+
+**Words to USE:**
+- Trust, accountability, scrutiny, governance, proof, systems
+
+**Words to AVOID:**
+- Brands, marketing teams, campaigns, brand storytelling
 
 ---
 
-## What's NOT Being Built
-❌ Dashboards with widgets  
-❌ Workflow/task tracking  
-❌ Story submission UI  
-❌ Analytics panels  
-❌ Complex user metrics  
-❌ Course platform features  
+## Technical Summary
 
----
+| File | Type of Change |
+|------|----------------|
+| HeroSection.tsx | Subheadline edit + add supporting line |
+| PrinciplesSection.tsx | Intro rewrite + add corporate signal paragraph |
+| FrameworkPreviewSection.tsx | Intro paragraph edit |
+| ServicesPreviewSection.tsx | Add clarifying sentence |
+| VideoPortfolioSection.tsx | Update credibility line |
+| FounderSection.tsx | Add bio sentence |
 
-## Future-Ready Architecture
-The database structure will support future additions of:
-- Story intake forms
-- Review status tracking
-- Proof attachments
-- Reporting views
-
-But these will NOT be built or surfaced in this phase.
-
----
-
-## Build Order
-1. **Phase 1**: Core public pages with video portfolio (original impactloop.ca recreation)
-2. **Phase 2**: Supabase setup with auth and user roles
-3. **Phase 3**: Client access area with framework modules
-4. **Phase 4**: Resource library and templates section
-5. **Phase 5**: Stripe integration for Framework Kit purchase
-6. **Phase 6**: Polish, animations, and final content integration
+All changes are copy updates only. No structural or layout modifications required.
 
