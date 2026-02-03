@@ -1,5 +1,21 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { MessageSquare, Users, RefreshCw } from "lucide-react";
+
+const outcomes = [
+  {
+    icon: MessageSquare,
+    title: "Clearer conversations with funders and stakeholders",
+  },
+  {
+    icon: Users,
+    title: "Stronger internal alignment around your mission",
+  },
+  {
+    icon: RefreshCw,
+    title: "Higher reuse and consistency across communications",
+  },
+];
 
 const ImpactStatsSection = () => {
   const ref = useRef(null);
@@ -9,66 +25,52 @@ const ImpactStatsSection = () => {
     <section ref={ref} className="py-24 bg-white">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Main Stat */}
+          {/* Headline */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-8xl md:text-9xl lg:text-[12rem] font-serif font-bold text-gradient leading-none">
-              22X
-            </span>
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-impact-dark mb-6">
+              What Changes When Stories Are Built With Proof
+            </h2>
           </motion.div>
 
-          {/* Supporting Text */}
+          {/* Outcomes Grid */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-4 md:mt-6"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8"
           >
-            <h3 className="font-serif text-2xl md:text-3xl font-semibold text-impact-dark mb-4">
-              Higher Impact
-            </h3>
-            <p className="text-impact-dark/60 text-lg max-w-2xl mx-auto leading-relaxed">
-              Organizations that invest in authentic storytelling see up to 22x more
-              engagement than those using generic content. Real stories create real
-              trust—and real results.
-            </p>
+            {outcomes.map((outcome, index) => (
+              <motion.div
+                key={outcome.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                className="text-center p-6"
+              >
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-impact-blue/10 to-impact-purple/10 flex items-center justify-center mx-auto mb-4">
+                  <outcome.icon className="w-7 h-7 text-impact-blue" />
+                </div>
+                <p className="text-impact-dark font-medium text-lg leading-relaxed">
+                  {outcome.title}
+                </p>
+              </motion.div>
+            ))}
           </motion.div>
 
-          {/* Secondary Stats */}
-          <motion.div
+          {/* Context Line */}
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8"
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="mt-12 text-impact-dark/50 text-base max-w-2xl mx-auto"
           >
-            <div className="text-center">
-              <span className="text-4xl md:text-5xl font-serif font-bold text-impact-blue">
-                87%
-              </span>
-              <p className="text-impact-dark/60 mt-2 text-sm">
-                of funders prefer video over written proposals
-              </p>
-            </div>
-            <div className="text-center">
-              <span className="text-4xl md:text-5xl font-serif font-bold text-impact-purple">
-                3.5x
-              </span>
-              <p className="text-impact-dark/60 mt-2 text-sm">
-                higher retention with story-driven content
-              </p>
-            </div>
-            <div className="text-center">
-              <span className="text-4xl md:text-5xl font-serif font-bold text-impact-blue">
-                94%
-              </span>
-              <p className="text-impact-dark/60 mt-2 text-sm">
-                of viewers trust authentic testimonials
-              </p>
-            </div>
-          </motion.div>
+            Industry benchmarks suggest that authentic, story-driven content consistently 
+            outperforms generic messaging.
+          </motion.p>
         </div>
       </div>
     </section>

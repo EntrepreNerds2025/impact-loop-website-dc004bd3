@@ -13,33 +13,33 @@ import {
 const principles = [
   {
     icon: Film,
-    title: "Impact Storytelling",
-    description: "Stories rooted in real outcomes, not marketing speak.",
+    title: "Story Standards",
+    description: "A consistent methodology for capturing authentic narratives.",
   },
   {
     icon: Target,
-    title: "Funding Ready Content",
-    description: "Videos that speak directly to funders and decision-makers.",
+    title: "Proof-Backed Narratives",
+    description: "Stories structured as evidence, not just content.",
   },
   {
     icon: Award,
-    title: "Cinematic Quality",
-    description: "Production value that matches your mission's importance.",
+    title: "Selective Craft, Not Volume",
+    description: "Quality over quantity. Every story earns its place.",
   },
   {
     icon: Video,
-    title: "Strategic Videos",
-    description: "Every frame serves a purpose in your larger story.",
+    title: "System-Led Production",
+    description: "Video as an output of a larger storytelling infrastructure.",
   },
   {
     icon: Shield,
-    title: "Confident Coverage",
-    description: "Protecting trust while amplifying impact.",
+    title: "Ethical Story Governance",
+    description: "Protecting human voice in an AI-saturated world.",
   },
   {
     icon: Heart,
-    title: "Community Trust",
-    description: "Building lasting relationships through authentic storytelling.",
+    title: "Long-Term Trust Building",
+    description: "Compounding credibility through consistent, authentic storytelling.",
   },
 ];
 
@@ -117,11 +117,11 @@ const PrinciplesSection = () => {
           </div>
           <div>
             <h4 className="font-serif text-xl font-semibold mb-3">
-              Human First
+              Human Voice Protection
             </h4>
             <p className="text-white/70 text-sm leading-relaxed">
-              Real people. Real stories. Real outcomes. No stock footage, no
-              generic scripts, no synthetic narratives.
+              Real people. Real stories. Real outcomes. Protected voices and 
+              authentic narratives—no stock footage, no generic scripts, no synthetic content.
             </p>
           </div>
         </motion.div>
