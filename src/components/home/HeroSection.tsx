@@ -14,22 +14,8 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Video Background Placeholder */}
       <div className="absolute inset-0 z-0">
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-impact-dark/80 via-impact-dark/60 to-impact-dark z-10" />
-        
-        {/* Placeholder for video - animated gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-impact-dark via-impact-dark-lighter to-impact-purple/20 animate-pulse" />
-        
-        {/* When you have the video, replace the above with: */}
-        {/* <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover"
-        >
-          <source src="/your-video.mp4" type="video/mp4" />
-        </video> */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--impact-dark))]/80 via-[hsl(var(--impact-dark))]/60 to-[hsl(var(--impact-dark))] z-10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--impact-dark))] via-[hsl(var(--impact-dark-lighter))] to-[hsl(var(--impact-purple))]/20" />
       </div>
 
       {/* Content */}
@@ -40,7 +26,6 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="max-w-4xl mx-auto"
         >
-          {/* Tagline */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -50,7 +35,6 @@ const HeroSection = () => {
             Cinematic storytelling for changemakers
           </motion.p>
 
-          {/* Main Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -64,7 +48,6 @@ const HeroSection = () => {
             Real Trust.
           </motion.h1>
 
-          {/* Subheadline */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -75,7 +58,6 @@ const HeroSection = () => {
             narratives, without sounding generic, performative, or synthetic.
           </motion.p>
 
-          {/* Supporting Line */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -85,7 +67,6 @@ const HeroSection = () => {
             Built for nonprofits, CSR teams, and impact-led organizations responsible for trust.
           </motion.p>
 
-          {/* Authority-Anchoring Line */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -95,7 +76,6 @@ const HeroSection = () => {
             We combine storytelling standards, systems, and selective video production to help organizations earn trust at scale.
           </motion.p>
 
-          {/* CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -110,7 +90,7 @@ const HeroSection = () => {
             </Link>
             <Link
               to="/services"
-              className="btn-secondary text-base"
+              className="bg-transparent border border-white text-white hover:bg-white hover:text-[hsl(var(--impact-dark))] font-medium px-8 py-3.5 rounded-sm transition-all duration-300 uppercase tracking-widest text-sm"
             >
               Explore the Framework
             </Link>
