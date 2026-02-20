@@ -1,25 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* Impact Loop Design System
-   Premium cinematic aesthetic with dark themes, blue/purple accents
+   Light, editorial, high-end aesthetic
+   Premium typography + cinematic scroll animations
    All colors in HSL format
 */
 
 @layer base {
   :root {
-    /* Core colors - Light mode (rarely used, dark is primary) */
+    /* Light theme - Primary */
     --background: 0 0% 100%;
-    --foreground: 220 20% 10%;
+    --foreground: 220 15% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 20% 10%;
+    --card-foreground: 220 15% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 10%;
+    --popover-foreground: 220 15% 15%;
 
     /* Primary Blue - Impact Loop signature */
     --primary: 235 66% 58%;
@@ -42,7 +43,7 @@
     --input: 220 13% 91%;
     --ring: 235 66% 58%;
 
-    --radius: 0.5rem;
+    --radius: 0.25rem;
 
     /* Custom Impact Loop tokens */
     --impact-blue: 235 66% 58%;
@@ -94,11 +95,11 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
   }
 }
 
@@ -115,16 +116,20 @@
     @apply bg-[hsl(var(--impact-dark))] text-white;
   }
 
+  .section-cream {
+    @apply bg-[hsl(var(--impact-cream))];
+  }
+
   .text-gradient {
     @apply bg-gradient-to-r from-[hsl(var(--impact-blue))] to-[hsl(var(--impact-purple))] bg-clip-text text-transparent;
   }
 
   .btn-primary {
-    @apply bg-[hsl(var(--impact-blue))] hover:bg-[hsl(var(--impact-blue))]/90 text-white font-medium px-6 py-3 rounded-md transition-all duration-300;
+    @apply bg-[hsl(var(--impact-blue))] hover:bg-[hsl(var(--impact-blue))]/90 text-white font-medium px-8 py-3.5 rounded-sm transition-all duration-300 uppercase tracking-widest text-sm;
   }
 
   .btn-secondary {
-    @apply bg-transparent border-2 border-white text-white hover:bg-white hover:text-[hsl(var(--impact-dark))] font-medium px-6 py-3 rounded-md transition-all duration-300;
+    @apply bg-transparent border border-foreground text-foreground hover:bg-foreground hover:text-background font-medium px-8 py-3.5 rounded-sm transition-all duration-300 uppercase tracking-widest text-sm;
   }
 }
 
@@ -155,15 +160,5 @@
     to {
       opacity: 1;
     }
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
   }
 }

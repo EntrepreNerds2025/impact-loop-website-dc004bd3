@@ -28,7 +28,7 @@ const Header = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-impact-dark/95 backdrop-blur-md py-4"
+          ? "bg-background/95 backdrop-blur-md py-4 shadow-sm"
           : "bg-transparent py-6"
       }`}
     >
@@ -38,7 +38,9 @@ const Header = () => {
           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-impact-blue to-impact-purple flex items-center justify-center">
             <span className="text-white font-serif font-bold text-lg">IL</span>
           </div>
-          <span className="text-white font-serif text-xl font-semibold tracking-wide">
+          <span className={`font-serif text-xl font-semibold tracking-wide transition-colors duration-500 ${
+            isScrolled ? "text-foreground" : "text-white"
+          }`}>
             Impact Loop
           </span>
         </Link>
@@ -50,9 +52,13 @@ const Header = () => {
               key={link.href}
               to={link.href}
               className={`text-sm font-medium transition-colors duration-300 ${
-                location.pathname === link.href
-                  ? "text-white"
-                  : "text-white/70 hover:text-white"
+                isScrolled
+                  ? location.pathname === link.href
+                    ? "text-foreground"
+                    : "text-foreground/60 hover:text-foreground"
+                  : location.pathname === link.href
+                    ? "text-white"
+                    : "text-white/70 hover:text-white"
               }`}
             >
               {link.label}
@@ -60,7 +66,11 @@ const Header = () => {
           ))}
           <Link
             to="/login"
-            className="text-sm font-medium text-white/70 hover:text-white transition-colors duration-300"
+            className={`text-sm font-medium transition-colors duration-300 ${
+              isScrolled
+                ? "text-foreground/60 hover:text-foreground"
+                : "text-white/70 hover:text-white"
+            }`}
           >
             Login
           </Link>
@@ -68,7 +78,9 @@ const Header = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-white p-2"
+          className={`md:hidden p-2 transition-colors duration-300 ${
+            isScrolled ? "text-foreground" : "text-white"
+          }`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -83,7 +95,7 @@ const Header = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-impact-dark/98 backdrop-blur-md"
+            className="md:hidden bg-background/98 backdrop-blur-md"
           >
             <nav className="container mx-auto px-6 py-6 flex flex-col gap-4">
               {navLinks.map((link) => (
@@ -93,8 +105,8 @@ const Header = () => {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`text-lg font-medium py-2 transition-colors duration-300 ${
                     location.pathname === link.href
-                      ? "text-white"
-                      : "text-white/70"
+                      ? "text-foreground"
+                      : "text-foreground/60"
                   }`}
                 >
                   {link.label}
@@ -103,7 +115,7 @@ const Header = () => {
               <Link
                 to="/login"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-lg font-medium py-2 text-white/70"
+                className="text-lg font-medium py-2 text-foreground/60"
               >
                 Login
               </Link>

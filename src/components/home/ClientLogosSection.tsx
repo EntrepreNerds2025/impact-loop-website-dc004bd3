@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { fadeIn, staggerContainer } from "@/hooks/useScrollAnimation";
 
-// Placeholder logos - replace with actual client logos
 const clientLogos = [
   { id: 1, name: "Community Foundation", placeholder: "CF" },
   { id: 2, name: "Health Alliance", placeholder: "HA" },
@@ -22,36 +22,30 @@ const ClientLogosSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section ref={ref} className="py-16 bg-impact-cream">
+    <section ref={ref} className="py-16 bg-background">
       <div className="container mx-auto px-6">
         <motion.p
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center text-impact-dark/50 text-sm uppercase tracking-widest mb-10"
+          variants={fadeIn}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="text-center text-muted-foreground text-sm uppercase tracking-widest mb-10"
         >
           Trusted by organizations making real impact
         </motion.p>
 
-        {/* Logo Grid */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          variants={staggerContainer}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
           className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center justify-items-center"
         >
-          {clientLogos.map((logo, index) => (
+          {clientLogos.map((logo) => (
             <motion.div
               key={logo.id}
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="w-20 h-12 flex items-center justify-center text-impact-dark/30 hover:text-impact-dark/50 transition-colors duration-300"
+              variants={fadeIn}
+              className="w-20 h-12 flex items-center justify-center text-muted-foreground/50 hover:text-foreground/60 transition-colors duration-300"
             >
-              {/* Replace with actual logo images */}
-              <span className="font-serif text-xl font-bold">
-                {logo.placeholder}
-              </span>
+              <span className="font-serif text-xl font-bold">{logo.placeholder}</span>
             </motion.div>
           ))}
         </motion.div>
