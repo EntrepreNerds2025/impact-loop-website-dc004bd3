@@ -21,6 +21,7 @@ const Header = () => {
     { href: "/about", label: "About" },
     { href: "/work", label: "Work" },
     { href: "/services", label: "Services" },
+    { href: "/impact-report-hub", label: "Impact Hub" },
     { href: "/bookings", label: "Book" },
   ];
 
@@ -64,16 +65,6 @@ const Header = () => {
               {link.label}
             </Link>
           ))}
-          <Link
-            to="/login"
-            className={`text-sm font-medium transition-colors duration-300 ${
-              isScrolled
-                ? "text-foreground/60 hover:text-foreground"
-                : "text-white/70 hover:text-white"
-            }`}
-          >
-            Login
-          </Link>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -112,13 +103,6 @@ const Header = () => {
                   {link.label}
                 </Link>
               ))}
-              <Link
-                to="/login"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-lg font-medium py-2 text-foreground/60"
-              >
-                Login
-              </Link>
             </nav>
           </motion.div>
         )}
