@@ -15,19 +15,15 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-          poster="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1920&q=80"
-        >
-          <source
-            src="https://cdn.coverr.co/videos/coverr-aerial-view-of-city-at-night-2559/1080p.mp4"
-            type="video/mp4"
+        <div className="absolute inset-0 overflow-hidden">
+          <iframe
+            src="https://player.vimeo.com/video/1135409559?background=1&autoplay=1&loop=1&muted=1&autopause=0"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] min-w-[120%] min-h-[120%] pointer-events-none"
+            style={{ border: 'none' }}
+            allow="autoplay; fullscreen"
+            title="Background video"
           />
-        </video>
+        </div>
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--impact-dark))]/85 via-[hsl(var(--impact-dark))]/70 to-[hsl(var(--impact-dark))] z-10" />
       </div>
 
