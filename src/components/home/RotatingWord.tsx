@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const words = ["Communities", "Partners", "People", "Change"];
+const headlines = [
+  "Stories that Earn Donor Trust.",
+  "Stories that Earn Partner Trust.",
+  "Stories that Earn Stakeholder Trust.",
+];
 
-const RotatingWord = () => {
+const RotatingHeadline = () => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -11,37 +15,42 @@ const RotatingWord = () => {
     if (prefersReduced) return;
 
     const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % words.length);
-    }, 2000);
+      setIndex((prev) => (prev + 1) % headlines.length);
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
-  const prefersReduced = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const prefersReduced =
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (prefersReduced) {
-    return <span className="text-gradient">Communities</span>;
+    return <span>{headlines[0]}</span>;
   }
 
   return (
-    <span className="inline-block relative overflow-hidden" style={{ minWidth: "4ch" }}>
+    <span
+      className="block relative overflow-hidden"
+      style={{ perspective: "1200px", minHeight: "1.2em" }}
+    >
       <AnimatePresence mode="wait">
         <motion.span
-          key={words[index]}
-          initial={{ rotateX: -90, opacity: 0, y: 20 }}
-          animate={{ rotateX: 0, opacity: 1, y: 0 }}
-          exit={{ rotateX: 90, opacity: 0, y: -20 }}
+          key={headlines[index]}
+          initial={{ rotateX: 90, opacity: 0, transformOrigin: "bottom center" }}
+          animate={{ rotateX: 0, opacity: 1, transformOrigin: "bottom center" }}
+          exit={{ rotateX: -90, opacity: 0, transformOrigin: "top center" }}
           transition={{
-            duration: 0.5,
+            duration: 0.7,
             ease: [0.23, 1, 0.32, 1],
           }}
-          className="text-gradient inline-block"
-          style={{ perspective: "600px", transformStyle: "preserve-3d" }}
+          className="block"
+          style={{ backfaceVisibility: "hidden" }}
         >
-          {words[index]}
+          {headlines[index]}
         </motion.span>
       </AnimatePresence>
     </span>
   );
 };
 
-export default RotatingWord;
+export default RotatingHeadline;
