@@ -14,9 +14,9 @@ import { supabase } from "@/integrations/supabase/client";
 // Report data (hardcoded to match seed)
 const reports = [
   {
-    title: "The Anti-Vanity Report 2026",
+    title: "The Metrics That Matter Report 2026",
     description: "Why impressions don't equal impact. A guide to measuring what matters in social impact communications.",
-    slug: "anti-vanity-report-2026",
+    slug: "metrics-that-matter-2026",
     cover: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
     label: "MEASUREMENT",
   },
