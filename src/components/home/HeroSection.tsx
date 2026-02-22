@@ -54,9 +54,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6"
           >
-            Stories that Move{" "}
             <RotatingWord />
-            {" "}Forward.
           </motion.h1>
 
           <motion.p
