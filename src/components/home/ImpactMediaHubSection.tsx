@@ -4,12 +4,12 @@ import { Globe, FileDown, Images } from "lucide-react";
 import { slideFromLeft, slideFromRight, staggerContainer, slideUp } from "@/hooks/useScrollAnimation";
 
 const features = [
-  { icon: Globe, label: "Interactive web hub your stakeholders can explore and share" },
-  { icon: FileDown, label: "Downloadable PDF reports and partner kits" },
-  { icon: Images, label: "Media appendix with photos, quotes, and video links" },
+  { icon: Globe, label: "A shareable media page your stakeholders can explore and share" },
+  { icon: FileDown, label: "Downloadable reports, partner kits, and media packs" },
+  { icon: Images, label: "Photos, quotes, video clips, and partner context — all in one place" },
 ];
 
-const ImpactReportHubSection = () => {
+const ImpactMediaHubSection = () => {
   return (
     <section className="section-cream py-24 md:py-32">
       <div className="container mx-auto px-6">
@@ -26,11 +26,10 @@ const ImpactReportHubSection = () => {
               New
             </span>
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground leading-tight">
-              Digital Impact Report Hub
+              Impact Media Hub
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed max-w-lg">
-              A shareable, story-first web report that turns your outcomes into trust.
-              Built for nonprofits, CSR teams, and changemakers who need proof that moves people.
+              A shareable media page for your program, event, campaign, or partnership. Story-first. Proof woven in through real outcomes, quotes, and partner context.
             </p>
 
             <ul className="space-y-4 pt-2">
@@ -44,10 +43,13 @@ const ImpactReportHubSection = () => {
 
             <div className="flex flex-wrap gap-4 pt-4">
               <Link to="/hub/demo" className="btn-primary">
-                View Example Hub
+                View Nonprofit Demo Hub
+              </Link>
+              <Link to="/hub/corporate-demo" className="btn-secondary">
+                View CSR Demo Hub
               </Link>
               <Link to="/bookings" className="btn-secondary">
-                Build My Hub
+                Build a Hub
               </Link>
             </div>
           </motion.div>
@@ -58,15 +60,15 @@ const ImpactReportHubSection = () => {
               <div className="bg-impact-dark p-6 text-center">
                 <p className="text-white/50 text-xs uppercase tracking-widest mb-2">Example Hub</p>
                 <h3 className="font-serif text-2xl text-white font-semibold">
-                  EmployNext Community Impact Report 2025
+                  Our People's Keeper Employment Program
                 </h3>
                 <p className="text-white/60 text-sm mt-1">Real stories. Real outcomes. Built to be shared.</p>
               </div>
               <div className="p-6 grid grid-cols-3 gap-4 text-center">
                 {[
-                  { value: "420", label: "Youth Served" },
-                  { value: "78%", label: "Completion" },
-                  { value: "24", label: "Partners" },
+                  { value: "150+", label: "Participants" },
+                  { value: "12", label: "Partners" },
+                  { value: "8", label: "Video Clips" },
                 ].map((stat) => (
                   <div key={stat.label}>
                     <p className="font-serif text-2xl font-bold text-impact-blue">{stat.value}</p>
@@ -82,4 +84,4 @@ const ImpactReportHubSection = () => {
   );
 };
 
-export default ImpactReportHubSection;
+export default ImpactMediaHubSection;
