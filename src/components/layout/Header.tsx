@@ -1,11 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+
+const servicesDropdown = [
+  { href: "/cinematic-impact-films", label: "Cinematic Impact Films" },
+  { href: "/impact-media-hub", label: "Impact Media Hub" },
+  { href: "/services#workshops", label: "Workshops & Training" },
+  { href: "/services#framework", label: "Framework Kit" },
+  { href: "/services#system-setup", label: "Story System Setup (Pilot)" },
+];
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+  const servicesRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -16,15 +27,31 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/work", label: "Work" },
-    { href: "/services", label: "Services" },
-    { href: "/impact-media-hub", label: "Impact Media Hub" },
-    { href: "/research", label: "Research" },
-    { href: "/bookings", label: "Book" },
-  ];
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+    setIsServicesOpen(false);
+    setIsMobileServicesOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) {
+        setIsServicesOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const navLinkClass = (active: boolean) =>
+    `text-sm font-medium transition-colors duration-300 ${
+      isScrolled
+        ? active ? "text-foreground" : "text-foreground/60 hover:text-foreground"
+        : active ? "text-white" : "text-white/70 hover:text-white"
+    }`;
+
+  const isServicesActive = ["/services", "/cinematic-impact-films"].includes(location.pathname) ||
+    location.pathname.startsWith("/services");
 
   return (
     <header
@@ -49,23 +76,53 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              to={link.href}
-              className={`text-sm font-medium transition-colors duration-300 ${
-                isScrolled
-                  ? location.pathname === link.href
-                    ? "text-foreground"
-                    : "text-foreground/60 hover:text-foreground"
-                  : location.pathname === link.href
-                    ? "text-white"
-                    : "text-white/70 hover:text-white"
-              }`}
+          <Link to="/" className={navLinkClass(location.pathname === "/")}>Home</Link>
+          <Link to="/work" className={navLinkClass(location.pathname === "/work")}>Work</Link>
+
+          {/* Services Dropdown */}
+          <div ref={servicesRef} className="relative">
+            <button
+              onClick={() => setIsServicesOpen(!isServicesOpen)}
+              className={`flex items-center gap-1 ${navLinkClass(isServicesActive)}`}
             >
-              {link.label}
-            </Link>
-          ))}
+              Services
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isServicesOpen ? "rotate-180" : ""}`} />
+            </button>
+            <AnimatePresence>
+              {isServicesOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 8 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute top-full left-0 mt-3 w-64 bg-background border border-border rounded-md shadow-lg z-50 overflow-hidden"
+                >
+                  {servicesDropdown.map((item) => (
+                    <Link
+                      key={item.href}
+                      to={item.href}
+                      className="block px-5 py-3 text-sm text-foreground/70 hover:text-foreground hover:bg-muted transition-colors duration-200"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                  <div className="border-t border-border">
+                    <Link
+                      to="/services"
+                      className="block px-5 py-3 text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground hover:bg-muted transition-colors duration-200"
+                    >
+                      View All Services →
+                    </Link>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          <Link to="/research" className={navLinkClass(location.pathname === "/research")}>Research</Link>
+          <Link to="/about" className={navLinkClass(location.pathname === "/about")}>About</Link>
+          <Link to="/bookings" className={navLinkClass(location.pathname === "/bookings")}>Book</Link>
+
           <Link
             to="/bookings"
             className="btn-primary text-xs !px-5 !py-2"
@@ -95,21 +152,51 @@ const Header = () => {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-background/98 backdrop-blur-md"
           >
-            <nav className="container mx-auto px-6 py-6 flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`text-lg font-medium py-2 transition-colors duration-300 ${
-                    location.pathname === link.href
-                      ? "text-foreground"
-                      : "text-foreground/60"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
+            <nav className="container mx-auto px-6 py-6 flex flex-col gap-1">
+              <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium py-2 text-foreground/60 hover:text-foreground">Home</Link>
+              <Link to="/work" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium py-2 text-foreground/60 hover:text-foreground">Work</Link>
+
+              {/* Mobile Services Accordion */}
+              <button
+                onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
+                className="flex items-center justify-between text-lg font-medium py-2 text-foreground/60 hover:text-foreground w-full text-left"
+              >
+                Services
+                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isMobileServicesOpen ? "rotate-180" : ""}`} />
+              </button>
+              <AnimatePresence>
+                {isMobileServicesOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    className="overflow-hidden pl-4"
+                  >
+                    {servicesDropdown.map((item) => (
+                      <Link
+                        key={item.href}
+                        to={item.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="block py-2 text-base text-foreground/50 hover:text-foreground"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <Link to="/research" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium py-2 text-foreground/60 hover:text-foreground">Research</Link>
+              <Link to="/about" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium py-2 text-foreground/60 hover:text-foreground">About</Link>
+              <Link to="/bookings" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium py-2 text-foreground/60 hover:text-foreground">Book</Link>
+
+              <Link
+                to="/bookings"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="btn-primary text-center mt-4"
+              >
+                Book a Story Call
+              </Link>
             </nav>
           </motion.div>
         )}

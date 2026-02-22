@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
+import RotatingWord from "./RotatingWord";
 
 const HeroSection = () => {
   const scrollToContent = () => {
@@ -12,10 +13,22 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Video Background Placeholder */}
+      {/* Video Background */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--impact-dark))]/80 via-[hsl(var(--impact-dark))]/60 to-[hsl(var(--impact-dark))] z-10" />
-        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--impact-dark))] via-[hsl(var(--impact-dark-lighter))] to-[hsl(var(--impact-purple))]/20" />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          poster="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1920&q=80"
+        >
+          <source
+            src="https://cdn.coverr.co/videos/coverr-aerial-view-of-city-at-night-2559/1080p.mp4"
+            type="video/mp4"
+          />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--impact-dark))]/85 via-[hsl(var(--impact-dark))]/70 to-[hsl(var(--impact-dark))] z-10" />
       </div>
 
       {/* Content */}
@@ -32,7 +45,7 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-6"
           >
-            Cinematic storytelling for changemakers
+            Cinematic Impact Films & Story Systems
           </motion.p>
 
           <motion.h1
@@ -41,11 +54,9 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6"
           >
-            Real Stories.
-            <br />
-            <span className="text-gradient">Real Proof.</span>
-            <br />
-            Real Trust.
+            Stories that Move{" "}
+            <RotatingWord />
+            {" "}Forward.
           </motion.h1>
 
           <motion.p
@@ -54,26 +65,16 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.7 }}
             className="text-white/70 text-lg md:text-xl max-w-2xl mx-auto mb-4 leading-relaxed"
           >
-            Impact Loop helps organizations and corporations turn real human impact into trusted
-            narratives, without sounding generic, performative, or synthetic.
+            Cinematic impact films and story systems built to earn trust under scrutiny.
           </motion.p>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="text-white/50 text-base max-w-xl mx-auto mb-4"
+            className="text-white/50 text-base max-w-2xl mx-auto mb-10"
           >
-            Built for nonprofits, CSR teams, and impact-led organizations responsible for trust.
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
-            className="text-white/40 text-sm max-w-2xl mx-auto mb-10"
-          >
-            We combine storytelling standards, systems, and selective video production to help organizations earn trust at scale.
+            We produce documentary-style impact films and short-form cutdowns, then deploy them as reusable story assets for partners, funders, and stakeholders.
           </motion.p>
 
           <motion.div
@@ -83,16 +84,16 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Link
-              to="/bookings"
+              to="/cinematic-impact-films"
               className="btn-primary text-base"
             >
-              Book a Storytelling Diagnostic
+              Watch the Reel
             </Link>
             <Link
-              to="/services"
+              to="/bookings"
               className="bg-transparent border border-white text-white hover:bg-white hover:text-[hsl(var(--impact-dark))] font-medium px-8 py-3.5 rounded-sm transition-all duration-300 uppercase tracking-widest text-sm"
             >
-              Explore the Framework
+              Book a Storytelling Diagnostic
             </Link>
           </motion.div>
         </motion.div>
