@@ -1,173 +1,135 @@
 
 
-# Impact Media Hub - Phase 1 Pivot (Static Pages + Photo Storage)
+# Research & Reports Page + Sample Web-Based Reports
 
 ## Overview
-Rename "Digital Impact Report Hub" to "Impact Media Hub" and rebuild as media-first showcase pages. All content is static/hardcoded except for photo galleries, which use Lovable Cloud storage so you can easily upload and manage photos.
+Build a `/research` page that closely mirrors VaynerMedia's reports page layout, plus create web-based report detail pages for each report. The page will feature a dark hero banner, alternating report card layouts (featured large card, 3-card grid rows, alternating featured cards), and a lead capture modal gated behind each "Download" button. Each report will also have a viewable web page with editorial-style content.
 
 ---
 
-## Part 1: Photo Storage Setup
+## Page Structure (matching VaynerMedia reference)
 
-### Database Migration
-- Create a `hub_photos` table in the database:
-  - `id` (UUID, primary key)
-  - `hub_slug` (text) -- which hub the photo belongs to (e.g. "cafcan-demo", "corporate-demo")
-  - `image_url` (text) -- the public URL from storage
-  - `caption` (text, optional)
-  - `sort_order` (integer)
-  - `created_at` (timestamp)
-- RLS policy: public read (anyone can view photos), no public write (uploads happen through your session only)
+### 1. Dark Hero Banner
+- Full-width dark background with a background image overlay (impact/storytelling photo)
+- Large serif heading: "RESEARCH & REPORTS"
+- Subtitle text about Impact Loop's research on impact communications
 
-### Storage Bucket
-- Create a public `hub-photos` storage bucket
-- RLS policies for authenticated upload and public read
+### 2. Featured Report (large, side-by-side)
+- Left: cover image area (Unsplash photo relevant to report topic)
+- Right: title, description paragraph, "DOWNLOAD" button
+- Mimics VaynerMedia's top featured report layout
 
-### Upload Component
-- Build a simple bulk photo upload component (visible only when you are logged in)
-- Drag-and-drop or file picker for multiple images at once
-- Auto-saves to the storage bucket and creates a row in `hub_photos`
-- Appears inline on the hub page when logged in, hidden for public visitors
+### 3. Three-Card Grid Row
+- 3 report cards in equal columns
+- Each card: square cover image on top, title below, short description, "DOWNLOAD" button
+- Purple/branded accent color on buttons
 
----
+### 4. Featured Report (alternate layout)
+- Left: large styled cover image with overlaid text/label
+- Right: title, description, "DOWNLOAD" button
+- Reversed layout from the first featured report
 
-## Part 2: Navigation Updates
+### 5. Three-Card Grid Row (second set)
+- Another row of 3 report cards, same format as row 1
 
-### Header.tsx
-- Rename "Impact Hub" link to "Impact Media Hub" pointing to `/impact-media-hub`
-- Add a "Book a Story Call" secondary CTA button (desktop only, links to `/bookings`)
+### 6. Single Report Card (centered)
+- One final report card, centered on the page
 
-### Footer.tsx
-- Rename "Impact Report Hub" to "Impact Media Hub"
-- Update link from `/impact-report-hub` to `/impact-media-hub`
-- Add "Hub Examples" link pointing to `/hub/examples`
-
-### App.tsx
-- Replace `/impact-report-hub` route with `/impact-media-hub`
-- Add `/hub/examples` route
-- Add `/hub/corporate-demo` route
-- Keep `/hub/demo` for CAFCan nonprofit demo
+### 7. Bottom CTA Section
+- "Work With Us" heading with link to /bookings
+- Matches the existing site CTA pattern
 
 ---
 
-## Part 3: Homepage Section
+## 7 Impact Loop Original Reports
 
-### Rename ImpactReportHubSection to ImpactMediaHubSection
-- New headline: "Impact Media Hub"
-- New subheadline: "A shareable media page for your program, event, campaign, or partnership. Story-first. Proof woven in through real outcomes, quotes, and partner context."
-- Three buttons:
-  - "View Nonprofit Demo Hub" (links to `/hub/demo`)
-  - "View CSR Demo Hub" (links to `/hub/corporate-demo`)
-  - "Build a Hub" (links to `/bookings`)
+Each report uses a relevant Unsplash image as its cover:
 
----
-
-## Part 4: Marketing Page
-
-### New file: ImpactMediaHub.tsx (route: `/impact-media-hub`)
-- Hero section with media-first messaging
-- What it includes: Overview, Hero Video, Clips, Photos, Quotes, Partners, Downloads, Quick Outcomes
-- Who it is for: Nonprofits, CSR Teams, Partnerships
-- How it works: Diagnose, Blueprint, Produce, Deploy (4 steps)
-- FAQ accordion (6 questions about the media-first approach)
-- Bottom CTA: Book a Story Call
+1. **The Anti-Vanity Report 2026** -- Why impressions don't equal impact. A guide to measuring what matters in social impact communications.
+2. **Culture vs. Counterfeit: The Nonprofit's Guide to Authentic Storytelling** -- How organizations can tell real stories without extracting from the communities they serve.
+3. **The Trust Effect: Rebuilding Stakeholder Confidence Through Media** -- A framework for using video, photography, and narrative to rebuild trust after organizational change.
+4. **Constellations Outlook: The Forces Shaping Impact Communications in 2026** -- Trends in nonprofit media, CSR reporting, and community-led storytelling.
+5. **Inside Modern Impact Reporting: Trust, Timing & Building Credibility** -- A deep dive into earned attention in the impact sector.
+6. **Building a Story-First Strategy: A Guide for Nonprofits** -- How to shift from data-heavy reports to narrative-driven impact communications.
+7. **The Growing Power of Community-Led Media** -- Why the most credible impact stories come from the communities themselves.
 
 ---
 
-## Part 5: Hub Examples Gallery
+## Lead Capture Modal
 
-### New file: HubExamples.tsx (route: `/hub/examples`)
-- Two cards:
-  - CAFCan Our People's Keeper Employment Program (Nonprofit / Program)
-  - Northfield Tech Community Investment Hub 2025 (Corporate / CSR)
-- Each card: title, type badge, 1-line description, "View Hub" button
-
----
-
-## Part 6: CAFCan Nonprofit Demo Hub (HubDemo.tsx rewrite)
-
-Complete rewrite as a media-first hub page with these sections:
-
-1. **Overview** -- Title, tagline, the approved initiative brief, who/what/when/where, two CTAs
-2. **Initiative Overview** -- Structured breakdown of the program
-3. **Hero Video** -- YouTube/Vimeo embed placeholder
-4. **Clips** -- 8 embedded video placeholders with titles:
-   - Launch Welcome and Purpose
-   - Employment Pathways Overview
-   - Wellness and Health Supports
-   - Partner Spotlight: Collaboration in Action
-   - Presenter Moment: City Services and Supports
-   - Participant Moment: What This Program Means
-   - Program Next Steps
-   - Community Momentum Recap
-5. **Photo Gallery** -- Pulls from `hub_photos` table (filtered by slug "cafcan-demo"). Shows upload button when logged in. Lightbox on click. Falls back to placeholder images if no uploads exist.
-6. **Quotes** -- 12 quotes with name + role labels (Participant, Partner, Presenter, Staff)
-7. **Partners and Presenters** -- Logo tiles for CIBC, Toronto Employment and Social Services, Toronto Business Development Centre, Up With Women, Black Creek Community Health Centre, Michael Jazz brand, Kairos Law. Three spotlight cards. Partner sharing kit preview.
-8. **Downloads** -- 3 link buttons (One-Page Recap, Partner Kit, Media Pack) triggering demo toast
-9. **Quick Outcomes** -- Small metrics panel with 4-6 demo values
-10. **Final CTA** -- "Build your Impact Media Hub" with two buttons
-
-Layout: Sticky sidebar navigation on desktop, dropdown selector on mobile, floating "Book a Story Call" CTA.
+- Triggered by any "DOWNLOAD" button
+- Fields: First Name, Last Name, Email, Organization (all required)
+- Validated with zod + react-hook-form
+- On submit: saves lead to `research_leads` table in the database
+- Shows success toast: "Thanks! We'll send your report to your inbox shortly."
+- No actual email delivery yet (Resend integration later)
 
 ---
 
-## Part 7: Corporate CSR Demo Hub
+## Database Changes (1 migration)
 
-### New file: HubCorporateDemo.tsx (route: `/hub/corporate-demo`)
-Same template structure as CAFCan but with corporate framing:
-- Title: "Northfield Tech Community Investment Hub 2025"
-- Corporate community investment overview
-- 8 clips with corporate-themed titles
-- Photo gallery pulling from `hub_photos` with slug "corporate-demo" (same upload system)
-- 10 quotes from partners and staff
-- 6 fictional corporate partner logos
-- Downloads: Partner Kit, One-Page Recap
-- Quick Outcomes: Investment amount, Partners supported, Volunteer hours, Events hosted
+### Table: `research_reports`
+| Column | Type | Notes |
+|--------|------|-------|
+| id | uuid | PK, auto-generated |
+| title | text | Report title |
+| description | text | Short description |
+| slug | text | Unique, URL-friendly |
+| cover_image | text | Unsplash image URL |
+| cover_label | text | Short label overlaid on cover |
+| pdf_url | text | Nullable, for future PDF uploads |
+| published | boolean | Default true |
+| sort_order | integer | Default 0 |
+| created_at | timestamptz | Default now() |
+
+RLS: Anyone can SELECT (public). Authenticated users can INSERT/UPDATE/DELETE.
+
+### Table: `research_leads`
+| Column | Type | Notes |
+|--------|------|-------|
+| id | uuid | PK, auto-generated |
+| first_name | text | Required |
+| last_name | text | Required |
+| email | text | Required |
+| organization | text | Required |
+| report_slug | text | Which report they requested |
+| created_at | timestamptz | Default now() |
+
+RLS: Anyone can INSERT (so anonymous visitors can submit). Only authenticated users can SELECT/UPDATE/DELETE (so you can view leads later).
+
+Seed data: All 7 reports inserted via migration.
+
+---
+
+## Navigation Updates
+
+- **Header.tsx**: Add "Research" link between "Impact Media Hub" and "Book"
+- **Footer.tsx**: Add "Research" link to the Navigate column
+- **App.tsx**: Add `/research` route
 
 ---
 
 ## Files Summary
 
-**New files:**
-```text
-src/components/home/ImpactMediaHubSection.tsx
-src/pages/ImpactMediaHub.tsx
-src/pages/HubExamples.tsx
-src/pages/HubCorporateDemo.tsx
-src/components/hub/PhotoGallery.tsx (reusable gallery with upload + lightbox)
-src/components/hub/PhotoUploader.tsx (bulk upload component, shown when logged in)
-```
+### New files:
+- `src/pages/Research.tsx` -- Full page with hero, alternating report layouts, and lead capture modal component built inline
 
-**Rewritten files:**
-```text
-src/pages/HubDemo.tsx
-```
+### Modified files:
+- `src/App.tsx` -- Add Research import and route
+- `src/components/layout/Header.tsx` -- Add "Research" nav link
+- `src/components/layout/Footer.tsx` -- Add "Research" link
 
-**Deleted files:**
-```text
-src/components/home/ImpactReportHubSection.tsx
-src/pages/ImpactReportHub.tsx
-```
+### Database:
+- 1 migration creating both tables with RLS policies and seed data
 
-**Modified files:**
-```text
-src/App.tsx
-src/pages/Index.tsx
-src/components/layout/Header.tsx
-src/components/layout/Footer.tsx
-```
+---
 
-**Database changes:**
-```text
-1 migration: Create hub_photos table + hub-photos storage bucket + RLS policies
-```
+## Technical Approach
 
-## Implementation Order
-1. Create storage bucket and hub_photos table (database migration)
-2. Update routing, header, footer
-3. Build PhotoGallery and PhotoUploader components
-4. Create homepage section and marketing page
-5. Create hub examples gallery
-6. Rewrite CAFCan demo hub with photo storage integration
-7. Create corporate CSR demo hub
+- Uses existing Layout component, design system (section-dark, btn-primary, font-serif, motion animations)
+- Report covers use high-quality Unsplash images with gradient overlays and text labels (replacing VaynerMedia's hand-drawn illustrations)
+- Lead capture form uses react-hook-form + zod for validation
+- Database interaction via the existing Supabase client
+- Framer Motion scroll animations consistent with other pages
+- Responsive: featured reports stack vertically on mobile, 3-card grids collapse to single column
 
