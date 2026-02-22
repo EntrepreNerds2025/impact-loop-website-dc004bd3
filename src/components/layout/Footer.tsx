@@ -31,8 +31,8 @@ const Footer = () => {
                 { href: "/about", label: "About" },
                 { href: "/work", label: "Work" },
                 { href: "/services", label: "Services" },
-                { href: "/impact-report-hub", label: "Impact Report Hub" },
-                { href: "/hub/demo", label: "Example Hub Demo" },
+                { href: "/impact-media-hub", label: "Impact Media Hub" },
+                { href: "/hub/examples", label: "Hub Examples" },
                 { href: "/bookings", label: "Book a Call" },
               ].map((link) => (
                 <Link

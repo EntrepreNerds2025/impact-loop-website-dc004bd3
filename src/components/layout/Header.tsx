@@ -21,7 +21,7 @@ const Header = () => {
     { href: "/about", label: "About" },
     { href: "/work", label: "Work" },
     { href: "/services", label: "Services" },
-    { href: "/impact-report-hub", label: "Impact Hub" },
+    { href: "/impact-media-hub", label: "Impact Media Hub" },
     { href: "/bookings", label: "Book" },
   ];
 
@@ -65,6 +65,12 @@ const Header = () => {
               {link.label}
             </Link>
           ))}
+          <Link
+            to="/bookings"
+            className="btn-primary text-xs !px-5 !py-2"
+          >
+            Book a Story Call
+          </Link>
         </nav>
 
         {/* Mobile Menu Button */}

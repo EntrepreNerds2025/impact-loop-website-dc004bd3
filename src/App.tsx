@@ -10,8 +10,10 @@ import Services from "./pages/Services";
 import Bookings from "./pages/Bookings";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
-import ImpactReportHub from "./pages/ImpactReportHub";
+import ImpactMediaHub from "./pages/ImpactMediaHub";
 import HubDemo from "./pages/HubDemo";
+import HubExamples from "./pages/HubExamples";
+import HubCorporateDemo from "./pages/HubCorporateDemo";
 
 const queryClient = new QueryClient();
 
@@ -28,8 +30,10 @@ const App = () => (
           <Route path="/services" element={<Services />} />
           <Route path="/bookings" element={<Bookings />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/impact-report-hub" element={<ImpactReportHub />} />
+          <Route path="/impact-media-hub" element={<ImpactMediaHub />} />
           <Route path="/hub/demo" element={<HubDemo />} />
+          <Route path="/hub/examples" element={<HubExamples />} />
+          <Route path="/hub/corporate-demo" element={<HubCorporateDemo />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
