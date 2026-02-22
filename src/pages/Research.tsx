@@ -83,10 +83,26 @@ const ReportCover = ({ cover, label, className = "" }: { cover: string; label: s
   </div>
 );
 
-const DownloadButton = ({ onClick }: { onClick: () => void }) => (
-  <button onClick={onClick} className="btn-primary text-xs !px-6 !py-2.5 mt-4">
-    Download
-  </button>
+const ReadReportLink = ({ slug }: { slug: string }) => {
+  const reportPages: Record<string, string> = {
+    "metrics-that-matter-2026": "/research/metrics-that-matter-2026",
+  };
+  const href = reportPages[slug];
+  if (!href) return null;
+  return (
+    <Link to={href} className="text-[hsl(var(--impact-blue))] text-xs font-semibold uppercase tracking-wider hover:underline mt-4 inline-block mr-4">
+      Read Report →
+    </Link>
+  );
+};
+
+const DownloadButton = ({ onClick, slug }: { onClick: () => void; slug?: string }) => (
+  <div className="flex items-center gap-4 mt-4">
+    {slug && <ReadReportLink slug={slug} />}
+    <button onClick={onClick} className="btn-primary text-xs !px-6 !py-2.5">
+      Download
+    </button>
+  </div>
 );
 
 const FeaturedReport = ({ report, reverse, onDownload }: { report: typeof reports[0]; reverse?: boolean; onDownload: (slug: string) => void }) => (
@@ -103,7 +119,7 @@ const FeaturedReport = ({ report, reverse, onDownload }: { report: typeof report
     <div className={`space-y-4 ${reverse ? "lg:order-1" : ""}`}>
       <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl font-semibold text-foreground leading-tight">{report.title}</h3>
       <p className="text-muted-foreground leading-relaxed">{report.description}</p>
-      <DownloadButton onClick={() => onDownload(report.slug)} />
+      <DownloadButton onClick={() => onDownload(report.slug)} slug={report.slug} />
     </div>
   </motion.div>
 );
@@ -120,7 +136,7 @@ const ReportCard = ({ report, onDownload }: { report: typeof reports[0]; onDownl
     <div className="pt-5 space-y-2 flex-1 flex flex-col">
       <h4 className="font-serif text-xl font-semibold text-foreground leading-snug">{report.title}</h4>
       <p className="text-muted-foreground text-sm leading-relaxed flex-1">{report.description}</p>
-      <DownloadButton onClick={() => onDownload(report.slug)} />
+      <DownloadButton onClick={() => onDownload(report.slug)} slug={report.slug} />
     </div>
   </motion.div>
 );
