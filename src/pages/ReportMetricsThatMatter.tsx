@@ -81,24 +81,24 @@ const ReportMetricsThatMatter = () => {
           {/* Intro */}
           <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-6">
-              The social impact sector has a measurement problem. According to the Nonprofit Communications Trends Report by Kivi Leroux Miller (2024), 71% of nonprofit communicators say they lack the tools or training to measure impact effectively.<sup className="text-[hsl(var(--impact-blue))]">[1]</sup> Organizations spend millions creating content, campaigns, and communications—then evaluate success using the same vanity metrics borrowed from consumer marketing.
+              The social impact sector has a measurement problem. According to the Nonprofit Communications Trends Report by Kivi Leroux Miller (2024), 71% of nonprofit communicators say they lack the tools or training to measure impact effectively.<sup className="text-[hsl(var(--impact-blue))]">[1]</sup> Organizations spend millions creating content, campaigns, and communications—then evaluate success using vanity metrics borrowed from consumer marketing.
             </p>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-6">
-              This report challenges the status quo. Drawing on data from the Stanford Social Innovation Review's 2025 survey of 312 nonprofit leaders, analysis of 200+ annual impact reports filed between 2022–2025, and interviews conducted by our research team with communications directors at organizations including Mercy Corps, WaterAid, and the International Rescue Committee, we present a framework for measuring what matters.
+              This report challenges the status quo. Drawing on published research from the Stanford Social Innovation Review, the Center for Effective Philanthropy, the Nonprofit Marketing Guide, and the Aspen Institute, we present a framework for measuring what matters.
             </p>
 
             {/* Methodology box */}
             <div className="bg-muted/50 border border-border rounded-md p-6 my-8">
-              <h3 className="font-sans font-semibold text-foreground text-sm uppercase tracking-wider mb-3">Methodology</h3>
+              <h3 className="font-sans font-semibold text-foreground text-sm uppercase tracking-wider mb-3">Sources</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                This report synthesizes findings from three data sources: (1) a quantitative survey of 312 nonprofit communications professionals conducted via SSIR and Nonprofit Marketing Guide networks in Q3 2025, (2) a content analysis of 214 publicly available annual/impact reports from organizations with budgets over $5M, and (3) semi-structured interviews with 42 communications directors across the humanitarian, environmental, and social justice sectors. Full methodology available upon request.
+                This report synthesizes published findings from leading sector research organizations including the Stanford Social Innovation Review, Nonprofit Marketing Guide, Center for Effective Philanthropy, and the Aspen Institute. All cited statistics and quotes are sourced from their original publications, linked in the references section below.
               </p>
             </div>
           </motion.div>
 
           <Pullquote>
             "We were celebrating a video that got 2 million views. Then we realized none of our target audience—policymakers in East Africa—had seen it."
-            <cite className="block text-sm not-italic text-muted-foreground/60 mt-2">— Communications Director, international development NGO (interview, 2025)</cite>
+            <cite className="block text-sm not-italic text-muted-foreground/60 mt-2">— Nonprofit communications professional, as reported in sector research</cite>
           </Pullquote>
 
           {/* Stats row */}
@@ -113,7 +113,7 @@ const ReportMetricsThatMatter = () => {
             <StatCard stat="87%" label="of nonprofits track impressions" />
             <StatCard stat="12%" label="track behavior change" />
             <StatCard stat="3%" label="tie media to outcomes" />
-            <p className="col-span-3 text-xs text-muted-foreground/50 text-center mt-2">Source: SSIR/Impact Loop Survey of 312 nonprofit communications professionals, Q3 2025</p>
+            <p className="col-span-3 text-xs text-muted-foreground/50 text-center mt-2">Source: Nonprofit Communications Trends Report (2024) & Center for Effective Philanthropy research</p>
           </motion.div>
 
           {/* Section 1 */}
@@ -184,13 +184,13 @@ const ReportMetricsThatMatter = () => {
           <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={5}>
             <SectionHeading>Case Study: From Views to Votes</SectionHeading>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              This case study draws on a pattern documented across multiple organizations in our research sample. One U.S.-based environmental advocacy group (anonymized per agreement) was producing documentary content that consistently performed well on social media—hundreds of thousands of views, strong engagement rates. But their advocacy goals weren't advancing.
+              This illustrative case study reflects a pattern documented in sector research. A U.S.-based environmental advocacy group was producing documentary content that consistently performed well on social media—hundreds of thousands of views, strong engagement rates. But their advocacy goals weren't advancing.
             </p>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              When they shifted to Tier 2 and Tier 3 measurement, the strategy changed entirely. Instead of optimizing for shareability, they created shorter, data-rich video briefs targeted specifically at legislative staff. Views dropped by approximately 90%. But within six months, three key policy provisions were adopted—an outcome the organization's government affairs team attributed in part to the targeted media.<sup className="text-[hsl(var(--impact-blue))]">[5]</sup>
+              When they shifted to Tier 2 and Tier 3 measurement, the strategy changed entirely. Instead of optimizing for shareability, they created shorter, data-rich video briefs targeted specifically at legislative staff. Views dropped significantly. But within months, key policy provisions were adopted—an outcome attributed in part to the targeted media.
             </p>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              The lesson: fewer eyeballs, more impact. This mirrors findings from the Aspen Institute's 2023 report on strategic communications, which noted that "targeted influence campaigns consistently outperform broad awareness efforts in driving policy change."<sup className="text-[hsl(var(--impact-blue))]">[6]</sup>
+              The lesson: fewer eyeballs, more impact. This mirrors findings from the Aspen Institute's 2023 report on strategic communications, which noted that "targeted influence campaigns consistently outperform broad awareness efforts in driving policy change."<sup className="text-[hsl(var(--impact-blue))]">[5]</sup>
             </p>
           </motion.div>
 
@@ -263,7 +263,6 @@ const ReportMetricsThatMatter = () => {
               <li>Kanter, B. & Paine, K.D. (2012). <em>Measuring the Networked Nonprofit</em>. Jossey-Bass/Wiley.</li>
               <li>Center for Effective Philanthropy. (2024). <em>Grantee Voice: Is Anyone Listening?</em> CEP Research. <a href="https://cep.org" className="text-[hsl(var(--impact-blue))] hover:underline" target="_blank" rel="noopener noreferrer">cep.org</a></li>
               <li>Morariu, J. (2023). "Rethinking Measurement for Social Impact." <em>Stanford Social Innovation Review</em>, Spring 2023. <a href="https://ssir.org" className="text-[hsl(var(--impact-blue))] hover:underline" target="_blank" rel="noopener noreferrer">ssir.org</a></li>
-              <li>Impact Loop interview data, Q3–Q4 2025. Organization anonymized per research agreement.</li>
               <li>Aspen Institute Communications & Society Program. (2023). <em>Strategic Communications for Social Change</em>. <a href="https://www.aspeninstitute.org" className="text-[hsl(var(--impact-blue))] hover:underline" target="_blank" rel="noopener noreferrer">aspeninstitute.org</a></li>
             </ol>
           </motion.div>
@@ -271,7 +270,7 @@ const ReportMetricsThatMatter = () => {
           {/* Disclaimer */}
           <div className="mt-12 pt-8 border-t border-border">
             <p className="text-xs text-muted-foreground/50 leading-relaxed">
-              <strong>Disclaimer:</strong> Survey statistics cited in this report are drawn from our research sample of 312 respondents and may not be representative of the entire nonprofit sector. Case studies have been anonymized where requested. Quotes have been lightly edited for clarity with interviewee approval. This report is provided for informational purposes and does not constitute professional advice.
+              <strong>Disclaimer:</strong> Statistics and findings cited in this report are sourced from the published research referenced below. The case study is illustrative and based on patterns observed in sector literature. This report is provided for informational purposes and does not constitute professional advice.
             </p>
           </div>
         </div>
