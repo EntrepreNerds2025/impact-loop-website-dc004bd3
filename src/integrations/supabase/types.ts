@@ -41,6 +41,75 @@ export type Database = {
         }
         Relationships: []
       }
+      research_leads: {
+        Row: {
+          created_at: string
+          email: string
+          first_name: string
+          id: string
+          last_name: string
+          organization: string
+          report_slug: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          first_name: string
+          id?: string
+          last_name: string
+          organization: string
+          report_slug: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          first_name?: string
+          id?: string
+          last_name?: string
+          organization?: string
+          report_slug?: string
+        }
+        Relationships: []
+      }
+      research_reports: {
+        Row: {
+          cover_image: string
+          cover_label: string | null
+          created_at: string
+          description: string
+          id: string
+          pdf_url: string | null
+          published: boolean
+          slug: string
+          sort_order: number
+          title: string
+        }
+        Insert: {
+          cover_image: string
+          cover_label?: string | null
+          created_at?: string
+          description: string
+          id?: string
+          pdf_url?: string | null
+          published?: boolean
+          slug: string
+          sort_order?: number
+          title: string
+        }
+        Update: {
+          cover_image?: string
+          cover_label?: string | null
+          created_at?: string
+          description?: string
+          id?: string
+          pdf_url?: string | null
+          published?: boolean
+          slug?: string
+          sort_order?: number
+          title?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

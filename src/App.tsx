@@ -14,6 +14,7 @@ import ImpactMediaHub from "./pages/ImpactMediaHub";
 import HubDemo from "./pages/HubDemo";
 import HubExamples from "./pages/HubExamples";
 import HubCorporateDemo from "./pages/HubCorporateDemo";
+import Research from "./pages/Research";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/hub/demo" element={<HubDemo />} />
           <Route path="/hub/examples" element={<HubExamples />} />
           <Route path="/hub/corporate-demo" element={<HubCorporateDemo />} />
+          <Route path="/research" element={<Research />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
