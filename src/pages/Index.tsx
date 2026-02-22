@@ -1,6 +1,5 @@
 import Layout from "@/components/layout/Layout";
 import HeroSection from "@/components/home/HeroSection";
-import HeroCubeWrapper from "@/components/home/HeroCubeWrapper";
 import PrinciplesSection from "@/components/home/PrinciplesSection";
 import VideoPortfolioSection from "@/components/home/VideoPortfolioSection";
 import FrameworkPreviewSection from "@/components/home/FrameworkPreviewSection";
@@ -13,11 +12,8 @@ import FounderSection from "@/components/home/FounderSection";
 const Index = () => {
   return (
     <Layout>
-      <HeroCubeWrapper
-        contentChildren={<PrinciplesSection />}
-      >
-        <HeroSection />
-      </HeroCubeWrapper>
+      <HeroSection />
+      <PrinciplesSection />
       <VideoPortfolioSection />
       <ClientLogosSection />
       <ImpactStatsSection />
