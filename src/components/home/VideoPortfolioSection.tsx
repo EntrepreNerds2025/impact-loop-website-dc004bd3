@@ -10,16 +10,16 @@ interface PortfolioItem {
   category: string;
   thumbnail: string;
   vimeoId: string;
-  previewUrl?: string;
+  previewVimeoId: string;
 }
 
 const portfolioItems: PortfolioItem[] = [
-  { id: 1, title: "Community Health Initiative", category: "Impact Story", thumbnail: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&h=340&fit=crop", vimeoId: "76979871" },
-  { id: 2, title: "Youth Empowerment Program", category: "Testimonial", thumbnail: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=256&fit=crop", vimeoId: "76979871" },
-  { id: 3, title: "Environmental Restoration", category: "Program Highlight", thumbnail: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&h=256&fit=crop", vimeoId: "76979871" },
-  { id: 4, title: "Education Access Campaign", category: "Impact Story", thumbnail: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=800&h=340&fit=crop", vimeoId: "76979871" },
-  { id: 5, title: "Housing First Initiative", category: "Event Recap", thumbnail: "https://images.unsplash.com/photo-1460317442991-0ec209397118?w=600&h=256&fit=crop", vimeoId: "76979871" },
-  { id: 6, title: "Mental Health Awareness", category: "Testimonial", thumbnail: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&h=256&fit=crop", vimeoId: "76979871" },
+  { id: 1, title: "Community Health Initiative", category: "Impact Story", thumbnail: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&h=340&fit=crop", vimeoId: "76979871", previewVimeoId: "1168718287" },
+  { id: 2, title: "Youth Empowerment Program", category: "Testimonial", thumbnail: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=256&fit=crop", vimeoId: "76979871", previewVimeoId: "1168718353" },
+  { id: 3, title: "Environmental Restoration", category: "Program Highlight", thumbnail: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&h=256&fit=crop", vimeoId: "76979871", previewVimeoId: "1168718362" },
+  { id: 4, title: "Education Access Campaign", category: "Impact Story", thumbnail: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=800&h=340&fit=crop", vimeoId: "76979871", previewVimeoId: "1168718383" },
+  { id: 5, title: "Housing First Initiative", category: "Event Recap", thumbnail: "https://images.unsplash.com/photo-1460317442991-0ec209397118?w=600&h=256&fit=crop", vimeoId: "76979871", previewVimeoId: "1168718335" },
+  { id: 6, title: "Mental Health Awareness", category: "Testimonial", thumbnail: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&h=256&fit=crop", vimeoId: "76979871", previewVimeoId: "1168718317" },
 ];
 
 const VideoCard = ({
@@ -37,22 +37,20 @@ const VideoCard = ({
     style={{ aspectRatio: isFullWidth ? "2.35 / 1" : "2.35 / 1" }}
     onClick={onClick}
   >
-    {item.previewUrl ? (
-      <video
-        src={item.previewUrl}
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      />
-    ) : (
-      <img
-        src={item.thumbnail}
-        alt={item.title}
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-      />
-    )}
+    {/* Thumbnail fallback behind iframe */}
+    <img
+      src={item.thumbnail}
+      alt={item.title}
+      className="absolute inset-0 w-full h-full object-cover"
+    />
+    {/* Vimeo background embed */}
+    <iframe
+      src={`https://player.vimeo.com/video/${item.previewVimeoId}?background=1&autoplay=1&loop=1&muted=1`}
+      className="absolute inset-0 w-full h-full pointer-events-none"
+      style={{ border: 0 }}
+      allow="autoplay"
+      title={`${item.title} preview`}
+    />
 
     {/* Overlay */}
     <div className="absolute inset-0 bg-[hsl(var(--impact-dark))]/40 group-hover:bg-[hsl(var(--impact-dark))]/60 transition-colors duration-300" />
