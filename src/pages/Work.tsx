@@ -22,7 +22,7 @@ const projects = [
     category: "Initiatives",
     description: "Lakeridge Health needed to bring their I Belong initiative to life — not as a corporate announcement, but as a genuine reflection of the culture they were building. The challenge was showing how values like inclusion, compassion, innovation, teamwork, and joy actually translate into better outcomes for staff, patients, and families. We produced a documentary-style piece featuring real staff voices that drove measurable inclusivity results, amplified public awareness, and aligned the organization with their IDEAA action plans — proving this wasn't a one-off campaign but an ongoing commitment to systemic change.",
     vimeoId: "1140641190",
-    previewStart: 8,
+    previewStart: 30,
   },
   {
     id: 3,
