@@ -61,24 +61,6 @@ const PrinciplesSection = () => {
           ))}
         </motion.div>
 
-        {/* Three Column Text */}
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center"
-        >
-          {[
-            { title: "Beyond Content", text: "In a world drowning in content, trust has become the scarcest resource. For corporations, this trust gap shows up in ESG reporting, CSR communications, and internal alignment, not just marketing." },
-            { title: "Systems Thinking", text: "One video is a moment. A storytelling system is infrastructure that scales with your mission." },
-            { title: "Human Voice Protection", text: "Real people. Real stories. Real outcomes. Protected voices and authentic narratives: no stock footage, no generic scripts, no synthetic content." },
-          ].map((item) => (
-            <motion.div key={item.title} variants={slideFromRight}>
-              <h4 className="font-serif text-xl font-semibold text-foreground mb-3">{item.title}</h4>
-              <p className="text-muted-foreground text-sm leading-relaxed">{item.text}</p>
-            </motion.div>
-          ))}
-        </motion.div>
       </div>
     </section>
   );

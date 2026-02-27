@@ -52,22 +52,22 @@ const Footer = () => {
             <h4 className="font-serif text-lg font-semibold">Contact</h4>
             <div className="flex flex-col gap-3">
               <a
-                href="mailto:hello@impactloop.ca"
+                href="mailto:info@impactloop.ca"
                 className="flex items-center gap-3 text-white/60 hover:text-white text-sm transition-colors duration-300"
               >
                 <Mail size={16} />
-                hello@impactloop.ca
+                info@impactloop.ca
               </a>
               <a
-                href="tel:+1234567890"
+                href="tel:+16478329775"
                 className="flex items-center gap-3 text-white/60 hover:text-white text-sm transition-colors duration-300"
               >
                 <Phone size={16} />
-                (123) 456-7890
+                (647) 832-9775
               </a>
               <div className="flex items-center gap-3 text-white/60 text-sm">
                 <MapPin size={16} />
-                Barrie, ON, Canada
+                Toronto, ON, Canada
               </div>
             </div>
           </div>
