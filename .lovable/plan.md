@@ -1,33 +1,33 @@
 
 
-## Add New Blog Post: "The 5 Nonprofit Videos That Actually Increase Donations and Trust"
+## Add New Blog Post: "Ethical Storytelling for Nonprofits and CSR Teams"
 
 ### What will happen
 
-Insert a new blog post into the database with the same premium editorial treatment as the first post:
+Insert a third blog post into the database with the same premium editorial treatment as the existing two posts:
 
-- **Title**: The 5 Nonprofit Videos That Actually Increase Donations and Trust
-- **Slug**: `5-nonprofit-videos-increase-donations-trust`
+- **Title**: Ethical Storytelling for Nonprofits and CSR Teams: Consent, Dignity, and a Simple Protocol
+- **Slug**: `ethical-storytelling-nonprofits-csr-consent-dignity-protocol`
 - **Author**: Rovonn Russell
 - **Published**: Yes, with current timestamp
-- **Cover image**: A cinematic Unsplash image related to video production or nonprofit storytelling
-- **SEO metadata**: Custom meta title and description for search visibility
+- **Cover image**: A cinematic Unsplash image related to community storytelling or collaborative conversation
+- **SEO metadata**: Custom meta title and description
 
 ### Content enhancements
 
 The raw text will be formatted with the editorial markdown syntax the blog already supports:
 
-- **6-8 inline images** from Unsplash placed throughout the post using `![caption](url)` syntax, alternating left and right floats (e.g., video production scenes, nonprofit events, team meetings, community moments)
+- **6-8 inline images** from Unsplash placed throughout using `![caption](url)` syntax, alternating left and right floats (e.g., interview scenes, community gatherings, collaborative meetings, diverse teams)
 - **Pullquotes** on key statements like:
-  - *"If you try to do three of these in one video, you usually do none of them well."*
-  - *"A video is not a post. It is a campaign asset."*
-  - *"People do not remember a list. They remember change."*
-- **Section dividers** (`---`) between major sections for visual breathing room
-- **Proper list formatting** with `-` and `1)` syntax for all bullet and numbered lists
+  - *"Ethical storytelling is not making stories less emotional. It is making stories more honest, more human, and more respectful."*
+  - *"A powerful story is not a detailed confession. It is a clear arc of change."*
+  - *"Show change more than pain."*
+- **Section dividers** (`---`) between major sections
+- **Proper list formatting** with `-` and `1)` syntax throughout
 
 ### Excerpt
 
-"Most nonprofits don't have a video problem. They have a 'wrong video type for the goal' problem. Here are the five videos that consistently build trust and increase support."
+"Ethical storytelling needs to be a protocol, not a principle. Here is a practical framework your team can follow every time -- without killing the story."
 
 ### No code changes needed
 
