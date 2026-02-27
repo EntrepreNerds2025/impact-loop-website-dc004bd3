@@ -103,18 +103,14 @@ const Bookings = () => {
                 </p>
               </div>
 
-              {/* Placeholder for Calendly embed */}
-              <div className="aspect-video bg-impact-cream rounded-lg flex items-center justify-center">
-                <div className="text-center">
-                  <Calendar className="w-12 h-12 text-impact-dark/30 mx-auto mb-4" />
-                  <p className="text-impact-dark/50 text-sm">
-                    Calendly booking widget will be embedded here
-                  </p>
-                  <p className="text-impact-dark/40 text-xs mt-2">
-                    Replace with actual Calendly embed code
-                  </p>
-                </div>
-              </div>
+              <iframe
+                src="https://calendly.com/rovonnrussell/impactcall"
+                width="100%"
+                height="700"
+                frameBorder="0"
+                title="Schedule a call with Impact Loop"
+                className="rounded-lg"
+              />
 
               {/* Manual contact option */}
               <div className="mt-8 text-center border-t border-border pt-8">
@@ -122,10 +118,10 @@ const Bookings = () => {
                   Prefer to reach out directly?
                 </p>
                 <a
-                  href="mailto:hello@impactloop.ca"
+                  href="mailto:rovonn@impactloop.ca"
                   className="text-impact-blue hover:text-impact-purple transition-colors duration-300 font-medium"
                 >
-                  hello@impactloop.ca
+                  rovonn@impactloop.ca
                 </a>
               </div>
             </div>

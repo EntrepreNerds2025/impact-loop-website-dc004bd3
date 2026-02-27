@@ -11,12 +11,20 @@ const servicesDropdown = [
   { href: "/services#system-setup", label: "Story System Setup (Pilot)" },
 ];
 
+const resourcesDropdown = [
+  { href: "/research", label: "Research" },
+  { href: "/blog", label: "Blog" },
+];
+
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+  const [isMobileResourcesOpen, setIsMobileResourcesOpen] = useState(false);
   const servicesRef = useRef<HTMLDivElement>(null);
+  const resourcesRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -30,13 +38,18 @@ const Header = () => {
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setIsServicesOpen(false);
+    setIsResourcesOpen(false);
     setIsMobileServicesOpen(false);
+    setIsMobileResourcesOpen(false);
   }, [location.pathname]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) {
         setIsServicesOpen(false);
+      }
+      if (resourcesRef.current && !resourcesRef.current.contains(e.target as Node)) {
+        setIsResourcesOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -52,6 +65,114 @@ const Header = () => {
 
   const isServicesActive = ["/services", "/cinematic-impact-films"].includes(location.pathname) ||
     location.pathname.startsWith("/services");
+
+  const isResourcesActive = location.pathname.startsWith("/research") || location.pathname.startsWith("/blog");
+
+  const DesktopDropdown = ({
+    items,
+    containerRef,
+    isOpen,
+    setOpen,
+    label,
+    isActive,
+    showViewAll,
+    viewAllHref,
+    viewAllLabel,
+  }: {
+    items: { href: string; label: string }[];
+    containerRef: React.RefObject<HTMLDivElement | null>;
+    isOpen: boolean;
+    setOpen: (v: boolean) => void;
+    label: string;
+    isActive: boolean;
+    showViewAll?: boolean;
+    viewAllHref?: string;
+    viewAllLabel?: string;
+  }) => (
+    <div ref={containerRef} className="relative">
+      <button
+        onClick={() => setOpen(!isOpen)}
+        className={`flex items-center gap-1 ${navLinkClass(isActive)}`}
+      >
+        {label}
+        <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
+            transition={{ duration: 0.15 }}
+            className="absolute top-full left-0 mt-3 w-64 bg-background border border-border rounded-md shadow-lg z-50 overflow-hidden"
+          >
+            {items.map((item) => (
+              <Link
+                key={item.href}
+                to={item.href}
+                className="block px-5 py-3 text-sm text-foreground/70 hover:text-foreground hover:bg-muted transition-colors duration-200"
+              >
+                {item.label}
+              </Link>
+            ))}
+            {showViewAll && viewAllHref && (
+              <div className="border-t border-border">
+                <Link
+                  to={viewAllHref}
+                  className="block px-5 py-3 text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground hover:bg-muted transition-colors duration-200"
+                >
+                  {viewAllLabel || "View All"} →
+                </Link>
+              </div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+
+  const MobileAccordion = ({
+    items,
+    isOpen,
+    setOpen,
+    label,
+  }: {
+    items: { href: string; label: string }[];
+    isOpen: boolean;
+    setOpen: (v: boolean) => void;
+    label: string;
+  }) => (
+    <>
+      <button
+        onClick={() => setOpen(!isOpen)}
+        className="flex items-center justify-between text-lg font-medium py-2 text-foreground/60 hover:text-foreground w-full text-left"
+      >
+        {label}
+        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden pl-4"
+          >
+            {items.map((item) => (
+              <Link
+                key={item.href}
+                to={item.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block py-2 text-base text-foreground/50 hover:text-foreground"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
 
   return (
     <header
@@ -79,54 +200,31 @@ const Header = () => {
           <Link to="/" className={navLinkClass(location.pathname === "/")}>Home</Link>
           <Link to="/work" className={navLinkClass(location.pathname === "/work")}>Work</Link>
 
-          {/* Services Dropdown */}
-          <div ref={servicesRef} className="relative">
-            <button
-              onClick={() => setIsServicesOpen(!isServicesOpen)}
-              className={`flex items-center gap-1 ${navLinkClass(isServicesActive)}`}
-            >
-              Services
-              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isServicesOpen ? "rotate-180" : ""}`} />
-            </button>
-            <AnimatePresence>
-              {isServicesOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 8 }}
-                  transition={{ duration: 0.15 }}
-                  className="absolute top-full left-0 mt-3 w-64 bg-background border border-border rounded-md shadow-lg z-50 overflow-hidden"
-                >
-                  {servicesDropdown.map((item) => (
-                    <Link
-                      key={item.href}
-                      to={item.href}
-                      className="block px-5 py-3 text-sm text-foreground/70 hover:text-foreground hover:bg-muted transition-colors duration-200"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                  <div className="border-t border-border">
-                    <Link
-                      to="/services"
-                      className="block px-5 py-3 text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground hover:bg-muted transition-colors duration-200"
-                    >
-                      View All Services →
-                    </Link>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+          <DesktopDropdown
+            items={servicesDropdown}
+            containerRef={servicesRef}
+            isOpen={isServicesOpen}
+            setOpen={setIsServicesOpen}
+            label="Services"
+            isActive={isServicesActive}
+            showViewAll
+            viewAllHref="/services"
+            viewAllLabel="View All Services"
+          />
 
-          <Link to="/research" className={navLinkClass(location.pathname === "/research")}>Research</Link>
+          <DesktopDropdown
+            items={resourcesDropdown}
+            containerRef={resourcesRef}
+            isOpen={isResourcesOpen}
+            setOpen={setIsResourcesOpen}
+            label="Resources"
+            isActive={isResourcesActive}
+          />
+
           <Link to="/about" className={navLinkClass(location.pathname === "/about")}>About</Link>
           <Link to="/bookings" className={navLinkClass(location.pathname === "/bookings")}>Book</Link>
 
-          <Link
-            to="/bookings"
-            className="btn-primary text-xs !px-5 !py-2"
-          >
+          <Link to="/bookings" className="btn-primary text-xs !px-5 !py-2">
             Book a Story Call
           </Link>
         </nav>
@@ -156,37 +254,9 @@ const Header = () => {
               <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium py-2 text-foreground/60 hover:text-foreground">Home</Link>
               <Link to="/work" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium py-2 text-foreground/60 hover:text-foreground">Work</Link>
 
-              {/* Mobile Services Accordion */}
-              <button
-                onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
-                className="flex items-center justify-between text-lg font-medium py-2 text-foreground/60 hover:text-foreground w-full text-left"
-              >
-                Services
-                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isMobileServicesOpen ? "rotate-180" : ""}`} />
-              </button>
-              <AnimatePresence>
-                {isMobileServicesOpen && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    className="overflow-hidden pl-4"
-                  >
-                    {servicesDropdown.map((item) => (
-                      <Link
-                        key={item.href}
-                        to={item.href}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="block py-2 text-base text-foreground/50 hover:text-foreground"
-                      >
-                        {item.label}
-                      </Link>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              <MobileAccordion items={servicesDropdown} isOpen={isMobileServicesOpen} setOpen={setIsMobileServicesOpen} label="Services" />
+              <MobileAccordion items={resourcesDropdown} isOpen={isMobileResourcesOpen} setOpen={setIsMobileResourcesOpen} label="Resources" />
 
-              <Link to="/research" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium py-2 text-foreground/60 hover:text-foreground">Research</Link>
               <Link to="/about" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium py-2 text-foreground/60 hover:text-foreground">About</Link>
               <Link to="/bookings" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium py-2 text-foreground/60 hover:text-foreground">Book</Link>
 
