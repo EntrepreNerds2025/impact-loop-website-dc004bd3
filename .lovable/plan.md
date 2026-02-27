@@ -1,38 +1,28 @@
 
 
-## Redesign Video Portfolio: Landscape Grid with Native Auto-Playing Previews
+## Add Vimeo Preview Videos to Portfolio Grid
 
-### Layout
-A narrower container (`max-w-5xl`) with a repeating two-row pattern for 6 videos total:
+### What's Changing
+Since the previews are hosted on Vimeo (not raw .mp4 files), we'll switch from native `<video>` tags to **Vimeo background embeds** using the `?background=1` parameter. This makes Vimeo play silently, without controls, on autoplay loop -- exactly the behavior we want for background previews.
 
-```text
-Row 1: [────────── Video 1 (full width) ──────────]
-Row 2: [──── Video 2 ────] [──── Video 3 ────]
-Row 3: [────────── Video 4 (full width) ──────────]
-Row 4: [──── Video 5 ────] [──── Video 6 ────]
-```
-
-All containers use a cinematic landscape aspect ratio (roughly 2.35:1 or similar wide format) to give the section a filmic feel.
-
-### Auto-Playing Native Video Previews
-- Each portfolio item will accept a `previewUrl` field pointing to a hosted `.mp4` file (you'll provide the 25-second clips)
-- A native `<video>` element will be used with `autoPlay`, `muted`, `loop`, and `playsInline` attributes
-- The video will play silently on loop as visitors scroll past
-- Falls back to the existing thumbnail image if no preview URL is provided yet
-
-### Click-to-Lightbox
-- Clicking any video opens the existing Vimeo lightbox with the full version (with audio)
-- Play button overlay appears on hover to signal interactivity
-- Title and category labels remain at the bottom of each container
-
-### What You'll Need to Provide
-- 6 preview video files (`.mp4`, ideally under 5MB each, 25 seconds long) hosted somewhere accessible (e.g., a public URL, cloud storage link, or uploaded to file storage)
-- Once you share the URLs, I'll plug them into each portfolio item
+### Vimeo ID Mapping
+Each portfolio item gets its preview Vimeo ID:
+1. Community Health Initiative -- `1168718287`
+2. Youth Empowerment Program -- `1168718353`
+3. Environmental Restoration -- `1168718362`
+4. Education Access Campaign -- `1168718383`
+5. Housing First Initiative -- `1168718335`
+6. Mental Health Awareness -- `1168718317`
 
 ### Technical Details
 
-**Files modified:**
-- `src/components/home/VideoPortfolioSection.tsx` -- Rewrite grid to use the 1-2-1-2 layout pattern inside a `max-w-5xl` container. Replace `<img>` thumbnails with `<video>` elements using native HTML5 autoplay (`autoplay muted loop playsInline`). Each portfolio item gets a new `previewUrl` field. Grid uses single column with full-width items alternating with two-column rows via CSS grid (`grid-cols-1` then `grid-cols-2`).
+**File: `src/components/home/VideoPortfolioSection.tsx`**
 
-**No other files need changes** -- the Vimeo lightbox and routing remain as-is.
+- Replace `previewUrl` field with `previewVimeoId` field on each portfolio item
+- Replace the native `<video>` element with a Vimeo `<iframe>` using `?background=1&autoplay=1&loop=1&muted=1` parameters (chromeless, silent, looping)
+- The iframe will be positioned absolutely to fill each container, with `pointer-events-none` so clicks pass through to the overlay/play button
+- On click, the existing lightbox opens with the same Vimeo ID (full playback with audio)
+- Thumbnail images remain as a fallback/loading state behind the iframe
+
+No other files need changes.
 
