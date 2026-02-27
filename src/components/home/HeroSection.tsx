@@ -59,7 +59,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.7 }}
             className="text-white/70 text-lg md:text-xl max-w-2xl mx-auto mb-4 leading-relaxed"
           >
-            Cinematic impact films and story systems built to earn trust under scrutiny.
+            Cinematic impact films and story systems built to earn trust.
           </motion.p>
 
           <motion.p
@@ -78,10 +78,10 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Link
-              to="/cinematic-impact-films"
+              to="/work"
               className="btn-primary text-base"
             >
-              Watch the Reel
+              See Our Work
             </Link>
             <Link
               to="/bookings"
