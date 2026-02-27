@@ -1,6 +1,7 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Play, ChevronDown } from "lucide-react";
+import Player from "@vimeo/player";
 import Layout from "@/components/layout/Layout";
 import VimeoLightbox from "@/components/shared/VimeoLightbox";
 import { slideFromLeft, slideFromRight, scaleIn } from "@/hooks/useScrollAnimation";
@@ -13,48 +14,42 @@ const projects = [
     title: "Community Health Initiative",
     category: "Impact Stories",
     description: "A local health clinic needed to communicate the real-world outcomes of their patient care programs to secure continued funding. We crafted a documentary-style piece that followed patients and staff, turning clinical data into a human narrative that resonated with funders and community partners alike.",
-    vimeoId: "76979871",
-    previewVimeoId: "1168718287",
+    vimeoId: "1168718287",
   },
   {
     id: 2,
     title: "Youth Empowerment Program",
-    category: "Testimonials",
+    category: "Impact Stories",
     description: "Young leaders from an after-school mentorship program wanted their voices heard by the donors who made it possible. We sat down with six participants and captured candid, unscripted conversations about growth, resilience, and the moments that changed their trajectories.",
-    vimeoId: "76979871",
-    previewVimeoId: "1168718353",
+    vimeoId: "1168718353",
   },
   {
     id: 3,
     title: "Environmental Restoration",
     category: "Program Highlights",
     description: "A conservation nonprofit had spent three years restoring a critical wetland habitat but struggled to show stakeholders the scale of their progress. We produced a visual journey from barren land to thriving ecosystem, combining aerial footage with on-the-ground interviews.",
-    vimeoId: "76979871",
-    previewVimeoId: "1168718362",
+    vimeoId: "1168718362",
   },
   {
     id: 4,
     title: "Education Access Campaign",
     category: "Impact Stories",
     description: "An education foundation needed to demonstrate how their scholarship program was closing opportunity gaps in underserved communities. We followed three students from application to graduation, creating a compelling case for expanded investment.",
-    vimeoId: "76979871",
-    previewVimeoId: "1168718383",
+    vimeoId: "1168718383",
   },
   {
     id: 5,
     title: "Housing First Initiative",
     category: "Event Recaps",
     description: "The annual gala for a housing-first organization needed to capture the energy of the evening while reinforcing the urgency of their mission. We produced a same-day edit highlight reel alongside a longer documentary piece featuring residents sharing their stories of stability.",
-    vimeoId: "76979871",
-    previewVimeoId: "1168718335",
+    vimeoId: "1168718335",
   },
   {
     id: 6,
     title: "Mental Health Awareness",
-    category: "Testimonials",
+    category: "Impact Stories",
     description: "Breaking the stigma around mental health required authentic, vulnerable storytelling. We partnered with a wellness organization to capture personal narratives from people at different stages of their mental health journeys, creating a series that sparked meaningful community dialogue.",
-    vimeoId: "76979871",
-    previewVimeoId: "1168718317",
+    vimeoId: "1168718317",
   },
 ];
 
@@ -70,12 +65,32 @@ const ProjectRow = ({
   onPlay: (id: string) => void;
 }) => {
   const ref = useRef(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const isEven = index % 2 === 0;
 
   const textVariants = isEven ? slideFromLeft : slideFromRight;
   const videoOrder = isEven ? "md:order-2" : "md:order-1";
   const textOrder = isEven ? "md:order-1" : "md:order-2";
+
+  // Loop the first 10 seconds using Vimeo Player SDK
+  useEffect(() => {
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+    const player = new Player(iframe);
+    const LOOP_END = 10; // seconds
+
+    const handleTimeUpdate = (data: { seconds: number }) => {
+      if (data.seconds >= LOOP_END) {
+        player.setCurrentTime(0);
+      }
+    };
+
+    player.on("timeupdate", handleTimeUpdate);
+    return () => {
+      player.off("timeupdate", handleTimeUpdate);
+    };
+  }, []);
 
   return (
     <motion.div
@@ -115,7 +130,8 @@ const ProjectRow = ({
         onClick={() => onPlay(project.vimeoId)}
       >
         <iframe
-          src={`https://player.vimeo.com/video/${project.previewVimeoId}?background=1&autoplay=1&loop=1&muted=1`}
+          ref={iframeRef}
+          src={`https://player.vimeo.com/video/${project.vimeoId}?background=1&autoplay=1&loop=1&muted=1`}
           className="absolute pointer-events-none"
           style={{ border: 0, width: "140%", height: "140%", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
           allow="autoplay"
