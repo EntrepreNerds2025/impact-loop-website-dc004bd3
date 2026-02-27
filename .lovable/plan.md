@@ -1,53 +1,79 @@
 
 
-## Multi-Part Update: Logos, Hero Copy, Video Reorder
+## Upgrade Blog Post Page to Premium Editorial Layout
 
-### 1. Replace Logo with Uploaded Images
-
-Copy the two uploaded logo files into the project and use them in the Header and Footer instead of the current gradient circle with "IL" text.
-
-- Copy `Impact_Loop_Logo_White.png` to `src/assets/logos/impact-loop-white.png` (for dark backgrounds / unscrolled header / footer)
-- Copy `Impact_Loop_Logo_Black.png` to `src/assets/logos/impact-loop-black.png` (for light backgrounds / scrolled header)
-
-**Header (`src/components/layout/Header.tsx`):**
-- Replace the gradient circle `<div>` with an `<img>` that swaps between the white and black logo based on the `isScrolled` state
-- White logo when header is transparent (top of page), black logo when scrolled (white background)
-
-**Footer (`src/components/layout/Footer.tsx`):**
-- Replace the gradient circle `<div>` with the white logo (footer has dark background)
+Transform the blog post template from plain text into a visually rich, magazine-style reading experience with a cover image, inline images, pullquotes, callout boxes, and editorial design elements.
 
 ---
 
-### 2. Hero Section Copy Changes
+### 1. Enhance the Markdown Renderer
 
-**File: `src/components/home/HeroSection.tsx`**
+Upgrade `renderMarkdown()` in `BlogPost.tsx` to support additional syntax:
 
-- Change "Watch the Reel" button text to **"See Our Work"** and update the link from `/cinematic-impact-films` to `/work`
-- Remove "under scrutiny" from the subtitle -- change "Cinematic impact films and story systems built to earn trust under scrutiny." to **"Cinematic impact films and story systems built to earn trust."**
+- **Images**: `![alt text](url)` renders as styled images with captions, alternating between left-aligned and right-aligned float layouts
+- **Blockquotes**: `> text` renders as styled pullquotes with a left border accent and larger italic text
+- **Horizontal rules**: `---` renders as a styled section divider
+- **Unordered lists**: `- item` renders as proper styled bullet lists
+- **Numbered lists**: `1) item` renders as ordered lists with styling
 
 ---
 
-### 3. Rearrange Video Portfolio Order
+### 2. Redesign the Blog Post Page Layout
 
-**File: `src/components/home/VideoPortfolioSection.tsx`**
+**Cover image**: Full-width hero cover image that overlaps the header section, creating a cinematic feel. Will use a gradient overlay for the title text to sit on top of the image.
 
-New order (following the 1-2-1-2 row pattern):
-1. **Row 1 (full):** Mental Health Awareness (was #6)
-2. **Row 2 (pair):** Housing First Initiative (was #5) + Youth Empowerment Program (was #2)
-3. **Row 3 (full):** Education Access Campaign (was #4, stays)
-4. **Row 4 (pair):** Community Health Initiative (was #1) + Environmental Restoration (was #3)
+**Reading progress bar**: A thin accent-colored bar at the top of the viewport that fills as the reader scrolls down.
 
-Reorder the `portfolioItems` array to: `[6, 5, 2, 4, 1, 3]` (by original IDs).
+**Estimated read time**: Display next to the author and date (calculated from word count).
+
+**Author byline enhancement**: Add a small avatar circle with initials and styled author card.
+
+**Content typography**: Increase line height, add drop cap on first paragraph, and use wider margins with elegant spacing between sections.
+
+**Pullquote styling**: Blockquotes rendered as large, visually distinct pullquotes with decorative quotation marks and accent color borders.
+
+**Section dividers**: Styled `<hr>` elements with a small diamond or dot pattern.
+
+**Bottom CTA**: Keep the existing CTA but enhance with a subtle gradient background.
+
+---
+
+### 3. Update Blog Post Content in Database
+
+Update the existing blog post's markdown content to include:
+
+- A cover image URL (using a relevant Unsplash image)
+- Inline images throughout using `![description](unsplash-url)` syntax placed between sections
+- Blockquote pullquotes at key moments (e.g., `> Put the proof beside the story, not above it.`)
+- Horizontal rule dividers between major sections (`---`)
+- Proper list formatting with `-` and `1)` syntax
+
+---
+
+### 4. Update Blog Listing Card
+
+Update the Blog listing page (`Blog.tsx`) to show the cover image properly on the card when one exists.
 
 ---
 
 ### Technical Details
 
 **Files changed:**
-- `src/assets/logos/impact-loop-white.png` (new -- copied from upload)
-- `src/assets/logos/impact-loop-black.png` (new -- copied from upload)
-- `src/components/layout/Header.tsx` (swap logo based on scroll state)
-- `src/components/layout/Footer.tsx` (use white logo)
-- `src/components/home/HeroSection.tsx` (button text + subtitle edit)
-- `src/components/home/VideoPortfolioSection.tsx` (reorder array)
+- `src/pages/BlogPost.tsx` -- Major rewrite: enhanced markdown renderer, full-bleed cover hero, reading progress bar, read time estimate, drop cap, pullquote styles, alternating image floats
+- Database update: Update existing blog post record with cover_image URL and enriched markdown content with embedded images and pullquotes
+
+**Markdown enhancements (new syntax support):**
+```
+![alt text](url)          --> Styled image with caption, alternating float
+> blockquote text         --> Pullquote with accent border
+---                       --> Decorative section divider  
+- list item               --> Styled bullet list
+1) numbered item          --> Styled numbered list
+```
+
+**Reading progress bar**: Uses a `scroll` event listener to calculate percentage and renders a fixed-position bar at the top.
+
+**Read time**: Calculated as `Math.ceil(wordCount / 200)` minutes.
+
+**Cover image approach**: The cover image will be set as a background on the hero section with a gradient overlay, so the title text sits elegantly on top of the image.
 
