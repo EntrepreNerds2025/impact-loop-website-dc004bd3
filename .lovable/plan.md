@@ -1,23 +1,62 @@
 
 
-## Remove Cube Effect, Add Vimeo Background Video
+## Multi-Part Site Update
 
-### What changes
+### 1. Remove "Three Column Text" from PrinciplesSection
 
-1. **Remove HeroCubeWrapper from homepage** (`src/pages/Index.tsx`)
-   - Remove the `HeroCubeWrapper` import and wrapper
-   - Render `HeroSection` and `PrinciplesSection` as regular siblings so the page scrolls normally
+Remove the bottom three-column text block (lines 64-81 in `PrinciplesSection.tsx`) -- "Beyond Content", "Systems Thinking", "Human Voice Protection". Keep the 6-card grid above it.
 
-2. **Update HeroSection video background** (`src/components/home/HeroSection.tsx`)
-   - Replace the current Coverr placeholder `<video>` tag with a Vimeo embed using their background player
-   - Use `https://player.vimeo.com/video/1135409559?background=1&autoplay=1&loop=1&muted=1` in an iframe
-   - The `background=1` parameter removes all controls and enables autoplay/loop/mute automatically
-   - Keep the dark gradient overlay for text readability
-   - Keep the rotating headlines, subheadline, and CTA buttons exactly as they are
+### 2. Update Client Logos Section with Real Logos
 
-3. **HeroCubeWrapper component** -- will be left in place (not deleted) in case you want to reuse it later, but it will no longer be imported on the homepage.
+Replace the placeholder text logos with the 10 uploaded white logo images. Change the section background to dark (`bg-impact-dark`) so the white logos are visible. Update the heading text to "Trusted by organizations and companies making real impact."
 
-### Technical detail
+Logos to include (copied to `src/assets/logos/`):
+- Cafcan
+- Black Creek
+- BCF (Barrie Community Foundation)
+- Bartley Skills Development
+- Reddit
+- Fibe (Bell)
+- EmployNext
+- Addictive Services
+- Leukemia
+- Lakeridge
 
-The Vimeo background embed iframe will be styled with `position: absolute; inset: 0; width/height scaled up` to ensure full coverage (Vimeo iframes need slight oversizing to avoid letterboxing). A poster image fallback remains for slow connections.
+Each logo displayed as an `<img>` at roughly `h-10 w-auto` with `object-contain`, arranged in a responsive grid.
 
+### 3. Remove "Build a Hub" Button from ImpactMediaHubSection
+
+Remove the third CTA link ("Build a Hub") from `ImpactMediaHubSection.tsx` (line 51-53), keeping just "View Nonprofit Demo Hub" and "View CSR Demo Hub".
+
+### 4. Update Footer Contact Info
+
+In `Footer.tsx`:
+- Email: `hello@impactloop.ca` to `info@impactloop.ca`
+- Phone: `(123) 456-7890` to `(647) 832-9775` and `tel:+16478329775`
+- Location: `Barrie, ON, Canada` to `Toronto, ON, Canada`
+
+### 5. Create Terms of Service Page
+
+New file `src/pages/Terms.tsx` with a proper Terms of Service for a video production and storytelling company (Impact Loop). Covers: services, intellectual property, payment terms, liability limitations, client responsibilities, content usage rights, and governing law (Ontario, Canada).
+
+### 6. Create Privacy Policy Page
+
+New file `src/pages/Privacy.tsx` with a privacy policy covering: data collection, use of information, cookies, third-party services, data retention, rights under Canadian privacy law (PIPEDA), and contact info using `info@impactloop.ca`.
+
+### 7. Add Routes for Terms and Privacy
+
+In `App.tsx`, import and add routes for `/terms` and `/privacy`. These links already exist in the footer.
+
+### Technical Details
+
+**Files modified:**
+- `src/components/home/PrinciplesSection.tsx` -- remove three-column text block
+- `src/components/home/ClientLogosSection.tsx` -- replace with real logos on dark background
+- `src/components/home/ImpactMediaHubSection.tsx` -- remove "Build a Hub" button
+- `src/components/layout/Footer.tsx` -- update contact details
+- `src/App.tsx` -- add Terms and Privacy routes
+
+**Files created:**
+- `src/pages/Terms.tsx`
+- `src/pages/Privacy.tsx`
+- 10 logo files copied to `src/assets/logos/`
