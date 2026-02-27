@@ -14,7 +14,7 @@ import leukemiaLogo from "@/assets/logos/leukemia.png";
 import lakeridgeLogo from "@/assets/logos/lakeridge.png";
 
 const clientLogos = [
-  { id: 1, name: "Cafcan", src: cafcanLogo, className: "h-20" },
+  { id: 1, name: "Cafcan", src: cafcanLogo, className: "h-[7.5rem]" },
   { id: 2, name: "Black Creek", src: blackCreekLogo, className: "h-30" },
   { id: 3, name: "Barrie Community Foundation", src: bcfLogo, className: "h-30" },
   { id: 4, name: "Bartley Skills Development", src: bartleyLogo, className: "h-30" },
