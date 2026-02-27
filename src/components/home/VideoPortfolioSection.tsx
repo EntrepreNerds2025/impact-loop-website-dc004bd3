@@ -14,12 +14,12 @@ interface PortfolioItem {
 }
 
 const portfolioItems: PortfolioItem[] = [
-  { id: 6, title: "Mental Health Awareness", category: "Testimonial", thumbnail: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&h=340&fit=crop", vimeoId: "76979871", previewVimeoId: "1168718317" },
-  { id: 5, title: "Housing First Initiative", category: "Event Recap", thumbnail: "https://images.unsplash.com/photo-1460317442991-0ec209397118?w=600&h=256&fit=crop", vimeoId: "76979871", previewVimeoId: "1168718335" },
-  { id: 2, title: "Youth Empowerment Program", category: "Testimonial", thumbnail: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=256&fit=crop", vimeoId: "76979871", previewVimeoId: "1168718353" },
-  { id: 4, title: "Education Access Campaign", category: "Impact Story", thumbnail: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=800&h=340&fit=crop", vimeoId: "76979871", previewVimeoId: "1168718383" },
-  { id: 1, title: "Community Health Initiative", category: "Impact Story", thumbnail: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&h=256&fit=crop", vimeoId: "76979871", previewVimeoId: "1168718287" },
-  { id: 3, title: "Environmental Restoration", category: "Program Highlight", thumbnail: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&h=256&fit=crop", vimeoId: "76979871", previewVimeoId: "1168718362" },
+  { id: 1, title: "Mental Health Awareness", category: "Testimonial", thumbnail: "", vimeoId: "1140514160", previewVimeoId: "1168718317" },
+  { id: 2, title: "Iris Ministries — Malawi", category: "Impact Story", thumbnail: "", vimeoId: "1140283574", previewVimeoId: "1140283574" },
+  { id: 3, title: "Lakeridge Health — I Belong Initiative", category: "Initiatives", thumbnail: "", vimeoId: "1140641190", previewVimeoId: "1140641190" },
+  { id: 4, title: "Hair for Self-Esteem", category: "Impact Story", thumbnail: "", vimeoId: "1135409664", previewVimeoId: "1135409664" },
+  { id: 5, title: "Black Creek Community Health Ambassadors", category: "Program Highlight", thumbnail: "", vimeoId: "833854968", previewVimeoId: "833854968" },
+  { id: 6, title: "Octavia Sampson — Wellness Educator", category: "Testimonial", thumbnail: "", vimeoId: "1142229793", previewVimeoId: "1142229793" },
 ];
 
 const VideoCard = ({
