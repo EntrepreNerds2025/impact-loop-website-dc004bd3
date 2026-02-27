@@ -86,6 +86,7 @@ const projects = [
     category: "Initiatives",
     description: "Black Creek Community Health Centre needed to showcase their innovative Community Health Ambassador model — a grassroots approach born during the pandemic where trusted community members became the bridge between residents and critical health services. The video captures ambassadors delivering meals, checking blood pressure, and building the kind of trust that institutions alone can't create. The piece helped inspire other community centres across the region to adopt the same model, proving that health equity starts with the people who already belong to the community.",
     vimeoId: "833854968",
+    previewStart: 15,
   },
   {
     id: 12,
