@@ -46,8 +46,8 @@ const VideoCard = ({
     {/* Vimeo background embed */}
     <iframe
       src={`https://player.vimeo.com/video/${item.previewVimeoId}?background=1&autoplay=1&loop=1&muted=1`}
-      className="absolute inset-0 w-full h-full pointer-events-none"
-      style={{ border: 0 }}
+      className="absolute pointer-events-none"
+      style={{ border: 0, width: '140%', height: '140%', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
       allow="autoplay"
       title={`${item.title} preview`}
     />
