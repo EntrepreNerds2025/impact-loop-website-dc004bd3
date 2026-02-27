@@ -226,7 +226,7 @@ const Header = () => {
           />
 
           <Link to="/about" className={navLinkClass(location.pathname === "/about")}>About</Link>
-          <Link to="/bookings" className={navLinkClass(location.pathname === "/bookings")}>Book</Link>
+          <Link to="/contact" className={navLinkClass(location.pathname === "/contact")}>Contact</Link>
 
           <Link to="/bookings" className="btn-primary text-xs !px-5 !py-2">
             Book a Story Call
@@ -262,7 +262,7 @@ const Header = () => {
               <MobileAccordion items={resourcesDropdown} isOpen={isMobileResourcesOpen} setOpen={setIsMobileResourcesOpen} label="Resources" />
 
               <Link to="/about" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium py-2 text-foreground/60 hover:text-foreground">About</Link>
-              <Link to="/bookings" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium py-2 text-foreground/60 hover:text-foreground">Book</Link>
+              <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium py-2 text-foreground/60 hover:text-foreground">Contact</Link>
 
               <Link
                 to="/bookings"
