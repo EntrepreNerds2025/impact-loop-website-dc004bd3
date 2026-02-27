@@ -22,6 +22,7 @@ const projects = [
     category: "Initiatives",
     description: "Lakeridge Health needed to bring their I Belong initiative to life — not as a corporate announcement, but as a genuine reflection of the culture they were building. The challenge was showing how values like inclusion, compassion, innovation, teamwork, and joy actually translate into better outcomes for staff, patients, and families. We produced a documentary-style piece featuring real staff voices that drove measurable inclusivity results, amplified public awareness, and aligned the organization with their IDEAA action plans — proving this wasn't a one-off campaign but an ongoing commitment to systemic change.",
     vimeoId: "1140641190",
+    previewStart: 8,
   },
   {
     id: 3,
@@ -73,16 +74,19 @@ const ProjectRow = ({
   const videoOrder = isEven ? "md:order-2" : "md:order-1";
   const textOrder = isEven ? "md:order-1" : "md:order-2";
 
-  // Loop the first 10 seconds using Vimeo Player SDK
+  // Loop a 10-second preview using Vimeo Player SDK
   useEffect(() => {
     const iframe = iframeRef.current;
     if (!iframe) return;
     const player = new Player(iframe);
-    const LOOP_END = 10; // seconds
+    const LOOP_START = project.previewStart ?? 0;
+    const LOOP_END = LOOP_START + 10;
+
+    player.setCurrentTime(LOOP_START);
 
     const handleTimeUpdate = (data: { seconds: number }) => {
       if (data.seconds >= LOOP_END) {
-        player.setCurrentTime(0);
+        player.setCurrentTime(LOOP_START);
       }
     };
 
@@ -90,7 +94,7 @@ const ProjectRow = ({
     return () => {
       player.off("timeupdate", handleTimeUpdate);
     };
-  }, []);
+  }, [project.previewStart]);
 
   return (
     <motion.div
