@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import logoWhite from "@/assets/logos/impact-loop-white.png";
+import logoBlack from "@/assets/logos/impact-loop-black.png";
 
 const servicesDropdown = [
   { href: "/cinematic-impact-films", label: "Cinematic Impact Films" },
@@ -184,10 +186,12 @@ const Header = () => {
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-impact-blue to-impact-purple flex items-center justify-center">
-            <span className="text-white font-serif font-bold text-lg">IL</span>
-          </div>
+         <Link to="/" className="flex items-center gap-3">
+          <img
+            src={isScrolled ? logoBlack : logoWhite}
+            alt="Impact Loop"
+            className="h-10 w-auto transition-opacity duration-500"
+          />
           <span className={`font-serif text-xl font-semibold tracking-wide transition-colors duration-500 ${
             isScrolled ? "text-foreground" : "text-white"
           }`}>

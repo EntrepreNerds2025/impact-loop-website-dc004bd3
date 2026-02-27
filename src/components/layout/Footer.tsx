@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin } from "lucide-react";
+import logoWhite from "@/assets/logos/impact-loop-white.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -11,9 +12,7 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-impact-blue to-impact-purple flex items-center justify-center">
-                <span className="text-white font-serif font-bold text-lg">IL</span>
-              </div>
+              <img src={logoWhite} alt="Impact Loop" className="h-10 w-auto" />
               <span className="font-serif text-xl font-semibold">Impact Loop</span>
             </Link>
             <p className="text-white/60 text-sm leading-relaxed">
