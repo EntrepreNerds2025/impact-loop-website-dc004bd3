@@ -8,7 +8,8 @@ import Layout from "@/components/layout/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { setSEO, resetSEO } from "@/lib/seo";
 import { Progress } from "@/components/ui/progress";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import rovoннAvatar from "@/assets/founder/rovonn-avatar.png";
 
 const SITE_URL = "https://impact-loop-website.lovable.app";
 
@@ -206,6 +207,7 @@ const BlogPost = () => {
               </h1>
               <div className="flex items-center gap-4">
                 <Avatar className="h-11 w-11 border-2 border-white/20">
+                  <AvatarImage src={rovoннAvatar} alt={post.author} />
                   <AvatarFallback className="bg-[hsl(var(--primary))] text-primary-foreground text-sm font-semibold">
                     {getInitials(post.author)}
                   </AvatarFallback>
