@@ -5,7 +5,7 @@ import Layout from "@/components/layout/Layout";
 import VimeoLightbox from "@/components/shared/VimeoLightbox";
 import { slideFromLeft, slideFromRight, scaleIn } from "@/hooks/useScrollAnimation";
 
-const categories = ["All", "Impact Stories", "Testimonials", "Program Highlights", "Event Recaps", "Marketing Videos"];
+const categories = ["All", "Impact Stories", "Initiatives", "Program Highlights", "Event Recaps", "Promo & Hero Videos"];
 
 const projects = [
   {
