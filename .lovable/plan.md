@@ -1,62 +1,38 @@
 
 
-## Multi-Part Site Update
+## Redesign Video Portfolio: Landscape Grid with Native Auto-Playing Previews
 
-### 1. Remove "Three Column Text" from PrinciplesSection
+### Layout
+A narrower container (`max-w-5xl`) with a repeating two-row pattern for 6 videos total:
 
-Remove the bottom three-column text block (lines 64-81 in `PrinciplesSection.tsx`) -- "Beyond Content", "Systems Thinking", "Human Voice Protection". Keep the 6-card grid above it.
+```text
+Row 1: [────────── Video 1 (full width) ──────────]
+Row 2: [──── Video 2 ────] [──── Video 3 ────]
+Row 3: [────────── Video 4 (full width) ──────────]
+Row 4: [──── Video 5 ────] [──── Video 6 ────]
+```
 
-### 2. Update Client Logos Section with Real Logos
+All containers use a cinematic landscape aspect ratio (roughly 2.35:1 or similar wide format) to give the section a filmic feel.
 
-Replace the placeholder text logos with the 10 uploaded white logo images. Change the section background to dark (`bg-impact-dark`) so the white logos are visible. Update the heading text to "Trusted by organizations and companies making real impact."
+### Auto-Playing Native Video Previews
+- Each portfolio item will accept a `previewUrl` field pointing to a hosted `.mp4` file (you'll provide the 25-second clips)
+- A native `<video>` element will be used with `autoPlay`, `muted`, `loop`, and `playsInline` attributes
+- The video will play silently on loop as visitors scroll past
+- Falls back to the existing thumbnail image if no preview URL is provided yet
 
-Logos to include (copied to `src/assets/logos/`):
-- Cafcan
-- Black Creek
-- BCF (Barrie Community Foundation)
-- Bartley Skills Development
-- Reddit
-- Fibe (Bell)
-- EmployNext
-- Addictive Services
-- Leukemia
-- Lakeridge
+### Click-to-Lightbox
+- Clicking any video opens the existing Vimeo lightbox with the full version (with audio)
+- Play button overlay appears on hover to signal interactivity
+- Title and category labels remain at the bottom of each container
 
-Each logo displayed as an `<img>` at roughly `h-10 w-auto` with `object-contain`, arranged in a responsive grid.
-
-### 3. Remove "Build a Hub" Button from ImpactMediaHubSection
-
-Remove the third CTA link ("Build a Hub") from `ImpactMediaHubSection.tsx` (line 51-53), keeping just "View Nonprofit Demo Hub" and "View CSR Demo Hub".
-
-### 4. Update Footer Contact Info
-
-In `Footer.tsx`:
-- Email: `hello@impactloop.ca` to `info@impactloop.ca`
-- Phone: `(123) 456-7890` to `(647) 832-9775` and `tel:+16478329775`
-- Location: `Barrie, ON, Canada` to `Toronto, ON, Canada`
-
-### 5. Create Terms of Service Page
-
-New file `src/pages/Terms.tsx` with a proper Terms of Service for a video production and storytelling company (Impact Loop). Covers: services, intellectual property, payment terms, liability limitations, client responsibilities, content usage rights, and governing law (Ontario, Canada).
-
-### 6. Create Privacy Policy Page
-
-New file `src/pages/Privacy.tsx` with a privacy policy covering: data collection, use of information, cookies, third-party services, data retention, rights under Canadian privacy law (PIPEDA), and contact info using `info@impactloop.ca`.
-
-### 7. Add Routes for Terms and Privacy
-
-In `App.tsx`, import and add routes for `/terms` and `/privacy`. These links already exist in the footer.
+### What You'll Need to Provide
+- 6 preview video files (`.mp4`, ideally under 5MB each, 25 seconds long) hosted somewhere accessible (e.g., a public URL, cloud storage link, or uploaded to file storage)
+- Once you share the URLs, I'll plug them into each portfolio item
 
 ### Technical Details
 
 **Files modified:**
-- `src/components/home/PrinciplesSection.tsx` -- remove three-column text block
-- `src/components/home/ClientLogosSection.tsx` -- replace with real logos on dark background
-- `src/components/home/ImpactMediaHubSection.tsx` -- remove "Build a Hub" button
-- `src/components/layout/Footer.tsx` -- update contact details
-- `src/App.tsx` -- add Terms and Privacy routes
+- `src/components/home/VideoPortfolioSection.tsx` -- Rewrite grid to use the 1-2-1-2 layout pattern inside a `max-w-5xl` container. Replace `<img>` thumbnails with `<video>` elements using native HTML5 autoplay (`autoplay muted loop playsInline`). Each portfolio item gets a new `previewUrl` field. Grid uses single column with full-width items alternating with two-column rows via CSS grid (`grid-cols-1` then `grid-cols-2`).
 
-**Files created:**
-- `src/pages/Terms.tsx`
-- `src/pages/Privacy.tsx`
-- 10 logo files copied to `src/assets/logos/`
+**No other files need changes** -- the Vimeo lightbox and routing remain as-is.
+
