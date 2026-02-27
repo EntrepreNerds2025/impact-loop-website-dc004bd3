@@ -1,15 +1,17 @@
 import { useState, useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import { Play } from "lucide-react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { Play, ChevronDown } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import VimeoLightbox from "@/components/shared/VimeoLightbox";
 import { slideFromLeft, slideFromRight, scaleIn } from "@/hooks/useScrollAnimation";
+
+const categories = ["All", "Impact Stories", "Testimonials", "Program Highlights", "Event Recaps", "Marketing Videos"];
 
 const projects = [
   {
     id: 1,
     title: "Community Health Initiative",
-    category: "Impact Story",
+    category: "Impact Stories",
     description: "A local health clinic needed to communicate the real-world outcomes of their patient care programs to secure continued funding. We crafted a documentary-style piece that followed patients and staff, turning clinical data into a human narrative that resonated with funders and community partners alike.",
     vimeoId: "76979871",
     previewVimeoId: "1168718287",
@@ -17,7 +19,7 @@ const projects = [
   {
     id: 2,
     title: "Youth Empowerment Program",
-    category: "Testimonial",
+    category: "Testimonials",
     description: "Young leaders from an after-school mentorship program wanted their voices heard by the donors who made it possible. We sat down with six participants and captured candid, unscripted conversations about growth, resilience, and the moments that changed their trajectories.",
     vimeoId: "76979871",
     previewVimeoId: "1168718353",
@@ -25,7 +27,7 @@ const projects = [
   {
     id: 3,
     title: "Environmental Restoration",
-    category: "Program Highlight",
+    category: "Program Highlights",
     description: "A conservation nonprofit had spent three years restoring a critical wetland habitat but struggled to show stakeholders the scale of their progress. We produced a visual journey from barren land to thriving ecosystem, combining aerial footage with on-the-ground interviews.",
     vimeoId: "76979871",
     previewVimeoId: "1168718362",
@@ -33,7 +35,7 @@ const projects = [
   {
     id: 4,
     title: "Education Access Campaign",
-    category: "Impact Story",
+    category: "Impact Stories",
     description: "An education foundation needed to demonstrate how their scholarship program was closing opportunity gaps in underserved communities. We followed three students from application to graduation, creating a compelling case for expanded investment.",
     vimeoId: "76979871",
     previewVimeoId: "1168718383",
@@ -41,7 +43,7 @@ const projects = [
   {
     id: 5,
     title: "Housing First Initiative",
-    category: "Event Recap",
+    category: "Event Recaps",
     description: "The annual gala for a housing-first organization needed to capture the energy of the evening while reinforcing the urgency of their mission. We produced a same-day edit highlight reel alongside a longer documentary piece featuring residents sharing their stories of stability.",
     vimeoId: "76979871",
     previewVimeoId: "1168718335",
@@ -49,12 +51,14 @@ const projects = [
   {
     id: 6,
     title: "Mental Health Awareness",
-    category: "Testimonial",
+    category: "Testimonials",
     description: "Breaking the stigma around mental health required authentic, vulnerable storytelling. We partnered with a wellness organization to capture personal narratives from people at different stages of their mental health journeys, creating a series that sparked meaningful community dialogue.",
     vimeoId: "76979871",
     previewVimeoId: "1168718317",
   },
 ];
+
+const VISIBLE_COUNT = 6;
 
 const ProjectRow = ({
   project,
@@ -74,7 +78,15 @@ const ProjectRow = ({
   const textOrder = isEven ? "md:order-1" : "md:order-2";
 
   return (
-    <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center py-16 md:py-24">
+    <motion.div
+      ref={ref}
+      layout
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.5 }}
+      className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center py-16 md:py-24"
+    >
       {/* Text */}
       <motion.div
         variants={textVariants}
@@ -116,12 +128,30 @@ const ProjectRow = ({
           </div>
         </div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 
 const Work = () => {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [showAll, setShowAll] = useState(false);
+
+  const filteredProjects =
+    selectedCategory === "All"
+      ? projects
+      : projects.filter((p) => p.category === selectedCategory);
+
+  const visibleProjects = showAll
+    ? filteredProjects
+    : filteredProjects.slice(0, VISIBLE_COUNT);
+
+  const hasMore = filteredProjects.length > VISIBLE_COUNT;
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    setShowAll(false);
+  };
 
   return (
     <Layout>
@@ -148,18 +178,56 @@ const Work = () => {
         </div>
       </section>
 
+      {/* Category Tabs */}
+      <section className="py-6 bg-impact-dark border-b border-white/10 sticky top-[72px] z-30 backdrop-blur-md bg-impact-dark/90">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-wrap justify-center gap-3">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => handleCategoryChange(category)}
+                className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                  selectedCategory === category
+                    ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
+                    : "bg-white/10 text-white/70 hover:bg-white/20 hover:text-white"
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Editorial Portfolio */}
       <section className="bg-impact-dark">
         <div className="container mx-auto px-6 divide-y divide-white/10">
-          {projects.map((project, index) => (
-            <ProjectRow
-              key={project.id}
-              project={project}
-              index={index}
-              onPlay={setSelectedVideo}
-            />
-          ))}
+          <AnimatePresence mode="popLayout">
+            {visibleProjects.map((project, index) => (
+              <ProjectRow
+                key={project.id}
+                project={project}
+                index={index}
+                onPlay={setSelectedVideo}
+              />
+            ))}
+          </AnimatePresence>
         </div>
+
+        {/* View More */}
+        {hasMore && !showAll && (
+          <div className="container mx-auto px-6 pb-20 text-center">
+            <motion.button
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              onClick={() => setShowAll(true)}
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-full border border-white/20 text-white/80 hover:bg-white/10 hover:text-white transition-all duration-300 font-medium"
+            >
+              View More Projects
+              <ChevronDown className="w-4 h-4" />
+            </motion.button>
+          </div>
+        )}
       </section>
 
       {/* CTA */}
