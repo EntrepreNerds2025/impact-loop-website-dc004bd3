@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const headlines = [
   "Stories that Earn Donor Trust.",
-  "Stories that Earn Partner Trust.",
-  "Stories that Earn Stakeholder Trust.",
+  "Stories that Earn Community Trust.",
+  "Stories that Drive Action.",
 ];
 
 const RotatingHeadline = () => {
