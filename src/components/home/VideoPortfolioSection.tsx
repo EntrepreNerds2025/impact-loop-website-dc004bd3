@@ -33,7 +33,7 @@ const VideoCard = ({
 }) => (
   <motion.div
     variants={scaleIn}
-    className="group relative overflow-hidden rounded-sm cursor-pointer"
+    className="group relative overflow-hidden rounded-xl cursor-pointer"
     style={{ aspectRatio: isFullWidth ? "2.35 / 1" : "2.35 / 1" }}
     onClick={onClick}
   >
