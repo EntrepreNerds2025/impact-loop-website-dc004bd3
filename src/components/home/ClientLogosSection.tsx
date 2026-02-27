@@ -14,16 +14,16 @@ import leukemiaLogo from "@/assets/logos/leukemia.png";
 import lakeridgeLogo from "@/assets/logos/lakeridge.png";
 
 const clientLogos = [
-  { id: 1, name: "Cafcan", src: cafcanLogo },
-  { id: 2, name: "Black Creek", src: blackCreekLogo },
-  { id: 3, name: "Barrie Community Foundation", src: bcfLogo },
-  { id: 4, name: "Bartley Skills Development", src: bartleyLogo },
-  { id: 5, name: "Reddit", src: redditLogo },
-  { id: 6, name: "Fibe", src: fibeLogo },
-  { id: 7, name: "EmployNext", src: employnextLogo },
-  { id: 8, name: "Addictive Services", src: addictiveLogo },
-  { id: 9, name: "Leukemia & Lymphoma Society", src: leukemiaLogo },
-  { id: 10, name: "Lakeridge Health", src: lakeridgeLogo },
+  { id: 1, name: "Cafcan", src: cafcanLogo, large: true },
+  { id: 2, name: "Black Creek", src: blackCreekLogo, large: true },
+  { id: 3, name: "Barrie Community Foundation", src: bcfLogo, large: true },
+  { id: 4, name: "Bartley Skills Development", src: bartleyLogo, large: true },
+  { id: 5, name: "Reddit", src: redditLogo, large: true },
+  { id: 6, name: "Fibe", src: fibeLogo, large: false },
+  { id: 7, name: "EmployNext", src: employnextLogo, large: false },
+  { id: 8, name: "Addictive Services", src: addictiveLogo, large: true },
+  { id: 9, name: "Leukemia & Lymphoma Society", src: leukemiaLogo, large: true },
+  { id: 10, name: "Lakeridge Health", src: lakeridgeLogo, large: true },
 ];
 
 const ClientLogosSection = () => {
@@ -57,7 +57,7 @@ const ClientLogosSection = () => {
               <img
                 src={logo.src}
                 alt={logo.name}
-                className="h-10 w-auto object-contain"
+                className={`${logo.large ? "h-30" : "h-10"} w-auto object-contain`}
               />
             </motion.div>
           ))}
