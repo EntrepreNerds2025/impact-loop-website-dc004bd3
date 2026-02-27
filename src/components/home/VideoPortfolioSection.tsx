@@ -14,7 +14,7 @@ interface PortfolioItem {
 }
 
 const portfolioItems: PortfolioItem[] = [
-  { id: 1, title: "Mental Health Awareness", category: "Testimonial", thumbnail: "", vimeoId: "1140514160", previewVimeoId: "1168718317" },
+  { id: 1, title: "CIBC Refugee Employment Support", category: "Testimonial", thumbnail: "", vimeoId: "1140514160", previewVimeoId: "1168718317" },
   { id: 2, title: "Iris Ministries — Malawi", category: "Impact Story", thumbnail: "", vimeoId: "1140283574", previewVimeoId: "1140283574" },
   { id: 3, title: "Lakeridge Health — I Belong Initiative", category: "Initiatives", thumbnail: "", vimeoId: "1140641190", previewVimeoId: "1140641190" },
   { id: 4, title: "Hair for Self-Esteem", category: "Impact Story", thumbnail: "", vimeoId: "1135409664", previewVimeoId: "1135409664" },
