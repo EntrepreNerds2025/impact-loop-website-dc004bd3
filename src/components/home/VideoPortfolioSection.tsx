@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { Play } from "lucide-react";
 import VimeoLightbox from "../shared/VimeoLightbox";
@@ -30,11 +30,19 @@ const VideoCard = ({
   item: PortfolioItem;
   onClick: () => void;
   isFullWidth: boolean;
-}) => (
+}) => {
+  const [showPreview, setShowPreview] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowPreview(false), 10000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
   <motion.div
     variants={scaleIn}
     className="group relative overflow-hidden rounded-xl cursor-pointer"
-    style={{ aspectRatio: isFullWidth ? "2.35 / 1" : "2.35 / 1" }}
+    style={{ aspectRatio: "2.35 / 1" }}
     onClick={onClick}
   >
     {/* Thumbnail fallback behind iframe */}
@@ -44,13 +52,15 @@ const VideoCard = ({
       className="absolute inset-0 w-full h-full object-cover"
     />
     {/* Vimeo background embed */}
-    <iframe
-      src={`https://player.vimeo.com/video/${item.previewVimeoId}?background=1&autoplay=1&loop=1&muted=1`}
-      className="absolute pointer-events-none"
-      style={{ border: 0, width: '140%', height: '140%', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
-      allow="autoplay"
-      title={`${item.title} preview`}
-    />
+    {showPreview && (
+      <iframe
+        src={`https://player.vimeo.com/video/${item.previewVimeoId}?background=1&autoplay=1&loop=1&muted=1`}
+        className="absolute pointer-events-none"
+        style={{ border: 0, width: '140%', height: '140%', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
+        allow="autoplay"
+        title={`${item.title} preview`}
+      />
+    )}
 
     {/* Overlay */}
     <div className="absolute inset-0 bg-[hsl(var(--impact-dark))]/40 group-hover:bg-[hsl(var(--impact-dark))]/60 transition-colors duration-300" />
@@ -68,7 +78,8 @@ const VideoCard = ({
       <h3 className="font-serif text-lg font-semibold text-white mt-1">{item.title}</h3>
     </div>
   </motion.div>
-);
+  );
+};
 
 const VideoPortfolioSection = () => {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
