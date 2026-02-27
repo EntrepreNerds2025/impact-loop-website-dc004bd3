@@ -31,11 +31,11 @@ const VideoCard = ({
   onClick: () => void;
   isFullWidth: boolean;
 }) => {
-  const [showPreview, setShowPreview] = useState(true);
+  const [previewKey, setPreviewKey] = useState(0);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowPreview(false), 10000);
-    return () => clearTimeout(timer);
+    const interval = setInterval(() => setPreviewKey((k) => k + 1), 10000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -51,16 +51,15 @@ const VideoCard = ({
       alt={item.title}
       className="absolute inset-0 w-full h-full object-cover"
     />
-    {/* Vimeo background embed */}
-    {showPreview && (
+    {/* Vimeo background embed - remounts every 10s to loop */}
       <iframe
-        src={`https://player.vimeo.com/video/${item.previewVimeoId}?background=1&autoplay=1&loop=1&muted=1`}
+        key={previewKey}
+        src={`https://player.vimeo.com/video/${item.previewVimeoId}?background=1&autoplay=1&loop=0&muted=1`}
         className="absolute pointer-events-none"
         style={{ border: 0, width: '140%', height: '140%', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
         allow="autoplay"
         title={`${item.title} preview`}
       />
-    )}
 
     {/* Overlay */}
     <div className="absolute inset-0 bg-[hsl(var(--impact-dark))]/40 group-hover:bg-[hsl(var(--impact-dark))]/60 transition-colors duration-300" />
