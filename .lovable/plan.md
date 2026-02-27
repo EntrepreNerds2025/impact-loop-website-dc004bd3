@@ -1,35 +1,26 @@
 
 
-## Add New Blog Post: "Ethical Storytelling for Nonprofits and CSR Teams"
+## Update Rotating Headlines and Video Preview Duration
 
-### What will happen
+### 1. Update rotating headline text in `RotatingWord.tsx`
 
-Insert a third blog post into the database with the same premium editorial treatment as the existing two posts:
+Change the three headlines from:
+- "Stories that Earn Donor Trust." (keep as-is)
+- "Stories that Earn Partner Trust." --> "Stories that Earn Community Trust."
+- "Stories that Earn Stakeholder Trust." --> "Stories that Drive Action."
 
-- **Title**: Ethical Storytelling for Nonprofits and CSR Teams: Consent, Dignity, and a Simple Protocol
-- **Slug**: `ethical-storytelling-nonprofits-csr-consent-dignity-protocol`
-- **Author**: Rovonn Russell
-- **Published**: Yes, with current timestamp
-- **Cover image**: A cinematic Unsplash image related to community storytelling or collaborative conversation
-- **SEO metadata**: Custom meta title and description
+### 2. Limit video preview playback to 10 seconds
 
-### Content enhancements
+The Vimeo background embeds in `VideoPortfolioSection.tsx` currently autoplay and loop indefinitely. Vimeo's background embed API does not support a native "stop after X seconds" parameter, so we will:
 
-The raw text will be formatted with the editorial markdown syntax the blog already supports:
+- Add a time-based approach using React state: each `VideoCard` will mount with the iframe visible, then after 10 seconds, hide the iframe (letting the static thumbnail show through) or use the Vimeo `#t=0s` fragment plus a timer to remove/reset the iframe `src` after 10 seconds.
+- Specifically: wrap the iframe in a component that uses `useEffect` with a 10-second `setTimeout` to set a `showPreview` state to `false`, which removes the iframe and leaves the thumbnail fallback visible.
+- The preview will play once for 10 seconds when the card scrolls into view, then stop and show the thumbnail.
 
-- **6-8 inline images** from Unsplash placed throughout using `![caption](url)` syntax, alternating left and right floats (e.g., interview scenes, community gatherings, collaborative meetings, diverse teams)
-- **Pullquotes** on key statements like:
-  - *"Ethical storytelling is not making stories less emotional. It is making stories more honest, more human, and more respectful."*
-  - *"A powerful story is not a detailed confession. It is a clear arc of change."*
-  - *"Show change more than pain."*
-- **Section dividers** (`---`) between major sections
-- **Proper list formatting** with `-` and `1)` syntax throughout
+### Files to modify
 
-### Excerpt
-
-"Ethical storytelling needs to be a protocol, not a principle. Here is a practical framework your team can follow every time -- without killing the story."
-
-### No code changes needed
-
-The existing blog template and markdown renderer already support all the editorial features. This is a database-only update.
+| File | Change |
+|------|--------|
+| `src/components/home/RotatingWord.tsx` | Update lines 5-7 with new headline text |
+| `src/components/home/VideoPortfolioSection.tsx` | Add 10-second timer logic to `VideoCard` to hide the Vimeo iframe after 10 seconds |
 
