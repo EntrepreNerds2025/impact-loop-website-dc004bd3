@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import { convergeFromLeft, convergeFromRight } from "@/hooks/useScrollAnimation";
+import founderPhoto from "@/assets/founder/rovonn.png";
 
 const FounderSection = () => {
   const ref = useRef(null);
@@ -19,9 +20,7 @@ const FounderSection = () => {
             className="relative"
           >
             <div className="aspect-[4/5] rounded-sm overflow-hidden bg-gradient-to-br from-primary/20 to-secondary/20">
-              <div className="w-full h-full flex items-center justify-center text-muted-foreground/40">
-                <span className="font-serif text-lg">Founder Photo</span>
-              </div>
+              <img src={founderPhoto} alt="Rovonn Russell, Founder of Impact Loop" className="w-full h-full object-cover object-top" />
             </div>
             <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-primary/10 rounded-sm -z-10" />
           </motion.div>

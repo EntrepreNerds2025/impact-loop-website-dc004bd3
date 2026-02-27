@@ -33,6 +33,7 @@ const Footer = () => {
                 { href: "/services", label: "Services" },
                 { href: "/impact-media-hub", label: "Impact Media Hub" },
                 { href: "/research", label: "Research" },
+                { href: "/blog", label: "Blog" },
                 { href: "/hub/examples", label: "Hub Examples" },
                 { href: "/bookings", label: "Book a Call" },
               ].map((link) => (

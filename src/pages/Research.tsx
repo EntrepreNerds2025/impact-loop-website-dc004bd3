@@ -11,58 +11,15 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
-// Report data (hardcoded to match seed)
-const reports = [
-  {
-    title: "The Metrics That Matter Report 2026",
-    description: "Why impressions don't equal impact. A guide to measuring what matters in social impact communications.",
-    slug: "metrics-that-matter-2026",
-    cover: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-    label: "MEASUREMENT",
-  },
-  {
-    title: "Culture vs. Counterfeit: The Nonprofit's Guide to Authentic Storytelling",
-    description: "How organizations can tell real stories without extracting from the communities they serve.",
-    slug: "culture-vs-counterfeit",
-    cover: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80",
-    label: "STORYTELLING",
-  },
-  {
-    title: "The Trust Effect: Rebuilding Stakeholder Confidence Through Media",
-    description: "A framework for using video, photography, and narrative to rebuild trust after organizational change.",
-    slug: "trust-effect",
-    cover: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80",
-    label: "TRUST",
-  },
-  {
-    title: "Constellations Outlook: The Forces Shaping Impact Communications in 2026",
-    description: "Trends in nonprofit media, CSR reporting, and community-led storytelling.",
-    slug: "constellations-outlook-2026",
-    cover: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
-    label: "TRENDS",
-  },
-  {
-    title: "Inside Modern Impact Reporting: Trust, Timing & Building Credibility",
-    description: "A deep dive into earned attention in the impact sector.",
-    slug: "modern-impact-reporting",
-    cover: "https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=800&q=80",
-    label: "CREDIBILITY",
-  },
-  {
-    title: "Building a Story-First Strategy: A Guide for Nonprofits",
-    description: "How to shift from data-heavy reports to narrative-driven impact communications.",
-    slug: "story-first-strategy",
-    cover: "https://images.unsplash.com/photo-1456324504439-367cee3b3c32?w=800&q=80",
-    label: "STRATEGY",
-  },
-  {
-    title: "The Growing Power of Community-Led Media",
-    description: "Why the most credible impact stories come from the communities themselves.",
-    slug: "community-led-media",
-    cover: "https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?w=800&q=80",
-    label: "COMMUNITY",
-  },
-];
+type ReportData = { title: string; description: string; slug: string; cover: string; label: string };
+
+const report: ReportData = {
+  title: "The Metrics That Matter Report 2026",
+  description: "Why impressions don't equal impact. A guide to measuring what matters in social impact communications.",
+  slug: "metrics-that-matter-2026",
+  cover: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+  label: "MEASUREMENT",
+};
 
 const leadSchema = z.object({
   first_name: z.string().trim().min(1, "First name is required").max(100),
@@ -105,7 +62,7 @@ const DownloadButton = ({ onClick, slug }: { onClick: () => void; slug?: string 
   </div>
 );
 
-const FeaturedReport = ({ report, reverse, onDownload }: { report: typeof reports[0]; reverse?: boolean; onDownload: (slug: string) => void }) => (
+const FeaturedReport = ({ report, reverse, onDownload }: { report: ReportData; reverse?: boolean; onDownload: (slug: string) => void }) => (
   <motion.div
     initial={{ opacity: 0, y: 40 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -124,7 +81,7 @@ const FeaturedReport = ({ report, reverse, onDownload }: { report: typeof report
   </motion.div>
 );
 
-const ReportCard = ({ report, onDownload }: { report: typeof reports[0]; onDownload: (slug: string) => void }) => (
+const ReportCard = ({ report, onDownload }: { report: ReportData; onDownload: (slug: string) => void }) => (
   <motion.div
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -212,39 +169,10 @@ const Research = () => {
         </div>
       </section>
 
-      {/* Featured Report 1 */}
+      {/* Featured Report */}
       <section className="py-20 md:py-28">
         <div className="container mx-auto px-6">
-          <FeaturedReport report={reports[0]} onDownload={handleDownload} />
-        </div>
-      </section>
-
-      {/* 3-Card Grid Row 1 */}
-      <section className="py-16 section-cream">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {reports.slice(1, 4).map((r) => (
-              <ReportCard key={r.slug} report={r} onDownload={handleDownload} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Report 2 (reversed) */}
-      <section className="py-20 md:py-28">
-        <div className="container mx-auto px-6">
-          <FeaturedReport report={reports[4]} reverse onDownload={handleDownload} />
-        </div>
-      </section>
-
-      {/* 3-Card Grid Row 2 — last 2 reports */}
-      <section className="py-16 section-cream">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {reports.slice(5, 7).map((r) => (
-              <ReportCard key={r.slug} report={r} onDownload={handleDownload} />
-            ))}
-          </div>
+          <FeaturedReport report={report} onDownload={handleDownload} />
         </div>
       </section>
 
