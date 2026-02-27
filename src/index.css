@@ -131,6 +131,100 @@
   .btn-secondary {
     @apply bg-transparent border border-foreground text-foreground hover:bg-foreground hover:text-background font-medium px-8 py-3.5 rounded-sm transition-all duration-300 uppercase tracking-widest text-sm;
   }
+
+  /* Editorial blog styles */
+  .editorial-content {
+    @apply text-lg leading-[1.9];
+  }
+
+  .editorial-content .editorial-p {
+    @apply mb-6 leading-[1.9];
+  }
+
+  .editorial-content .editorial-drop-cap::first-letter {
+    float: left;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4.5rem;
+    line-height: 0.8;
+    padding-right: 0.6rem;
+    padding-top: 0.15rem;
+    font-weight: 700;
+    color: hsl(var(--primary));
+  }
+
+  .editorial-content .editorial-h1 {
+    font-family: 'Cormorant Garamond', serif;
+    @apply text-3xl md:text-4xl font-bold mt-14 mb-5;
+  }
+
+  .editorial-content .editorial-h2 {
+    font-family: 'Cormorant Garamond', serif;
+    @apply text-2xl md:text-3xl font-semibold mt-12 mb-4;
+  }
+
+  .editorial-content .editorial-h3 {
+    font-family: 'Cormorant Garamond', serif;
+    @apply text-xl md:text-2xl font-semibold mt-10 mb-3;
+  }
+
+  .editorial-content .editorial-li {
+    @apply ml-6 mb-2 list-disc leading-relaxed;
+  }
+
+  .editorial-content .editorial-li-ordered {
+    @apply list-decimal;
+  }
+
+  .editorial-pullquote {
+    @apply relative my-12 py-6 px-8 border-l-4 border-[hsl(var(--primary))] italic text-xl md:text-2xl leading-relaxed;
+    font-family: 'Cormorant Garamond', serif;
+    color: hsl(var(--foreground));
+    background: hsl(var(--muted));
+    border-radius: 0 0.25rem 0.25rem 0;
+  }
+
+  .editorial-pullquote .pullquote-mark {
+    @apply absolute -top-2 -left-1 text-6xl leading-none font-bold;
+    color: hsl(var(--primary) / 0.3);
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .editorial-divider {
+    @apply flex items-center justify-center gap-2 my-14;
+  }
+
+  .editorial-divider span {
+    @apply w-2 h-2 rounded-full;
+    background: hsl(var(--primary) / 0.4);
+  }
+
+  .editorial-image {
+    @apply my-10 rounded-sm overflow-hidden;
+  }
+
+  .editorial-image img {
+    @apply w-full h-auto rounded-sm;
+  }
+
+  .editorial-image figcaption {
+    @apply text-sm text-muted-foreground mt-3 italic;
+  }
+
+  @media (min-width: 768px) {
+    .editorial-image-left {
+      float: left;
+      width: 55%;
+      margin-right: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .editorial-image-right {
+      float: right;
+      width: 55%;
+      margin-left: 2rem;
+      margin-bottom: 1rem;
+    }
+  }
 }
 
 @layer utilities {
