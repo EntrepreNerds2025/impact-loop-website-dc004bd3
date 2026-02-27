@@ -17,6 +17,8 @@ import HubCorporateDemo from "./pages/HubCorporateDemo";
 import Research from "./pages/Research";
 import ReportMetricsThatMatter from "./pages/ReportMetricsThatMatter";
 import CinematicImpactFilms from "./pages/CinematicImpactFilms";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -39,6 +41,8 @@ const App = () => (
           <Route path="/research" element={<Research />} />
           <Route path="/research/metrics-that-matter-2026" element={<ReportMetricsThatMatter />} />
           <Route path="/cinematic-impact-films" element={<CinematicImpactFilms />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

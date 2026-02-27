@@ -48,9 +48,6 @@ const ImpactMediaHubSection = () => {
               <Link to="/hub/corporate-demo" className="btn-secondary">
                 View CSR Demo Hub
               </Link>
-              <Link to="/bookings" className="btn-secondary">
-                Build a Hub
-              </Link>
             </div>
           </motion.div>
 

@@ -2,19 +2,28 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { fadeIn, staggerContainer } from "@/hooks/useScrollAnimation";
 
+import cafcanLogo from "@/assets/logos/cafcan.png";
+import blackCreekLogo from "@/assets/logos/black-creek.png";
+import bcfLogo from "@/assets/logos/bcf.png";
+import bartleyLogo from "@/assets/logos/bartley.png";
+import redditLogo from "@/assets/logos/reddit.png";
+import fibeLogo from "@/assets/logos/fibe.png";
+import employnextLogo from "@/assets/logos/employnext.png";
+import addictiveLogo from "@/assets/logos/addictive-services.png";
+import leukemiaLogo from "@/assets/logos/leukemia.png";
+import lakeridgeLogo from "@/assets/logos/lakeridge.png";
+
 const clientLogos = [
-  { id: 1, name: "Community Foundation", placeholder: "CF" },
-  { id: 2, name: "Health Alliance", placeholder: "HA" },
-  { id: 3, name: "Youth Network", placeholder: "YN" },
-  { id: 4, name: "Green Initiative", placeholder: "GI" },
-  { id: 5, name: "Education First", placeholder: "EF" },
-  { id: 6, name: "Housing Trust", placeholder: "HT" },
-  { id: 7, name: "Arts Council", placeholder: "AC" },
-  { id: 8, name: "Food Security", placeholder: "FS" },
-  { id: 9, name: "Mental Health", placeholder: "MH" },
-  { id: 10, name: "Family Services", placeholder: "FS" },
-  { id: 11, name: "Indigenous Partners", placeholder: "IP" },
-  { id: 12, name: "Climate Action", placeholder: "CA" },
+  { id: 1, name: "Cafcan", src: cafcanLogo },
+  { id: 2, name: "Black Creek", src: blackCreekLogo },
+  { id: 3, name: "Barrie Community Foundation", src: bcfLogo },
+  { id: 4, name: "Bartley Skills Development", src: bartleyLogo },
+  { id: 5, name: "Reddit", src: redditLogo },
+  { id: 6, name: "Fibe", src: fibeLogo },
+  { id: 7, name: "EmployNext", src: employnextLogo },
+  { id: 8, name: "Addictive Services", src: addictiveLogo },
+  { id: 9, name: "Leukemia & Lymphoma Society", src: leukemiaLogo },
+  { id: 10, name: "Lakeridge Health", src: lakeridgeLogo },
 ];
 
 const ClientLogosSection = () => {
@@ -22,30 +31,34 @@ const ClientLogosSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section ref={ref} className="py-16 bg-background">
+    <section ref={ref} className="py-16 bg-impact-dark">
       <div className="container mx-auto px-6">
         <motion.p
           variants={fadeIn}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="text-center text-muted-foreground text-sm uppercase tracking-widest mb-10"
+          className="text-center text-white/50 text-sm uppercase tracking-widest mb-10"
         >
-          Trusted by organizations making real impact
+          Trusted by organizations and companies making real impact
         </motion.p>
 
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center justify-items-center"
+          className="grid grid-cols-3 md:grid-cols-5 gap-10 items-center justify-items-center"
         >
           {clientLogos.map((logo) => (
             <motion.div
               key={logo.id}
               variants={fadeIn}
-              className="w-20 h-12 flex items-center justify-center text-muted-foreground/50 hover:text-foreground/60 transition-colors duration-300"
+              className="flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity duration-300"
             >
-              <span className="font-serif text-xl font-bold">{logo.placeholder}</span>
+              <img
+                src={logo.src}
+                alt={logo.name}
+                className="h-10 w-auto object-contain"
+              />
             </motion.div>
           ))}
         </motion.div>
