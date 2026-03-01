@@ -66,11 +66,19 @@ const TechSolutionsSection = () => {
           variants={scaleIn}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="text-center mt-10"
+          className="text-center mt-10 space-y-4"
         >
           <Link to="/contact" className="btn-primary">
             Let's Build Something
           </Link>
+          <div>
+            <Link
+              to="/blog/ai-apps-for-impact"
+              className="text-primary hover:underline text-sm font-medium"
+            >
+              Read: How AI Is Changing What's Possible →
+            </Link>
+          </div>
         </motion.div>
       </div>
     </section>
