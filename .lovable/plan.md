@@ -1,48 +1,65 @@
 
 
-# Remove Impact Technology from Services Preview + Add Standalone Tech Section + Remove Hub Examples from Footer
+# Redesign Sections + New Blog Post + Tech CTA
 
-## 1. Remove "Impact Technology" from ServicesPreviewSection
+## 1. Dark Background + Split Layout for "The Storytelling Standard Behind the Work"
 
-**File: `src/components/home/ServicesPreviewSection.tsx`**
-- Remove the 5th entry (`Monitor` / "Impact Technology") from the `services` array (line 12)
-- Remove `Monitor` from the lucide-react import
-- Grid returns to a clean 2x2 layout
+**File: `src/components/home/FrameworkPreviewSection.tsx`** -- Full redesign
 
-## 2. Create new TechSolutionsSection component
+Replace the current centered card grid with a cinematic split layout:
+- Dark background using `section-dark` (the Impact Loop dark navy)
+- Left side: A compelling stock/Unsplash image (embedded via URL) showing storytelling/filmmaking
+- Right side: The text content (label, heading, description) + the 3 framework module cards stacked vertically
+- CTA button styled for dark background (white outline or primary on dark)
+- All text colors updated to white/white-muted for dark bg contrast
 
-**New file: `src/components/home/TechSolutionsSection.tsx`**
+## 2. Dark Background + Split Layout for "Videos That Move People to Action"
 
-A standalone homepage section dedicated to the technology offering, using the same animation patterns (`slideFromLeft`, `scaleIn`, `useInView`) as other sections. Content:
+**File: `src/components/home/ServicesPreviewSection.tsx`** -- Full redesign
 
-- **Label**: "Impact Technology"
-- **Headline**: "Custom Platforms Built in Weeks, Not Years"
-- **Body copy**: Explains how AI-accelerated development removes the need for large teams and long timelines. Organizations can now get purpose-built apps, dashboards, intake systems, and reporting platforms tailored to their workflows -- delivered in weeks.
-- **3-4 feature highlights** in a minimal grid (icon + short text):
-  - Custom apps tailored to your workflows
-  - AI-powered development -- fast delivery
-  - Integration with existing systems
-  - Ongoing support and iteration
-- **CTA**: Links to `/services` or `/contact`
+Flip the layout (text left, image right) to create visual rhythm:
+- Dark background using `bg-[hsl(var(--impact-dark))]`
+- Left side: Text content (label, heading, description) + the 4 service cards in a 2x2 grid below
+- Right side: A compelling image showing video production/impact work
+- Footer line and CTA adapted for dark background
+- Alternating direction from the Framework section creates visual interest
 
-Style: Alternating background (e.g. `section-cream` or `bg-muted`) to contrast with surrounding sections.
+## 3. New Blog Post -- "AI Is Making Impact Apps Possible Without Big Dev Teams"
 
-## 3. Add TechSolutionsSection to homepage
+**Database insert** into `blog_posts` table with the full copy provided by the user:
+- **slug**: `ai-apps-for-impact`
+- **title**: "AI Is Making Impact Apps Possible Without Big Dev Teams"
+- **excerpt**: "Apps, portals, and internal tools that support programs, partnerships, and reporting can now be built in weeks to months, not years."
+- **content**: Full markdown content from the user's copy (formatted with proper markdown headings, lists, blockquotes)
+- **author**: "Rovonn Russell"
+- **published**: true
+- **published_at**: Current date
+- **meta_title**: "AI Is Making Impact Apps Possible Without Big Dev Teams"
+- **meta_description**: The provided meta description
+- **cover_image**: An appropriate Unsplash image URL for the blog hero
 
-**File: `src/pages/Index.tsx`**
-- Import and render `<TechSolutionsSection />` after `<ServicesPreviewSection />` (before `<FrameworkPreviewSection />`)
+## 4. Add "Read More" Blog CTA to TechSolutionsSection
 
-## 4. Remove "Hub Examples" from Footer
+**File: `src/components/home/TechSolutionsSection.tsx`**
 
-**File: `src/components/layout/Footer.tsx`**
-- Remove `{ href: "/hub/examples", label: "Hub Examples" }` from the navigation links array (line 35)
+Add a secondary link/button below the existing "Let's Build Something" CTA that links to the new blog post:
+- Text: "Read: How AI Is Changing What's Possible" or similar
+- Links to `/blog/ai-apps-for-impact`
+- Styled as a text link or outline button to not compete with the primary CTA
 
 ## Files Changed
 
 | File | Change |
 |---|---|
-| `src/components/home/ServicesPreviewSection.tsx` | Remove Impact Technology card + Monitor import |
-| `src/components/home/TechSolutionsSection.tsx` | New standalone tech solutions section |
-| `src/pages/Index.tsx` | Import and render TechSolutionsSection |
-| `src/components/layout/Footer.tsx` | Remove Hub Examples link |
+| `src/components/home/FrameworkPreviewSection.tsx` | Dark bg + split layout (image left, text right) |
+| `src/components/home/ServicesPreviewSection.tsx` | Dark bg + split layout (text left, image right) |
+| `src/components/home/TechSolutionsSection.tsx` | Add blog post link below existing CTA |
+| Database: `blog_posts` | Insert new blog post with full content |
+
+## Design Notes
+
+- The two redesigned sections will alternate their image/text positioning (Framework: image-left/text-right, Services: text-left/image-right) creating a zig-zag visual pattern as users scroll
+- Both sections use the dark Impact Loop background for dramatic contrast against the lighter sections above and below
+- Images will use high-quality Unsplash URLs with appropriate subjects (storytelling/filmmaking for Framework, video production/community for Services)
+- Animations shift from `scaleIn` cards to `convergeFromLeft` / `convergeFromRight` to match the split layout direction
 
