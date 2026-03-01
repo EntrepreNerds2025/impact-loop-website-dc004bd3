@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Film, Lightbulb, CalendarCheck, Sparkles, Monitor } from "lucide-react";
+import { Film, Lightbulb, CalendarCheck, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { slideFromLeft, staggerContainer, scaleIn } from "@/hooks/useScrollAnimation";
 
@@ -9,7 +9,6 @@ const services = [
   { icon: Lightbulb, title: "Program Highlights", description: "Showcase the outcomes and transformations your programs create in the community." },
   { icon: CalendarCheck, title: "Event Recaps", description: "Dynamic coverage that extends the life and reach of your important events." },
   { icon: Sparkles, title: "Testimonial Stories", description: "Authentic voices sharing real experiences that build trust with your audience." },
-  { icon: Monitor, title: "Impact Technology", description: "Custom apps and platforms built with AI — delivered in weeks, not years — to power your operations and amplify your impact." },
 ];
 
 const ServicesPreviewSection = () => {

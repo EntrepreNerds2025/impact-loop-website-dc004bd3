@@ -32,7 +32,7 @@ const Footer = () => {
                 { href: "/services", label: "Services" },
                 { href: "/research", label: "Research" },
                 { href: "/blog", label: "Blog" },
-                { href: "/hub/examples", label: "Hub Examples" },
+                
                 { href: "/contact", label: "Contact Us" },
                 { href: "/bookings", label: "Book a Call" },
               ].map((link) => (
