@@ -121,7 +121,28 @@ const BlogPost = () => {
       ogType: "article",
       canonical: `${SITE_URL}/blog/${post.slug}`,
     });
-    return resetSEO;
+
+    // JSON-LD Article structured data
+    const jsonLd = document.createElement("script");
+    jsonLd.type = "application/ld+json";
+    jsonLd.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: post.title,
+      description: post.meta_description || post.excerpt,
+      image: post.og_image || post.cover_image || undefined,
+      author: { "@type": "Person", name: post.author },
+      publisher: { "@type": "Organization", name: "Impact Loop" },
+      datePublished: post.published_at || post.created_at,
+      dateModified: post.updated_at,
+      mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
+    });
+    document.head.appendChild(jsonLd);
+
+    return () => {
+      resetSEO();
+      jsonLd.remove();
+    };
   }, [post]);
 
   if (isLoading) {

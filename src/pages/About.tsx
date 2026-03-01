@@ -1,11 +1,21 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
+import { setSEO, resetSEO } from "@/lib/seo";
 
 const About = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  useEffect(() => {
+    setSEO({
+      title: "About — Impact Loop",
+      description: "Impact Loop bridges the trust gap for nonprofits and corporations through authentic, cinematic storytelling systems.",
+      ogType: "website",
+    });
+    return resetSEO;
+  }, []);
 
   return (
     <Layout>

@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { setSEO, resetSEO } from "@/lib/seo";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -101,6 +102,15 @@ const ReportCard = ({ report, onDownload }: { report: ReportData; onDownload: (s
 // --- Main Page ---
 
 const Research = () => {
+  useEffect(() => {
+    setSEO({
+      title: "Research & Reports — Impact Loop",
+      description: "Original research on impact communications, nonprofit storytelling, and building trust through media.",
+      ogType: "website",
+    });
+    return resetSEO;
+  }, []);
+
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedSlug, setSelectedSlug] = useState("");
   const [submitting, setSubmitting] = useState(false);

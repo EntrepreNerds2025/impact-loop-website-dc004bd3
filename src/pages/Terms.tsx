@@ -1,6 +1,17 @@
+import { useEffect } from "react";
 import Layout from "@/components/layout/Layout";
+import { setSEO, resetSEO } from "@/lib/seo";
 
 const Terms = () => {
+  useEffect(() => {
+    setSEO({
+      title: "Terms of Service — Impact Loop",
+      description: "Impact Loop's terms of service for video production, storytelling, and media services.",
+      ogType: "website",
+    });
+    return resetSEO;
+  }, []);
+
   return (
     <Layout>
       <section className="py-24 md:py-32 bg-background">

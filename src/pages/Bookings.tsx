@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Calendar, Clock, MessageSquare } from "lucide-react";
 import Layout from "@/components/layout/Layout";
+import { setSEO, resetSEO } from "@/lib/seo";
 
 const bookingTypes = [
   {
@@ -30,6 +32,15 @@ const bookingTypes = [
 ];
 
 const Bookings = () => {
+  useEffect(() => {
+    setSEO({
+      title: "Book a Call — Impact Loop",
+      description: "Schedule a free storytelling diagnostic call with Impact Loop. Explore how cinematic storytelling can build trust for your organization.",
+      ogType: "website",
+    });
+    return resetSEO;
+  }, []);
+
   return (
     <Layout>
       {/* Hero */}
