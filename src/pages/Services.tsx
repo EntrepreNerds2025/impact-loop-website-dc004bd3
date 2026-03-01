@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Users, BookOpen, Compass, Video, ArrowRight } from "lucide-react";
+import { Users, BookOpen, Compass, Video, Monitor, ArrowRight } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { setSEO, resetSEO } from "@/lib/seo";
 
@@ -69,6 +69,22 @@ const services = [
       "Strategic deployment guidance for stakeholders and partners",
     ],
     color: "impact-purple",
+  },
+  {
+    icon: Monitor,
+    title: "Impact Technology Solutions",
+    tagline: "Custom platforms that power your operations",
+    description:
+      "We design and build custom apps, platforms, and software tools that help your organization operate more efficiently and deliver impact at scale. With AI-accelerated development, solutions that once required large teams and years of work can now be built in weeks.",
+    forWho: "Organizations that need purpose-built tools — intake systems, dashboards, reporting platforms, or stakeholder portals — but don't have the budget or timeline for traditional software development",
+    problem: "Off-the-shelf tools don't fit your workflows, and custom development has always felt out of reach. AI has changed that equation entirely.",
+    outcomes: [
+      "Custom app or platform tailored to your workflows",
+      "AI-powered development — weeks, not years",
+      "Ongoing support and iteration",
+      "Integration with your existing systems",
+    ],
+    color: "impact-blue",
   },
 ];
 
