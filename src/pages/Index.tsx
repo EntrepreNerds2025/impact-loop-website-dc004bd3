@@ -8,6 +8,7 @@ import FrameworkPreviewSection from "@/components/home/FrameworkPreviewSection";
 import ClientLogosSection from "@/components/home/ClientLogosSection";
 import ImpactStatsSection from "@/components/home/ImpactStatsSection";
 import ServicesPreviewSection from "@/components/home/ServicesPreviewSection";
+import TechSolutionsSection from "@/components/home/TechSolutionsSection";
 import FounderSection from "@/components/home/FounderSection";
 
 const Index = () => {
@@ -28,6 +29,7 @@ const Index = () => {
       <ClientLogosSection />
       <ImpactStatsSection />
       <ServicesPreviewSection />
+      <TechSolutionsSection />
       <FrameworkPreviewSection />
       <FounderSection />
     </Layout>
