@@ -1,27 +1,40 @@
 
 
-## Update Homepage Video Portfolio Grid
+# Connect Contact Form to CRM
 
-Replace the 6 portfolio items in `src/components/home/VideoPortfolioSection.tsx` with new videos matching the requested layout.
+## Overview
+Add a POST request to your CRM endpoint in the contact form's submit handler, alongside the existing database save and email notification. No UI changes.
 
-### New Grid Layout
+## Field Mapping
+The current form fields map to the CRM payload as follows:
 
-| Row | Type | Position | Video | Vimeo ID |
-|-----|------|----------|-------|----------|
-| 1 | Full | — | Mental Health Awareness (lightbox opens **1140514160**) | preview: 1168718317, lightbox: 1140514160 |
-| 2 | Pair | Left | Iris Ministries — Malawi | 1140283574 |
-| 2 | Pair | Right | Lakeridge Health — I Belong Initiative | 1140641190 |
-| 3 | Full | — | Hair for Self-Esteem | 1135409664 |
-| 4 | Pair | Left | Black Creek Community Health Ambassadors | 833854968 |
-| 4 | Pair | Right | Octavia Sampson — Wellness Educator | 1142229793 |
+| Form Field | CRM Field |
+|---|---|
+| `name` | `first_name` (full name sent as first_name since there's no separate last_name field) |
+| `email` | `email` |
+| `organization` | `company_name` |
+| `service_interest` | `service_interest` |
+| `message` | `message` |
+| (hardcoded) | `business_unit: "impact_loop"` |
 
-### Technical Details
+## Technical Changes
 
-**File**: `src/components/home/VideoPortfolioSection.tsx`
+### File: `src/pages/Contact.tsx`
 
-- Update the `portfolioItems` array (lines 16-23) with 6 new entries
-- Row 1 keeps its existing `previewVimeoId: "1168718317"` but changes `vimeoId` to `"1140514160"` so the lightbox plays the correct video
-- For rows 2-4, set both `previewVimeoId` and `vimeoId` to the same Vimeo ID (the actual project video), since no separate preview clips exist for these
-- Lakeridge and Black Creek will use `background=1` in the iframe embed, so Vimeo handles the silent autoplay loop natively (no SDK-based start offset needed on the homepage since the homepage cards don't use the Player SDK)
-- Update titles and categories to match the actual projects
+In the `handleSubmit` function, after the existing database insert and email notification, add a `fetch` call to the CRM endpoint:
+
+- POST to `https://oyjbpxdcazamsdtrrmey.supabase.co/functions/v1/receive-inquiry`
+- Include `Content-Type` and `apikey` headers
+- Map form fields to the CRM's expected JSON body
+- The CRM call will be part of the main try/catch block -- if it fails, the user sees the error toast
+- On success (200), show success toast and reset form (existing behavior)
+- The existing database save and email notification remain unchanged
+
+The apikey is a publishable/anon key, so it is safe to include directly in code.
+
+### Submission Flow (after change)
+1. Save to `contact_submissions` table (existing)
+2. Send email notification via backend function (existing, non-critical)
+3. POST to CRM endpoint (new)
+4. Show success toast and reset form
 
