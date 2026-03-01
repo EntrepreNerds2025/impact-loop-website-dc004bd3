@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { setSEO, resetSEO } from "@/lib/seo";
 import { ArrowRight, Film, Scissors, Quote, Share2, Layers, Play } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import RotatingWord from "@/components/home/RotatingWord";
@@ -46,6 +48,15 @@ const portfolioItems = [
 ];
 
 const CinematicImpactFilms = () => {
+  useEffect(() => {
+    setSEO({
+      title: "Cinematic Impact Films — Impact Loop",
+      description: "Premium documentary-style video production for nonprofits, CSR teams, and changemakers. Films built to earn trust with donors, partners, and stakeholders.",
+      ogType: "website",
+    });
+    return resetSEO;
+  }, []);
+
   return (
     <Layout>
       {/* Hero with video banner */}

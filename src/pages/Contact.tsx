@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { setSEO, resetSEO } from "@/lib/seo";
 
 const serviceOptions = [
   "Video Production",
@@ -15,6 +16,15 @@ const serviceOptions = [
 ];
 
 const Contact = () => {
+  useEffect(() => {
+    setSEO({
+      title: "Contact — Impact Loop",
+      description: "Get in touch with Impact Loop. Reach out about video production, consulting, workshops, or storytelling strategy.",
+      ogType: "website",
+    });
+    return resetSEO;
+  }, []);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
     name: "",

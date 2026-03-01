@@ -1,8 +1,9 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Users, BookOpen, Compass, Video, ArrowRight } from "lucide-react";
 import Layout from "@/components/layout/Layout";
+import { setSEO, resetSEO } from "@/lib/seo";
 
 const services = [
   {
@@ -74,6 +75,15 @@ const services = [
 const Services = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  useEffect(() => {
+    setSEO({
+      title: "Services — Impact Loop",
+      description: "Workshops, framework kits, system pilots, and cinematic impact films. Choose the storytelling pathway that fits your organization.",
+      ogType: "website",
+    });
+    return resetSEO;
+  }, []);
 
   return (
     <Layout>

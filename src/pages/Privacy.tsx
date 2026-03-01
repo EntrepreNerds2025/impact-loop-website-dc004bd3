@@ -1,6 +1,17 @@
+import { useEffect } from "react";
 import Layout from "@/components/layout/Layout";
+import { setSEO, resetSEO } from "@/lib/seo";
 
 const Privacy = () => {
+  useEffect(() => {
+    setSEO({
+      title: "Privacy Policy — Impact Loop",
+      description: "Impact Loop's privacy policy. How we collect, use, and protect your personal information under PIPEDA.",
+      ogType: "website",
+    });
+    return resetSEO;
+  }, []);
+
   return (
     <Layout>
       <section className="py-24 md:py-32 bg-background">

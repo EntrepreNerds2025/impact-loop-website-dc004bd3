@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
+import { setSEO, resetSEO } from "@/lib/seo";
 import { slideUp, staggerContainer, fadeIn } from "@/hooks/useScrollAnimation";
 
 const hubs = [
@@ -19,6 +21,15 @@ const hubs = [
 ];
 
 const HubExamples = () => {
+  useEffect(() => {
+    setSEO({
+      title: "Hub Examples — Impact Loop",
+      description: "Explore demo Impact Media Hubs built for nonprofits and corporate CSR initiatives.",
+      ogType: "website",
+    });
+    return resetSEO;
+  }, []);
+
   return (
     <Layout>
       <section className="section-dark pt-32 pb-16 md:pt-40 md:pb-20">

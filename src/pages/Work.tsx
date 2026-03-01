@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { setSEO, resetSEO } from "@/lib/seo";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Play, ChevronDown } from "lucide-react";
 import Player from "@vimeo/player";
@@ -199,6 +200,15 @@ const Work = () => {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [showAll, setShowAll] = useState(false);
+
+  useEffect(() => {
+    setSEO({
+      title: "Our Work — Impact Loop",
+      description: "Explore Impact Loop's portfolio of cinematic impact stories, event recaps, and documentary films for nonprofits and changemakers.",
+      ogType: "website",
+    });
+    return resetSEO;
+  }, []);
 
   const filteredProjects =
     selectedCategory === "All"
