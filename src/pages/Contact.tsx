@@ -66,8 +66,32 @@ const Contact = () => {
           },
         });
       } catch {
-        // Email notification is non-critical; form was still saved
         console.warn("Email notification could not be sent.");
+      }
+
+      // POST to CRM
+      const crmRes = await fetch(
+        "https://oyjbpxdcazamsdtrrmey.supabase.co/functions/v1/receive-inquiry",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            apikey:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im95amJweGRjYXphbXNkdHJybWV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyMjM0MTgsImV4cCI6MjA4Nzc5OTQxOH0.n-j0RqwqckV3kisVL-JnjDx84AEOGUKY6SWxnLFUjmE",
+          },
+          body: JSON.stringify({
+            first_name: form.name.trim(),
+            email: form.email.trim(),
+            company_name: form.organization.trim() || undefined,
+            service_interest: form.service_interest,
+            message: form.message.trim(),
+            business_unit: "impact_loop",
+          }),
+        }
+      );
+
+      if (!crmRes.ok) {
+        throw new Error("CRM submission failed");
       }
 
       toast.success("Thank you! We'll be in touch soon.");
