@@ -9,6 +9,7 @@ import { setSEO, resetSEO } from "@/lib/seo";
 const serviceOptions = [
   "Video Production",
   "Consulting",
+  "Custom Software / App Development",
   "Workshops & Training",
   "Impact Media Hub",
   "Story System Setup",
