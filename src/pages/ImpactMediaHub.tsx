@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { setSEO, resetSEO } from "@/lib/seo";
-import { Globe, FileDown, Images, Handshake, Search, Pencil, Rocket, ChevronRight, Video, Quote, Download, BarChart3 } from "lucide-react";
+import { Globe, FileDown, Images, Handshake, Search, Pencil, Rocket, ChevronRight, Video, Quote, BarChart3 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { slideUp, staggerContainer, fadeIn } from "@/hooks/useScrollAnimation";
 import {
@@ -18,7 +18,6 @@ const includes = [
   { icon: Images, title: "Photo Gallery", desc: "Upload and manage photos with captions. Lightbox viewing. Easy bulk upload." },
   { icon: Quote, title: "Quotes & Voices", desc: "Participant, partner, and staff quotes with role labels — real voices woven in." },
   { icon: Handshake, title: "Partners & Presenters", desc: "Logo tiles, spotlight cards, and a partner sharing kit — ready for co-promotion." },
-  { icon: Download, title: "Downloads", desc: "One-page recap, partner kit, and media pack — all downloadable from the hub." },
   { icon: BarChart3, title: "Quick Outcomes", desc: "A small metrics panel showing 4-6 key outcome numbers at a glance." },
   { icon: FileDown, title: "PDF Export", desc: "A polished downloadable report for board meetings and grant applications." },
 ];
