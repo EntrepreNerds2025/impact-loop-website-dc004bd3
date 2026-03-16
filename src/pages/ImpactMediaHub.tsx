@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { setSEO, resetSEO } from "@/lib/seo";
-import { Globe, FileDown, Images, Handshake, Search, Pencil, Rocket, ChevronRight, Video, Quote, Download, BarChart3 } from "lucide-react";
+import { Globe, FileDown, Images, Handshake, Search, Pencil, Rocket, ChevronRight, Video, Quote, BarChart3 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { slideUp, staggerContainer, fadeIn } from "@/hooks/useScrollAnimation";
 import {
