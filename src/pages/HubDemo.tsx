@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
-  BookOpen, Video, Images, Quote, Handshake, Download, BarChart3,
+  BookOpen, Video, Images, Quote, Handshake, FileDown, BarChart3,
   ChevronDown, Menu, X, Play
 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
@@ -10,6 +10,9 @@ import { slideUp, staggerContainer, fadeIn } from "@/hooks/useScrollAnimation";
 import { useToast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
 import PhotoGallery from "@/components/hub/PhotoGallery";
+import HubVideoClips from "@/components/hub/HubVideoClips";
+import PdfExportPreview from "@/components/hub/PdfExportPreview";
+import VimeoLightbox from "@/components/shared/VimeoLightbox";
 
 /* ─── Sections nav ─── */
 const sections = [
@@ -20,20 +23,20 @@ const sections = [
   { id: "photos", label: "Photos", icon: Images },
   { id: "quotes", label: "Quotes", icon: Quote },
   { id: "partners", label: "Partners", icon: Handshake },
-  { id: "downloads", label: "Downloads", icon: Download },
+  { id: "pdf-export", label: "PDF Export", icon: FileDown },
   { id: "outcomes", label: "Quick Outcomes", icon: BarChart3 },
 ];
 
-/* ─── Clips ─── */
+/* ─── Clips (Vimeo) ─── */
 const clips = [
-  { title: "Launch Welcome and Purpose", videoId: "dQw4w9WgXcQ" },
-  { title: "Employment Pathways Overview", videoId: "ScMzIvxBSi4" },
-  { title: "Wellness and Health Supports", videoId: "LXb3EKWsInQ" },
-  { title: "Partner Spotlight: Collaboration in Action", videoId: "dQw4w9WgXcQ" },
-  { title: "Presenter Moment: City Services and Supports", videoId: "ScMzIvxBSi4" },
-  { title: "Participant Moment: What This Program Means", videoId: "LXb3EKWsInQ" },
-  { title: "Program Next Steps", videoId: "dQw4w9WgXcQ" },
-  { title: "Community Momentum Recap", videoId: "ScMzIvxBSi4" },
+  { title: "Launch Welcome and Purpose", vimeoId: "1143331891" },
+  { title: "Employment Pathways Overview", vimeoId: "1140641190", previewStart: 30 },
+  { title: "Wellness and Health Supports", vimeoId: "1135409664" },
+  { title: "Partner Spotlight: Collaboration in Action", vimeoId: "833854968", previewStart: 30 },
+  { title: "Presenter Moment: City Services and Supports", vimeoId: "1142229793" },
+  { title: "Participant Moment: What This Program Means", vimeoId: "1140283574" },
+  { title: "Program Next Steps", vimeoId: "1159742453" },
+  { title: "Community Momentum Recap", vimeoId: "1064687560" },
 ];
 
 /* ─── Quotes ─── */
@@ -92,6 +95,7 @@ const HubDemo = () => {
   const isMobile = useIsMobile();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
 
   const handleDemoDownload = () => {
     toast({ title: "Demo Only", description: "This is a demo hub. Downloads are available in real hubs." });
@@ -206,16 +210,26 @@ const HubDemo = () => {
             <section id="hero-video" className="section-cream py-20">
               <div className="container mx-auto px-6 max-w-4xl">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-8 text-center">Program Story</h2>
-                <div className="aspect-video rounded-sm overflow-hidden bg-impact-dark">
+                <div
+                  className="group relative overflow-hidden rounded-xl cursor-pointer bg-[hsl(var(--impact-dark))]"
+                  style={{ aspectRatio: "16 / 9" }}
+                  onClick={() => setSelectedVideo("1143331891")}
+                >
                   <iframe
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                    className="w-full h-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    title="Program Hero Video"
+                    src="https://player.vimeo.com/video/1143331891?background=1&autoplay=1&loop=1&muted=1"
+                    className="absolute pointer-events-none"
+                    style={{ border: 0, width: "140%", height: "140%", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
+                    allow="autoplay"
+                    title="Program Hero Video preview"
                   />
+                  <div className="absolute inset-0 bg-[hsl(var(--impact-dark))]/30 group-hover:bg-[hsl(var(--impact-dark))]/60 transition-colors duration-300" />
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-16 h-16 rounded-full bg-primary/80 backdrop-blur-sm flex items-center justify-center">
+                      <Play className="w-7 h-7 text-primary-foreground ml-1" fill="white" />
+                    </div>
+                  </div>
                 </div>
-                <p className="text-muted-foreground text-sm text-center mt-4">Placeholder video — your cinematic hero story goes here.</p>
+                <p className="text-muted-foreground text-sm text-center mt-4">Click to play the full program story.</p>
               </div>
             </section>
 
@@ -223,22 +237,7 @@ const HubDemo = () => {
             <section id="clips" className="py-20 bg-background">
               <div className="container mx-auto px-6">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-12 text-center">Video Clips</h2>
-                <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {clips.map((clip, i) => (
-                    <motion.div key={i} variants={slideUp} className="space-y-3">
-                      <div className="aspect-video rounded-sm overflow-hidden bg-impact-dark">
-                        <iframe
-                          src={`https://www.youtube.com/embed/${clip.videoId}`}
-                          className="w-full h-full"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                          title={clip.title}
-                        />
-                      </div>
-                      <p className="font-serif text-lg font-semibold text-foreground">{clip.title}</p>
-                    </motion.div>
-                  ))}
-                </motion.div>
+                <HubVideoClips clips={clips} onPlay={setSelectedVideo} />
               </div>
             </section>
 
@@ -302,18 +301,17 @@ const HubDemo = () => {
               </div>
             </section>
 
-            {/* 8. Downloads */}
-            <section id="downloads" className="py-20 bg-background">
-              <div className="container mx-auto px-6 text-center">
-                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-12">Downloads</h2>
-                <div className="flex flex-wrap justify-center gap-4">
-                  {["One-Page Recap", "Partner Kit", "Media Pack"].map((label) => (
-                    <button key={label} onClick={handleDemoDownload} className="btn-primary">
-                      {label}
-                    </button>
-                  ))}
-                </div>
-                <p className="text-muted-foreground text-sm mt-6">Demo hub — downloads are available in real hubs.</p>
+            {/* 8. PDF Export */}
+            <section id="pdf-export" className="py-20 bg-background">
+              <div className="container mx-auto px-6">
+                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-12 text-center">PDF Export</h2>
+                <PdfExportPreview
+                  hubTitle="Our People's Keeper Employment Program"
+                  hubSubtitle="CAFCan • January – December 2025"
+                  outcomes={outcomes}
+                  quotes={quotes}
+                  onDownload={handleDemoDownload}
+                />
               </div>
             </section>
 
@@ -346,6 +344,12 @@ const HubDemo = () => {
           </main>
         </div>
       </div>
+
+      <VimeoLightbox
+        vimeoId={selectedVideo}
+        isOpen={!!selectedVideo}
+        onClose={() => setSelectedVideo(null)}
+      />
     </Layout>
   );
 };
