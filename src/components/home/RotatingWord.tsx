@@ -29,7 +29,7 @@ const RotatingHeadline = () => {
   }
 
   return (
-    <span className="relative flex w-full justify-center overflow-hidden" style={{ minHeight: "1.2em" }}>
+    <span className="relative flex w-full justify-center overflow-hidden whitespace-nowrap" style={{ minHeight: "1.2em" }}>
       <AnimatePresence>
         {headlines.map((headline, i) =>
           i === index ? (
