@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -12,7 +12,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import PhotoGallery from "@/components/hub/PhotoGallery";
 import HubVideoClips from "@/components/hub/HubVideoClips";
 import PdfExportPreview from "@/components/hub/PdfExportPreview";
-import VimeoLightbox from "@/components/shared/VimeoLightbox";
+import MediaLightbox, { type MediaItem } from "@/components/shared/MediaLightbox";
 
 /* ─── Sections nav ─── */
 const sections = [
@@ -37,6 +37,16 @@ const clips = [
   { title: "Participant Moment: What This Program Means", vimeoId: "1140283574" },
   { title: "Program Next Steps", vimeoId: "1159742453" },
   { title: "Community Momentum Recap", vimeoId: "1064687560" },
+];
+
+/* ─── Photos (placeholder) ─── */
+const photoItems: MediaItem[] = [
+  { type: "photo", src: "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=1200&h=800&fit=crop", title: "Community gathering" },
+  { type: "photo", src: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1200&h=800&fit=crop", title: "Workshop session" },
+  { type: "photo", src: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=1200&h=800&fit=crop", title: "Event celebration" },
+  { type: "photo", src: "https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?w=1200&h=800&fit=crop", title: "Team collaboration" },
+  { type: "photo", src: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1200&h=800&fit=crop", title: "Networking session" },
+  { type: "photo", src: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1200&h=800&fit=crop", title: "Volunteer day" },
 ];
 
 /* ─── Quotes ─── */
@@ -95,10 +105,28 @@ const HubDemo = () => {
   const isMobile = useIsMobile();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const handleDemoDownload = () => {
     toast({ title: "Demo Only", description: "This is a demo hub. Downloads are available in real hubs." });
+  };
+
+  // Build unified media array: hero + clips + photos
+  const allMedia: MediaItem[] = useMemo(() => [
+    { type: "video" as const, src: "1143331891", title: "Program Story — Full Video" },
+    ...clips.map(c => ({ type: "video" as const, src: c.vimeoId, title: c.title })),
+    ...photoItems,
+  ], []);
+
+  const openVideo = (vimeoId: string) => {
+    const idx = allMedia.findIndex(m => m.type === "video" && m.src === vimeoId);
+    if (idx >= 0) setLightboxIndex(idx);
+  };
+
+  const openPhoto = (photoIndex: number) => {
+    // Photos start after hero + clips
+    const offset = 1 + clips.length;
+    setLightboxIndex(offset + photoIndex);
   };
 
   return (
@@ -169,7 +197,7 @@ const HubDemo = () => {
           {/* Main content */}
           <main className={`flex-1 min-w-0 ${isMobile ? "pt-12" : ""}`}>
 
-            {/* 1. Overview */}
+            {/* 1. Overview — DARK */}
             <section id="overview" className="section-dark py-20 md:py-28">
               <div className="container mx-auto px-6 text-center max-w-3xl">
                 <motion.p variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-impact-blue uppercase tracking-widest text-xs mb-4">
@@ -206,14 +234,14 @@ const HubDemo = () => {
               </div>
             </section>
 
-            {/* 3. Hero Video */}
-            <section id="hero-video" className="section-cream py-20">
+            {/* 3. Hero Video — DARK */}
+            <section id="hero-video" className="section-dark py-20">
               <div className="container mx-auto px-6 max-w-4xl">
-                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-8 text-center">Program Story</h2>
+                <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-8 text-center">Program Story</h2>
                 <div
                   className="group relative overflow-hidden rounded-xl cursor-pointer bg-[hsl(var(--impact-dark))]"
                   style={{ aspectRatio: "16 / 9" }}
-                  onClick={() => setSelectedVideo("1143331891")}
+                  onClick={() => openVideo("1143331891")}
                 >
                   <iframe
                     src="https://player.vimeo.com/video/1143331891?background=1&autoplay=1&loop=1&muted=1"
@@ -229,7 +257,7 @@ const HubDemo = () => {
                     </div>
                   </div>
                 </div>
-                <p className="text-muted-foreground text-sm text-center mt-4">Click to play the full program story.</p>
+                <p className="text-white/40 text-sm text-center mt-4">Click to play the full program story.</p>
               </div>
             </section>
 
@@ -237,15 +265,35 @@ const HubDemo = () => {
             <section id="clips" className="py-20 bg-background">
               <div className="container mx-auto px-6">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-12 text-center">Video Clips</h2>
-                <HubVideoClips clips={clips} onPlay={setSelectedVideo} />
+                <HubVideoClips clips={clips} onPlay={openVideo} />
               </div>
             </section>
 
-            {/* 5. Photo Gallery */}
-            <section id="photos" className="section-cream py-20">
+            {/* 5. Photo Gallery — DARK */}
+            <section id="photos" className="section-dark py-20">
               <div className="container mx-auto px-6">
-                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-12 text-center">Photo Gallery</h2>
-                <PhotoGallery hubSlug="cafcan-demo" />
+                <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-12 text-center">Photo Gallery</h2>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  {photoItems.map((photo, i) => (
+                    <button
+                      key={i}
+                      onClick={() => openPhoto(i)}
+                      className="group relative aspect-[3/2] overflow-hidden rounded-xl bg-white/5"
+                    >
+                      <img
+                        src={photo.src}
+                        alt={photo.title || "Hub photo"}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      {photo.title && (
+                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <p className="text-white text-xs">{photo.title}</p>
+                        </div>
+                      )}
+                    </button>
+                  ))}
+                </div>
               </div>
             </section>
 
@@ -267,35 +315,32 @@ const HubDemo = () => {
               </div>
             </section>
 
-            {/* 7. Partners and Presenters */}
-            <section id="partners" className="section-cream py-20">
+            {/* 7. Partners — DARK */}
+            <section id="partners" className="section-dark py-20">
               <div className="container mx-auto px-6">
-                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-12 text-center">Partners & Presenters</h2>
+                <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-12 text-center">Partners & Presenters</h2>
 
-                {/* Logo tiles */}
                 <div className="flex flex-wrap justify-center gap-4 mb-12">
                   {partners.map((p) => (
-                    <div key={p.initials} className="w-24 h-24 rounded-sm bg-background border border-border flex items-center justify-center" title={p.name}>
-                      <span className="font-serif text-lg font-bold text-foreground/60 text-center px-1">{p.initials}</span>
+                    <div key={p.initials} className="w-24 h-24 rounded-sm bg-white/5 border border-white/10 flex items-center justify-center" title={p.name}>
+                      <span className="font-serif text-lg font-bold text-white/60 text-center px-1">{p.initials}</span>
                     </div>
                   ))}
                 </div>
 
-                {/* Spotlight cards */}
                 <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
                   {spotlights.map((s) => (
-                    <motion.div key={s.name} variants={slideUp} className="bg-background border border-border rounded-sm p-6 space-y-3">
-                      <h3 className="font-serif text-lg font-semibold text-foreground">{s.name}</h3>
-                      <p className="text-muted-foreground text-sm"><strong>Contribution:</strong> {s.contribution}</p>
-                      <p className="text-muted-foreground text-sm"><strong>Outcome:</strong> {s.outcome}</p>
+                    <motion.div key={s.name} variants={slideUp} className="bg-white/5 border border-white/10 rounded-sm p-6 space-y-3">
+                      <h3 className="font-serif text-lg font-semibold text-white">{s.name}</h3>
+                      <p className="text-white/60 text-sm"><strong className="text-white/80">Contribution:</strong> {s.contribution}</p>
+                      <p className="text-white/60 text-sm"><strong className="text-white/80">Outcome:</strong> {s.outcome}</p>
                     </motion.div>
                   ))}
                 </motion.div>
 
-                {/* Partner sharing kit */}
-                <div className="bg-background border border-border rounded-sm p-6 text-center max-w-lg mx-auto">
-                  <p className="text-foreground font-semibold mb-2">Partner Sharing Kit</p>
-                  <p className="text-muted-foreground text-sm mb-4">Pre-built captions, thumbnails, and talking points for co-promotion.</p>
+                <div className="bg-white/5 border border-white/10 rounded-sm p-6 text-center max-w-lg mx-auto">
+                  <p className="text-white font-semibold mb-2">Partner Sharing Kit</p>
+                  <p className="text-white/50 text-sm mb-4">Pre-built captions, thumbnails, and talking points for co-promotion.</p>
                   <button onClick={handleDemoDownload} className="btn-primary text-xs">Download Kit (Demo)</button>
                 </div>
               </div>
@@ -315,23 +360,23 @@ const HubDemo = () => {
               </div>
             </section>
 
-            {/* 9. Quick Outcomes */}
-            <section id="outcomes" className="section-cream py-20">
+            {/* 9. Quick Outcomes — DARK */}
+            <section id="outcomes" className="section-dark py-20">
               <div className="container mx-auto px-6">
-                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-12 text-center">Quick Outcomes</h2>
+                <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-12 text-center">Quick Outcomes</h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
                   {outcomes.map((o) => (
-                    <div key={o.label} className="bg-background border border-border rounded-sm p-6 text-center">
+                    <div key={o.label} className="bg-white/5 border border-white/10 rounded-sm p-6 text-center">
                       <p className="font-serif text-3xl font-bold text-impact-blue">{o.value}</p>
-                      <p className="text-muted-foreground text-xs mt-1">{o.label}</p>
+                      <p className="text-white/50 text-xs mt-1">{o.label}</p>
                     </div>
                   ))}
                 </div>
               </div>
             </section>
 
-            {/* 10. Final CTA */}
-            <section className="section-dark py-24">
+            {/* 10. Final CTA — DARK */}
+            <section className="section-dark py-24 border-t border-white/10">
               <div className="container mx-auto px-6 text-center max-w-2xl">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-6">Build your Impact Media Hub</h2>
                 <p className="text-white/60 mb-10">Let's turn your impact into a living, shareable media page.</p>
@@ -345,10 +390,11 @@ const HubDemo = () => {
         </div>
       </div>
 
-      <VimeoLightbox
-        vimeoId={selectedVideo}
-        isOpen={!!selectedVideo}
-        onClose={() => setSelectedVideo(null)}
+      <MediaLightbox
+        items={allMedia}
+        currentIndex={lightboxIndex}
+        onClose={() => setLightboxIndex(null)}
+        onNavigate={setLightboxIndex}
       />
     </Layout>
   );

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -9,10 +9,9 @@ import Layout from "@/components/layout/Layout";
 import { slideUp, staggerContainer, fadeIn } from "@/hooks/useScrollAnimation";
 import { useToast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
-import PhotoGallery from "@/components/hub/PhotoGallery";
 import HubVideoClips from "@/components/hub/HubVideoClips";
 import PdfExportPreview from "@/components/hub/PdfExportPreview";
-import VimeoLightbox from "@/components/shared/VimeoLightbox";
+import MediaLightbox, { type MediaItem } from "@/components/shared/MediaLightbox";
 
 /* ─── Sections nav ─── */
 const sections = [
@@ -37,6 +36,16 @@ const clips = [
   { title: "Youth STEM Education Initiative", vimeoId: "1145353261" },
   { title: "Annual Giving Campaign Results", vimeoId: "1064687560" },
   { title: "Looking Ahead: 2026 Community Goals", vimeoId: "1168847247" },
+];
+
+/* ─── Photos (placeholder) ─── */
+const photoItems: MediaItem[] = [
+  { type: "photo", src: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1200&h=800&fit=crop", title: "Corporate team event" },
+  { type: "photo", src: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1200&h=800&fit=crop", title: "Volunteer day" },
+  { type: "photo", src: "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=1200&h=800&fit=crop", title: "Community engagement" },
+  { type: "photo", src: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1200&h=800&fit=crop", title: "Workshop session" },
+  { type: "photo", src: "https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?w=1200&h=800&fit=crop", title: "Partnership celebration" },
+  { type: "photo", src: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=1200&h=800&fit=crop", title: "Annual gala" },
 ];
 
 /* ─── Quotes ─── */
@@ -84,10 +93,26 @@ const HubCorporateDemo = () => {
   const isMobile = useIsMobile();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const handleDemoDownload = () => {
     toast({ title: "Demo Only", description: "This is a demo hub. Downloads are available in real hubs." });
+  };
+
+  const allMedia: MediaItem[] = useMemo(() => [
+    { type: "video" as const, src: "1168844885", title: "Our Impact Story — Full Video" },
+    ...clips.map(c => ({ type: "video" as const, src: c.vimeoId, title: c.title })),
+    ...photoItems,
+  ], []);
+
+  const openVideo = (vimeoId: string) => {
+    const idx = allMedia.findIndex(m => m.type === "video" && m.src === vimeoId);
+    if (idx >= 0) setLightboxIndex(idx);
+  };
+
+  const openPhoto = (photoIndex: number) => {
+    const offset = 1 + clips.length;
+    setLightboxIndex(offset + photoIndex);
   };
 
   return (
@@ -141,7 +166,7 @@ const HubCorporateDemo = () => {
 
           <main className={`flex-1 min-w-0 ${isMobile ? "pt-12" : ""}`}>
 
-            {/* 1. Overview */}
+            {/* 1. Overview — DARK */}
             <section id="overview" className="section-dark py-20 md:py-28">
               <div className="container mx-auto px-6 text-center max-w-3xl">
                 <motion.p variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-impact-blue uppercase tracking-widest text-xs mb-4">
@@ -178,14 +203,14 @@ const HubCorporateDemo = () => {
               </div>
             </section>
 
-            {/* 3. Hero Video */}
-            <section id="hero-video" className="section-cream py-20">
+            {/* 3. Hero Video — DARK */}
+            <section id="hero-video" className="section-dark py-20">
               <div className="container mx-auto px-6 max-w-4xl">
-                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-8 text-center">Our Impact Story</h2>
+                <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-8 text-center">Our Impact Story</h2>
                 <div
                   className="group relative overflow-hidden rounded-xl cursor-pointer bg-[hsl(var(--impact-dark))]"
                   style={{ aspectRatio: "16 / 9" }}
-                  onClick={() => setSelectedVideo("1168844885")}
+                  onClick={() => openVideo("1168844885")}
                 >
                   <iframe
                     src="https://player.vimeo.com/video/1168844885?background=1&autoplay=1&loop=1&muted=1"
@@ -201,7 +226,7 @@ const HubCorporateDemo = () => {
                     </div>
                   </div>
                 </div>
-                <p className="text-muted-foreground text-sm text-center mt-4">Click to play the full impact story.</p>
+                <p className="text-white/40 text-sm text-center mt-4">Click to play the full impact story.</p>
               </div>
             </section>
 
@@ -209,15 +234,35 @@ const HubCorporateDemo = () => {
             <section id="clips" className="py-20 bg-background">
               <div className="container mx-auto px-6">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-12 text-center">Video Clips</h2>
-                <HubVideoClips clips={clips} onPlay={setSelectedVideo} />
+                <HubVideoClips clips={clips} onPlay={openVideo} />
               </div>
             </section>
 
-            {/* 5. Photo Gallery */}
-            <section id="photos" className="section-cream py-20">
+            {/* 5. Photo Gallery — DARK */}
+            <section id="photos" className="section-dark py-20">
               <div className="container mx-auto px-6">
-                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-12 text-center">Photo Gallery</h2>
-                <PhotoGallery hubSlug="corporate-demo" />
+                <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-12 text-center">Photo Gallery</h2>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  {photoItems.map((photo, i) => (
+                    <button
+                      key={i}
+                      onClick={() => openPhoto(i)}
+                      className="group relative aspect-[3/2] overflow-hidden rounded-xl bg-white/5"
+                    >
+                      <img
+                        src={photo.src}
+                        alt={photo.title || "Hub photo"}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      {photo.title && (
+                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <p className="text-white text-xs">{photo.title}</p>
+                        </div>
+                      )}
+                    </button>
+                  ))}
+                </div>
               </div>
             </section>
 
@@ -239,14 +284,14 @@ const HubCorporateDemo = () => {
               </div>
             </section>
 
-            {/* 7. Partners */}
-            <section id="partners" className="section-cream py-20">
+            {/* 7. Partners — DARK */}
+            <section id="partners" className="section-dark py-20">
               <div className="container mx-auto px-6">
-                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-12 text-center">Our Partners</h2>
+                <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-12 text-center">Our Partners</h2>
                 <div className="flex flex-wrap justify-center gap-4 mb-12">
                   {partners.map((p) => (
-                    <div key={p.initials} className="w-24 h-24 rounded-sm bg-background border border-border flex items-center justify-center" title={p.name}>
-                      <span className="font-serif text-lg font-bold text-foreground/60 text-center px-1">{p.initials}</span>
+                    <div key={p.initials} className="w-24 h-24 rounded-sm bg-white/5 border border-white/10 flex items-center justify-center" title={p.name}>
+                      <span className="font-serif text-lg font-bold text-white/60 text-center px-1">{p.initials}</span>
                     </div>
                   ))}
                 </div>
@@ -267,23 +312,23 @@ const HubCorporateDemo = () => {
               </div>
             </section>
 
-            {/* 9. Quick Outcomes */}
-            <section id="outcomes" className="section-cream py-20">
+            {/* 9. Quick Outcomes — DARK */}
+            <section id="outcomes" className="section-dark py-20">
               <div className="container mx-auto px-6">
-                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-12 text-center">Quick Outcomes</h2>
+                <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-12 text-center">Quick Outcomes</h2>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                   {outcomes.map((o) => (
-                    <div key={o.label} className="bg-background border border-border rounded-sm p-6 text-center">
+                    <div key={o.label} className="bg-white/5 border border-white/10 rounded-sm p-6 text-center">
                       <p className="font-serif text-3xl font-bold text-impact-blue">{o.value}</p>
-                      <p className="text-muted-foreground text-xs mt-1">{o.label}</p>
+                      <p className="text-white/50 text-xs mt-1">{o.label}</p>
                     </div>
                   ))}
                 </div>
               </div>
             </section>
 
-            {/* 10. Final CTA */}
-            <section className="section-dark py-24">
+            {/* 10. Final CTA — DARK */}
+            <section className="section-dark py-24 border-t border-white/10">
               <div className="container mx-auto px-6 text-center max-w-2xl">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-6">Build your Impact Media Hub</h2>
                 <p className="text-white/60 mb-10">Let's turn your community investment into a living, shareable media page.</p>
@@ -297,10 +342,11 @@ const HubCorporateDemo = () => {
         </div>
       </div>
 
-      <VimeoLightbox
-        vimeoId={selectedVideo}
-        isOpen={!!selectedVideo}
-        onClose={() => setSelectedVideo(null)}
+      <MediaLightbox
+        items={allMedia}
+        currentIndex={lightboxIndex}
+        onClose={() => setLightboxIndex(null)}
+        onNavigate={setLightboxIndex}
       />
     </Layout>
   );
