@@ -15,6 +15,7 @@ import ImpactMediaHub from "./pages/ImpactMediaHub";
 import HubDemo from "./pages/HubDemo";
 import HubExamples from "./pages/HubExamples";
 import HubCorporateDemo from "./pages/HubCorporateDemo";
+import HubBlackCreekBHM from "./pages/HubBlackCreekBHM";
 import Research from "./pages/Research";
 import ReportMetricsThatMatter from "./pages/ReportMetricsThatMatter";
 import CinematicImpactFilms from "./pages/CinematicImpactFilms";
