@@ -7,16 +7,10 @@ import { slideUp, staggerContainer, fadeIn } from "@/hooks/useScrollAnimation";
 
 const hubs = [
   {
-    title: "CAFCan Our People's Keeper Employment Program",
-    type: "Nonprofit / Program",
-    description: "A media-first hub showcasing employment pathways, wellness supports, and community momentum for an Indigenous-led workforce initiative.",
-    link: "/hub/demo",
-  },
-  {
-    title: "Northfield Tech Community Investment Hub 2025",
-    type: "Corporate / CSR",
-    description: "A corporate community investment hub highlighting partner impact, volunteer engagement, and social responsibility outcomes.",
-    link: "/hub/corporate-demo",
+    title: "Black Creek Community Health Centre Black History Month Event Series",
+    type: "Featured Example",
+    description: "A media-first hub featuring community voices, photos, video clips, partners, and outcomes from Black Creek's Black History Month programming.",
+    link: "/hub/black-creek-bhm",
   },
 ];
 

@@ -203,13 +203,6 @@ const HubBlackCreekBHM = () => {
   return (
     <Layout>
       <div className="pt-24 relative">
-        <Link
-          to="/bookings"
-          className="fixed top-24 right-6 z-40 btn-primary text-xs hidden md:inline-flex"
-        >
-          Book a Story Call
-        </Link>
-
         <div className="flex">
           {/* Desktop sidebar */}
           {!isMobile && (
@@ -474,7 +467,6 @@ const HubBlackCreekBHM = () => {
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-6">Build your Impact Media Hub</h2>
                 <p className="text-white/60 mb-10">Let's turn your impact into a living, shareable media page.</p>
                 <div className="flex flex-wrap justify-center gap-4">
-                  <Link to="/bookings" className="btn-primary">Book a Story Call</Link>
                   <Link to="/impact-media-hub" className="btn-secondary !border-white/30 !text-white hover:!bg-white hover:!text-impact-dark">Learn More</Link>
                 </div>
               </div>

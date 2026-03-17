@@ -69,8 +69,8 @@ const ImpactMediaHub = () => {
             Combine cinematic stories, real outcomes, photos, quotes, and partner assets into one shareable web page — designed for nonprofits, CSR teams, and changemakers.
           </motion.p>
           <motion.div variants={slideUp} initial="hidden" animate="visible" className="flex flex-wrap justify-center gap-4">
-            <Link to="/hub/demo" className="btn-primary">View Nonprofit Demo</Link>
-            <Link to="/hub/corporate-demo" className="btn-secondary !border-white/30 !text-white hover:!bg-white hover:!text-impact-dark">View CSR Demo</Link>
+            <Link to="/hub/black-creek-bhm" className="btn-primary">View Example Hub</Link>
+            <Link to="/hub/black-creek-bhm" className="btn-secondary !border-white/30 !text-white hover:!bg-white hover:!text-impact-dark">View Black Creek Demo</Link>
           </motion.div>
         </div>
       </section>
@@ -159,7 +159,7 @@ const ImpactMediaHub = () => {
           <p className="text-white/60 mb-10">Let's turn your impact into a living, shareable media page.</p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link to="/bookings" className="btn-primary">Book a Story Call</Link>
-            <Link to="/hub/examples" className="btn-secondary !border-white/30 !text-white hover:!bg-white hover:!text-impact-dark">View Hub Examples</Link>
+            <Link to="/hub/black-creek-bhm" className="btn-secondary !border-white/30 !text-white hover:!bg-white hover:!text-impact-dark">View Example Hub</Link>
           </div>
         </div>
       </section>

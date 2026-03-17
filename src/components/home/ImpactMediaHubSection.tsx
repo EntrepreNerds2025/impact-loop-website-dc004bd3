@@ -42,11 +42,11 @@ const ImpactMediaHubSection = () => {
             </ul>
 
             <div className="flex flex-wrap gap-4 pt-4">
-              <Link to="/hub/demo" className="btn-primary">
-                View Nonprofit Demo Hub
+              <Link to="/hub/black-creek-bhm" className="btn-primary">
+                View Example Hub
               </Link>
-              <Link to="/hub/corporate-demo" className="btn-secondary">
-                View CSR Demo Hub
+              <Link to="/hub/black-creek-bhm" className="btn-secondary">
+                View Black Creek Demo
               </Link>
             </div>
           </motion.div>
