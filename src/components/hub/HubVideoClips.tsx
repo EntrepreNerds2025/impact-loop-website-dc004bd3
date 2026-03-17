@@ -66,15 +66,16 @@ const ClipCard = ({ clip, onPlay }: { clip: Clip; onPlay: (id: string) => void }
 interface HubVideoClipsProps {
   clips: Clip[];
   onPlay: (vimeoId: string) => void;
+  className?: string;
 }
 
-const HubVideoClips = ({ clips, onPlay }: HubVideoClipsProps) => (
+const HubVideoClips = ({ clips, onPlay, className }: HubVideoClipsProps) => (
   <motion.div
     variants={staggerContainer}
     initial="hidden"
     whileInView="visible"
     viewport={{ once: true }}
-    className="grid grid-cols-1 md:grid-cols-2 gap-8"
+    className={className ?? "grid grid-cols-1 md:grid-cols-2 gap-8"}
   >
     {clips.map((clip, i) => (
       <ClipCard key={i} clip={clip} onPlay={onPlay} />

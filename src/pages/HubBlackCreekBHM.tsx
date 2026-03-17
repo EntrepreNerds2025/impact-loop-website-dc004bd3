@@ -33,18 +33,18 @@ const sections = [
 
 /* ─── Clips (Vimeo — from the user's library) ─── */
 const clips = [
-  { title: "BHM Clip 01", vimeoId: "1174190910" },
-  { title: "BHM Clip 02", vimeoId: "1174191105" },
-  { title: "BHM Clip 03", vimeoId: "1174191067" },
-  { title: "BHM Clip 04", vimeoId: "1174190976" },
-  { title: "BHM Clip 05", vimeoId: "1174203013" },
-  { title: "BHM Clip 06", vimeoId: "1174191137" },
-  { title: "BHM Clip 07", vimeoId: "1174191016" },
-  { title: "BHM Clip 08", vimeoId: "1174190887" },
-  { title: "BHM Clip 09", vimeoId: "1174190944" },
-  { title: "BHM Clip 10", vimeoId: "1174191042" },
-  { title: "BHM Clip 11", vimeoId: "1174203036" },
-  { title: "BHM Clip 12", vimeoId: "1174203026" },
+  { title: "Dr Akeem on Community Event Importance", vimeoId: "1174190910" },
+  { title: "Victoria Testimonial 1", vimeoId: "1174191105" },
+  { title: "Patricia Testimonial", vimeoId: "1174191067" },
+  { title: "Ella Charles Cuisine Spotlight", vimeoId: "1174190976" },
+  { title: "Edith Testimonial Video", vimeoId: "1174203013" },
+  { title: "Victoria Testimonial 2", vimeoId: "1174191137" },
+  { title: "Emma Testimonial", vimeoId: "1174191016" },
+  { title: "Doreen Testimonial", vimeoId: "1174190887" },
+  { title: "Dr Akeem on the BCCHC Partnership", vimeoId: "1174190944" },
+  { title: "Miss Emma Community Ambassador", vimeoId: "1174191042" },
+  { title: "Carol Testimonial Video", vimeoId: "1174203036" },
+  { title: "Veroni Testimonial Video", vimeoId: "1174203026" },
 ];
 
 /* ─── Photos (placeholder until real uploads) ─── */
@@ -72,18 +72,40 @@ const toTitleFromPath = (filePath: string) => {
   return fileName.replace(/[-_]+/g, " ").replace(/\s+/g, " ").trim();
 };
 
-const uploadedPhotoItems: MediaItem[] = Object.entries(localPhotoModules)
-  .sort(([pathA], [pathB]) => {
-    const baseA = toBaseNameFromPath(pathA).toLowerCase();
-    const baseB = toBaseNameFromPath(pathB).toLowerCase();
+const seededShuffle = <T,>(items: T[]) => {
+  const result = [...items];
+  let seed = 20260217;
+  const random = () => {
+    seed = (seed * 1664525 + 1013904223) % 4294967296;
+    return seed / 4294967296;
+  };
 
-    const aPriority = baseA === FEATURED_PHOTO_BASENAME ? 0 : 1;
-    const bPriority = baseB === FEATURED_PHOTO_BASENAME ? 0 : 1;
-    if (aPriority !== bPriority) return aPriority - bPriority;
+  for (let i = result.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
 
-    return baseA.localeCompare(baseB, undefined, { numeric: true, sensitivity: "base" });
-  })
-  .map(([filePath, module], index) => ({
+  return result;
+};
+
+const sortedPhotoEntries = Object.entries(localPhotoModules).sort(([pathA], [pathB]) =>
+  pathA.localeCompare(pathB, undefined, { numeric: true, sensitivity: "base" })
+);
+
+const featuredPhotoEntries = sortedPhotoEntries.filter(
+  ([filePath]) => toBaseNameFromPath(filePath).toLowerCase() === FEATURED_PHOTO_BASENAME
+);
+
+const regularPhotoEntries = sortedPhotoEntries.filter(
+  ([filePath]) => toBaseNameFromPath(filePath).toLowerCase() !== FEATURED_PHOTO_BASENAME
+);
+
+const orderedPhotoEntries = [
+  ...featuredPhotoEntries,
+  ...seededShuffle(regularPhotoEntries),
+];
+
+const uploadedPhotoItems: MediaItem[] = orderedPhotoEntries.map(([filePath, module], index) => ({
     type: "photo",
     src: module.default,
     title: toTitleFromPath(filePath) || `Event Photo ${index + 1}`,
@@ -94,14 +116,15 @@ const photoItems: MediaItem[] =
 
 /* ─── Quotes ─── */
 const quotes = [
-  { text: "The vision board workshop gave me space to dream again. I haven't done that in years.", name: "Community Member", role: "Participant" },
-  { text: "Cooking together broke down every barrier. People who came in as strangers left as neighbours.", name: "Community Member", role: "Participant" },
-  { text: "It's always powerful when partners show up in real ways — not just on paper.", name: "Rovonn Dixon", role: "Impact Loop" },
-  { text: "These moments matter more than people realize. This is what community programming is supposed to do.", name: "Rovonn Dixon", role: "Impact Loop" },
-  { text: "We left with meals, recipes, and a sense of connection we hadn't felt in a long time.", name: "Community Member", role: "Participant" },
-  { text: "Movie night wasn't just entertainment — it was healing. Food, laughs, and good vibes.", name: "Community Member", role: "Participant" },
-  { text: "Speaking into this community was a privilege. The work happening here is real.", name: "Akeem Stewart, M.D.", role: "Alliance for Healthier Communities" },
-  { text: "When you lower stress and create space for joy, everything else follows.", name: "Community Member", role: "Participant" },
+  { text: "The events are so enjoyable. We always enjoy the food and the hospitality.", name: "Community Member", role: "Community Member and Participant" },
+  { text: "This gives us opportunity to meet people. I did not know my friend beside me before, and now we connect.", name: "Community Member", role: "Community Member and Participant" },
+  { text: "It is a wonderful opportunity to come out and be happy, especially for people who do not go out often.", name: "Community Member", role: "Community Member and Participant" },
+  { text: "Thank you for the opportunity to participate. This helps us make new friends and learn new skills.", name: "Community Member", role: "Community Member and Participant" },
+  { text: "Before COVID we were serving 20 to 30 meals a day. Now it is over 100.", name: "Community Member", role: "Community Member and Participant" },
+  { text: "As humans, we are not supposed to be in isolation. Being together promotes a better sense of wellness.", name: "Dr. Akeem Stewart", role: "Alliance for Healthier Communities" },
+  { text: "Creating culturally safe spaces and representation helps people feel safe to step forward and seek care.", name: "Dr. Akeem Stewart", role: "Alliance for Healthier Communities" },
+  { text: "My name is Emma, and I am a Black Community Ambassador and an advocate for my community.", name: "Emma", role: "Community Ambassador" },
+  { text: "Black Creek gives a sense of belonging. Black Creek is the beacon of our community.", name: "Emma", role: "Community Ambassador" },
 ];
 
 /* ─── Partners ─── */
@@ -140,12 +163,17 @@ const events = [
   { label: "Black-Owned Collaboration", value: "Black-owned businesses and partners as health assets." },
 ];
 
+const INITIAL_CLIPS_VISIBLE = 6;
+const INITIAL_PHOTOS_VISIBLE = 12;
+
 const HubBlackCreekBHM = () => {
   const { toast } = useToast();
   const isMobile = useIsMobile();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [showAllClips, setShowAllClips] = useState(false);
+  const [showAllPhotos, setShowAllPhotos] = useState(false);
 
   const handleDemoDownload = () => {
     toast({ title: "Coming Soon", description: "PDF export will be available when this hub is finalized." });
@@ -168,6 +196,9 @@ const HubBlackCreekBHM = () => {
     const offset = 1 + clips.length;
     setLightboxIndex(offset + photoIndex);
   };
+
+  const visibleClips = showAllClips ? clips : clips.slice(0, INITIAL_CLIPS_VISIBLE);
+  const visiblePhotos = showAllPhotos ? photoItems : photoItems.slice(0, INITIAL_PHOTOS_VISIBLE);
 
   return (
     <Layout>
@@ -254,21 +285,19 @@ const HubBlackCreekBHM = () => {
                 <motion.p variants={slideUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-muted-foreground text-sm md:text-base leading-relaxed mb-10 max-w-2xl mx-auto">
                   Black Creek Community Health Centre's Black History Month programming was designed to strengthen social connection, reduce isolation, and create culturally affirming care pathways. Through barrier-free workshops, cultural food programming, and collaboration with Black-owned businesses and trusted partners, these events helped build trust and improve access to community health supports.
                 </motion.p>
-                <motion.div variants={slideUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex flex-wrap justify-center gap-4">
-                  <Link to="/bookings" className="btn-primary">Build Your Own Hub</Link>
-                  <Link to="/hub/examples" className="btn-secondary">View More Examples</Link>
-                </motion.div>
               </div>
             </section>
 
             {/* 2. Events Overview */}
-            <section id="initiative" className="py-16 md:py-20 bg-background">
+            <section id="initiative" className="py-16 md:py-20 bg-[hsl(var(--impact-cream))]">
               <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
                 <h2 className="font-serif text-2xl md:text-5xl font-bold text-foreground mb-8 md:mb-12 text-center">Community Themes</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                  {events.map((d) => (
-                    <div key={d.label} className="bg-card border border-border rounded-sm p-4 md:p-6">
-                      <p className="text-impact-blue text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] md:tracking-widest mb-2">{d.label}</p>
+                  {events.map((d, idx) => (
+                    <div key={d.label} className="bg-white border border-border rounded-xl p-4 md:p-6 shadow-sm">
+                      <p className="text-impact-blue text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] md:tracking-widest mb-2">
+                        {String(idx + 1).padStart(2, "0")} • {d.label}
+                      </p>
                       <p className="text-foreground text-sm md:text-base leading-relaxed">{d.value}</p>
                     </div>
                   ))}
@@ -307,7 +336,21 @@ const HubBlackCreekBHM = () => {
             <section id="clips" className="py-20 bg-background">
               <div className="container mx-auto px-6">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-12 text-center">Video Clips</h2>
-                <HubVideoClips clips={clips} onPlay={openVideo} />
+                <HubVideoClips
+                  clips={visibleClips}
+                  onPlay={openVideo}
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+                />
+                {clips.length > INITIAL_CLIPS_VISIBLE && (
+                  <div className="mt-10 text-center">
+                    <button
+                      onClick={() => setShowAllClips((prev) => !prev)}
+                      className="btn-secondary"
+                    >
+                      {showAllClips ? "Show Fewer Clips" : "View More Clips"}
+                    </button>
+                  </div>
+                )}
               </div>
             </section>
 
@@ -317,7 +360,7 @@ const HubBlackCreekBHM = () => {
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-4 text-center">Photo Gallery</h2>
                 <p className="text-white/40 text-sm text-center mb-12">Drop photos into <code>src/assets/hub/black-creek-bhm/photos</code> and they will auto-appear here.</p>
                 <div className="columns-1 sm:columns-2 lg:columns-3 [column-gap:1rem]">
-                  {photoItems.map((photo, i) => (
+                  {visiblePhotos.map((photo, i) => (
                     <button
                       key={i}
                       onClick={() => openPhoto(i)}
@@ -340,6 +383,16 @@ const HubBlackCreekBHM = () => {
                     </button>
                   ))}
                 </div>
+                {photoItems.length > INITIAL_PHOTOS_VISIBLE && (
+                  <div className="mt-10 text-center">
+                    <button
+                      onClick={() => setShowAllPhotos((prev) => !prev)}
+                      className="btn-secondary !border-white/30 !text-white hover:!bg-white hover:!text-impact-dark"
+                    >
+                      {showAllPhotos ? "Show Fewer Photos" : "View More Photos"}
+                    </button>
+                  </div>
+                )}
               </div>
             </section>
 
