@@ -45,8 +45,8 @@ const ImpactMediaHubSection = () => {
               <Link to="/hub/black-creek-bhm" className="btn-primary">
                 View Example Hub
               </Link>
-              <Link to="/hub/black-creek-bhm" className="btn-secondary">
-                View Black Creek Demo
+              <Link to="/impact-media-hub" className="btn-secondary">
+                Learn More
               </Link>
             </div>
           </motion.div>
