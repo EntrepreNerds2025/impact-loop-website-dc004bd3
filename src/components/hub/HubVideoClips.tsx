@@ -1,8 +1,8 @@
 import { useRef, useEffect } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { Play } from "lucide-react";
 import Player from "@vimeo/player";
-import { slideUp, staggerContainer, scaleIn } from "@/hooks/useScrollAnimation";
+import { scaleIn } from "@/hooks/useScrollAnimation";
 
 interface Clip {
   title: string;
@@ -13,7 +13,6 @@ interface Clip {
 const ClipCard = ({ clip, onPlay }: { clip: Clip; onPlay: (id: string) => void }) => {
   const ref = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   useEffect(() => {
     const iframe = iframeRef.current;
@@ -37,7 +36,14 @@ const ClipCard = ({ clip, onPlay }: { clip: Clip; onPlay: (id: string) => void }
   }, [clip.previewStart]);
 
   return (
-    <motion.div ref={ref} variants={scaleIn} className="space-y-3">
+    <motion.div
+      ref={ref}
+      variants={scaleIn}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-80px" }}
+      className="space-y-3"
+    >
       <h3 className="font-serif text-xl md:text-2xl font-semibold text-foreground">{clip.title}</h3>
       <div
         className="group relative overflow-hidden rounded-xl cursor-pointer bg-[hsl(var(--impact-dark))]"
@@ -70,17 +76,11 @@ interface HubVideoClipsProps {
 }
 
 const HubVideoClips = ({ clips, onPlay, className }: HubVideoClipsProps) => (
-  <motion.div
-    variants={staggerContainer}
-    initial="hidden"
-    whileInView="visible"
-    viewport={{ once: true }}
-    className={className ?? "grid grid-cols-1 md:grid-cols-2 gap-8"}
-  >
+  <div className={className ?? "grid grid-cols-1 md:grid-cols-2 gap-8"}>
     {clips.map((clip, i) => (
       <ClipCard key={i} clip={clip} onPlay={onPlay} />
     ))}
-  </motion.div>
+  </div>
 );
 
 export default HubVideoClips;
