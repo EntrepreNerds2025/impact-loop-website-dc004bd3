@@ -21,7 +21,7 @@ import ellaCharlesLogo from "@/assets/hub/ella-charles-logo.png";
 /* ─── Sections nav ─── */
 const sections = [
   { id: "overview", label: "Overview", icon: BookOpen },
-  { id: "initiative", label: "Events", icon: BookOpen },
+  { id: "initiative", label: "Themes", icon: BookOpen },
   { id: "hero-video", label: "Hero Video", icon: Video },
   { id: "clips", label: "Clips", icon: Play },
   { id: "photos", label: "Photos", icon: Images },
@@ -33,16 +33,22 @@ const sections = [
 
 /* ─── Clips (Vimeo — from the user's library) ─── */
 const clips = [
-  { title: "Vision Board Workshop Highlights", vimeoId: "1064687560" },
-  { title: "Community Cooking Workshop", vimeoId: "1143331891", previewStart: 5 },
-  { title: "Movie Night Recap", vimeoId: "1140641190" },
-  { title: "Partner Spotlight: Akeem Stewart", vimeoId: "833854968", previewStart: 10 },
-  { title: "Community Voices", vimeoId: "1135409664" },
-  { title: "Event Series Recap", vimeoId: "1142229793" },
+  { title: "BHM Clip 01", vimeoId: "1174190910" },
+  { title: "BHM Clip 02", vimeoId: "1174191105" },
+  { title: "BHM Clip 03", vimeoId: "1174191067" },
+  { title: "BHM Clip 04", vimeoId: "1174190976" },
+  { title: "BHM Clip 05", vimeoId: "1174203013" },
+  { title: "BHM Clip 06", vimeoId: "1174191137" },
+  { title: "BHM Clip 07", vimeoId: "1174191016" },
+  { title: "BHM Clip 08", vimeoId: "1174190887" },
+  { title: "BHM Clip 09", vimeoId: "1174190944" },
+  { title: "BHM Clip 10", vimeoId: "1174191042" },
+  { title: "BHM Clip 11", vimeoId: "1174203036" },
+  { title: "BHM Clip 12", vimeoId: "1174203026" },
 ];
 
 /* ─── Photos (placeholder until real uploads) ─── */
-const photoItems: MediaItem[] = [
+const fallbackPhotoItems: MediaItem[] = [
   { type: "photo", src: "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=1200&h=800&fit=crop", title: "Community gathering" },
   { type: "photo", src: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=1200&h=800&fit=crop", title: "Cooking workshop" },
   { type: "photo", src: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=1200&h=800&fit=crop", title: "Event celebration" },
@@ -50,6 +56,41 @@ const photoItems: MediaItem[] = [
   { type: "photo", src: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=1200&h=800&fit=crop", title: "Movie night" },
   { type: "photo", src: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1200&h=800&fit=crop", title: "Volunteer moment" },
 ];
+
+const localPhotoModules = import.meta.glob<{ default: string }>(
+  "../assets/hub/black-creek-bhm/photos/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP,AVIF}",
+  { eager: true }
+);
+
+const FEATURED_PHOTO_BASENAME = "dsc06165";
+
+const toBaseNameFromPath = (filePath: string) =>
+  filePath.split("/").pop()?.replace(/\.[^/.]+$/, "") ?? "";
+
+const toTitleFromPath = (filePath: string) => {
+  const fileName = toBaseNameFromPath(filePath);
+  return fileName.replace(/[-_]+/g, " ").replace(/\s+/g, " ").trim();
+};
+
+const uploadedPhotoItems: MediaItem[] = Object.entries(localPhotoModules)
+  .sort(([pathA], [pathB]) => {
+    const baseA = toBaseNameFromPath(pathA).toLowerCase();
+    const baseB = toBaseNameFromPath(pathB).toLowerCase();
+
+    const aPriority = baseA === FEATURED_PHOTO_BASENAME ? 0 : 1;
+    const bPriority = baseB === FEATURED_PHOTO_BASENAME ? 0 : 1;
+    if (aPriority !== bPriority) return aPriority - bPriority;
+
+    return baseA.localeCompare(baseB, undefined, { numeric: true, sensitivity: "base" });
+  })
+  .map(([filePath, module], index) => ({
+    type: "photo",
+    src: module.default,
+    title: toTitleFromPath(filePath) || `Event Photo ${index + 1}`,
+  }));
+
+const photoItems: MediaItem[] =
+  uploadedPhotoItems.length > 0 ? uploadedPhotoItems : fallbackPhotoItems;
 
 /* ─── Quotes ─── */
 const quotes = [
@@ -89,10 +130,14 @@ const outcomes = [
 
 /* ─── Events ─── */
 const events = [
-  { label: "What", value: "Black History Month Community Event Series — three events celebrating culture, wellness, and connection." },
-  { label: "Vision Board Workshop", value: "A space to reflect, dream, and build with intention. Participants created vision boards and set personal goals." },
-  { label: "Community Cooking Workshop", value: "Learning, sharing, and leaving with meals and supplies to take home. Led by Ella Charles Cuisine." },
-  { label: "Movie Night", value: "Food, laughs, and good vibes with the community. A night of togetherness and celebration." },
+  { label: "Afrocentric Design", value: "Programs and events rooted in Afrocentricity." },
+  { label: "Culturally Affirming Care", value: "Safe, equitable care that improves Black health outcomes." },
+  { label: "Social Connection", value: "Stronger relationships that reduce social isolation." },
+  { label: "Cultural Food Programming", value: "Food-led programming that addresses health inequities." },
+  { label: "Community Trust", value: "Community-led engagement that builds trust with providers." },
+  { label: "Barrier-Free Access", value: "Barrier-free access to workshops and trainings." },
+  { label: "Social Infrastructure", value: "Markets and events as community social infrastructure." },
+  { label: "Black-Owned Collaboration", value: "Black-owned businesses and partners as health assets." },
 ];
 
 const HubBlackCreekBHM = () => {
@@ -191,40 +236,40 @@ const HubBlackCreekBHM = () => {
           {/* Main content */}
           <main className={`flex-1 min-w-0 ${isMobile ? "pt-12" : ""}`}>
 
-            {/* 1. Overview — DARK */}
-            <section id="overview" className="section-dark py-20 md:py-28">
-              <div className="container mx-auto px-6 text-center max-w-3xl">
+            {/* 1. Overview */}
+            <section id="overview" className="py-16 md:py-28 bg-background">
+              <div className="container mx-auto px-4 sm:px-6 text-center max-w-3xl">
                 <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex justify-center mb-8">
                   <img src={blackCreekLogo} alt="Black Creek Community Health Centre" className="h-20 md:h-28 rounded-lg bg-white p-2" />
                 </motion.div>
                 <motion.p variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-impact-blue uppercase tracking-widest text-xs mb-4">
                   Black Creek Community Health Centre • Impact Media Hub
                 </motion.p>
-                <motion.h1 variants={slideUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-serif text-4xl md:text-6xl font-bold text-white leading-tight mb-4">
+                <motion.h1 variants={slideUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-serif text-3xl sm:text-4xl md:text-6xl font-bold text-foreground leading-tight mb-4">
                   Black History Month Community Event Series
                 </motion.h1>
-                <motion.p variants={slideUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-white/50 text-lg italic mb-6">
-                  Bringing people together, lowering stress, and creating space for joy and connection.
+                <motion.p variants={slideUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-muted-foreground text-base md:text-lg italic mb-6">
+                  Afrocentric, community-rooted programming advancing health equity for Black communities.
                 </motion.p>
-                <motion.p variants={slideUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-white/60 leading-relaxed mb-10 max-w-2xl mx-auto">
-                  Black Creek Community Health Centre hosted a series of community events for Black History Month — a Vision Board Workshop, a Community Cooking Workshop, and a Movie Night. Each event did exactly what community programming is supposed to do: bring people together, lower stress, and create space for joy and connection. These moments matter more than people realize.
+                <motion.p variants={slideUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-muted-foreground text-sm md:text-base leading-relaxed mb-10 max-w-2xl mx-auto">
+                  Black Creek Community Health Centre's Black History Month programming was designed to strengthen social connection, reduce isolation, and create culturally affirming care pathways. Through barrier-free workshops, cultural food programming, and collaboration with Black-owned businesses and trusted partners, these events helped build trust and improve access to community health supports.
                 </motion.p>
                 <motion.div variants={slideUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex flex-wrap justify-center gap-4">
                   <Link to="/bookings" className="btn-primary">Build Your Own Hub</Link>
-                  <Link to="/hub/examples" className="btn-secondary !border-white/30 !text-white hover:!bg-white hover:!text-impact-dark">View More Examples</Link>
+                  <Link to="/hub/examples" className="btn-secondary">View More Examples</Link>
                 </motion.div>
               </div>
             </section>
 
             {/* 2. Events Overview */}
-            <section id="initiative" className="py-20 bg-background">
-              <div className="container mx-auto px-6 max-w-4xl">
-                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-12 text-center">The Events</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <section id="initiative" className="py-16 md:py-20 bg-background">
+              <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
+                <h2 className="font-serif text-2xl md:text-5xl font-bold text-foreground mb-8 md:mb-12 text-center">Community Themes</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   {events.map((d) => (
-                    <div key={d.label} className="bg-card border border-border rounded-sm p-6">
-                      <p className="text-impact-blue text-xs font-semibold uppercase tracking-widest mb-2">{d.label}</p>
-                      <p className="text-foreground text-sm">{d.value}</p>
+                    <div key={d.label} className="bg-card border border-border rounded-sm p-4 md:p-6">
+                      <p className="text-impact-blue text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] md:tracking-widest mb-2">{d.label}</p>
+                      <p className="text-foreground text-sm md:text-base leading-relaxed">{d.value}</p>
                     </div>
                   ))}
                 </div>
@@ -270,18 +315,21 @@ const HubBlackCreekBHM = () => {
             <section id="photos" className="section-dark py-20">
               <div className="container mx-auto px-6">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-4 text-center">Photo Gallery</h2>
-                <p className="text-white/40 text-sm text-center mb-12">Placeholder photos — 100+ real event photos coming soon.</p>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <p className="text-white/40 text-sm text-center mb-12">Drop photos into <code>src/assets/hub/black-creek-bhm/photos</code> and they will auto-appear here.</p>
+                <div className="columns-1 sm:columns-2 lg:columns-3 [column-gap:1rem]">
                   {photoItems.map((photo, i) => (
                     <button
                       key={i}
                       onClick={() => openPhoto(i)}
-                      className="group relative aspect-[3/2] overflow-hidden rounded-xl bg-white/5"
+                      className="group relative mb-4 w-full overflow-hidden rounded-xl bg-white/5"
+                      style={{ breakInside: "avoid" }}
                     >
                       <img
                         src={photo.src}
                         alt={photo.title || "Hub photo"}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        decoding="async"
                         loading="lazy"
                       />
                       {photo.title && (
@@ -313,14 +361,14 @@ const HubBlackCreekBHM = () => {
               </div>
             </section>
 
-            {/* 7. Partners — DARK */}
-            <section id="partners" className="section-dark py-20">
+            {/* 7. Partners */}
+            <section id="partners" className="py-20 bg-background">
               <div className="container mx-auto px-6">
-                <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-12 text-center">Partners</h2>
+                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-12 text-center">Partners</h2>
 
                 <div className="flex flex-wrap justify-center items-center gap-8 mb-12">
                   {partners.map((p) => (
-                    <div key={p.name} className="h-16 md:h-20 bg-white rounded-lg px-4 py-2 flex items-center justify-center" title={p.name}>
+                    <div key={p.name} className="h-16 md:h-20 bg-white border border-border rounded-lg px-4 py-2 flex items-center justify-center" title={p.name}>
                       <img src={p.logo} alt={p.name} className="h-full w-auto object-contain max-w-[180px]" />
                     </div>
                   ))}
@@ -328,10 +376,10 @@ const HubBlackCreekBHM = () => {
 
                 <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
                   {spotlights.map((s) => (
-                    <motion.div key={s.name} variants={slideUp} className="bg-white/5 border border-white/10 rounded-sm p-6 space-y-3">
-                      <h3 className="font-serif text-lg font-semibold text-white">{s.name}</h3>
-                      <p className="text-white/60 text-sm"><strong className="text-white/80">Contribution:</strong> {s.contribution}</p>
-                      <p className="text-white/60 text-sm"><strong className="text-white/80">Outcome:</strong> {s.outcome}</p>
+                    <motion.div key={s.name} variants={slideUp} className="bg-card border border-border rounded-sm p-6 space-y-3">
+                      <h3 className="font-serif text-lg font-semibold text-foreground">{s.name}</h3>
+                      <p className="text-muted-foreground text-sm"><strong className="text-foreground">Contribution:</strong> {s.contribution}</p>
+                      <p className="text-muted-foreground text-sm"><strong className="text-foreground">Outcome:</strong> {s.outcome}</p>
                     </motion.div>
                   ))}
                 </motion.div>
@@ -393,3 +441,4 @@ const HubBlackCreekBHM = () => {
 };
 
 export default HubBlackCreekBHM;
+
