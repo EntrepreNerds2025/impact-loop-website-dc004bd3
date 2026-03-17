@@ -45,8 +45,8 @@ const ImpactMediaHubSection = () => {
               <Link to="/hub/black-creek-bhm" className="btn-primary">
                 View Example Hub
               </Link>
-              <Link to="/hub/black-creek-bhm" className="btn-secondary">
-                View Black Creek Demo
+              <Link to="/impact-media-hub" className="btn-secondary">
+                Learn More
               </Link>
             </div>
           </motion.div>
@@ -55,17 +55,17 @@ const ImpactMediaHubSection = () => {
           <motion.div variants={slideFromRight}>
             <div className="relative bg-background rounded-sm shadow-xl border border-border overflow-hidden">
               <div className="bg-impact-dark p-6 text-center">
-                <p className="text-white/50 text-xs uppercase tracking-widest mb-2">Example Hub</p>
+                <p className="text-white/50 text-xs uppercase tracking-widest mb-2">Featured Hub</p>
                 <h3 className="font-serif text-2xl text-white font-semibold">
-                  Our People's Keeper Employment Program
+                  Black Creek — Black History Month
                 </h3>
-                <p className="text-white/60 text-sm mt-1">Real stories. Real outcomes. Built to be shared.</p>
+                <p className="text-white/60 text-sm mt-1">Vision boards, community cooking, movie night — all documented.</p>
               </div>
               <div className="p-6 grid grid-cols-3 gap-4 text-center">
                 {[
-                  { value: "150+", label: "Participants" },
-                  { value: "12", label: "Partners" },
-                  { value: "8", label: "Video Clips" },
+                  { value: "3", label: "Events" },
+                  { value: "3", label: "Partners" },
+                  { value: "100+", label: "Photos" },
                 ].map((stat) => (
                   <div key={stat.label}>
                     <p className="font-serif text-2xl font-bold text-impact-blue">{stat.value}</p>

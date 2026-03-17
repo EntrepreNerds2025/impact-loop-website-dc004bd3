@@ -1,27 +1,65 @@
 
 
-## Plan: Restore Impact Media Hub Visibility + Link to Black Creek Hub
+# Redesign Sections + New Blog Post + Tech CTA
 
-The Impact Media Hub section, nav links, and footer links are currently hidden. Here's what we'll do to bring them back, now pointing to the real Black Creek BHM hub as the featured example.
+## 1. Dark Background + Split Layout for "The Storytelling Standard Behind the Work"
 
-### Changes
+**File: `src/components/home/FrameworkPreviewSection.tsx`** -- Full redesign
 
-1. **Homepage — Re-add ImpactMediaHubSection**
-   - Import and place `ImpactMediaHubSection` back into `src/pages/Index.tsx` (after `ServicesPreviewSection`, before `TechSolutionsSection`)
-   - Update the section's CTAs: one "View Example Hub" button linking to `/hub/black-creek-bhm`, remove the duplicate second button (or make it link to `/impact-media-hub` as "Learn More")
-   - Update the preview card content to reference Black Creek BHM instead of the generic "Our People's Keeper" placeholder
+Replace the current centered card grid with a cinematic split layout:
+- Dark background using `section-dark` (the Impact Loop dark navy)
+- Left side: A compelling stock/Unsplash image (embedded via URL) showing storytelling/filmmaking
+- Right side: The text content (label, heading, description) + the 3 framework module cards stacked vertically
+- CTA button styled for dark background (white outline or primary on dark)
+- All text colors updated to white/white-muted for dark bg contrast
 
-2. **Header Navigation — Add Impact Media Hub link**
-   - Add "Impact Media Hub" to the Services dropdown in `src/components/layout/Header.tsx` (e.g. `{ href: "/impact-media-hub", label: "Impact Media Hub" }`)
+## 2. Dark Background + Split Layout for "Videos That Move People to Action"
 
-3. **Footer — Add link back**
-   - Add `{ href: "/impact-media-hub", label: "Impact Media Hub" }` to the Navigate list in `src/components/layout/Footer.tsx`
+**File: `src/components/home/ServicesPreviewSection.tsx`** -- Full redesign
 
-4. **Hub Examples page — Already has Black Creek**
-   - `src/pages/HubExamples.tsx` already lists the Black Creek BHM hub, no changes needed
+Flip the layout (text left, image right) to create visual rhythm:
+- Dark background using `bg-[hsl(var(--impact-dark))]`
+- Left side: Text content (label, heading, description) + the 4 service cards in a 2x2 grid below
+- Right side: A compelling image showing video production/impact work
+- Footer line and CTA adapted for dark background
+- Alternating direction from the Framework section creates visual interest
 
-### Technical Notes
-- The `ImpactMediaHubSection` component already exists and is functional — just needs to be re-imported on the homepage
-- The `/impact-media-hub` and `/hub/black-creek-bhm` routes are already registered in `App.tsx`
-- The preview card in the homepage section will be updated to show Black Creek BHM stats (3 events, 3 partners, 100+ photos) to reflect the real hub
+## 3. New Blog Post -- "AI Is Making Impact Apps Possible Without Big Dev Teams"
+
+**Database insert** into `blog_posts` table with the full copy provided by the user:
+- **slug**: `ai-apps-for-impact`
+- **title**: "AI Is Making Impact Apps Possible Without Big Dev Teams"
+- **excerpt**: "Apps, portals, and internal tools that support programs, partnerships, and reporting can now be built in weeks to months, not years."
+- **content**: Full markdown content from the user's copy (formatted with proper markdown headings, lists, blockquotes)
+- **author**: "Rovonn Russell"
+- **published**: true
+- **published_at**: Current date
+- **meta_title**: "AI Is Making Impact Apps Possible Without Big Dev Teams"
+- **meta_description**: The provided meta description
+- **cover_image**: An appropriate Unsplash image URL for the blog hero
+
+## 4. Add "Read More" Blog CTA to TechSolutionsSection
+
+**File: `src/components/home/TechSolutionsSection.tsx`**
+
+Add a secondary link/button below the existing "Let's Build Something" CTA that links to the new blog post:
+- Text: "Read: How AI Is Changing What's Possible" or similar
+- Links to `/blog/ai-apps-for-impact`
+- Styled as a text link or outline button to not compete with the primary CTA
+
+## Files Changed
+
+| File | Change |
+|---|---|
+| `src/components/home/FrameworkPreviewSection.tsx` | Dark bg + split layout (image left, text right) |
+| `src/components/home/ServicesPreviewSection.tsx` | Dark bg + split layout (text left, image right) |
+| `src/components/home/TechSolutionsSection.tsx` | Add blog post link below existing CTA |
+| Database: `blog_posts` | Insert new blog post with full content |
+
+## Design Notes
+
+- The two redesigned sections will alternate their image/text positioning (Framework: image-left/text-right, Services: text-left/image-right) creating a zig-zag visual pattern as users scroll
+- Both sections use the dark Impact Loop background for dramatic contrast against the lighter sections above and below
+- Images will use high-quality Unsplash URLs with appropriate subjects (storytelling/filmmaking for Framework, video production/community for Services)
+- Animations shift from `scaleIn` cards to `convergeFromLeft` / `convergeFromRight` to match the split layout direction
 
