@@ -10,6 +10,7 @@ const servicesDropdown = [
   { href: "/services#workshops", label: "Workshops & Training" },
   { href: "/services#framework", label: "Framework Kit" },
   { href: "/services#system-setup", label: "Story System Setup (Pilot)" },
+  { href: "/impact-media-hub", label: "Impact Media Hub" },
 ];
 
 const resourcesDropdown = [

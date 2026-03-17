@@ -30,6 +30,7 @@ const Index = () => {
       <ClientLogosSection />
       <ImpactStatsSection />
       <ServicesPreviewSection />
+      <ImpactMediaHubSection />
       <TechSolutionsSection />
       <FrameworkPreviewSection />
       <FounderSection />
