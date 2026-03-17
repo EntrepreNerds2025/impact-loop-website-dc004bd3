@@ -25,17 +25,24 @@ const RotatingHeadline = () => {
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (prefersReduced) {
-    return <span>{headlines[0]}</span>;
+    return (
+      <span className="block mx-auto max-w-[15ch] sm:max-w-none leading-tight text-center px-2">
+        {headlines[0]}
+      </span>
+    );
   }
 
   return (
-    <span className="relative flex w-full justify-center overflow-hidden whitespace-nowrap" style={{ minHeight: "1.2em" }}>
+    <span
+      className="relative mx-auto flex w-full max-w-[15ch] sm:max-w-none justify-center overflow-hidden px-2 text-center"
+      style={{ minHeight: "2.6em" }}
+    >
       <AnimatePresence>
         {headlines.map((headline, i) =>
           i === index ? (
             <motion.span
               key={headline}
-              className="absolute"
+              className="absolute inset-x-0 leading-tight"
               initial={{ y: 150, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -150, opacity: 0 }}

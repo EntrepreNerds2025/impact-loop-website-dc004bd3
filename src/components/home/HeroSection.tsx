@@ -48,7 +48,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6"
+            className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6"
           >
             <RotatingWord />
           </motion.h1>
@@ -79,13 +79,13 @@ const HeroSection = () => {
           >
             <Link
               to="/work"
-              className="btn-primary text-base"
+              className="bg-[hsl(var(--impact-blue))] hover:bg-[hsl(var(--impact-blue))]/90 text-white font-medium px-5 py-2.5 sm:px-8 sm:py-3.5 rounded-sm transition-all duration-300 uppercase tracking-[0.16em] text-xs sm:text-sm text-center"
             >
               See Our Work
             </Link>
             <Link
               to="/bookings"
-              className="bg-transparent border border-white text-white hover:bg-white hover:text-[hsl(var(--impact-dark))] font-medium px-8 py-3.5 rounded-sm transition-all duration-300 uppercase tracking-widest text-sm"
+              className="bg-transparent border border-white text-white hover:bg-white hover:text-[hsl(var(--impact-dark))] font-medium px-5 py-2.5 sm:px-8 sm:py-3.5 rounded-sm transition-all duration-300 uppercase tracking-[0.16em] text-[11px] sm:text-sm leading-tight text-center"
             >
               Book a Storytelling Diagnostic
             </Link>
