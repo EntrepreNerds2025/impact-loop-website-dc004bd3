@@ -17,9 +17,9 @@ const portfolioItems: PortfolioItem[] = [
   { id: 1, title: "CIBC Refugee Employment Support", category: "Corporate Partnership", thumbnail: "", vimeoId: "1140514160", previewVimeoId: "1168718317" },
   { id: 2, title: "Iris Ministries — Malawi", category: "Impact Story", thumbnail: "", vimeoId: "1140283574", previewVimeoId: "1140283574" },
   { id: 3, title: "Lakeridge Health — I Belong Initiative", category: "Initiatives", thumbnail: "", vimeoId: "1140641190", previewVimeoId: "1140641190" },
-  { id: 4, title: "Hair for Self-Esteem", category: "Impact Story", thumbnail: "", vimeoId: "1135409664", previewVimeoId: "1135409664" },
-  { id: 5, title: "Black Creek Community Health Ambassadors", category: "Program Highlight", thumbnail: "", vimeoId: "833854968", previewVimeoId: "833854968" },
-  { id: 6, title: "Octavia Sampson — Wellness Educator", category: "Testimonial", thumbnail: "", vimeoId: "1142229793", previewVimeoId: "1142229793" },
+  { id: 4, title: "EmployNext — Youth Trades Program", category: "Program Highlight", thumbnail: "", vimeoId: "1174716942", previewVimeoId: "1174716942" },
+  { id: 5, title: "Black Creek — Black History Month", category: "Event Recap", thumbnail: "", vimeoId: "1174716851", previewVimeoId: "1174716851" },
+  { id: 6, title: "Hair for Self-Esteem", category: "Impact Story", thumbnail: "", vimeoId: "1135409664", previewVimeoId: "1135409664" },
 ];
 
 const VideoCard = ({
