@@ -179,7 +179,7 @@ const HubBlackCreekBHM = () => {
     toast({ title: "Coming Soon", description: "PDF export will be available when this hub is finalized." });
   };
 
-  const heroVimeoId = "1064687560";
+  const heroVimeoId = "1174716851";
 
   const allMedia: MediaItem[] = useMemo(() => [
     { type: "video" as const, src: heroVimeoId, title: "Black History Month Event Series — Full Story" },
