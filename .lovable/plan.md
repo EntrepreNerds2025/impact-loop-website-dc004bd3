@@ -1,65 +1,34 @@
 
 
-# Redesign Sections + New Blog Post + Tech CTA
+## Plan: Add Media Download Functionality to Black Creek Hub
 
-## 1. Dark Background + Split Layout for "The Storytelling Standard Behind the Work"
+Enable Black Creek (or any hub client) to download photos and videos directly from the hub page.
 
-**File: `src/components/home/FrameworkPreviewSection.tsx`** -- Full redesign
+### What we'll build
 
-Replace the current centered card grid with a cinematic split layout:
-- Dark background using `section-dark` (the Impact Loop dark navy)
-- Left side: A compelling stock/Unsplash image (embedded via URL) showing storytelling/filmmaking
-- Right side: The text content (label, heading, description) + the 3 framework module cards stacked vertically
-- CTA button styled for dark background (white outline or primary on dark)
-- All text colors updated to white/white-muted for dark bg contrast
+1. **Download button on each photo in the gallery grid** — A small download icon overlay on hover, triggers a direct image download.
 
-## 2. Dark Background + Split Layout for "Videos That Move People to Action"
+2. **Download button in the MediaLightbox** — Add a download icon button next to the close button. For photos, it downloads the image file directly. For videos, it links to the Vimeo video page (since Vimeo videos can't be directly downloaded via embed).
 
-**File: `src/components/home/ServicesPreviewSection.tsx`** -- Full redesign
+3. **"Download All Photos" bulk button** — Add a button above the photo gallery section that downloads all photos as a ZIP file using JSZip (client-side). This is the most useful feature for a client wanting to grab everything.
 
-Flip the layout (text left, image right) to create visual rhythm:
-- Dark background using `bg-[hsl(var(--impact-dark))]`
-- Left side: Text content (label, heading, description) + the 4 service cards in a 2x2 grid below
-- Right side: A compelling image showing video production/impact work
-- Footer line and CTA adapted for dark background
-- Alternating direction from the Framework section creates visual interest
+### Technical approach
 
-## 3. New Blog Post -- "AI Is Making Impact Apps Possible Without Big Dev Teams"
+- **Single photo download**: Use `fetch()` + `blob` + programmatic `<a download>` click. Works for same-origin and CORS-enabled images. For the local assets (bundled photos), this works natively.
+- **Bulk ZIP download**: Add `jszip` + `file-saver` packages. Fetch all photo blobs, bundle into a ZIP, and trigger download. Show a progress indicator while building.
+- **Video download**: Since Vimeo embeds don't allow direct file download, the download button for videos will open the Vimeo page in a new tab (where download may be enabled depending on Vimeo settings). Alternatively, we can note "Contact us for video files."
+- **MediaLightbox**: Add a `Download` icon button in the top bar, next to the close button.
 
-**Database insert** into `blog_posts` table with the full copy provided by the user:
-- **slug**: `ai-apps-for-impact`
-- **title**: "AI Is Making Impact Apps Possible Without Big Dev Teams"
-- **excerpt**: "Apps, portals, and internal tools that support programs, partnerships, and reporting can now be built in weeks to months, not years."
-- **content**: Full markdown content from the user's copy (formatted with proper markdown headings, lists, blockquotes)
-- **author**: "Rovonn Russell"
-- **published**: true
-- **published_at**: Current date
-- **meta_title**: "AI Is Making Impact Apps Possible Without Big Dev Teams"
-- **meta_description**: The provided meta description
-- **cover_image**: An appropriate Unsplash image URL for the blog hero
-
-## 4. Add "Read More" Blog CTA to TechSolutionsSection
-
-**File: `src/components/home/TechSolutionsSection.tsx`**
-
-Add a secondary link/button below the existing "Let's Build Something" CTA that links to the new blog post:
-- Text: "Read: How AI Is Changing What's Possible" or similar
-- Links to `/blog/ai-apps-for-impact`
-- Styled as a text link or outline button to not compete with the primary CTA
-
-## Files Changed
+### Files to change
 
 | File | Change |
-|---|---|
-| `src/components/home/FrameworkPreviewSection.tsx` | Dark bg + split layout (image left, text right) |
-| `src/components/home/ServicesPreviewSection.tsx` | Dark bg + split layout (text left, image right) |
-| `src/components/home/TechSolutionsSection.tsx` | Add blog post link below existing CTA |
-| Database: `blog_posts` | Insert new blog post with full content |
+|------|--------|
+| `src/components/shared/MediaLightbox.tsx` | Add download button for current media item |
+| `src/pages/HubBlackCreekBHM.tsx` | Add "Download All Photos" button above photo grid, add download overlay on individual photos |
+| `package.json` | Add `jszip` and `file-saver` dependencies |
 
-## Design Notes
-
-- The two redesigned sections will alternate their image/text positioning (Framework: image-left/text-right, Services: text-left/image-right) creating a zig-zag visual pattern as users scroll
-- Both sections use the dark Impact Loop background for dramatic contrast against the lighter sections above and below
-- Images will use high-quality Unsplash URLs with appropriate subjects (storytelling/filmmaking for Framework, video production/community for Services)
-- Animations shift from `scaleIn` cards to `convergeFromLeft` / `convergeFromRight` to match the split layout direction
+### Notes
+- Local photos (from `import.meta.glob`) are bundled as asset URLs — they support fetch + blob download.
+- Vimeo video files cannot be downloaded client-side from embeds; we'll provide a "View on Vimeo" fallback or a note to contact for raw files.
+- The download buttons use the same dark/minimal aesthetic as the rest of the hub.
 
