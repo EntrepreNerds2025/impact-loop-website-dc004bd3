@@ -1,10 +1,12 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   BookOpen, Video, Images, Quote, Handshake, FileDown, BarChart3,
-  ChevronDown, Menu, X, Play
+  ChevronDown, Menu, X, Play, Download
 } from "lucide-react";
+import JSZip from "jszip";
+import { saveAs } from "file-saver";
 import Layout from "@/components/layout/Layout";
 import { slideUp, staggerContainer, fadeIn } from "@/hooks/useScrollAnimation";
 import { useToast } from "@/hooks/use-toast";
