@@ -1,6 +1,6 @@
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Download, ExternalLink } from "lucide-react";
 
 export interface MediaItem {
   type: "video" | "photo";
@@ -17,11 +17,30 @@ interface MediaLightboxProps {
   onNavigate: (index: number) => void;
 }
 
+const downloadPhoto = async (src: string, title?: string) => {
+  try {
+    const response = await fetch(src);
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = title ? `${title.replace(/[^a-zA-Z0-9-_ ]/g, "")}.jpg` : "photo.jpg";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  } catch {
+    // Fallback: open in new tab
+    window.open(src, "_blank");
+  }
+};
+
 const MediaLightbox = ({ items, currentIndex, onClose, onNavigate }: MediaLightboxProps) => {
   const isOpen = currentIndex !== null;
   const item = currentIndex !== null ? items[currentIndex] : null;
   const hasPrev = currentIndex !== null && currentIndex > 0;
   const hasNext = currentIndex !== null && currentIndex < items.length - 1;
+  const [downloading, setDownloading] = useState(false);
 
   const goPrev = useCallback(() => {
     if (hasPrev && currentIndex !== null) onNavigate(currentIndex - 1);
@@ -30,6 +49,17 @@ const MediaLightbox = ({ items, currentIndex, onClose, onNavigate }: MediaLightb
   const goNext = useCallback(() => {
     if (hasNext && currentIndex !== null) onNavigate(currentIndex + 1);
   }, [hasNext, currentIndex, onNavigate]);
+
+  const handleDownload = useCallback(async () => {
+    if (!item) return;
+    if (item.type === "video") {
+      window.open(`https://vimeo.com/${item.src}`, "_blank");
+    } else {
+      setDownloading(true);
+      await downloadPhoto(item.src, item.title);
+      setDownloading(false);
+    }
+  }, [item]);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -68,14 +98,29 @@ const MediaLightbox = ({ items, currentIndex, onClose, onNavigate }: MediaLightb
             onClick={onClose}
           />
 
-          {/* Close */}
-          <button
-            onClick={onClose}
-            className="absolute top-4 right-4 md:top-8 md:right-8 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors duration-300"
-            aria-label="Close"
-          >
-            <X className="w-6 h-6 text-white" />
-          </button>
+          {/* Top-right buttons */}
+          <div className="absolute top-4 right-4 md:top-8 md:right-8 z-10 flex items-center gap-2">
+            <button
+              onClick={handleDownload}
+              disabled={downloading}
+              className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors duration-300 disabled:opacity-50"
+              aria-label={item.type === "video" ? "View on Vimeo" : "Download photo"}
+              title={item.type === "video" ? "View on Vimeo" : "Download photo"}
+            >
+              {item.type === "video" ? (
+                <ExternalLink className="w-5 h-5 text-white" />
+              ) : (
+                <Download className="w-5 h-5 text-white" />
+              )}
+            </button>
+            <button
+              onClick={onClose}
+              className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors duration-300"
+              aria-label="Close"
+            >
+              <X className="w-6 h-6 text-white" />
+            </button>
+          </div>
 
           {/* Prev arrow */}
           {hasPrev && (

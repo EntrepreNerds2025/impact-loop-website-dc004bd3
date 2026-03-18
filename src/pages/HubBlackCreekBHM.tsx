@@ -1,10 +1,12 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   BookOpen, Video, Images, Quote, Handshake, FileDown, BarChart3,
-  ChevronDown, Menu, X, Play
+  ChevronDown, Menu, X, Play, Download
 } from "lucide-react";
+import JSZip from "jszip";
+import { saveAs } from "file-saver";
 import Layout from "@/components/layout/Layout";
 import { slideUp, staggerContainer, fadeIn } from "@/hooks/useScrollAnimation";
 import { useToast } from "@/hooks/use-toast";
@@ -197,8 +199,56 @@ const HubBlackCreekBHM = () => {
     setLightboxIndex(offset + photoIndex);
   };
 
+  const [zipping, setZipping] = useState(false);
+  const [zipProgress, setZipProgress] = useState(0);
+
   const visibleClips = showAllClips ? clips : clips.slice(0, INITIAL_CLIPS_VISIBLE);
   const visiblePhotos = showAllPhotos ? photoItems : photoItems.slice(0, INITIAL_PHOTOS_VISIBLE);
+
+  const downloadSinglePhoto = useCallback(async (src: string, title?: string) => {
+    try {
+      const response = await fetch(src);
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = title ? `${title.replace(/[^a-zA-Z0-9-_ ]/g, "")}.jpg` : "photo.jpg";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch {
+      window.open(src, "_blank");
+    }
+  }, []);
+
+  const downloadAllPhotos = useCallback(async () => {
+    if (zipping) return;
+    setZipping(true);
+    setZipProgress(0);
+    try {
+      const zip = new JSZip();
+      const folder = zip.folder("black-creek-bhm-photos");
+      for (let i = 0; i < photoItems.length; i++) {
+        const photo = photoItems[i];
+        const response = await fetch(photo.src);
+        const blob = await response.blob();
+        const ext = blob.type.includes("png") ? "png" : "jpg";
+        const name = photo.title
+          ? `${photo.title.replace(/[^a-zA-Z0-9-_ ]/g, "")}.${ext}`
+          : `photo-${i + 1}.${ext}`;
+        folder!.file(name, blob);
+        setZipProgress(Math.round(((i + 1) / photoItems.length) * 100));
+      }
+      const content = await zip.generateAsync({ type: "blob" });
+      saveAs(content, "black-creek-bhm-photos.zip");
+    } catch (err) {
+      toast({ title: "Download failed", description: "Could not build the ZIP file. Try again." });
+    } finally {
+      setZipping(false);
+      setZipProgress(0);
+    }
+  }, [zipping, toast]);
 
   return (
     <Layout>
@@ -350,30 +400,53 @@ const HubBlackCreekBHM = () => {
             {/* 5. Photo Gallery — DARK */}
             <section id="photos" className="section-dark py-20">
               <div className="container mx-auto px-6">
-                <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-4 text-center">Photo Gallery</h2>
-                <p className="text-white/40 text-sm text-center mb-12">Drop photos into <code>src/assets/hub/black-creek-bhm/photos</code> and they will auto-appear here.</p>
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
+                  <h2 className="font-serif text-3xl md:text-5xl font-bold text-white text-center sm:text-left">Photo Gallery</h2>
+                  <button
+                    onClick={downloadAllPhotos}
+                    disabled={zipping}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors disabled:opacity-50"
+                  >
+                    <Download size={16} />
+                    {zipping ? `Zipping… ${zipProgress}%` : `Download All (${photoItems.length})`}
+                  </button>
+                </div>
+                <p className="text-white/40 text-sm text-center sm:text-left mb-12">Drop photos into <code>src/assets/hub/black-creek-bhm/photos</code> and they will auto-appear here.</p>
                 <div className="columns-1 sm:columns-2 lg:columns-3 [column-gap:1rem]">
                   {visiblePhotos.map((photo, i) => (
-                    <button
+                    <div
                       key={i}
-                      onClick={() => openPhoto(i)}
                       className="group relative mb-4 w-full overflow-hidden rounded-xl bg-white/5"
                       style={{ breakInside: "avoid" }}
                     >
-                      <img
-                        src={photo.src}
-                        alt={photo.title || "Hub photo"}
-                        className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        decoding="async"
-                        loading="lazy"
-                      />
+                      <button
+                        onClick={() => openPhoto(i)}
+                        className="w-full"
+                      >
+                        <img
+                          src={photo.src}
+                          alt={photo.title || "Hub photo"}
+                          className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </button>
+                      {/* Download overlay */}
+                      <button
+                        onClick={(e) => { e.stopPropagation(); downloadSinglePhoto(photo.src, photo.title); }}
+                        className="absolute top-2 right-2 w-9 h-9 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                        aria-label="Download photo"
+                        title="Download photo"
+                      >
+                        <Download size={14} className="text-white" />
+                      </button>
                       {photo.title && (
-                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-3 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                           <p className="text-white text-xs">{photo.title}</p>
                         </div>
                       )}
-                    </button>
+                    </div>
                   ))}
                 </div>
                 {photoItems.length > INITIAL_PHOTOS_VISIBLE && (
