@@ -199,8 +199,56 @@ const HubBlackCreekBHM = () => {
     setLightboxIndex(offset + photoIndex);
   };
 
+  const [zipping, setZipping] = useState(false);
+  const [zipProgress, setZipProgress] = useState(0);
+
   const visibleClips = showAllClips ? clips : clips.slice(0, INITIAL_CLIPS_VISIBLE);
   const visiblePhotos = showAllPhotos ? photoItems : photoItems.slice(0, INITIAL_PHOTOS_VISIBLE);
+
+  const downloadSinglePhoto = useCallback(async (src: string, title?: string) => {
+    try {
+      const response = await fetch(src);
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = title ? `${title.replace(/[^a-zA-Z0-9-_ ]/g, "")}.jpg` : "photo.jpg";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch {
+      window.open(src, "_blank");
+    }
+  }, []);
+
+  const downloadAllPhotos = useCallback(async () => {
+    if (zipping) return;
+    setZipping(true);
+    setZipProgress(0);
+    try {
+      const zip = new JSZip();
+      const folder = zip.folder("black-creek-bhm-photos");
+      for (let i = 0; i < photoItems.length; i++) {
+        const photo = photoItems[i];
+        const response = await fetch(photo.src);
+        const blob = await response.blob();
+        const ext = blob.type.includes("png") ? "png" : "jpg";
+        const name = photo.title
+          ? `${photo.title.replace(/[^a-zA-Z0-9-_ ]/g, "")}.${ext}`
+          : `photo-${i + 1}.${ext}`;
+        folder!.file(name, blob);
+        setZipProgress(Math.round(((i + 1) / photoItems.length) * 100));
+      }
+      const content = await zip.generateAsync({ type: "blob" });
+      saveAs(content, "black-creek-bhm-photos.zip");
+    } catch (err) {
+      toast({ title: "Download failed", description: "Could not build the ZIP file. Try again." });
+    } finally {
+      setZipping(false);
+      setZipProgress(0);
+    }
+  }, [zipping, toast]);
 
   return (
     <Layout>
