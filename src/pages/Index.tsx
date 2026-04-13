@@ -25,9 +25,9 @@ const Index = () => {
   return (
     <Layout>
       <HeroSection />
+      <ClientLogosSection />
       <PrinciplesSection />
       <VideoPortfolioSection />
-      <ClientLogosSection />
       <ImpactStatsSection />
       <ServicesPreviewSection />
       <ImpactMediaHubSection />

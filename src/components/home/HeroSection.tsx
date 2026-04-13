@@ -30,51 +30,51 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-20 container mx-auto px-6 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
           className="max-w-4xl mx-auto"
         >
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
             className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-6"
           >
             Cinematic Impact Films & Story Systems
           </motion.p>
 
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6"
           >
             <RotatingWord />
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
             className="text-white/70 text-lg md:text-xl max-w-2xl mx-auto mb-4 leading-relaxed"
           >
             Cinematic impact films and story systems built to earn trust.
           </motion.p>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
             className="text-white/50 text-base max-w-2xl mx-auto mb-10"
           >
             We produce documentary-style impact films and short-form cutdowns, then deploy them as reusable story assets for partners, funders, and stakeholders.
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Link
@@ -97,7 +97,7 @@ const HeroSection = () => {
       <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 1.2 }}
+        transition={{ duration: 0.6, delay: 0.8 }}
         onClick={scrollToContent}
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 text-white/50 hover:text-white transition-colors duration-300"
         aria-label="Scroll down"
