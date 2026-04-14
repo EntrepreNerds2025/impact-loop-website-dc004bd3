@@ -21,6 +21,9 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import BookingConfirmed from "./pages/BookingConfirmed";
+import RescheduleBooking from "./pages/RescheduleBooking";
+import CancelBooking from "./pages/CancelBooking";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -37,6 +40,9 @@ const App = () => (
           <Route path="/bookings" element={<Bookings />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/booking-confirmed" element={<BookingConfirmed />} />
+          <Route path="/booking/reschedule/:token" element={<RescheduleBooking />} />
+          <Route path="/booking/cancel/:token" element={<CancelBooking />} />
           <Route path="/impact-media-hub" element={<ImpactMediaHub />} />
           <Route path="/hub/demo" element={<HubBlackCreekBHM />} />
           <Route path="/hub/examples" element={<HubExamples />} />

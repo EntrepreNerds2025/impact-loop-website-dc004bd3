@@ -1,49 +1,208 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Calendar, Clock, MessageSquare } from "lucide-react";
+import { ArrowLeft, Calendar, CheckCircle2, Clock, MessageSquare } from "lucide-react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { setSEO, resetSEO } from "@/lib/seo";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+import StepIndicator from "@/components/bookings/StepIndicator";
+import IntakeForm from "@/components/bookings/IntakeForm";
+import AvailabilityPicker from "@/components/bookings/AvailabilityPicker";
+import type { AvailabilitySlot, BookingLeadRecord } from "@/components/bookings/types";
+import {
+  BOOKING_CALL_TYPES,
+  BOOKING_STEPS,
+  getCallTypeConfig,
+  normalizeCallType,
+  type BookingCallType,
+} from "@/lib/booking";
 
-const bookingTypes = [
-  {
-    icon: MessageSquare,
-    title: "Storytelling Diagnostic",
-    duration: "30-45 minutes",
-    description:
-      "A focused conversation to understand your storytelling challenges and explore potential solutions.",
-    ideal: "Nonprofit leaders, CSR teams, and communications directors exploring whether Impact Loop is the right fit",
-  },
-  {
-    icon: Calendar,
-    title: "Workshop Discovery Call",
-    duration: "30 minutes",
-    description:
-      "Discuss your team's training needs and explore workshop options for building internal capacity.",
-    ideal: "Internal teams responsible for impact reporting, communications, or stakeholder trust",
-  },
-  {
-    icon: Clock,
-    title: "System Pilot Call",
-    duration: "45 minutes",
-    description:
-      "Deep dive into implementing a custom storytelling system for your organization.",
-    ideal: "Organizations and corporate teams ready to invest in storytelling infrastructure that supports accountability and long-term trust",
-  },
-];
+const callTypeIcons = {
+  diagnostic: MessageSquare,
+  workshop: Calendar,
+  pilot: Clock,
+} as const;
 
 const Bookings = () => {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const preselectedCallType = useMemo(
+    () => normalizeCallType(searchParams.get("type")),
+    [searchParams],
+  );
+
+  const [selectedCallType, setSelectedCallType] = useState<BookingCallType | null>(
+    preselectedCallType,
+  );
+  const [currentStep, setCurrentStep] = useState(preselectedCallType ? 2 : 1);
+  const [bookingLead, setBookingLead] = useState<BookingLeadRecord | null>(null);
+  const [isCreatingBooking, setIsCreatingBooking] = useState(false);
+
   useEffect(() => {
     setSEO({
-      title: "Book a Call — Impact Loop",
-      description: "Schedule a free storytelling diagnostic call with Impact Loop. Explore how cinematic storytelling can build trust for your organization.",
+      title: "Book a Call - Impact Loop",
+      description:
+        "Book a Storytelling Diagnostic, Workshop Discovery, or System Pilot call with Impact Loop.",
       ogType: "website",
     });
     return resetSEO;
   }, []);
 
+  useEffect(() => {
+    if (!preselectedCallType) return;
+    setSelectedCallType(preselectedCallType);
+    setCurrentStep((prev) => (prev < 2 ? 2 : prev));
+  }, [preselectedCallType]);
+
+  const selectedCallConfig = selectedCallType ? getCallTypeConfig(selectedCallType) : null;
+
+  const handleSelectCallType = (callType: BookingCallType) => {
+    setSelectedCallType(callType);
+    setCurrentStep(2);
+    setBookingLead(null);
+  };
+
+  const handleIntakeComplete = (lead: BookingLeadRecord) => {
+    setBookingLead(lead);
+    setCurrentStep(3);
+  };
+
+  const handleConfirmSlot = async (slot: AvailabilitySlot) => {
+    if (!bookingLead?.id) {
+      toast.error("Please complete the intake form first.");
+      return;
+    }
+
+    setIsCreatingBooking(true);
+
+    try {
+      const { data, error } = await supabase.functions.invoke("create-booking", {
+        body: {
+          booking_lead_id: bookingLead.id,
+          selected_slot: slot.start_utc,
+        },
+      });
+
+      if (error) throw new Error(error.message || "Failed to book this slot.");
+
+      const booking = data?.booking;
+      if (!booking?.cancel_token || !booking?.scheduled_at) {
+        throw new Error("Booking response is missing required details.");
+      }
+
+      const params = new URLSearchParams({
+        token: booking.cancel_token,
+        scheduled: booking.scheduled_at,
+        callType: booking.call_type || selectedCallType || "diagnostic",
+        callTypeLabel: booking.call_type_label || selectedCallConfig?.title || "Impact Loop Call",
+        challenge: booking.challenge_type || bookingLead.challenge_type,
+        name: booking.full_name || bookingLead.full_name,
+        meeting: booking.meeting_link || "",
+      });
+
+      setCurrentStep(4);
+      toast.success("Booking confirmed.");
+      navigate(`/booking-confirmed?${params.toString()}`);
+    } catch (error) {
+      console.error(error);
+      toast.error(error instanceof Error ? error.message : "Could not complete booking.");
+    } finally {
+      setIsCreatingBooking(false);
+    }
+  };
+
+  const renderStepContent = () => {
+    if (currentStep === 1 || !selectedCallType) {
+      return (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {BOOKING_CALL_TYPES.map((type) => {
+            const Icon = callTypeIcons[type.id];
+            return (
+              <div key={type.id} className="bg-background rounded-lg border border-border p-6">
+                <div className="w-12 h-12 rounded-lg bg-impact-blue/10 flex items-center justify-center mb-5">
+                  <Icon className="w-6 h-6 text-impact-blue" />
+                </div>
+                <h3 className="font-serif text-2xl font-semibold text-foreground mb-2">{type.title}</h3>
+                <p className="text-impact-blue text-sm font-medium mb-4">{type.durationLabel}</p>
+                <p className="text-muted-foreground text-sm mb-4">{type.description}</p>
+                <p className="text-muted-foreground/80 text-xs mb-6">
+                  <span className="font-semibold">Ideal for:</span> {type.ideal}
+                </p>
+                <button className="btn-primary w-full" onClick={() => handleSelectCallType(type.id)}>
+                  Choose This Call
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
+
+    if (currentStep === 2) {
+      return (
+        <div className="space-y-5">
+          <div className="rounded-lg border border-border bg-background p-5">
+            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Selected Call Type</p>
+            <p className="font-serif text-2xl text-foreground">{selectedCallConfig?.title}</p>
+            <p className="text-sm text-muted-foreground mt-1">{selectedCallConfig?.durationLabel}</p>
+          </div>
+          <IntakeForm
+            callType={selectedCallType}
+            callDurationMin={selectedCallConfig?.durationMinutes || 45}
+            onComplete={handleIntakeComplete}
+          />
+          {!preselectedCallType && (
+            <button
+              className="text-sm text-muted-foreground hover:text-foreground inline-flex items-center gap-2"
+              onClick={() => setCurrentStep(1)}
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back to call types
+            </button>
+          )}
+        </div>
+      );
+    }
+
+    if (currentStep === 3) {
+      return (
+        <div className="space-y-5">
+          <div className="rounded-lg border border-green-500/30 bg-green-500/10 p-4 text-sm text-green-800">
+            <p className="font-semibold inline-flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4" />
+              Intake complete
+            </p>
+            <p className="mt-1">
+              Booking for <strong>{bookingLead?.full_name}</strong> at{" "}
+              <strong>{bookingLead?.organization}</strong>.
+            </p>
+          </div>
+
+          <AvailabilityPicker
+            durationMinutes={selectedCallConfig?.durationMinutes || bookingLead?.call_duration_min || 45}
+            onConfirm={handleConfirmSlot}
+            confirmLabel={isCreatingBooking ? "Booking..." : "Confirm Booking"}
+          />
+
+          <button
+            className="text-sm text-muted-foreground hover:text-foreground inline-flex items-center gap-2"
+            onClick={() => setCurrentStep(2)}
+            disabled={isCreatingBooking}
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to intake
+          </button>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <Layout>
-      {/* Hero */}
       <section className="pt-32 pb-20 bg-impact-dark">
         <div className="container mx-auto px-6">
           <motion.div
@@ -53,136 +212,60 @@ const Bookings = () => {
             className="max-w-3xl mx-auto text-center"
           >
             <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">
-              Book a Call
+              Smart Booking
             </p>
             <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-              Let's Start a <span className="text-gradient">Conversation</span>
+              Book Your <span className="text-gradient">Impact Loop Call</span>
             </h1>
             <p className="text-white/70 text-lg leading-relaxed">
-              Every great story starts with a conversation. Choose the call type
-              that fits where you are right now.
+              Choose your call type, share context, and reserve a time with real availability.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Booking Types */}
-      <section className="py-20 bg-impact-cream">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-16">
-            {bookingTypes.map((type, index) => (
-              <motion.div
-                key={type.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white rounded-lg p-8 shadow-sm"
-              >
-                <div className="w-12 h-12 rounded-lg bg-impact-blue/10 flex items-center justify-center mb-5">
-                  <type.icon className="w-6 h-6 text-impact-blue" />
-                </div>
-                <h3 className="font-serif text-xl font-semibold text-impact-dark mb-2">
-                  {type.title}
-                </h3>
-                <p className="text-impact-blue text-sm font-medium mb-4">
-                  {type.duration}
-                </p>
-                <p className="text-impact-dark/70 text-sm mb-4">
-                  {type.description}
-                </p>
-                <p className="text-impact-dark/50 text-xs">
-                  <span className="font-semibold">Ideal for:</span> {type.ideal}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Calendly Embed Placeholder */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="max-w-4xl mx-auto"
-          >
-            <div className="bg-white rounded-lg p-8 md:p-12 shadow-sm">
-              <div className="text-center mb-8">
-                <h2 className="font-serif text-2xl font-bold text-impact-dark mb-4">
-                  Schedule Your Call
-                </h2>
-                <p className="text-impact-dark/60">
-                  Select a time that works for you. All calls are conducted via Zoom.
-                </p>
-              </div>
-
-              <iframe
-                src="https://calendly.com/rovonnrussell/impactcall"
-                width="100%"
-                height="700"
-                frameBorder="0"
-                title="Schedule a call with Impact Loop"
-                className="rounded-lg"
-              />
-
-              {/* Manual contact option */}
-              <div className="mt-8 text-center border-t border-border pt-8">
-                <p className="text-impact-dark/60 text-sm mb-2">
-                  Prefer to reach out directly?
-                </p>
-                <a
-                  href="mailto:rovonn@impactloop.ca"
-                  className="text-impact-blue hover:text-impact-purple transition-colors duration-300 font-medium"
-                >
-                  rovonn@impactloop.ca
-                </a>
-              </div>
-            </div>
-          </motion.div>
+      <section className="py-16 md:py-20 section-cream">
+        <div className="container mx-auto px-6 max-w-6xl space-y-8">
+          <StepIndicator steps={BOOKING_STEPS} currentStep={currentStep} />
+          {renderStepContent()}
         </div>
       </section>
 
-      {/* What to Expect */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="font-serif text-2xl md:text-3xl font-bold text-impact-dark mb-6">
-                What to Expect
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-                <div>
-                  <div className="w-8 h-8 rounded-full bg-impact-blue text-white flex items-center justify-center font-bold mb-4">
-                    1
-                  </div>
-                  <h4 className="font-semibold text-impact-dark mb-2">We Listen</h4>
-                  <p className="text-impact-dark/60 text-sm">
-                    You share your current challenges, goals, and storytelling history.
-                  </p>
+            <h2 className="font-serif text-2xl md:text-3xl font-bold text-impact-dark mb-6">
+              What to Expect
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+              <div>
+                <div className="w-8 h-8 rounded-full bg-impact-blue text-white flex items-center justify-center font-bold mb-4">
+                  1
                 </div>
-                <div>
-                  <div className="w-8 h-8 rounded-full bg-impact-blue text-white flex items-center justify-center font-bold mb-4">
-                    2
-                  </div>
-                  <h4 className="font-semibold text-impact-dark mb-2">We Explore</h4>
-                  <p className="text-impact-dark/60 text-sm">
-                    Together, we identify opportunities and discuss what's possible.
-                  </p>
-                </div>
-                <div>
-                  <div className="w-8 h-8 rounded-full bg-impact-blue text-white flex items-center justify-center font-bold mb-4">
-                    3
-                  </div>
-                  <h4 className="font-semibold text-impact-dark mb-2">We Recommend</h4>
-                  <p className="text-impact-dark/60 text-sm">
-                    You leave with clarity on next steps, whether with us or on your own.
-                  </p>
-                </div>
+                <h4 className="font-semibold text-impact-dark mb-2">We Listen</h4>
+                <p className="text-impact-dark/60 text-sm">
+                  You share your current challenges, goals, and storytelling context.
+                </p>
               </div>
-            </motion.div>
+              <div>
+                <div className="w-8 h-8 rounded-full bg-impact-blue text-white flex items-center justify-center font-bold mb-4">
+                  2
+                </div>
+                <h4 className="font-semibold text-impact-dark mb-2">We Explore</h4>
+                <p className="text-impact-dark/60 text-sm">
+                  Together, we identify opportunities and align around what matters most.
+                </p>
+              </div>
+              <div>
+                <div className="w-8 h-8 rounded-full bg-impact-blue text-white flex items-center justify-center font-bold mb-4">
+                  3
+                </div>
+                <h4 className="font-semibold text-impact-dark mb-2">We Recommend</h4>
+                <p className="text-impact-dark/60 text-sm">
+                  You leave with clear next steps and a practical direction forward.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
