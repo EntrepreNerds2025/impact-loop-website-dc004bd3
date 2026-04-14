@@ -1,5 +1,5 @@
-import { useRef, useEffect } from "react";
-import { motion, useInView } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   Users,
@@ -13,12 +13,39 @@ import {
   MessageSquare,
   ArrowRight,
   ChevronRight,
+  Play,
+  Building2,
+  Heart,
 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { setSEO, resetSEO } from "@/lib/seo";
+import CommunicationOSGraphic from "@/components/services/CommunicationOSGraphic";
+import founderPhoto from "@/assets/founder/rovonn.png";
+import blackCreekPhoto from "@/assets/hub/black-creek-bhm/photos/DSC06165.jpg";
 
-const pathways = [
+// ─── Service definitions ───────────────────────────────────────────
+
+interface ServiceDef {
+  id: string;
+  phase: string;
+  label: string;
+  title: string;
+  tagline: string;
+  description: string;
+  price: string;
+  priceNote?: string;
+  icon: typeof Video;
+  cta: string;
+  ctaHref: string;
+  featured?: boolean;
+  outcomes?: string[];
+  visual?: "employNextPreview" | "mediaHubPhoto" | "advisoryPhoto" | "commOSGraphic";
+  lanes: ("nonprofit" | "corporate")[];
+}
+
+const allServices: ServiceDef[] = [
   {
+    id: "diagnostic",
     phase: "01",
     label: "Start Here",
     title: "Impact Story Diagnostic",
@@ -27,12 +54,13 @@ const pathways = [
       "A guided assessment that surfaces your strongest story opportunities, gaps in your current communications, and the clearest path to credibility with funders and stakeholders.",
     price: "Free",
     priceNote: "AI-powered tool on the website",
-    color: "impact-blue",
     icon: MessageSquare,
     cta: "Take the Diagnostic",
     ctaHref: "/bookings",
+    lanes: ["nonprofit", "corporate"],
   },
   {
+    id: "visibility-starter",
     phase: "02",
     label: "Build Visibility",
     title: "Impact Visibility Starter",
@@ -40,13 +68,13 @@ const pathways = [
     description:
       "A monthly content system that keeps your organization visible with funders, community partners, and stakeholders between major projects. Short-form video cutdowns, social assets, and story distribution built into your workflow.",
     price: "Starting from $1,500/mo",
-    priceNote: "CAD",
-    color: "impact-blue",
     icon: BarChart2,
     cta: "Book a Call",
     ctaHref: "/bookings",
+    lanes: ["nonprofit"],
   },
   {
+    id: "content-engine",
     phase: "03",
     label: "Scale Content",
     title: "Impact Content Engine",
@@ -54,13 +82,13 @@ const pathways = [
     description:
       "A full content production system built around your existing story assets. Cutdowns, repurposed testimonials, program highlights, and social-ready clips produced monthly so your mission stays visible across every stakeholder channel.",
     price: "Starting from $3,000/mo",
-    priceNote: "CAD",
-    color: "impact-blue",
     icon: Layers,
     cta: "Book a Call",
     ctaHref: "/bookings",
+    lanes: ["nonprofit", "corporate"],
   },
   {
+    id: "workshops",
     phase: "04",
     label: "Build Capacity",
     title: "Workshops & Training",
@@ -68,8 +96,6 @@ const pathways = [
     description:
       "Equip your team with the frameworks, interview techniques, and content standards to identify and capture impact stories on an ongoing basis without relying on external production every time.",
     price: "Starting from $2,500/session",
-    priceNote: "CAD",
-    color: "impact-purple",
     icon: Users,
     cta: "Learn More",
     ctaHref: "/bookings",
@@ -79,8 +105,10 @@ const pathways = [
       "Content planning templates",
       "Ongoing support resources",
     ],
+    lanes: ["nonprofit"],
   },
   {
+    id: "framework-kit",
     phase: "05",
     label: "Self-Guided System",
     title: "Framework Kit Access",
@@ -88,8 +116,6 @@ const pathways = [
     description:
       "Access Impact Loop's complete storytelling framework, templates, and guides to implement at your own pace. Built for self-starters and teams who want a proven system without hands-on guidance.",
     price: "Starting from $500",
-    priceNote: "CAD",
-    color: "impact-purple",
     icon: BookOpen,
     cta: "Learn More",
     ctaHref: "/bookings",
@@ -99,8 +125,10 @@ const pathways = [
       "Intake prompts library",
       "Implementation checklists",
     ],
+    lanes: ["nonprofit"],
   },
   {
+    id: "system-setup",
     phase: "06",
     label: "Guided Implementation",
     title: "System Setup (Pilot)",
@@ -108,8 +136,7 @@ const pathways = [
     description:
       "Work directly with Impact Loop to design and implement a storytelling system tailored to your organization's mission, reporting requirements, and stakeholder environment. Includes hands-on training, first story capture support, and a 90-day plan.",
     price: "Starting from $3,000",
-    priceNote: "CAD, project-based",
-    color: "impact-blue",
+    priceNote: "Project-based",
     icon: Compass,
     cta: "Book a Discovery Call",
     ctaHref: "/bookings",
@@ -119,8 +146,10 @@ const pathways = [
       "First story capture support",
       "90-day implementation plan",
     ],
+    lanes: ["nonprofit"],
   },
   {
+    id: "cinematic-films",
     phase: "07",
     label: "Flagship Production",
     title: "Cinematic Impact Films",
@@ -128,34 +157,38 @@ const pathways = [
     description:
       "Documentary-style films that capture real people and real outcomes with the production quality that earns trust with donors, board members, funders, and corporate partners. Built to live for years and serve multiple audiences.",
     price: "Starting from $7,000",
-    priceNote: "CAD, project-based",
-    color: "impact-purple",
+    priceNote: "Project-based",
     icon: Video,
     cta: "See Our Work",
     ctaHref: "/work",
     featured: true,
+    visual: "employNextPreview",
     outcomes: [
-      "Flagship impact film (60–180 seconds)",
-      "6–12 short cutdowns for LinkedIn and social",
+      "Flagship impact film (60\u2013180 seconds)",
+      "6\u201312 short cutdowns for LinkedIn and social",
       "Story blueprint and interview plan",
       "Strategic deployment guidance",
     ],
+    lanes: ["nonprofit", "corporate"],
   },
   {
+    id: "media-hub",
     phase: "08",
     label: "Always-On Platform",
     title: "Impact Media Hub",
     tagline: "Platform setup + monthly hosting — your story library",
     description:
-      "A branded, purpose-built platform that houses all your impact stories, makes them searchable for stakeholders, and lets you deploy the right story to the right audience without manual effort. Setup plus ongoing management.",
+      "A branded, purpose-built platform that houses all your impact stories, makes them searchable for stakeholders, and lets you deploy the right story to the right audience without manual effort.",
     price: "Starting from $10,000 setup",
-    priceNote: "+ $500–$1,500/mo CAD",
-    color: "impact-blue",
+    priceNote: "+ $500\u2013$1,500/mo",
     icon: Globe,
+    visual: "mediaHubPhoto",
     cta: "Book a Call",
     ctaHref: "/bookings",
+    lanes: ["nonprofit", "corporate"],
   },
   {
+    id: "comm-os",
     phase: "09",
     label: "Full-System Strategy",
     title: "Impact Communication OS",
@@ -163,13 +196,14 @@ const pathways = [
     description:
       "A complete operating system for organizational storytelling. Covers production, content strategy, stakeholder deployment, funder-facing assets, and internal alignment. For organizations ready to make storytelling a core operational function.",
     price: "Starting from $5,000/mo",
-    priceNote: "CAD",
-    color: "impact-purple",
     icon: Layers,
+    visual: "commOSGraphic",
     cta: "Book a Discovery Call",
     ctaHref: "/bookings",
+    lanes: ["nonprofit", "corporate"],
   },
   {
+    id: "advisory",
     phase: "10",
     label: "Executive Partnership",
     title: "Strategic Advisory",
@@ -177,13 +211,14 @@ const pathways = [
     description:
       "Direct advisory partnership with Rovonn Russell for founders, CEOs, and communications leads navigating complex storytelling challenges. Covers brand positioning, stakeholder strategy, media presence, and organizational trust-building.",
     price: "Starting from $3,000/mo",
-    priceNote: "CAD",
-    color: "impact-blue",
     icon: MessageSquare,
+    visual: "advisoryPhoto",
     cta: "Apply for Advisory",
     ctaHref: "/bookings",
+    lanes: ["corporate"],
   },
   {
+    id: "tech-solutions",
     phase: "11",
     label: "Custom Technology",
     title: "Impact Technology Solutions",
@@ -191,8 +226,7 @@ const pathways = [
     description:
       "Custom apps, platforms, and software tools built to help your organization operate more efficiently and deliver impact at scale. AI-accelerated development means solutions that once required large teams and long timelines can now be built in weeks.",
     price: "Starting from $15,000",
-    priceNote: "CAD, project-based",
-    color: "impact-purple",
+    priceNote: "Project-based",
     icon: Monitor,
     cta: "Book a Discovery Call",
     ctaHref: "/bookings",
@@ -202,90 +236,141 @@ const pathways = [
       "Ongoing support and iteration",
       "Integration with your existing systems",
     ],
+    lanes: ["corporate"],
   },
 ];
+
+// ─── Visual asset renderers ────────────────────────────────────────
+
+const EmployNextPreview = () => (
+  <div
+    className="relative overflow-hidden rounded-lg cursor-pointer group"
+    style={{ aspectRatio: "16 / 9" }}
+  >
+    <iframe
+      src="https://player.vimeo.com/video/1174716942?background=1&autoplay=1&loop=1&muted=1"
+      className="absolute pointer-events-none"
+      style={{
+        border: 0,
+        width: "140%",
+        height: "140%",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+      }}
+      allow="autoplay"
+      title="EmployNext preview"
+    />
+    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors duration-300 flex items-center justify-center">
+      <div className="w-12 h-12 rounded-full bg-primary/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <Play className="w-5 h-5 text-white ml-0.5" fill="white" />
+      </div>
+    </div>
+    <div className="absolute bottom-3 left-3 right-3">
+      <span className="text-white/60 text-xs">EmployNext — Youth Trades Program</span>
+    </div>
+  </div>
+);
+
+const MediaHubPhoto = () => (
+  <div className="rounded-lg overflow-hidden" style={{ aspectRatio: "16 / 10" }}>
+    <img
+      src={blackCreekPhoto}
+      alt="Black Creek community event — Impact Media Hub example"
+      className="w-full h-full object-cover"
+      loading="lazy"
+    />
+  </div>
+);
+
+const AdvisoryPhoto = () => (
+  <div className="rounded-lg overflow-hidden" style={{ aspectRatio: "4 / 3" }}>
+    <img
+      src={founderPhoto}
+      alt="Rovonn Russell — Strategic Advisory"
+      className="w-full h-full object-cover object-top"
+      loading="lazy"
+    />
+  </div>
+);
+
+const VisualAsset = ({ type }: { type: ServiceDef["visual"] }) => {
+  switch (type) {
+    case "employNextPreview":
+      return <EmployNextPreview />;
+    case "mediaHubPhoto":
+      return <MediaHubPhoto />;
+    case "advisoryPhoto":
+      return <AdvisoryPhoto />;
+    case "commOSGraphic":
+      return <CommunicationOSGraphic />;
+    default:
+      return null;
+  }
+};
+
+// ─── Service card ──────────────────────────────────────────────────
 
 const ServiceCard = ({
   service,
   index,
 }: {
-  service: typeof pathways[0];
+  service: ServiceDef;
   index: number;
 }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
-
   const isFeatured = service.featured;
+  const hasVisual = !!service.visual;
 
   return (
     <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: Math.min(index * 0.06, 0.3) }}
-      className={`relative p-8 rounded-xl border transition-all duration-300 ${
+      transition={{ duration: 0.6, delay: Math.min(index * 0.05, 0.25) }}
+      className={`relative rounded-xl border transition-all duration-300 overflow-hidden ${
         isFeatured
-          ? "bg-impact-dark text-white border-primary/40 shadow-lg shadow-primary/10"
-          : index % 2 === 0
-          ? "bg-impact-cream border-border"
-          : "bg-white border-border"
+          ? "bg-[hsl(var(--impact-dark))] text-white border-primary/40 shadow-lg shadow-primary/10"
+          : "bg-white border-border hover:shadow-md"
       }`}
     >
       {isFeatured && (
-        <div className="absolute -top-3 left-8">
-          <span className="bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
+        <div className="absolute -top-0 right-8 z-10">
+          <span className="bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-b-lg uppercase tracking-wider">
             Most Popular
           </span>
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-        {/* Left col — icon, phase, title, tagline, description, price */}
-        <div className="lg:col-span-2">
+      <div className={`p-8 ${hasVisual ? "grid grid-cols-1 lg:grid-cols-2 gap-8" : ""}`}>
+        {/* Content side */}
+        <div className="flex flex-col">
+          {/* Header */}
           <div className="flex items-center gap-3 mb-4">
             <div
-              className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-                isFeatured
-                  ? "bg-primary/20"
-                  : service.color === "impact-blue"
-                  ? "bg-impact-blue/10"
-                  : "bg-impact-purple/10"
+              className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                isFeatured ? "bg-primary/20" : "bg-primary/8"
               }`}
             >
               <service.icon
-                className={`w-6 h-6 ${
-                  isFeatured
-                    ? "text-primary"
-                    : service.color === "impact-blue"
-                    ? "text-impact-blue"
-                    : "text-impact-purple"
-                }`}
+                className={`w-5 h-5 ${isFeatured ? "text-primary" : "text-primary"}`}
               />
             </div>
-            <span
-              className={`text-xs font-semibold uppercase tracking-widest ${
-                isFeatured ? "text-white/40" : "text-muted-foreground"
-              }`}
-            >
-              {service.phase}
-            </span>
-          </div>
-
-          <div
-            className={`text-xs font-medium uppercase tracking-widest mb-2 ${
-              isFeatured
-                ? "text-primary"
-                : service.color === "impact-blue"
-                ? "text-impact-blue"
-                : "text-impact-purple"
-            }`}
-          >
-            {service.label}
+            <div>
+              <span
+                className={`text-[10px] font-semibold uppercase tracking-widest block ${
+                  isFeatured ? "text-primary" : "text-primary"
+                }`}
+              >
+                {service.label}
+              </span>
+            </div>
           </div>
 
           <h2
-            className={`font-serif text-2xl font-bold mb-1 ${
-              isFeatured ? "text-white" : "text-impact-dark"
+            className={`font-serif text-xl md:text-2xl font-bold mb-1 ${
+              isFeatured ? "text-white" : "text-foreground"
             }`}
           >
             {service.title}
@@ -299,57 +384,24 @@ const ServiceCard = ({
           </p>
           <p
             className={`leading-relaxed text-sm mb-6 ${
-              isFeatured ? "text-white/70" : "text-impact-dark/70"
+              isFeatured ? "text-white/70" : "text-foreground/70"
             }`}
           >
             {service.description}
           </p>
 
-          {/* Price */}
-          <div
-            className={`rounded-lg p-4 ${
-              isFeatured ? "bg-white/5 border border-white/10" : "bg-white border border-border"
-            }`}
-          >
-            <div
-              className={`font-bold text-xl font-serif ${
-                isFeatured ? "text-white" : "text-impact-dark"
-              }`}
-            >
-              {service.price}
-            </div>
-            {service.priceNote && (
-              <div className={`text-xs mt-0.5 ${isFeatured ? "text-white/40" : "text-muted-foreground"}`}>
-                {service.priceNote}
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Right col — outcomes + CTA */}
-        <div className="lg:col-span-3 flex flex-col justify-between">
+          {/* Outcomes */}
           {service.outcomes && (
-            <div className="mb-8">
-              <h4
-                className={`text-xs font-semibold uppercase tracking-wider mb-4 ${
-                  isFeatured ? "text-white/40" : "text-impact-dark"
-                }`}
-              >
-                What You Get
-              </h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="mb-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {service.outcomes.map((outcome) => (
                   <div
                     key={outcome}
                     className={`flex items-start gap-2 text-sm ${
-                      isFeatured ? "text-white/65" : "text-impact-dark/70"
+                      isFeatured ? "text-white/65" : "text-foreground/65"
                     }`}
                   >
-                    <ChevronRight
-                      className={`w-4 h-4 mt-0.5 flex-shrink-0 ${
-                        service.color === "impact-blue" ? "text-impact-blue" : "text-impact-purple"
-                      }`}
-                    />
+                    <ChevronRight className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-primary" />
                     {outcome}
                   </div>
                 ))}
@@ -357,15 +409,32 @@ const ServiceCard = ({
             </div>
           )}
 
-          <div className="mt-auto pt-4">
+          {/* Price + CTA row */}
+          <div className="mt-auto flex flex-wrap items-end justify-between gap-4 pt-4 border-t border-white/10">
+            <div>
+              <div
+                className={`font-bold text-lg font-serif ${
+                  isFeatured ? "text-white" : "text-foreground"
+                }`}
+              >
+                {service.price}
+              </div>
+              {service.priceNote && (
+                <div
+                  className={`text-xs ${
+                    isFeatured ? "text-white/40" : "text-muted-foreground"
+                  }`}
+                >
+                  {service.priceNote}
+                </div>
+              )}
+            </div>
             <Link
               to={service.ctaHref}
               className={`inline-flex items-center gap-2 font-medium text-sm transition-colors duration-300 ${
                 isFeatured
                   ? "text-primary hover:text-white"
-                  : service.color === "impact-blue"
-                  ? "text-impact-blue hover:text-impact-purple"
-                  : "text-impact-purple hover:text-impact-blue"
+                  : "text-primary hover:text-primary/70"
               }`}
             >
               {service.cta}
@@ -373,79 +442,146 @@ const ServiceCard = ({
             </Link>
           </div>
         </div>
+
+        {/* Visual side */}
+        {hasVisual && (
+          <div className="flex items-center justify-center">
+            <VisualAsset type={service.visual} />
+          </div>
+        )}
       </div>
     </motion.div>
   );
 };
 
+// ─── Page ──────────────────────────────────────────────────────────
+
+type Lane = "nonprofit" | "corporate";
+
+const laneConfig: Record<Lane, { label: string; icon: typeof Heart; heroSub: string }> = {
+  nonprofit: {
+    label: "Nonprofits & Organizations",
+    icon: Heart,
+    heroSub:
+      "Services built for nonprofits, foundations, and community organizations that need to earn trust with funders, boards, and the communities they serve.",
+  },
+  corporate: {
+    label: "Corporate & Impact Companies",
+    icon: Building2,
+    heroSub:
+      "Services built for corporate teams, ESG leaders, and impact companies that need credible storytelling to demonstrate accountability and build stakeholder trust.",
+  },
+};
+
 const Services = () => {
-  const heroRef = useRef(null);
+  const [activeLane, setActiveLane] = useState<Lane>("nonprofit");
 
   useEffect(() => {
     setSEO({
-      title: "Services — Impact Loop",
-      description: "From free diagnostics to cinematic impact films and custom technology. Choose the storytelling pathway that matches where your organization is and where it needs to go.",
+      title: "Services \u2014 Impact Loop",
+      description:
+        "From free diagnostics to cinematic impact films and custom technology. Choose the storytelling pathway that matches where your organization is and where it needs to go.",
       ogType: "website",
     });
     return resetSEO;
   }, []);
 
+  const filteredServices = allServices.filter((s) =>
+    s.lanes.includes(activeLane)
+  );
+
   return (
     <Layout>
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-impact-dark">
+      <section className="pt-32 pb-16 bg-[hsl(var(--impact-dark))]">
         <div className="container mx-auto px-6">
           <motion.div
-            ref={heroRef}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="max-w-3xl mx-auto text-center"
           >
-            <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">
+            <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">
               Services
             </p>
             <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
               Pathways, Not <span className="text-gradient">Packages</span>
             </h1>
-            <p className="text-white/70 text-lg leading-relaxed mb-4">
+            <p className="text-white/70 text-lg leading-relaxed mb-2">
               Every organization is at a different stage. Choose the pathway that
               matches where you are and where you want to go.
-            </p>
-            <p className="text-white/40 text-sm leading-relaxed">
-              All prices are in Canadian dollars. Custom scoping available for every service.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Ascension Path Label */}
-      <section className="py-4 bg-impact-dark border-b border-white/10">
+      {/* Lane Tabs */}
+      <section className="bg-[hsl(var(--impact-dark))] border-b border-white/10 sticky top-[72px] z-30 backdrop-blur-md">
         <div className="container mx-auto px-6">
-          <div className="flex items-center justify-center gap-3 text-white/30 text-xs uppercase tracking-widest">
-            <span>Free</span>
-            <span className="text-white/10">→</span>
-            <span>Starter</span>
-            <span className="text-white/10">→</span>
-            <span>Growth</span>
-            <span className="text-white/10">→</span>
-            <span>Flagship</span>
-            <span className="text-white/10">→</span>
-            <span>System</span>
-            <span className="text-white/10">→</span>
-            <span>Technology</span>
+          <div className="flex justify-center">
+            {(Object.entries(laneConfig) as [Lane, typeof laneConfig[Lane]][]).map(
+              ([lane, config]) => {
+                const Icon = config.icon;
+                const isActive = activeLane === lane;
+                return (
+                  <button
+                    key={lane}
+                    onClick={() => setActiveLane(lane)}
+                    className={`flex items-center gap-2 px-6 py-4 text-sm font-medium transition-all duration-300 border-b-2 ${
+                      isActive
+                        ? "border-primary text-white"
+                        : "border-transparent text-white/40 hover:text-white/70"
+                    }`}
+                  >
+                    <Icon className="w-4 h-4" />
+                    {config.label}
+                  </button>
+                );
+              }
+            )}
           </div>
         </div>
       </section>
 
-      {/* Services */}
-      <section className="py-16 bg-white">
+      {/* Lane description */}
+      <section className="py-8 bg-[hsl(var(--impact-dark))]">
         <div className="container mx-auto px-6">
-          <div className="space-y-8 max-w-5xl mx-auto">
-            {pathways.map((service, index) => (
-              <ServiceCard key={service.title} service={service} index={index} />
-            ))}
-          </div>
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={activeLane}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="text-white/50 text-center max-w-2xl mx-auto text-sm leading-relaxed"
+            >
+              {laneConfig[activeLane].heroSub}
+            </motion.p>
+          </AnimatePresence>
+        </div>
+      </section>
+
+      {/* Services grid */}
+      <section className="py-16 bg-[hsl(var(--impact-cream))]">
+        <div className="container mx-auto px-6">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeLane}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.35 }}
+              className="space-y-6 max-w-5xl mx-auto"
+            >
+              {filteredServices.map((service, index) => (
+                <ServiceCard
+                  key={service.id}
+                  service={service}
+                  index={index}
+                />
+              ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </section>
 
@@ -462,7 +598,9 @@ const Services = () => {
               Not Sure Where to Start?
             </h2>
             <p className="text-white/80 max-w-2xl mx-auto mb-8 text-lg">
-              Book a free Storytelling Diagnostic. We'll look at your current situation and tell you honestly which pathway makes the most sense for where you are right now.
+              Book a free Storytelling Diagnostic. We'll look at your current
+              situation and tell you honestly which pathway makes the most sense
+              for where you are right now.
             </p>
             <Link to="/bookings" className="btn-secondary">
               Book Your Free Diagnostic
