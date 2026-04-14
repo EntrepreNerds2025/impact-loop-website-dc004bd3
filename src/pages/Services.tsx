@@ -31,6 +31,8 @@ interface ServiceDef {
   description: string;
   price: string;
   priceNote?: string;
+  corporatePrice?: string;
+  corporatePriceNote?: string;
   icon: typeof Video;
   cta: string;
   ctaHref: string;
@@ -64,7 +66,8 @@ const allServices: ServiceDef[] = [
     tagline: "Monthly retainer — consistent story output",
     description:
       "A full content production system built around your existing story assets. Cutdowns, repurposed testimonials, program highlights, and social-ready clips produced monthly so your mission stays visible across every stakeholder channel.",
-    price: "Starting from $3,000/mo",
+    price: "Starting from $1,000/mo",
+    corporatePrice: "Starting from $1,500/mo",
     icon: Layers,
     cta: "Book a Call",
     ctaHref: "/bookings",
@@ -78,7 +81,7 @@ const allServices: ServiceDef[] = [
     tagline: "One-time or recurring — in-house storytelling skills",
     description:
       "Equip your team with the frameworks, interview techniques, and content standards to identify and capture impact stories on an ongoing basis without relying on external production every time.",
-    price: "Starting from $2,500/session",
+    price: "Starting from $750/session",
     icon: Users,
     cta: "Learn More",
     ctaHref: "/bookings",
@@ -98,8 +101,10 @@ const allServices: ServiceDef[] = [
     tagline: "Project-based — your most credible story asset",
     description:
       "Documentary-style films that capture real people and real outcomes with the production quality that earns trust with donors, board members, funders, and corporate partners. Built to live for years and serve multiple audiences.",
-    price: "Starting from $7,000",
+    price: "Starting from $1,500",
     priceNote: "Project-based",
+    corporatePrice: "Starting from $2,250",
+    corporatePriceNote: "Project-based",
     icon: Video,
     cta: "See Our Work",
     ctaHref: "/work",
@@ -121,8 +126,10 @@ const allServices: ServiceDef[] = [
     tagline: "Platform setup + monthly hosting — your story library",
     description:
       "A branded, purpose-built platform that houses all your impact stories, makes them searchable for stakeholders, and lets you deploy the right story to the right audience without manual effort.",
-    price: "Starting from $10,000 setup",
-    priceNote: "+ $500\u2013$1,500/mo",
+    price: "$500\u2013$1,500/mo",
+    priceNote: "+ setup fee",
+    corporatePrice: "$750\u2013$2,250/mo",
+    corporatePriceNote: "+ setup fee",
     icon: Globe,
     visual: "mediaHubPhoto",
     cta: "Book a Call",
@@ -137,7 +144,8 @@ const allServices: ServiceDef[] = [
     tagline: "Monthly retainer — end-to-end story system",
     description:
       "A complete operating system for organizational storytelling. Covers production, content strategy, stakeholder deployment, funder-facing assets, and internal alignment. For organizations ready to make storytelling a core operational function.",
-    price: "Starting from $5,000/mo",
+    price: "Starting from $2,000/mo",
+    corporatePrice: "Starting from $3,000/mo",
     icon: Layers,
     visual: "commOSGraphic",
     cta: "Book a Discovery Call",
@@ -152,7 +160,7 @@ const allServices: ServiceDef[] = [
     tagline: "Monthly retainer — direct access to Rovonn",
     description:
       "Direct advisory partnership with Rovonn Russell for founders, CEOs, and communications leads navigating complex storytelling challenges. Covers brand positioning, stakeholder strategy, media presence, and organizational trust-building.",
-    price: "Starting from $3,000/mo",
+    price: "Starting from $1,500/mo",
     icon: MessageSquare,
     visual: "advisoryPhoto",
     cta: "Apply for Advisory",
@@ -167,7 +175,7 @@ const allServices: ServiceDef[] = [
     tagline: "Project-based — purpose-built platforms and tools",
     description:
       "Custom apps, platforms, and software tools built to help your organization operate more efficiently and deliver impact at scale. AI-accelerated development means solutions that once required large teams and long timelines can now be built in weeks.",
-    price: "Starting from $15,000",
+    price: "Starting from $5,000",
     priceNote: "Project-based",
     icon: Monitor,
     cta: "Book a Discovery Call",
@@ -256,14 +264,23 @@ const VisualAsset = ({ type }: { type: ServiceDef["visual"] }) => {
 const ServiceCard = ({
   service,
   index,
+  activeLane,
 }: {
   service: ServiceDef;
   index: number;
+  activeLane: Lane;
 }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const isFeatured = service.featured;
   const hasVisual = !!service.visual;
+
+  const displayPrice = activeLane === "corporate" && service.corporatePrice
+    ? service.corporatePrice
+    : service.price;
+  const displayPriceNote = activeLane === "corporate" && service.corporatePriceNote
+    ? service.corporatePriceNote
+    : service.priceNote;
 
   return (
     <motion.div
@@ -359,15 +376,15 @@ const ServiceCard = ({
                   isFeatured ? "text-white" : "text-foreground"
                 }`}
               >
-                {service.price}
+                {displayPrice}
               </div>
-              {service.priceNote && (
+              {displayPriceNote && (
                 <div
                   className={`text-xs ${
                     isFeatured ? "text-white/40" : "text-muted-foreground"
                   }`}
                 >
-                  {service.priceNote}
+                  {displayPriceNote}
                 </div>
               )}
             </div>
@@ -520,6 +537,7 @@ const Services = () => {
                   key={service.id}
                   service={service}
                   index={index}
+                  activeLane={activeLane}
                 />
               ))}
             </motion.div>

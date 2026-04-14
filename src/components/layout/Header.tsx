@@ -7,10 +7,10 @@ import logoBlack from "@/assets/logos/impact-loop-black.png";
 
 const servicesDropdown = [
   { href: "/cinematic-impact-films", label: "Cinematic Impact Films" },
-  { href: "/services#workshops", label: "Workshops & Training" },
-  { href: "/services#framework", label: "Framework Kit" },
-  { href: "/services#system-setup", label: "Story System Setup (Pilot)" },
   { href: "/impact-media-hub", label: "Impact Media Hub" },
+  { href: "/services", label: "Workshops & Training" },
+  { href: "/services", label: "Strategic Advisory" },
+  { href: "/services", label: "Impact Technology Solutions" },
 ];
 
 const resourcesDropdown = [

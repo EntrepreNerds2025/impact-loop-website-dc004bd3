@@ -41,10 +41,10 @@ const CommunicationOSGraphic = () => {
 
         {/* Center hub */}
         <circle cx="50" cy="47" r="10" fill="rgba(99, 102, 241, 0.08)" stroke="rgba(139, 92, 246, 0.3)" strokeWidth="0.4" />
-        <text x="50" y="45" textAnchor="middle" fill="rgba(255,255,255,0.8)" fontSize="3.2" fontWeight="600">
+        <text x="50" y="45" textAnchor="middle" fill="rgba(26,26,46,0.85)" fontSize="3.2" fontWeight="600">
           Impact
         </text>
-        <text x="50" y="49.5" textAnchor="middle" fill="rgba(255,255,255,0.8)" fontSize="3.2" fontWeight="600">
+        <text x="50" y="49.5" textAnchor="middle" fill="rgba(26,26,46,0.85)" fontSize="3.2" fontWeight="600">
           Comm OS
         </text>
 
@@ -69,7 +69,7 @@ const CommunicationOSGraphic = () => {
                 x={node.x}
                 y={node.y + (j - 0.5) * 3.5 + 0.5}
                 textAnchor="middle"
-                fill="rgba(255,255,255,0.75)"
+                fill="rgba(26,26,46,0.75)"
                 fontSize="2.6"
                 fontWeight="500"
               >
