@@ -15,7 +15,6 @@ const servicesDropdown = [
 
 const resourcesDropdown = [
   { href: "/research", label: "Research" },
-  { href: "/blog", label: "Blog" },
 ];
 
 const Header = () => {

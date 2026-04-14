@@ -3,11 +3,8 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   Users,
-  BookOpen,
-  Compass,
   Video,
   Monitor,
-  BarChart2,
   Layers,
   Globe,
   MessageSquare,
@@ -60,23 +57,9 @@ const allServices: ServiceDef[] = [
     lanes: ["nonprofit", "corporate"],
   },
   {
-    id: "visibility-starter",
-    phase: "02",
-    label: "Build Visibility",
-    title: "Impact Visibility Starter",
-    tagline: "Monthly retainer — content that shows up",
-    description:
-      "A monthly content system that keeps your organization visible with funders, community partners, and stakeholders between major projects. Short-form video cutdowns, social assets, and story distribution built into your workflow.",
-    price: "Starting from $1,500/mo",
-    icon: BarChart2,
-    cta: "Book a Call",
-    ctaHref: "/bookings",
-    lanes: ["nonprofit"],
-  },
-  {
     id: "content-engine",
-    phase: "03",
-    label: "Scale Content",
+    phase: "02",
+    label: "Ongoing Content",
     title: "Impact Content Engine",
     tagline: "Monthly retainer — consistent story output",
     description:
@@ -89,7 +72,7 @@ const allServices: ServiceDef[] = [
   },
   {
     id: "workshops",
-    phase: "04",
+    phase: "03",
     label: "Build Capacity",
     title: "Workshops & Training",
     tagline: "One-time or recurring — in-house storytelling skills",
@@ -108,49 +91,8 @@ const allServices: ServiceDef[] = [
     lanes: ["nonprofit"],
   },
   {
-    id: "framework-kit",
-    phase: "05",
-    label: "Self-Guided System",
-    title: "Framework Kit Access",
-    tagline: "One-time purchase — proven systems, self-paced",
-    description:
-      "Access Impact Loop's complete storytelling framework, templates, and guides to implement at your own pace. Built for self-starters and teams who want a proven system without hands-on guidance.",
-    price: "Starting from $500",
-    icon: BookOpen,
-    cta: "Learn More",
-    ctaHref: "/bookings",
-    outcomes: [
-      "Story Standard guidelines",
-      "Story Types catalog",
-      "Intake prompts library",
-      "Implementation checklists",
-    ],
-    lanes: ["nonprofit"],
-  },
-  {
-    id: "system-setup",
-    phase: "06",
-    label: "Guided Implementation",
-    title: "System Setup (Pilot)",
-    tagline: "Project-based — build your storytelling infrastructure",
-    description:
-      "Work directly with Impact Loop to design and implement a storytelling system tailored to your organization's mission, reporting requirements, and stakeholder environment. Includes hands-on training, first story capture support, and a 90-day plan.",
-    price: "Starting from $3,000",
-    priceNote: "Project-based",
-    icon: Compass,
-    cta: "Book a Discovery Call",
-    ctaHref: "/bookings",
-    outcomes: [
-      "Custom framework adaptation",
-      "Team training sessions",
-      "First story capture support",
-      "90-day implementation plan",
-    ],
-    lanes: ["nonprofit"],
-  },
-  {
     id: "cinematic-films",
-    phase: "07",
+    phase: "04",
     label: "Flagship Production",
     title: "Cinematic Impact Films",
     tagline: "Project-based — your most credible story asset",
@@ -173,7 +115,7 @@ const allServices: ServiceDef[] = [
   },
   {
     id: "media-hub",
-    phase: "08",
+    phase: "05",
     label: "Always-On Platform",
     title: "Impact Media Hub",
     tagline: "Platform setup + monthly hosting — your story library",
@@ -189,7 +131,7 @@ const allServices: ServiceDef[] = [
   },
   {
     id: "comm-os",
-    phase: "09",
+    phase: "06",
     label: "Full-System Strategy",
     title: "Impact Communication OS",
     tagline: "Monthly retainer — end-to-end story system",
@@ -204,7 +146,7 @@ const allServices: ServiceDef[] = [
   },
   {
     id: "advisory",
-    phase: "10",
+    phase: "07",
     label: "Executive Partnership",
     title: "Strategic Advisory",
     tagline: "Monthly retainer — direct access to Rovonn",
@@ -219,7 +161,7 @@ const allServices: ServiceDef[] = [
   },
   {
     id: "tech-solutions",
-    phase: "11",
+    phase: "08",
     label: "Custom Technology",
     title: "Impact Technology Solutions",
     tagline: "Project-based — purpose-built platforms and tools",

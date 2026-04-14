@@ -3,6 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { setSEO, resetSEO } from "@/lib/seo";
+import founderPhoto from "@/assets/founder/rovonn.png";
 
 const About = () => {
   const ref = useRef(null);
@@ -161,6 +162,77 @@ const About = () => {
                   The result? An organization that doesn't just have content, but has a
                   library of proof that compounds in value over time.
                 </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Meet Rovonn */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative"
+            >
+              <div className="aspect-[4/5] rounded-sm overflow-hidden">
+                <img
+                  src={founderPhoto}
+                  alt="Rovonn Russell, Founder of Impact Loop"
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
+              <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-primary/10 rounded-sm -z-10" />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">
+                The Person Behind Impact Loop
+              </p>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-2">
+                Rovonn Russell
+              </h2>
+              <p className="text-xl text-muted-foreground font-serif italic mb-6">
+                Founder & Storytelling Director
+              </p>
+              <div className="space-y-4 text-impact-dark/70 leading-relaxed">
+                <p>
+                  With over a decade in documentary filmmaking and organizational
+                  communications, Rovonn built Impact Loop to solve a problem he
+                  kept seeing: organizations doing meaningful work but struggling
+                  to prove it in ways that earn real trust.
+                </p>
+                <p>
+                  His background spans healthcare, community development,
+                  corporate partnerships, and faith-based organizations across
+                  Canada and internationally. That range gives him a sharp eye for
+                  what makes a story hold up under scrutiny, whether the audience
+                  is a government funder, a corporate board, or a community that
+                  has been burned by empty promises before.
+                </p>
+                <p>
+                  Every client works directly with Rovonn. No account managers,
+                  no handoffs. The person who designs your story strategy is the
+                  same person who directs the shoot and oversees the edit.
+                </p>
+              </div>
+              <div className="mt-8">
+                <Link
+                  to="/bookings"
+                  className="inline-flex items-center gap-2 text-primary hover:text-secondary transition-colors duration-300 font-medium"
+                >
+                  Book a conversation with Rovonn
+                  <span className="text-lg">&rarr;</span>
+                </Link>
               </div>
             </motion.div>
           </div>

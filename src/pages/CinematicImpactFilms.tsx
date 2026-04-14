@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { setSEO, resetSEO } from "@/lib/seo";
 import { ArrowRight, Film, Scissors, Quote, Share2, Layers, Play } from "lucide-react";
 import Layout from "@/components/layout/Layout";
+import VimeoLightbox from "@/components/shared/VimeoLightbox";
 import RotatingWord from "@/components/home/RotatingWord";
 
 const fadeIn = {
@@ -16,8 +17,8 @@ const fadeIn = {
 };
 
 const deliverables = [
-  { icon: Film, title: "Flagship Impact Film", desc: "60–180 second cinematic documentary capturing real people and real outcomes" },
-  { icon: Scissors, title: "Cutdowns Pack", desc: "6–12 short-form edits optimized for LinkedIn, Instagram, and social" },
+  { icon: Film, title: "Flagship Impact Film", desc: "60\u2013180 second cinematic documentary capturing real people and real outcomes" },
+  { icon: Scissors, title: "Cutdowns Pack", desc: "6\u201312 short-form edits optimized for LinkedIn, Instagram, and social" },
   { icon: Quote, title: "Quote Clips", desc: "Standalone soundbites from interviews, ready for social and presentations" },
   { icon: Share2, title: "Partner-Ready Sharing Kit", desc: "Branded assets, thumbnails, and copy for partners and stakeholders to share" },
   { icon: Layers, title: "Impact Media Hub Add-on", desc: "Optional always-on media hub for ongoing story distribution" },
@@ -38,19 +39,21 @@ const processSteps = [
   { step: "05", title: "Deploy", desc: "Strategic deployment guidance for stakeholders, partners, and platforms." },
 ];
 
-const portfolioItems = [
-  { title: "Impact Story", image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&q=80" },
-  { title: "Program Highlight", image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&q=80" },
-  { title: "Partner Story", image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=80" },
-  { title: "Event Recap", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80" },
-  { title: "Testimonial", image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80" },
-  { title: "Community Initiative", image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80" },
+const selectedWork = [
+  { title: "EmployNext \u2014 Youth Trades Program", category: "Program Highlight", vimeoId: "1174716942" },
+  { title: "Black Creek \u2014 Black History Month", category: "Event Recap", vimeoId: "1174716851" },
+  { title: "Hair for Self-Esteem", category: "Impact Story", vimeoId: "1135409664" },
+  { title: "CafCan \u2014 Our People's Keeper", category: "Program Highlight", vimeoId: "1143331891" },
+  { title: "Lakeridge Health \u2014 I Belong", category: "Initiative", vimeoId: "1140641190" },
+  { title: "Reddit AI Search Event", category: "Event Recap", vimeoId: "1168847247" },
 ];
 
 const CinematicImpactFilms = () => {
+  const [lightboxVideo, setLightboxVideo] = useState<string | null>(null);
+
   useEffect(() => {
     setSEO({
-      title: "Cinematic Impact Films — Impact Loop",
+      title: "Cinematic Impact Films \u2014 Impact Loop",
       description: "Premium documentary-style video production for nonprofits, CSR teams, and changemakers. Films built to earn trust with donors, partners, and stakeholders.",
       ogType: "website",
     });
@@ -92,14 +95,14 @@ const CinematicImpactFilms = () => {
               Stories that Move{" "}<RotatingWord />{" "}Forward.
             </h1>
             <p className="text-white/70 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-              Cinematic, documentary-style films that capture real people and real outcomes — built to earn trust with donors, partners, employees, and stakeholders.
+              Cinematic, documentary-style films that capture real people and real outcomes, built to earn trust with donors, partners, employees, and stakeholders.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="#reel"
+                href="#selected-work"
                 className="btn-primary text-base inline-flex items-center gap-2"
               >
-                <Play className="w-4 h-4" /> Watch the Reel
+                <Play className="w-4 h-4" /> See Our Work
               </a>
               <Link
                 to="/bookings"
@@ -107,28 +110,6 @@ const CinematicImpactFilms = () => {
               >
                 Book a Storytelling Diagnostic
               </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Reel Preview */}
-      <section id="reel" className="py-24 bg-[hsl(var(--impact-dark))]">
-        <div className="container mx-auto px-6 max-w-4xl">
-          <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0} className="text-center mb-10">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4">The Reel</h2>
-            <p className="text-white/60 max-w-xl mx-auto">
-              Documentary, cinematic, human-first. Every frame tells a story rooted in real outcomes.
-            </p>
-          </motion.div>
-          <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1}>
-            <div className="aspect-video bg-[hsl(var(--impact-dark-lighter))] rounded-md border border-white/10 flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4 cursor-pointer hover:bg-white/20 transition-colors">
-                  <Play className="w-8 h-8 text-white ml-1" />
-                </div>
-                <p className="text-white/40 text-sm">Reel video — embed your Vimeo or YouTube link here</p>
-              </div>
             </div>
           </motion.div>
         </div>
@@ -216,34 +197,64 @@ const CinematicImpactFilms = () => {
         </div>
       </section>
 
-      {/* Portfolio Preview */}
-      <section className="py-24 section-dark">
+      {/* Selected Work — Vimeo autoplay previews */}
+      <section id="selected-work" className="py-24 section-dark">
         <div className="container mx-auto px-6">
           <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0} className="text-center mb-16">
             <p className="text-[hsl(var(--impact-blue))] text-xs font-semibold tracking-[0.3em] uppercase mb-4">Portfolio</p>
             <h2 className="font-serif text-3xl md:text-5xl font-bold text-white">Selected Work</h2>
           </motion.div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
-            {portfolioItems.map((item, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {selectedWork.map((item, i) => (
               <motion.div
-                key={item.title}
+                key={item.vimeoId}
                 variants={fadeIn}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
                 custom={i}
-                className="group relative aspect-video rounded-md overflow-hidden cursor-pointer"
+                className="group relative overflow-hidden rounded-xl cursor-pointer bg-[hsl(var(--impact-dark))]"
+                style={{ aspectRatio: "2.35 / 1" }}
+                onClick={() => setLightboxVideo(item.vimeoId)}
               >
-                <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                  <p className="text-white text-sm font-medium">{item.title}</p>
+                {/* Vimeo background embed — autoplay, looped, muted */}
+                <iframe
+                  src={`https://player.vimeo.com/video/${item.vimeoId}?background=1&autoplay=1&loop=1&muted=1`}
+                  className="absolute pointer-events-none"
+                  style={{
+                    border: 0,
+                    width: "140%",
+                    height: "140%",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                  }}
+                  allow="autoplay"
+                  title={`${item.title} preview`}
+                />
+
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-[hsl(var(--impact-dark))]/40 group-hover:bg-[hsl(var(--impact-dark))]/60 transition-colors duration-300" />
+
+                {/* Play button */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="w-14 h-14 rounded-full bg-primary/80 backdrop-blur-sm flex items-center justify-center">
+                    <Play className="w-6 h-6 text-primary-foreground ml-0.5" fill="white" />
+                  </div>
+                </div>
+
+                {/* Info overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-[hsl(var(--impact-dark))]/90 to-transparent">
+                  <span className="text-primary text-xs uppercase tracking-wider">{item.category}</span>
+                  <h3 className="font-serif text-base font-semibold text-white mt-1">{item.title}</h3>
                 </div>
               </motion.div>
             ))}
           </div>
           <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={3} className="text-center mt-10">
-            <Link to="/work" className="text-white/60 hover:text-white text-sm uppercase tracking-widest transition-colors">
-              View Full Portfolio →
+            <Link to="/work" className="text-white/60 hover:text-white text-sm uppercase tracking-widest transition-colors inline-flex items-center gap-2">
+              View Full Portfolio
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
         </div>
@@ -264,17 +275,18 @@ const CinematicImpactFilms = () => {
             <p className="text-muted-foreground max-w-xl mx-auto mb-8 text-lg">
               Start with a Storytelling Diagnostic. We'll audit your current story assets and map the fastest path to trust.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="#reel" className="btn-primary inline-flex items-center gap-2">
-                <Play className="w-4 h-4" /> Watch the Reel
-              </a>
-              <Link to="/bookings" className="btn-secondary">
-                Book a Storytelling Diagnostic
-              </Link>
-            </div>
+            <Link to="/bookings" className="btn-primary">
+              Book a Storytelling Diagnostic
+            </Link>
           </motion.div>
         </div>
       </section>
+
+      <VimeoLightbox
+        vimeoId={lightboxVideo}
+        isOpen={!!lightboxVideo}
+        onClose={() => setLightboxVideo(null)}
+      />
     </Layout>
   );
 };
