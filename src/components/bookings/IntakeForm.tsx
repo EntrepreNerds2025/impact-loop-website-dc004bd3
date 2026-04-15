@@ -66,7 +66,7 @@ const IntakeForm = ({ callType, callDurationMin, onComplete }: IntakeFormProps) 
         status: "intake_complete",
       };
 
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("booking_leads")
         .insert(payload)
         .select(
