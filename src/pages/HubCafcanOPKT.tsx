@@ -27,7 +27,7 @@ import cafcanFullLogo from "@/assets/hub/cafcan-opkt/logos/cafcan-full.png";
 /* ─── Sections nav ─── */
 const sections = [
   { id: "overview", label: "Overview", icon: BookOpen },
-  { id: "program", label: "Program", icon: BookOpen },
+  
   { id: "hero-video", label: "Main Film", icon: Video },
   { id: "testimonials", label: "Testimonials", icon: Quote },
   { id: "clips", label: "Testimonial Clips", icon: Play },
