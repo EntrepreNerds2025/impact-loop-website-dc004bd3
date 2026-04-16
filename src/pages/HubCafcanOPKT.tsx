@@ -654,7 +654,9 @@ const HubCafcanOPKT = () => {
                       initial="hidden"
                       whileInView="visible"
                       viewport={{ once: true }}
-                      className="bg-white border border-border rounded-xl p-4 md:p-5 flex flex-col items-center justify-center gap-3 min-h-32"
+                      className={`border border-border rounded-xl p-4 md:p-5 flex flex-col items-center justify-center gap-3 min-h-32 ${
+                        partner.darkBg ? "bg-gray-800" : "bg-white"
+                      }`}
                     >
                       <img
                         src={partner.logo}
