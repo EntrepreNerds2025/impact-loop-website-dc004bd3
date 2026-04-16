@@ -50,6 +50,8 @@ const App = () => (
           <Route path="/hub/corporate-demo" element={<HubBlackCreekBHM />} />
           <Route path="/hub/black-creek-bhm" element={<HubBlackCreekBHM />} />
           <Route path="/hub/cafcan-opkt" element={<HubCafcanOPKT />} />
+          <Route path="/hub/cafcan" element={<HubCafcanOPKT />} />
+          <Route path="/hub/cafcan-opkt" element={<HubCafcanOPKT />} />
           <Route path="/research" element={<Research />} />
           <Route path="/research/metrics-that-matter-2026" element={<ReportMetricsThatMatter />} />
           <Route path="/cinematic-impact-films" element={<CinematicImpactFilms />} />
