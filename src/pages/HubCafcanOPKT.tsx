@@ -205,14 +205,14 @@ const outcomes = [
 ];
 
 const partnerLogos = [
-  { name: "Up With Women", logo: upwithwomenLogo, darkBg: false },
-  { name: "CIBC", logo: cibcLogo, darkBg: false },
-  { name: "TDG", logo: tdgLogo, darkBg: false },
-  { name: "Impakt Foundation for Social Change", logo: impaktLogo, darkBg: false },
-  { name: "Homes First", logo: homesFirstLogo, darkBg: true },
-  { name: "Christie Refugee Welcome Centre", logo: christieLogo, darkBg: true },
-  { name: "City of Toronto", logo: torontoLogo, darkBg: true },
-  { name: "CAFCAN Social Services", logo: cafcanLogo, darkBg: false },
+  { name: "Up With Women", logo: upwithwomenLogo },
+  { name: "CIBC", logo: cibcLogo },
+  { name: "TDG", logo: tdgLogo },
+  { name: "Impakt Foundation for Social Change", logo: impaktLogo },
+  { name: "Homes First", logo: homesFirstLogo },
+  { name: "Christie Refugee Welcome Centre", logo: christieLogo },
+  { name: "City of Toronto", logo: torontoLogo },
+  { name: "CAFCAN Social Services", logo: cafcanFullLogo },
 ];
 
 const INITIAL_PHOTOS_VISIBLE = 12;
