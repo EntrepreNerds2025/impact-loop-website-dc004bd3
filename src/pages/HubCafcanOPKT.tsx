@@ -17,7 +17,7 @@ import MediaLightbox, { type MediaItem } from "@/components/shared/MediaLightbox
 import cafcanLogo from "@/assets/logos/cafcan.png";
 import upwithwomenLogo from "@/assets/hub/cafcan-opkt/logos/upwithwomen.jpg";
 import cibcLogo from "@/assets/hub/cafcan-opkt/logos/cibc.svg";
-import tdgLogo from "@/assets/hub/cafcan-opkt/logos/tdg.png";
+import tdgLogo from "@/assets/hub/cafcan-opkt/logos/tdg.webp";
 import impaktLogo from "@/assets/hub/cafcan-opkt/logos/impakt-foundation.png";
 import homesFirstLogo from "@/assets/hub/cafcan-opkt/logos/homes-first.png";
 import christieLogo from "@/assets/hub/cafcan-opkt/logos/christie-refugee.jpg";
@@ -207,7 +207,7 @@ const outcomes = [
 const partnerLogos = [
   { name: "Up With Women", logo: upwithwomenLogo },
   { name: "CIBC", logo: cibcLogo },
-  { name: "TDG", logo: tdgLogo },
+  { name: "TBDC", logo: tdgLogo },
   { name: "Impakt Foundation for Social Change", logo: impaktLogo },
   { name: "Homes First", logo: homesFirstLogo },
   { name: "Christie Refugee Welcome Centre", logo: christieLogo },
