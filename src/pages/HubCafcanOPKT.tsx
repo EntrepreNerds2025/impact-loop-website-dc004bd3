@@ -19,9 +19,10 @@ import upwithwomenLogo from "@/assets/hub/cafcan-opkt/logos/upwithwomen.jpg";
 import cibcLogo from "@/assets/hub/cafcan-opkt/logos/cibc.svg";
 import tdgLogo from "@/assets/hub/cafcan-opkt/logos/tdg.png";
 import impaktLogo from "@/assets/hub/cafcan-opkt/logos/impakt-foundation.png";
-import homesFirstLogo from "@/assets/hub/cafcan-opkt/logos/homes-first.svg";
-import christieLogo from "@/assets/hub/cafcan-opkt/logos/christie-refugee.png";
-import torontoLogo from "@/assets/hub/cafcan-opkt/logos/toronto.svg";
+import homesFirstLogo from "@/assets/hub/cafcan-opkt/logos/homes-first.png";
+import christieLogo from "@/assets/hub/cafcan-opkt/logos/christie-refugee.jpg";
+import torontoLogo from "@/assets/hub/cafcan-opkt/logos/toronto.png";
+import cafcanFullLogo from "@/assets/hub/cafcan-opkt/logos/cafcan-full.png";
 
 /* ─── Sections nav ─── */
 const sections = [
