@@ -14,6 +14,14 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import HubVideoClips from "@/components/hub/HubVideoClips";
 import PdfExportPreview from "@/components/hub/PdfExportPreview";
 import MediaLightbox, { type MediaItem } from "@/components/shared/MediaLightbox";
+import cafcanLogo from "@/assets/logos/cafcan.png";
+import upwithwomenLogo from "@/assets/hub/cafcan-opkt/logos/upwithwomen.jpg";
+import cibcLogo from "@/assets/hub/cafcan-opkt/logos/cibc.svg";
+import tdgLogo from "@/assets/hub/cafcan-opkt/logos/tdg.png";
+import impaktLogo from "@/assets/hub/cafcan-opkt/logos/impakt-foundation.png";
+import homesFirstLogo from "@/assets/hub/cafcan-opkt/logos/homes-first.svg";
+import christieLogo from "@/assets/hub/cafcan-opkt/logos/christie-refugee.png";
+import torontoLogo from "@/assets/hub/cafcan-opkt/logos/toronto.svg";
 
 /* ─── Sections nav ─── */
 const sections = [
@@ -193,6 +201,17 @@ const outcomes = [
   { value: "6", label: "Partner Locations" },
   { value: "150+", label: "Photos Captured" },
   { value: "1", label: "Job Fair Hosted" },
+];
+
+const partnerLogos = [
+  { name: "Up With Women", logo: upwithwomenLogo },
+  { name: "CIBC", logo: cibcLogo },
+  { name: "TDG", logo: tdgLogo },
+  { name: "Impakt Foundation for Social Change", logo: impaktLogo },
+  { name: "Homes First", logo: homesFirstLogo },
+  { name: "Christie Refugee Welcome Centre", logo: christieLogo },
+  { name: "City of Toronto", logo: torontoLogo },
+  { name: "CAFCAN Social Services", logo: cafcanLogo },
 ];
 
 const INITIAL_PHOTOS_VISIBLE = 12;
@@ -620,20 +639,31 @@ const HubCafcanOPKT = () => {
               </div>
             </section>
 
-            {/* 8. Partners (placeholder) */}
+            {/* 8. Partners */}
             <section id="partners" className="py-20 bg-background">
               <div className="container mx-auto px-6">
-                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-12 text-center">Partners</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                  {[
-                    { name: "CAFCAN Social Services", contribution: "Program design, delivery, and coordination across all cohort sessions", outcome: "7 cohort sessions delivered across multiple locations in the GTA" },
-                    { name: "Homes First Shelter", contribution: "Hosted Cohort 2 and Cohort 4 at their Scarborough location", outcome: "Provided safe, accessible space for asylum seekers in shelter" },
-                    { name: "Christie Refugee Welcome Centre", contribution: "Hosted Cohort 3 at their Toronto location", outcome: "Connected participants with additional settlement resources" },
-                  ].map((s) => (
-                    <motion.div key={s.name} variants={slideUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-card border border-border rounded-sm p-6 space-y-3">
-                      <h3 className="font-serif text-lg font-semibold text-foreground">{s.name}</h3>
-                      <p className="text-muted-foreground text-sm"><strong className="text-foreground">Contribution:</strong> {s.contribution}</p>
-                      <p className="text-muted-foreground text-sm"><strong className="text-foreground">Outcome:</strong> {s.outcome}</p>
+                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-4 text-center">Partners</h2>
+                <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12">
+                  Community and institutional partners helping deliver the OPKT program across the GTA.
+                </p>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+                  {partnerLogos.map((partner) => (
+                    <motion.div
+                      key={partner.name}
+                      variants={slideUp}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      className="bg-white border border-border rounded-xl p-4 md:p-5 flex flex-col items-center justify-center gap-3 min-h-32"
+                    >
+                      <img
+                        src={partner.logo}
+                        alt={`${partner.name} logo`}
+                        className="max-h-14 w-auto max-w-full object-contain"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <p className="text-foreground text-xs md:text-sm text-center leading-tight">{partner.name}</p>
                     </motion.div>
                   ))}
                 </div>
