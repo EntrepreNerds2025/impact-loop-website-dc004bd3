@@ -14,6 +14,7 @@ import NotFound from "./pages/NotFound";
 import ImpactMediaHub from "./pages/ImpactMediaHub";
 import HubExamples from "./pages/HubExamples";
 import HubBlackCreekBHM from "./pages/HubBlackCreekBHM";
+import HubCafcanOPKT from "./pages/HubCafcanOPKT";
 import Research from "./pages/Research";
 import ReportMetricsThatMatter from "./pages/ReportMetricsThatMatter";
 import CinematicImpactFilms from "./pages/CinematicImpactFilms";
@@ -48,6 +49,8 @@ const App = () => (
           <Route path="/hub/examples" element={<HubExamples />} />
           <Route path="/hub/corporate-demo" element={<HubBlackCreekBHM />} />
           <Route path="/hub/black-creek-bhm" element={<HubBlackCreekBHM />} />
+          <Route path="/hub/cafcan-opkt" element={<HubCafcanOPKT />} />
+          <Route path="/hub/cafcan" element={<HubCafcanOPKT />} />
           <Route path="/research" element={<Research />} />
           <Route path="/research/metrics-that-matter-2026" element={<ReportMetricsThatMatter />} />
           <Route path="/cinematic-impact-films" element={<CinematicImpactFilms />} />
