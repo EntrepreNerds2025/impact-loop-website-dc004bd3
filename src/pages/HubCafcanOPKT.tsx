@@ -27,7 +27,7 @@ import cafcanFullLogo from "@/assets/hub/cafcan-opkt/logos/cafcan-full.png";
 /* ─── Sections nav ─── */
 const sections = [
   { id: "overview", label: "Overview", icon: BookOpen },
-  { id: "program", label: "Program", icon: BookOpen },
+  
   { id: "hero-video", label: "Main Film", icon: Video },
   { id: "testimonials", label: "Testimonials", icon: Quote },
   { id: "clips", label: "Testimonial Clips", icon: Play },
@@ -291,7 +291,7 @@ const HubCafcanOPKT = () => {
   const [zipProgress, setZipProgress] = useState(0);
 
   const heroVimeoId = "1143331891";
-  const featuredYouTubeId = "lcdbgNcaMe8";
+  const featuredVimeoId = "1183558738";
 
   /* Get current tab's photos */
   const currentPhotos = useMemo(() => {
@@ -438,22 +438,6 @@ const HubCafcanOPKT = () => {
               </div>
             </section>
 
-            {/* 2. Program Pillars */}
-            <section id="program" className="py-16 md:py-20 bg-[hsl(var(--impact-cream))]">
-              <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
-                <h2 className="font-serif text-2xl md:text-5xl font-bold text-foreground mb-8 md:mb-12 text-center">Program Pillars</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                  {programPillars.map((d, idx) => (
-                    <div key={d.label} className="bg-white border border-border rounded-xl p-4 md:p-6 shadow-sm">
-                      <p className="text-impact-blue text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] md:tracking-widest mb-2">
-                        {String(idx + 1).padStart(2, "0")} &bull; {d.label}
-                      </p>
-                      <p className="text-foreground text-sm md:text-base leading-relaxed">{d.value}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
 
             {/* 3. Hero Video */}
             <section id="hero-video" className="section-dark py-20">
@@ -491,16 +475,25 @@ const HubCafcanOPKT = () => {
                 </p>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                  {/* Featured testimonial video (YouTube) */}
-                  <div className="relative overflow-hidden rounded-xl bg-black lg:mt-8" style={{ aspectRatio: "16 / 9" }}>
+                  {/* Featured testimonial video (Vimeo) */}
+                  <div
+                    className="group relative overflow-hidden rounded-xl cursor-pointer bg-black lg:mt-8"
+                    style={{ aspectRatio: "16 / 9" }}
+                    onClick={() => openVideo(featuredVimeoId)}
+                  >
                     <iframe
-                      src={`https://www.youtube.com/embed/${featuredYouTubeId}?rel=0&modestbranding=1`}
-                      className="absolute inset-0 w-full h-full"
-                      style={{ border: 0 }}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
+                      src={`https://player.vimeo.com/video/${featuredVimeoId}?background=1&autoplay=1&loop=1&muted=1`}
+                      className="absolute pointer-events-none"
+                      style={{ border: 0, width: "140%", height: "140%", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
+                      allow="autoplay"
                       title="Featured OPKT Participant Testimonial"
                     />
+                    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/60 transition-colors duration-300" />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="w-16 h-16 rounded-full bg-primary/80 backdrop-blur-sm flex items-center justify-center">
+                        <Play className="w-7 h-7 text-primary-foreground ml-1" fill="white" />
+                      </div>
+                    </div>
                   </div>
 
                   {/* Write-up */}
