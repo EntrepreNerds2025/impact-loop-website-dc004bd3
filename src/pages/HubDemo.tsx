@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   BookOpen, Video, Images, Quote, Handshake, FileDown, BarChart3,
@@ -101,11 +101,18 @@ const initiativeDetails = [
 ];
 
 const HubDemo = () => {
+  const location = useLocation();
+  const path = location.pathname.toLowerCase();
   const { toast } = useToast();
   const isMobile = useIsMobile();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  // Safety net: if a CAFCAN path is accidentally mapped to this legacy demo page, redirect to the real CAFCAN hub.
+  if (path.startsWith("/hub/cafcan") || path.includes("opkt")) {
+    return <Navigate to="/hub/story-cafcan" replace />;
+  }
 
   const handleDemoDownload = () => {
     toast({ title: "Demo Only", description: "This is a demo hub. Downloads are available in real hubs." });

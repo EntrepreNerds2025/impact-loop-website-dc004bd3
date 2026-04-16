@@ -49,12 +49,14 @@ const App = () => (
           <Route path="/hub/examples" element={<HubExamples />} />
           <Route path="/hub/corporate-demo" element={<HubBlackCreekBHM />} />
           <Route path="/hub/black-creek-bhm" element={<HubBlackCreekBHM />} />
-          <Route path="/hub/cafcan-opkt" element={<Navigate to="/hub/cafcan" replace />} />
-          <Route path="/hub/cafcan" element={<HubCafcanOPKT />} />
-          <Route path="/hub/cafcan/*" element={<HubCafcanOPKT />} />
-          <Route path="/hub/cafcan-opkt/*" element={<Navigate to="/hub/cafcan" replace />} />
-          <Route path="/hub/cafcan-opkt-hub" element={<HubCafcanOPKT />} />
-          <Route path="/hub/cafcan-hub" element={<HubCafcanOPKT />} />
+          <Route path="/hub/story-cafcan" element={<HubCafcanOPKT />} />
+          <Route path="/hub/story-cafcan/*" element={<HubCafcanOPKT />} />
+          <Route path="/hub/cafcan-opkt" element={<Navigate to="/hub/story-cafcan" replace />} />
+          <Route path="/hub/cafcan" element={<Navigate to="/hub/story-cafcan" replace />} />
+          <Route path="/hub/cafcan/*" element={<Navigate to="/hub/story-cafcan" replace />} />
+          <Route path="/hub/cafcan-opkt/*" element={<Navigate to="/hub/story-cafcan" replace />} />
+          <Route path="/hub/cafcan-opkt-hub" element={<Navigate to="/hub/story-cafcan" replace />} />
+          <Route path="/hub/cafcan-hub" element={<Navigate to="/hub/story-cafcan" replace />} />
           <Route path="/research" element={<Research />} />
           <Route path="/research/metrics-that-matter-2026" element={<ReportMetricsThatMatter />} />
           <Route path="/cinematic-impact-films" element={<CinematicImpactFilms />} />

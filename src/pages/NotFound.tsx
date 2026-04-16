@@ -9,8 +9,8 @@ const NotFound = () => {
     console.error("404 Error: User attempted to access non-existent route:", location.pathname);
   }, [location.pathname]);
 
-  if (path.startsWith("/hub/cafcan-opkt") || path.startsWith("/hub/cafcan-hub") || path.startsWith("/hub/cafcan-opkt-hub")) {
-    return <Navigate to="/hub/cafcan" replace />;
+  if (path.startsWith("/hub/cafcan") || path.includes("opkt")) {
+    return <Navigate to="/hub/story-cafcan" replace />;
   }
 
   return (
