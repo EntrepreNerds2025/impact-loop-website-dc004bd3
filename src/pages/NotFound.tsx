@@ -1,12 +1,17 @@
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
 const NotFound = () => {
   const location = useLocation();
+  const path = location.pathname.toLowerCase();
 
   useEffect(() => {
     console.error("404 Error: User attempted to access non-existent route:", location.pathname);
   }, [location.pathname]);
+
+  if (path.startsWith("/hub/cafcan-opkt") || path.startsWith("/hub/cafcan-hub") || path.startsWith("/hub/cafcan-opkt-hub")) {
+    return <Navigate to="/hub/cafcan" replace />;
+  }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted">

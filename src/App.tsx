@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Work from "./pages/Work";
@@ -49,8 +49,10 @@ const App = () => (
           <Route path="/hub/examples" element={<HubExamples />} />
           <Route path="/hub/corporate-demo" element={<HubBlackCreekBHM />} />
           <Route path="/hub/black-creek-bhm" element={<HubBlackCreekBHM />} />
-          <Route path="/hub/cafcan-opkt" element={<HubCafcanOPKT />} />
+          <Route path="/hub/cafcan-opkt" element={<Navigate to="/hub/cafcan" replace />} />
           <Route path="/hub/cafcan" element={<HubCafcanOPKT />} />
+          <Route path="/hub/cafcan/*" element={<HubCafcanOPKT />} />
+          <Route path="/hub/cafcan-opkt/*" element={<Navigate to="/hub/cafcan" replace />} />
           <Route path="/hub/cafcan-opkt-hub" element={<HubCafcanOPKT />} />
           <Route path="/hub/cafcan-hub" element={<HubCafcanOPKT />} />
           <Route path="/research" element={<Research />} />
