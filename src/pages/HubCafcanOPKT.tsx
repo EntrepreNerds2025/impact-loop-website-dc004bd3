@@ -655,9 +655,7 @@ const HubCafcanOPKT = () => {
                       initial="hidden"
                       whileInView="visible"
                       viewport={{ once: true }}
-                      className={`border border-border rounded-xl p-4 md:p-5 flex flex-col items-center justify-center gap-3 min-h-32 ${
-                        partner.darkBg ? "bg-gray-800" : "bg-white"
-                      }`}
+                      className="bg-white border border-border rounded-xl p-4 md:p-5 flex flex-col items-center justify-center gap-3 min-h-32"
                     >
                       <img
                         src={partner.logo}
@@ -666,7 +664,7 @@ const HubCafcanOPKT = () => {
                         loading="lazy"
                         decoding="async"
                       />
-                      <p className={`text-xs md:text-sm text-center leading-tight ${partner.darkBg ? "text-white" : "text-foreground"}`}>{partner.name}</p>
+                      <p className="text-foreground text-xs md:text-sm text-center leading-tight">{partner.name}</p>
                     </motion.div>
                   ))}
                 </div>
