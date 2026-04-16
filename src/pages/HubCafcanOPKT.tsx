@@ -21,7 +21,7 @@ const sections = [
   { id: "program", label: "Program", icon: BookOpen },
   { id: "hero-video", label: "Main Film", icon: Video },
   { id: "testimonials", label: "Testimonials", icon: Quote },
-  { id: "clips", label: "Session Clips", icon: Play },
+  { id: "clips", label: "Testimonial Clips", icon: Play },
   { id: "photos", label: "Photos", icon: Images },
   { id: "voices", label: "Voices", icon: Quote },
   { id: "partners", label: "Partners", icon: Handshake },
@@ -45,6 +45,16 @@ const cohortTabs: CohortTab[] = [
   { id: "cohort-4", label: "Cohort 4", location: "Homes First Shelter" },
   { id: "cohort-5", label: "Cohort 5", location: "Skilled Trades" },
   { id: "cohort-6", label: "Cohort 6", location: "Entrepreneurship Module" },
+];
+
+const clipTabs: CohortTab[] = [
+  { id: "featured", label: "Featured", location: "" },
+  { id: "cohort-1", label: "Session 1", location: "CAFCAN Social Services" },
+  { id: "cohort-2", label: "Session 2", location: "Homes First Shelter" },
+  { id: "cohort-3", label: "Session 3", location: "Christie Refugee Welcome Centre" },
+  { id: "cohort-4", label: "Session 4", location: "Homes First Shelter" },
+  { id: "cohort-5", label: "Session 5", location: "Skilled Trades" },
+  { id: "cohort-6", label: "Session 6", location: "Entrepreneurship Module" },
 ];
 
 /* ─── Photo imports (auto-discovered per cohort) ─── */
@@ -123,8 +133,38 @@ interface ClipDef {
 }
 
 const clips: ClipDef[] = [
-  // Will be populated when Rovonn uploads to Vimeo
-  // Example: { title: "Participant Testimonial", vimeoId: "XXXXXXX", cohort: "cohort-1" },
+  { title: "Session 1 - Testimonial 1", vimeoId: "1183558854", cohort: "cohort-1" },
+  { title: "Session 1 - Testimonial 2", vimeoId: "1183558804", cohort: "cohort-1" },
+  { title: "Session 1 - Testimonial 3", vimeoId: "1183558844", cohort: "cohort-1" },
+
+  { title: "Session 2 - Testimonial 1", vimeoId: "1183558964", cohort: "cohort-2" },
+  { title: "Session 2 - Testimonial 2", vimeoId: "1183558944", cohort: "cohort-2" },
+  { title: "Session 2 - Testimonial 3", vimeoId: "1183558918", cohort: "cohort-2" },
+  { title: "Session 2 - Testimonial 4", vimeoId: "1183558892", cohort: "cohort-2" },
+  { title: "Session 2 - Testimonial 5", vimeoId: "1183558872", cohort: "cohort-2" },
+
+  { title: "Session 3 - Testimonial 1", vimeoId: "1183604690", cohort: "cohort-3" },
+  { title: "Session 3 - Testimonial 2", vimeoId: "1183604705", cohort: "cohort-3" },
+  { title: "Session 3 - Testimonial 3", vimeoId: "1183604763", cohort: "cohort-3" },
+  { title: "Session 3 - Testimonial 4", vimeoId: "1183604733", cohort: "cohort-3" },
+  { title: "Session 3 - Testimonial 5", vimeoId: "1183604782", cohort: "cohort-3" },
+
+  { title: "Session 4 - Testimonial 1", vimeoId: "1183559430", cohort: "cohort-4" },
+  { title: "Session 4 - Testimonial 2", vimeoId: "1183559484", cohort: "cohort-4" },
+  { title: "Session 4 - Testimonial 3", vimeoId: "1183559402", cohort: "cohort-4" },
+  { title: "Session 4 - Testimonial 4", vimeoId: "1183559448", cohort: "cohort-4" },
+  { title: "Session 4 - Testimonial 5", vimeoId: "1183559470", cohort: "cohort-4" },
+  { title: "Session 4 - Testimonial 6", vimeoId: "1183559379", cohort: "cohort-4" },
+
+  { title: "Session 5 - Testimonial 1", vimeoId: "1183559582", cohort: "cohort-5" },
+  { title: "Session 5 - Testimonial 2", vimeoId: "1183559561", cohort: "cohort-5" },
+  { title: "Session 5 - Testimonial 3", vimeoId: "1183559543", cohort: "cohort-5" },
+  { title: "Session 5 - Testimonial 4", vimeoId: "1183559509", cohort: "cohort-5" },
+
+  { title: "Session 6 - Testimonial 1", vimeoId: "1183559671", cohort: "cohort-6" },
+  { title: "Session 6 - Testimonial 2", vimeoId: "1183559635", cohort: "cohort-6" },
+  { title: "Session 6 - Testimonial 3", vimeoId: "1183559658", cohort: "cohort-6" },
+  { title: "Session 6 - Testimonial 4", vimeoId: "1183559617", cohort: "cohort-6" },
 ];
 
 /* ─── Program pillars ─── */
@@ -432,7 +472,7 @@ const HubCafcanOPKT = () => {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
                   {/* Featured testimonial video (YouTube) */}
-                  <div className="relative overflow-hidden rounded-xl bg-black" style={{ aspectRatio: "16 / 9" }}>
+                  <div className="relative overflow-hidden rounded-xl bg-black lg:mt-8" style={{ aspectRatio: "16 / 9" }}>
                     <iframe
                       src={`https://www.youtube.com/embed/${featuredYouTubeId}?rel=0&modestbranding=1`}
                       className="absolute inset-0 w-full h-full"
@@ -445,12 +485,14 @@ const HubCafcanOPKT = () => {
 
                   {/* Write-up */}
                   <div className="flex flex-col justify-center">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                      <Quote className="w-6 h-6 text-primary" />
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                        <Quote className="w-6 h-6 text-primary" />
+                      </div>
+                      <h3 className="font-serif text-2xl font-bold text-foreground">
+                        Why These Stories Matter
+                      </h3>
                     </div>
-                    <h3 className="font-serif text-2xl font-bold text-foreground mb-4">
-                      Why These Stories Matter
-                    </h3>
                     <div className="space-y-4 text-muted-foreground leading-relaxed">
                       <p>
                         Every participant in the OPKT program arrived in Canada carrying uncertainty, resilience, and a story that deserves to be heard. These testimonials are not promotional content. They are real voices from real people sharing what it meant to find community, build skills, and regain confidence during one of the most difficult transitions of their lives.
@@ -464,15 +506,15 @@ const HubCafcanOPKT = () => {
               </div>
             </section>
 
-            {/* 5. Session Video Clips (tabbed, awaiting Vimeo uploads) */}
+            {/* 5. Testimonial Clips */}
             <section id="clips" className="py-20 bg-[hsl(var(--impact-cream))]">
               <div className="container mx-auto px-6">
-                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-4 text-center">Session Clips</h2>
+                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-4 text-center">Testimonial Clips</h2>
                 <p className="text-muted-foreground text-center max-w-xl mx-auto mb-8">
-                  Video highlights from each cohort session. Select a session to explore.
+                  Testimonial clips from each session. Select a session to explore participant stories.
                 </p>
 
-                <LightTabBar tabs={cohortTabs} activeTab={clipTab} onSelect={setClipTab} />
+                <LightTabBar tabs={clipTabs} activeTab={clipTab} onSelect={setClipTab} />
 
                 {currentClips.length > 0 ? (
                   <HubVideoClips
