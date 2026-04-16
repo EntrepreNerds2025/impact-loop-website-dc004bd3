@@ -665,7 +665,7 @@ const HubCafcanOPKT = () => {
                         loading="lazy"
                         decoding="async"
                       />
-                      <p className="text-foreground text-xs md:text-sm text-center leading-tight">{partner.name}</p>
+                      <p className={`text-xs md:text-sm text-center leading-tight ${partner.darkBg ? "text-white" : "text-foreground"}`}>{partner.name}</p>
                     </motion.div>
                   ))}
                 </div>
