@@ -204,14 +204,14 @@ const outcomes = [
 ];
 
 const partnerLogos = [
-  { name: "Up With Women", logo: upwithwomenLogo },
-  { name: "CIBC", logo: cibcLogo },
-  { name: "TDG", logo: tdgLogo },
-  { name: "Impakt Foundation for Social Change", logo: impaktLogo },
-  { name: "Homes First", logo: homesFirstLogo },
-  { name: "Christie Refugee Welcome Centre", logo: christieLogo },
-  { name: "City of Toronto", logo: torontoLogo },
-  { name: "CAFCAN Social Services", logo: cafcanLogo },
+  { name: "Up With Women", logo: upwithwomenLogo, darkBg: false },
+  { name: "CIBC", logo: cibcLogo, darkBg: false },
+  { name: "TDG", logo: tdgLogo, darkBg: false },
+  { name: "Impakt Foundation for Social Change", logo: impaktLogo, darkBg: false },
+  { name: "Homes First", logo: homesFirstLogo, darkBg: true },
+  { name: "Christie Refugee Welcome Centre", logo: christieLogo, darkBg: true },
+  { name: "City of Toronto", logo: torontoLogo, darkBg: true },
+  { name: "CAFCAN Social Services", logo: cafcanLogo, darkBg: false },
 ];
 
 const INITIAL_PHOTOS_VISIBLE = 12;
@@ -654,7 +654,9 @@ const HubCafcanOPKT = () => {
                       initial="hidden"
                       whileInView="visible"
                       viewport={{ once: true }}
-                      className="bg-white border border-border rounded-xl p-4 md:p-5 flex flex-col items-center justify-center gap-3 min-h-32"
+                      className={`border border-border rounded-xl p-4 md:p-5 flex flex-col items-center justify-center gap-3 min-h-32 ${
+                        partner.darkBg ? "bg-gray-800" : "bg-white"
+                      }`}
                     >
                       <img
                         src={partner.logo}
@@ -663,7 +665,7 @@ const HubCafcanOPKT = () => {
                         loading="lazy"
                         decoding="async"
                       />
-                      <p className="text-foreground text-xs md:text-sm text-center leading-tight">{partner.name}</p>
+                      <p className={`text-xs md:text-sm text-center leading-tight ${partner.darkBg ? "text-white" : "text-foreground"}`}>{partner.name}</p>
                     </motion.div>
                   ))}
                 </div>
