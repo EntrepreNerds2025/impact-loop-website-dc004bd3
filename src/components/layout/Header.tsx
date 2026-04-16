@@ -17,15 +17,25 @@ const resourcesDropdown = [
   { href: "/research", label: "Research" },
 ];
 
+// Media Hubs — add corporate hub below when ready
+const mediaHubsDropdown = [
+  { href: "/hub/black-creek-bhm", label: "Black Creek BHM Hub" },
+  { href: "/hub/cafcan-opkt", label: "CAFCAN OPKT Hub" },
+  // { href: "/hub/corporate-demo", label: "Corporate Impact Hub" },
+];
+
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
+  const [isHubsOpen, setIsHubsOpen] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
   const [isMobileResourcesOpen, setIsMobileResourcesOpen] = useState(false);
+  const [isMobileHubsOpen, setIsMobileHubsOpen] = useState(false);
   const servicesRef = useRef<HTMLDivElement>(null);
   const resourcesRef = useRef<HTMLDivElement>(null);
+  const hubsRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -40,8 +50,10 @@ const Header = () => {
     setIsMobileMenuOpen(false);
     setIsServicesOpen(false);
     setIsResourcesOpen(false);
+    setIsHubsOpen(false);
     setIsMobileServicesOpen(false);
     setIsMobileResourcesOpen(false);
+    setIsMobileHubsOpen(false);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -51,6 +63,9 @@ const Header = () => {
       }
       if (resourcesRef.current && !resourcesRef.current.contains(e.target as Node)) {
         setIsResourcesOpen(false);
+      }
+      if (hubsRef.current && !hubsRef.current.contains(e.target as Node)) {
+        setIsHubsOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -68,6 +83,8 @@ const Header = () => {
     location.pathname.startsWith("/services");
 
   const isResourcesActive = location.pathname.startsWith("/research") || location.pathname.startsWith("/blog");
+
+  const isHubsActive = location.pathname.startsWith("/hub");
 
   const DesktopDropdown = ({
     items,
@@ -224,6 +241,15 @@ const Header = () => {
             isActive={isResourcesActive}
           />
 
+          <DesktopDropdown
+            items={mediaHubsDropdown}
+            containerRef={hubsRef}
+            isOpen={isHubsOpen}
+            setOpen={setIsHubsOpen}
+            label="Media Hubs"
+            isActive={isHubsActive}
+          />
+
           <Link to="/about" className={navLinkClass(location.pathname === "/about")}>About</Link>
           <Link to="/contact" className={navLinkClass(location.pathname === "/contact")}>Contact</Link>
 
@@ -259,6 +285,7 @@ const Header = () => {
 
               <MobileAccordion items={servicesDropdown} isOpen={isMobileServicesOpen} setOpen={setIsMobileServicesOpen} label="Services" />
               <MobileAccordion items={resourcesDropdown} isOpen={isMobileResourcesOpen} setOpen={setIsMobileResourcesOpen} label="Resources" />
+              <MobileAccordion items={mediaHubsDropdown} isOpen={isMobileHubsOpen} setOpen={setIsMobileHubsOpen} label="Media Hubs" />
 
               <Link to="/about" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium py-2 text-foreground/60 hover:text-foreground">About</Link>
               <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium py-2 text-foreground/60 hover:text-foreground">Contact</Link>
