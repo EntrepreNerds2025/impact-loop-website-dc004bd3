@@ -207,7 +207,7 @@ const outcomes = [
 const partnerLogos = [
   { name: "Up With Women", logo: upwithwomenLogo },
   { name: "CIBC", logo: cibcLogo },
-  { name: "TDG", logo: tdgLogo },
+  { name: "TBDC", logo: tdgLogo },
   { name: "Impakt Foundation for Social Change", logo: impaktLogo },
   { name: "Homes First", logo: homesFirstLogo },
   { name: "Christie Refugee Welcome Centre", logo: christieLogo },
