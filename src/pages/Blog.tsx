@@ -10,7 +10,7 @@ import { setSEO, resetSEO } from "@/lib/seo";
 const Blog = () => {
   useEffect(() => {
     setSEO({
-      title: "Blog — Impact Loop",
+      title: "Blog: Impact Loop",
       description:
         "Insights on impact communications, nonprofit storytelling, and building trust through media.",
       ogType: "website",

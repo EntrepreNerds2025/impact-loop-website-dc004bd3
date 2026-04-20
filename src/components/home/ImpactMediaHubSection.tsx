@@ -6,7 +6,7 @@ import { slideFromLeft, slideFromRight, staggerContainer, slideUp } from "@/hook
 const features = [
   { icon: Globe, label: "A shareable media page your stakeholders can explore and share" },
   { icon: FileDown, label: "Downloadable reports, partner kits, and media packs" },
-  { icon: Images, label: "Photos, quotes, video clips, and partner context — all in one place" },
+  { icon: Images, label: "Photos, quotes, video clips, and partner context, all in one place" },
 ];
 
 const ImpactMediaHubSection = () => {
@@ -57,9 +57,9 @@ const ImpactMediaHubSection = () => {
               <div className="bg-impact-dark p-6 text-center">
                 <p className="text-white/50 text-xs uppercase tracking-widest mb-2">Featured Hub</p>
                 <h3 className="font-serif text-2xl text-white font-semibold">
-                  Black Creek — Black History Month
+                  Black Creek, Black History Month
                 </h3>
-                <p className="text-white/60 text-sm mt-1">Vision boards, community cooking, movie night — all documented.</p>
+                <p className="text-white/60 text-sm mt-1">Vision boards, community cooking, movie night, all documented.</p>
               </div>
               <div className="p-6 grid grid-cols-3 gap-4 text-center">
                 {[

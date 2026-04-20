@@ -19,7 +19,7 @@ const ServicesPreviewSection = () => {
     <section ref={ref} className="py-24 bg-[hsl(var(--impact-dark))] text-white overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left — Content */}
+          {/* Left, Content */}
           <motion.div
             variants={staggerContainer}
             initial="hidden"
@@ -65,7 +65,7 @@ const ServicesPreviewSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right — Image */}
+          {/* Right, Image */}
           <motion.div
             variants={convergeFromRight}
             initial="hidden"

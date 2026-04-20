@@ -551,7 +551,7 @@ const HubCafcanOPKT = () => {
               </div>
             </section>
 
-            {/* 6. Photo Gallery (tabbed) — DARK */}
+            {/* 6. Photo Gallery (tabbed), DARK */}
             <section id="photos" className="section-dark py-20">
               <div className="container mx-auto px-6">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
@@ -681,7 +681,7 @@ const HubCafcanOPKT = () => {
               </div>
             </section>
 
-            {/* 10. Quick Outcomes — DARK */}
+            {/* 10. Quick Outcomes, DARK */}
             <section id="outcomes" className="section-dark py-20">
               <div className="container mx-auto px-6">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-12 text-center">Quick Outcomes</h2>

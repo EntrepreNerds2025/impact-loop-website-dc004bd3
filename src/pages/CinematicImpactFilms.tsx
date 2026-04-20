@@ -197,7 +197,7 @@ const CinematicImpactFilms = () => {
         </div>
       </section>
 
-      {/* Selected Work — Vimeo autoplay previews */}
+      {/* Selected Work, Vimeo autoplay previews */}
       <section id="selected-work" className="py-24 section-dark">
         <div className="container mx-auto px-6">
           <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0} className="text-center mb-16">
@@ -217,7 +217,7 @@ const CinematicImpactFilms = () => {
                 style={{ aspectRatio: "2.35 / 1" }}
                 onClick={() => setLightboxVideo(item.vimeoId)}
               >
-                {/* Vimeo background embed — autoplay, looped, muted */}
+                {/* Vimeo background embed, autoplay, looped, muted */}
                 <iframe
                   src={`https://player.vimeo.com/video/${item.vimeoId}?background=1&autoplay=1&loop=1&muted=1`}
                   className="absolute pointer-events-none"

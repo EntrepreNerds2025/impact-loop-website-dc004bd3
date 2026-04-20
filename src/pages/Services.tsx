@@ -50,7 +50,7 @@ const allServices: ServiceDef[] = [
     phase: "01",
     label: "Start Here",
     title: "Impact Story Diagnostic",
-    tagline: "Free — understand where you are",
+    tagline: "Free: understand where you are",
     description:
       "A guided assessment that surfaces your strongest story opportunities, gaps in your current communications, and the clearest path to credibility with funders and stakeholders.",
     investment: "Complimentary",
@@ -65,7 +65,7 @@ const allServices: ServiceDef[] = [
     phase: "02",
     label: "Ongoing Content",
     title: "Impact Content Engine",
-    tagline: "Monthly retainer — consistent story output",
+    tagline: "Monthly retainer: consistent story output",
     description:
       "A full content production system built around your existing story assets. Cutdowns, repurposed testimonials, program highlights, and social-ready clips produced monthly so your mission stays visible across every stakeholder channel.",
     icon: Layers,
@@ -78,7 +78,7 @@ const allServices: ServiceDef[] = [
     phase: "03",
     label: "Build Capacity",
     title: "Workshops & Training",
-    tagline: "One-time or recurring — in-house storytelling skills",
+    tagline: "One-time or recurring: in-house storytelling skills",
     description:
       "Equip your team with the frameworks, interview techniques, and content standards to identify and capture impact stories on an ongoing basis without relying on external production every time.",
     icon: Users,
@@ -97,9 +97,9 @@ const allServices: ServiceDef[] = [
     phase: "04",
     label: "Signature Production",
     title: "Signature Productions",
-    tagline: "Nonprofit flagship tier — for galas, capital campaigns, and legacy moments",
+    tagline: "Nonprofit flagship tier: for galas, capital campaigns, and legacy moments",
     description:
-      "Cinema-grade productions built for the moments that define a nonprofit's decade — gala premieres, capital campaign launches, anniversary celebrations, and major funder premieres. A full creative team, original score, broadcast-grade motion graphics, archival integration, and cinema-grade finishing — engineered to move a room of donors and keep earning value in every funder conversation that follows.",
+      "Cinema-grade productions built for the moments that define a nonprofit's decade, gala premieres, capital campaign launches, anniversary celebrations, and major funder premieres. A full creative team, original score, broadcast-grade motion graphics, archival integration, and cinema-grade finishing, engineered to move a room of donors and keep earning value in every funder conversation that follows.",
     icon: Award,
     cta: "Explore Signature Productions",
     ctaHref: "/signature-production",
@@ -121,9 +121,9 @@ const allServices: ServiceDef[] = [
     phase: "05",
     label: "Corporate Flagship",
     title: "Cinematic Impact Films",
-    tagline: "Corporate flagship tier — brand films, ESG stories, and stakeholder trust assets",
+    tagline: "Corporate flagship tier: brand films, ESG stories, and stakeholder trust assets",
     description:
-      "Documentary-style brand and impact films engineered for corporate audiences — investors, boards, employees, partners, and the public. We capture real people, real outcomes, and real work with the production quality that earns trust from institutional stakeholders. Built to anchor ESG reports, investor communications, recruitment narratives, and corporate social impact storytelling for years.",
+      "Documentary-style brand and impact films engineered for corporate audiences, investors, boards, employees, partners, and the public. We capture real people, real outcomes, and real work with the production quality that earns trust from institutional stakeholders. Built to anchor ESG reports, investor communications, recruitment narratives, and corporate social impact storytelling for years.",
     icon: Video,
     cta: "See Our Work",
     ctaHref: "/cinematic-impact-films",
@@ -144,7 +144,7 @@ const allServices: ServiceDef[] = [
     phase: "06",
     label: "Always-On Platform",
     title: "Impact Media Hub",
-    tagline: "Platform setup + monthly hosting — your story library",
+    tagline: "Platform setup + monthly hosting: your story library",
     description:
       "A branded, purpose-built platform that houses all your impact stories, makes them searchable for stakeholders, and lets you deploy the right story to the right audience without manual effort.",
     icon: Globe,
@@ -158,7 +158,7 @@ const allServices: ServiceDef[] = [
     phase: "07",
     label: "Full-System Strategy",
     title: "Impact Communication OS",
-    tagline: "Monthly retainer — end-to-end story system",
+    tagline: "Monthly retainer: end-to-end story system",
     description:
       "A complete operating system for organizational storytelling. Covers production, content strategy, stakeholder deployment, funder-facing assets, and internal alignment. For organizations ready to make storytelling a core operational function.",
     icon: Layers,
@@ -172,7 +172,7 @@ const allServices: ServiceDef[] = [
     phase: "08",
     label: "Executive Partnership",
     title: "Strategic Advisory",
-    tagline: "Monthly retainer — direct access to Rovonn",
+    tagline: "Monthly retainer: direct access to Rovonn",
     description:
       "Direct advisory partnership with Rovonn Russell for founders, CEOs, and communications leads navigating complex storytelling challenges. Covers brand positioning, stakeholder strategy, media presence, and organizational trust-building.",
     icon: MessageSquare,
@@ -186,7 +186,7 @@ const allServices: ServiceDef[] = [
     phase: "09",
     label: "Custom Technology",
     title: "Impact Technology Solutions",
-    tagline: "Project-based — purpose-built platforms and tools",
+    tagline: "Project-based: purpose-built platforms and tools",
     description:
       "Custom apps, platforms, and software tools built to help your organization operate more efficiently and deliver impact at scale. AI-accelerated development means solutions that once required large teams and long timelines can now be built in weeks.",
     icon: Monitor,
@@ -194,7 +194,7 @@ const allServices: ServiceDef[] = [
     ctaHref: "/bookings",
     outcomes: [
       "Custom app or platform tailored to your workflows",
-      "AI-powered development — weeks, not years",
+      "AI-powered development, weeks, not years",
       "Ongoing support and iteration",
       "Integration with your existing systems",
     ],
@@ -229,7 +229,7 @@ const EmployNextPreview = () => (
       </div>
     </div>
     <div className="absolute bottom-3 left-3 right-3">
-      <span className="text-white/60 text-xs">EmployNext — Youth Trades Program</span>
+      <span className="text-white/60 text-xs">EmployNext, Youth Trades Program</span>
     </div>
   </div>
 );
@@ -238,7 +238,7 @@ const MediaHubPhoto = () => (
   <div className="rounded-lg overflow-hidden" style={{ aspectRatio: "16 / 10" }}>
     <img
       src={blackCreekPhoto}
-      alt="Black Creek community event — Impact Media Hub example"
+      alt="Black Creek community event, Impact Media Hub example"
       className="w-full h-full object-cover"
       loading="lazy"
     />
@@ -249,7 +249,7 @@ const AdvisoryPhoto = () => (
   <div className="rounded-lg overflow-hidden" style={{ aspectRatio: "4 / 3" }}>
     <img
       src={founderPhoto}
-      alt="Rovonn Russell — Strategic Advisory"
+      alt="Rovonn Russell, Strategic Advisory"
       className="w-full h-full object-cover object-top"
       loading="lazy"
     />
@@ -486,7 +486,7 @@ const Services = () => {
 
   useEffect(() => {
     setSEO({
-      title: "Services — Impact Loop",
+      title: "Services: Impact Loop",
       description:
         "From free diagnostics to cinematic impact films and custom technology. Choose the storytelling pathway that matches where your organization is and where it needs to go.",
       ogType: "website",

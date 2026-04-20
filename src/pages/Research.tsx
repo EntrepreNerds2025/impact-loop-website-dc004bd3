@@ -104,7 +104,7 @@ const ReportCard = ({ report, onDownload }: { report: ReportData; onDownload: (s
 const Research = () => {
   useEffect(() => {
     setSEO({
-      title: "Research & Reports — Impact Loop",
+      title: "Research & Reports: Impact Loop",
       description: "Original research on impact communications, nonprofit storytelling, and building trust through media.",
       ogType: "website",
     });

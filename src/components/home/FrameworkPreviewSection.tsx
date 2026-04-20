@@ -18,7 +18,7 @@ const FrameworkPreviewSection = () => {
     <section ref={ref} className="py-24 section-dark overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left — Image */}
+          {/* Left, Image */}
           <motion.div
             variants={convergeFromLeft}
             initial="hidden"
@@ -35,7 +35,7 @@ const FrameworkPreviewSection = () => {
             </div>
           </motion.div>
 
-          {/* Right — Content */}
+          {/* Right, Content */}
           <motion.div
             variants={staggerContainer}
             initial="hidden"

@@ -17,7 +17,7 @@ const hubs = [
 const HubExamples = () => {
   useEffect(() => {
     setSEO({
-      title: "Hub Examples — Impact Loop",
+      title: "Hub Examples: Impact Loop",
       description: "Explore demo Impact Media Hubs built for nonprofits and corporate CSR initiatives.",
       ogType: "website",
     });

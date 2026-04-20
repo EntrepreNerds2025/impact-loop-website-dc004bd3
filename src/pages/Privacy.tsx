@@ -5,7 +5,7 @@ import { setSEO, resetSEO } from "@/lib/seo";
 const Privacy = () => {
   useEffect(() => {
     setSEO({
-      title: "Privacy Policy — Impact Loop",
+      title: "Privacy Policy: Impact Loop",
       description: "Impact Loop's privacy policy. How we collect, use, and protect your personal information under PIPEDA.",
       ogType: "website",
     });

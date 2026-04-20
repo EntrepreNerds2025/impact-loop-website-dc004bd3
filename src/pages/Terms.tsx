@@ -5,7 +5,7 @@ import { setSEO, resetSEO } from "@/lib/seo";
 const Terms = () => {
   useEffect(() => {
     setSEO({
-      title: "Terms of Service — Impact Loop",
+      title: "Terms of Service: Impact Loop",
       description: "Impact Loop's terms of service for video production, storytelling, and media services.",
       ogType: "website",
     });

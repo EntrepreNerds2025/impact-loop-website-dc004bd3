@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { slideFromLeft, staggerContainer, scaleIn } from "@/hooks/useScrollAnimation";
 
 const features = [
-  { icon: Monitor, title: "Custom-Built for You", description: "Apps, dashboards, and platforms designed around your actual workflows — not the other way around." },
+  { icon: Monitor, title: "Custom-Built for You", description: "Apps, dashboards, and platforms designed around your actual workflows, not the other way around." },
   { icon: Zap, title: "AI-Powered Delivery", description: "What used to take large teams and years of development can now be delivered in weeks." },
   { icon: Plug, title: "Seamless Integration", description: "Connect with the tools and systems your organization already relies on." },
   { icon: RefreshCw, title: "Ongoing Support", description: "Continuous iteration and support so your platform evolves as your needs grow." },
@@ -33,7 +33,7 @@ const TechSolutionsSection = () => {
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             With AI-accelerated development, organizations no longer need massive budgets or multi-year timelines
             to get purpose-built software. We design and deliver custom apps, intake systems, dashboards, and
-            reporting platforms — tailored to your workflows and ready in weeks.
+            reporting platforms, tailored to your workflows and ready in weeks.
           </p>
         </motion.div>
 

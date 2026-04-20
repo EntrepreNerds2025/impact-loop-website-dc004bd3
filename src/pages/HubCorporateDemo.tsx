@@ -53,7 +53,7 @@ const quotes = [
   { text: "Northfield's investment in our community centre changed how families access services.", name: "Maria L.", role: "Partner" },
   { text: "The volunteer program brought our team closer while making a real difference.", name: "James C.", role: "Staff" },
   { text: "We've seen a measurable increase in youth STEM participation since the partnership began.", name: "Dr. Susan P.", role: "Partner" },
-  { text: "This isn't just corporate responsibility — it's genuine community partnership.", name: "Aiden K.", role: "Partner" },
+  { text: "This isn't just corporate responsibility, it's genuine community partnership.", name: "Aiden K.", role: "Partner" },
   { text: "Our employees consistently say the volunteer days are the highlight of their year.", name: "Rachel M.", role: "Staff" },
   { text: "The scholarship program funded by Northfield changed my daughter's life.", name: "Deborah T.", role: "Partner" },
   { text: "We appreciate a corporate partner that listens first and acts second.", name: "Omar F.", role: "Partner" },
@@ -100,7 +100,7 @@ const HubCorporateDemo = () => {
   };
 
   const allMedia: MediaItem[] = useMemo(() => [
-    { type: "video" as const, src: "1168844885", title: "Our Impact Story — Full Video" },
+    { type: "video" as const, src: "1168844885", title: "Our Impact Story, Full Video" },
     ...clips.map(c => ({ type: "video" as const, src: c.vimeoId, title: c.title })),
     ...photoItems,
   ], []);
@@ -166,7 +166,7 @@ const HubCorporateDemo = () => {
 
           <main className={`flex-1 min-w-0 ${isMobile ? "pt-12" : ""}`}>
 
-            {/* 1. Overview — DARK */}
+            {/* 1. Overview, DARK */}
             <section id="overview" className="section-dark py-20 md:py-28">
               <div className="container mx-auto px-6 text-center max-w-3xl">
                 <motion.p variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-impact-blue uppercase tracking-widest text-xs mb-4">
@@ -203,7 +203,7 @@ const HubCorporateDemo = () => {
               </div>
             </section>
 
-            {/* 3. Hero Video — DARK */}
+            {/* 3. Hero Video, DARK */}
             <section id="hero-video" className="section-dark py-20">
               <div className="container mx-auto px-6 max-w-4xl">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-8 text-center">Our Impact Story</h2>
@@ -238,7 +238,7 @@ const HubCorporateDemo = () => {
               </div>
             </section>
 
-            {/* 5. Photo Gallery — DARK */}
+            {/* 5. Photo Gallery, DARK */}
             <section id="photos" className="section-dark py-20">
               <div className="container mx-auto px-6">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-12 text-center">Photo Gallery</h2>
@@ -284,7 +284,7 @@ const HubCorporateDemo = () => {
               </div>
             </section>
 
-            {/* 7. Partners — DARK */}
+            {/* 7. Partners, DARK */}
             <section id="partners" className="section-dark py-20">
               <div className="container mx-auto px-6">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-12 text-center">Our Partners</h2>
@@ -312,7 +312,7 @@ const HubCorporateDemo = () => {
               </div>
             </section>
 
-            {/* 9. Quick Outcomes — DARK */}
+            {/* 9. Quick Outcomes, DARK */}
             <section id="outcomes" className="section-dark py-20">
               <div className="container mx-auto px-6">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-12 text-center">Quick Outcomes</h2>
@@ -327,7 +327,7 @@ const HubCorporateDemo = () => {
               </div>
             </section>
 
-            {/* 10. Final CTA — DARK */}
+            {/* 10. Final CTA, DARK */}
             <section className="section-dark py-24 border-t border-white/10">
               <div className="container mx-auto px-6 text-center max-w-2xl">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-6">Build your Impact Media Hub</h2>

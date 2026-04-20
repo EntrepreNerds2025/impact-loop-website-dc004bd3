@@ -1,4 +1,4 @@
-const DEFAULT_TITLE = "Impact Loop — Cinematic Storytelling for Nonprofits & Changemakers";
+const DEFAULT_TITLE = "Impact Loop, Cinematic Storytelling for Nonprofits & Changemakers";
 const DEFAULT_DESCRIPTION =
   "Impact Loop designs storytelling systems that protect human stories in an AI-saturated world.";
 

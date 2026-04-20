@@ -52,15 +52,15 @@ const photoItems: MediaItem[] = [
 /* ─── Quotes ─── */
 const quotes = [
   { text: "This program gave me the confidence to walk into an interview and believe I belonged there.", name: "Keisha M.", role: "Participant" },
-  { text: "The wraparound supports — from transit to mental health — made all the difference.", name: "James R.", role: "Participant" },
+  { text: "The wraparound supports, from transit to mental health, made all the difference.", name: "James R.", role: "Participant" },
   { text: "I've never seen a program this focused on the whole person, not just the resume.", name: "Dr. Adaora N.", role: "Partner" },
   { text: "Our collaboration with CAFCan has changed how we approach community hiring.", name: "Mark S.", role: "Partner" },
-  { text: "The employment pathways aren't just theoretical — participants leave with real offers.", name: "Fatima A.", role: "Presenter" },
+  { text: "The employment pathways aren't just theoretical, participants leave with real offers.", name: "Fatima A.", role: "Presenter" },
   { text: "What makes this different is the dignity. Every participant is treated as a professional.", name: "Chris L.", role: "Staff" },
   { text: "I went from not knowing where to start to having two job offers in three months.", name: "Deshawn T.", role: "Participant" },
   { text: "The peer mentorship model creates bonds that last well beyond the program.", name: "Angela W.", role: "Staff" },
   { text: "We saw immediate improvements in retention when we partnered with this program.", name: "Toronto BDC Team", role: "Partner" },
-  { text: "The wellness supports aren't an add-on — they're foundational.", name: "Dr. Priya K.", role: "Presenter" },
+  { text: "The wellness supports aren't an add-on, they're foundational.", name: "Dr. Priya K.", role: "Presenter" },
   { text: "I tell everyone: if you get the chance to join, take it.", name: "Marcus J.", role: "Participant" },
   { text: "This is what community-led workforce development should look like.", name: "Councillor Diane F.", role: "Partner" },
 ];
@@ -77,8 +77,8 @@ const partners = [
 ];
 
 const spotlights = [
-  { name: "CIBC", contribution: "Lead funding partner — $75,000 in program support", outcome: "Enabled 50+ employment placements" },
-  { name: "Up With Women", contribution: "Mentorship program partnership — 12 mentors provided", outcome: "1-on-1 coaching for 30 participants" },
+  { name: "CIBC", contribution: "Lead funding partner, $75,000 in program support", outcome: "Enabled 50+ employment placements" },
+  { name: "Up With Women", contribution: "Mentorship program partnership, 12 mentors provided", outcome: "1-on-1 coaching for 30 participants" },
   { name: "Black Creek Community Health Centre", contribution: "Wellness and health supports integration", outcome: "Mental health, nutrition, and transit support for all participants" },
 ];
 
@@ -120,7 +120,7 @@ const HubDemo = () => {
 
   // Build unified media array: hero + clips + photos
   const allMedia: MediaItem[] = useMemo(() => [
-    { type: "video" as const, src: "1143331891", title: "Program Story — Full Video" },
+    { type: "video" as const, src: "1143331891", title: "Program Story, Full Video" },
     ...clips.map(c => ({ type: "video" as const, src: c.vimeoId, title: c.title })),
     ...photoItems,
   ], []);
@@ -204,7 +204,7 @@ const HubDemo = () => {
           {/* Main content */}
           <main className={`flex-1 min-w-0 ${isMobile ? "pt-12" : ""}`}>
 
-            {/* 1. Overview — DARK */}
+            {/* 1. Overview, DARK */}
             <section id="overview" className="section-dark py-20 md:py-28">
               <div className="container mx-auto px-6 text-center max-w-3xl">
                 <motion.p variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-impact-blue uppercase tracking-widest text-xs mb-4">
@@ -241,7 +241,7 @@ const HubDemo = () => {
               </div>
             </section>
 
-            {/* 3. Hero Video — DARK */}
+            {/* 3. Hero Video, DARK */}
             <section id="hero-video" className="section-dark py-20">
               <div className="container mx-auto px-6 max-w-4xl">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-8 text-center">Program Story</h2>
@@ -276,7 +276,7 @@ const HubDemo = () => {
               </div>
             </section>
 
-            {/* 5. Photo Gallery — DARK */}
+            {/* 5. Photo Gallery, DARK */}
             <section id="photos" className="section-dark py-20">
               <div className="container mx-auto px-6">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-12 text-center">Photo Gallery</h2>
@@ -322,7 +322,7 @@ const HubDemo = () => {
               </div>
             </section>
 
-            {/* 7. Partners — DARK */}
+            {/* 7. Partners, DARK */}
             <section id="partners" className="section-dark py-20">
               <div className="container mx-auto px-6">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-12 text-center">Partners & Presenters</h2>
@@ -367,7 +367,7 @@ const HubDemo = () => {
               </div>
             </section>
 
-            {/* 9. Quick Outcomes — DARK */}
+            {/* 9. Quick Outcomes, DARK */}
             <section id="outcomes" className="section-dark py-20">
               <div className="container mx-auto px-6">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-12 text-center">Quick Outcomes</h2>
@@ -382,7 +382,7 @@ const HubDemo = () => {
               </div>
             </section>
 
-            {/* 10. Final CTA — DARK */}
+            {/* 10. Final CTA, DARK */}
             <section className="section-dark py-24 border-t border-white/10">
               <div className="container mx-auto px-6 text-center max-w-2xl">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-6">Build your Impact Media Hub</h2>

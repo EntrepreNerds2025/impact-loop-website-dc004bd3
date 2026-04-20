@@ -26,6 +26,72 @@ const AnimatedSection = ({ children, className = "" }: { children: React.ReactNo
   );
 };
 
+/* ─── Testimonial Clip Card (looping preview, click to open lightbox) ─── */
+const TestimonialClipCard = ({
+  vimeoId,
+  title,
+  previewStart = 0,
+  onPlay,
+}: {
+  vimeoId: string;
+  title: string;
+  previewStart?: number;
+  onPlay: () => void;
+}) => {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  useEffect(() => {
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+    const player = new Player(iframe);
+    const LOOP_START = previewStart;
+    const LOOP_END = LOOP_START + 10;
+
+    player.setCurrentTime(LOOP_START);
+    const handleTimeUpdate = (data: { seconds: number }) => {
+      if (data.seconds >= LOOP_END) player.setCurrentTime(LOOP_START);
+    };
+    player.on("timeupdate", handleTimeUpdate);
+    return () => {
+      player.off("timeupdate", handleTimeUpdate);
+    };
+  }, [previewStart]);
+
+  return (
+    <motion.div
+      variants={slideUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-80px" }}
+      className="space-y-3"
+    >
+      <h3 className="font-serif text-base md:text-lg font-semibold text-foreground leading-tight">
+        {title}
+      </h3>
+      <div
+        className="group relative overflow-hidden rounded-xl cursor-pointer bg-[hsl(var(--impact-dark))]"
+        style={{ aspectRatio: "16 / 9" }}
+        onClick={onPlay}
+      >
+        <iframe
+          ref={iframeRef}
+          src={`https://player.vimeo.com/video/${vimeoId}?background=1&autoplay=1&loop=1&muted=1`}
+          className="absolute pointer-events-none"
+          style={{ border: 0, width: "140%", height: "140%", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
+          allow="autoplay"
+          title={`${title} preview`}
+        />
+        <div className="absolute inset-0 bg-[hsl(var(--impact-dark))]/30 group-hover:bg-[hsl(var(--impact-dark))]/60 transition-colors duration-300" />
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="w-14 h-14 rounded-full bg-primary/80 backdrop-blur-sm flex items-center justify-center">
+            <Play className="w-6 h-6 text-primary-foreground ml-0.5" fill="white" />
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 /* ─── Hero Video (looping preview, click to expand) ─── */
 const HeroVideo = ({
   vimeoId,
@@ -91,7 +157,7 @@ const CaseStudy = () => {
   useEffect(() => {
     if (study) {
       setSEO({
-        title: `${study.title} — Impact Loop Case Study`,
+        title: `${study.title}: Impact Loop Case Study`,
         description: study.tagline,
         ogType: "article",
       });
@@ -317,6 +383,58 @@ const CaseStudy = () => {
                   {study.gallery[0].caption}
                 </figcaption>
               </motion.figure>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ─── Voices from the Project (mini testimonial gallery) ─── */}
+      {study.videoTestimonials && study.videoTestimonials.length > 0 && (
+        <section className="py-24 bg-background border-t border-border">
+          <div className="container mx-auto px-6">
+            <div className="max-w-6xl mx-auto">
+              <AnimatedSection className="mb-12 max-w-2xl">
+                <p className="text-impact-blue text-xs font-semibold uppercase tracking-widest mb-3">
+                  Voices from the Project
+                </p>
+                <h2 className="font-serif text-2xl md:text-4xl font-bold text-foreground leading-tight">
+                  Hear it from the people on camera.
+                </h2>
+                <p className="text-muted-foreground text-base md:text-lg leading-relaxed mt-4">
+                  A few testimonials pulled from the full library. Every clip was recorded on
+                  location during production and lives inside the project's Impact Media Hub.
+                </p>
+              </AnimatedSection>
+
+              <motion.div
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+              >
+                {study.videoTestimonials.map((t) => (
+                  <TestimonialClipCard
+                    key={t.vimeoId}
+                    vimeoId={t.vimeoId}
+                    title={t.title}
+                    previewStart={t.previewStart}
+                    onPlay={() => setLightboxVideo(t.vimeoId)}
+                  />
+                ))}
+              </motion.div>
+
+              {study.hubLink && (
+                <AnimatedSection className="mt-12 text-center">
+                  <Link
+                    to={study.hubLink}
+                    className="inline-flex items-center gap-2 btn-primary"
+                  >
+                    See all testimonials
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </AnimatedSection>
+              )}
             </div>
           </div>
         </section>

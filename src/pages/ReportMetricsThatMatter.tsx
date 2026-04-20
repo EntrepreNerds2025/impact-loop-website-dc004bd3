@@ -81,7 +81,7 @@ const ReportMetricsThatMatter = () => {
           {/* Intro */}
           <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-6">
-              The social impact sector has a measurement problem. According to the Nonprofit Communications Trends Report by Kivi Leroux Miller (2024), 71% of nonprofit communicators say they lack the tools or training to measure impact effectively.<sup className="text-[hsl(var(--impact-blue))]">[1]</sup> Organizations spend millions creating content, campaigns, and communications—then evaluate success using vanity metrics borrowed from consumer marketing.
+              The social impact sector has a measurement problem. According to the Nonprofit Communications Trends Report by Kivi Leroux Miller (2024), 71% of nonprofit communicators say they lack the tools or training to measure impact effectively.<sup className="text-[hsl(var(--impact-blue))]">[1]</sup> Organizations spend millions creating content, campaigns, and communications, then evaluate success using vanity metrics borrowed from consumer marketing.
             </p>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-6">
               This report challenges the status quo. Drawing on published research from the Stanford Social Innovation Review, the Center for Effective Philanthropy, the Nonprofit Marketing Guide, and the Aspen Institute, we present a framework for measuring what matters.
@@ -97,8 +97,8 @@ const ReportMetricsThatMatter = () => {
           </motion.div>
 
           <Pullquote>
-            "We were celebrating a video that got 2 million views. Then we realized none of our target audience—policymakers in East Africa—had seen it."
-            <cite className="block text-sm not-italic text-muted-foreground/60 mt-2">— Nonprofit communications professional, as reported in sector research</cite>
+            "We were celebrating a video that got 2 million views. Then we realized none of our target audience, policymakers in East Africa, had seen it."
+            <cite className="block text-sm not-italic text-muted-foreground/60 mt-2">,  Nonprofit communications professional, as reported in sector research</cite>
           </Pullquote>
 
           {/* Stats row */}
@@ -120,7 +120,7 @@ const ReportMetricsThatMatter = () => {
           <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={2}>
             <SectionHeading>The Vanity Trap</SectionHeading>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              Vanity metrics aren't inherently bad—they measure reach, which has its place. The problem arises when organizations mistake reach for resonance. As Beth Kanter and Katie Paine documented in <em>Measuring the Networked Nonprofit</em> (2012), the gap between what's measurable and what's meaningful has only widened in the decade since.<sup className="text-[hsl(var(--impact-blue))]">[2]</sup>
+              Vanity metrics aren't inherently bad, they measure reach, which has its place. The problem arises when organizations mistake reach for resonance. As Beth Kanter and Katie Paine documented in <em>Measuring the Networked Nonprofit</em> (2012), the gap between what's measurable and what's meaningful has only widened in the decade since.<sup className="text-[hsl(var(--impact-blue))]">[2]</sup>
             </p>
             <p className="text-muted-foreground leading-relaxed mb-6">
               The trap is structural. Social platforms optimize for engagement, not impact. A 2024 analysis by the Center for Effective Philanthropy found that 68% of foundation program officers consider grantee communications materials "not useful" in assessing actual program impact.<sup className="text-[hsl(var(--impact-blue))]">[3]</sup> Analytics dashboards default to showing what's easy to count. And communications teams, under pressure to justify budgets, report what looks impressive rather than what's meaningful.
@@ -142,7 +142,7 @@ const ReportMetricsThatMatter = () => {
               className="w-full h-64 md:h-96 object-cover rounded-sm"
             />
             <p className="text-xs text-muted-foreground mt-3 px-6 md:px-12 italic">
-              Traditional dashboards prioritize volume over value—measuring what's easy, not what matters.
+              Traditional dashboards prioritize volume over value, measuring what's easy, not what matters.
             </p>
           </motion.div>
 
@@ -176,18 +176,18 @@ const ReportMetricsThatMatter = () => {
           </motion.div>
 
           <Pullquote>
-            "The organizations doing the most important work often have the worst metrics—because they're measuring the wrong things."
-            <cite className="block text-sm not-italic text-muted-foreground/60 mt-2">— Dr. Johanna Morariu, Innovation Network (adapted from SSIR, 2023)<sup className="text-[hsl(var(--impact-blue))]">[4]</sup></cite>
+            "The organizations doing the most important work often have the worst metrics, because they're measuring the wrong things."
+            <cite className="block text-sm not-italic text-muted-foreground/60 mt-2">,  Dr. Johanna Morariu, Innovation Network (adapted from SSIR, 2023)<sup className="text-[hsl(var(--impact-blue))]">[4]</sup></cite>
           </Pullquote>
 
           {/* Section 3 */}
           <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={5}>
             <SectionHeading>Case Study: From Views to Votes</SectionHeading>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              This illustrative case study reflects a pattern documented in sector research. A U.S.-based environmental advocacy group was producing documentary content that consistently performed well on social media—hundreds of thousands of views, strong engagement rates. But their advocacy goals weren't advancing.
+              This illustrative case study reflects a pattern documented in sector research. A U.S.-based environmental advocacy group was producing documentary content that consistently performed well on social media, hundreds of thousands of views, strong engagement rates. But their advocacy goals weren't advancing.
             </p>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              When they shifted to Tier 2 and Tier 3 measurement, the strategy changed entirely. Instead of optimizing for shareability, they created shorter, data-rich video briefs targeted specifically at legislative staff. Views dropped significantly. But within months, key policy provisions were adopted—an outcome attributed in part to the targeted media.
+              When they shifted to Tier 2 and Tier 3 measurement, the strategy changed entirely. Instead of optimizing for shareability, they created shorter, data-rich video briefs targeted specifically at legislative staff. Views dropped significantly. But within months, key policy provisions were adopted, an outcome attributed in part to the targeted media.
             </p>
             <p className="text-muted-foreground leading-relaxed mb-6">
               The lesson: fewer eyeballs, more impact. This mirrors findings from the Aspen Institute's 2023 report on strategic communications, which noted that "targeted influence campaigns consistently outperform broad awareness efforts in driving policy change."<sup className="text-[hsl(var(--impact-blue))]">[5]</sup>
@@ -223,7 +223,7 @@ const ReportMetricsThatMatter = () => {
               </div>
               <div>
                 <h3 className="font-sans font-semibold text-foreground mb-1">2. Track narrative adoption, not just sentiment</h3>
-                <p className="text-muted-foreground leading-relaxed">Positive sentiment is nice. But when stakeholders start using your language and framing unprompted, that's narrative shift—and it's far more valuable.</p>
+                <p className="text-muted-foreground leading-relaxed">Positive sentiment is nice. But when stakeholders start using your language and framing unprompted, that's narrative shift, and it's far more valuable.</p>
               </div>
               <div>
                 <h3 className="font-sans font-semibold text-foreground mb-1">3. Connect media touchpoints to decisions</h3>
@@ -244,7 +244,7 @@ const ReportMetricsThatMatter = () => {
           <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={8}>
             <SectionHeading>What Comes Next</SectionHeading>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              The shift from vanity metrics to impact metrics isn't just a measurement upgrade—it's a strategic transformation. When organizations measure what matters, they make better content, reach more relevant audiences, and can demonstrate genuine impact to funders and stakeholders.
+              The shift from vanity metrics to impact metrics isn't just a measurement upgrade, it's a strategic transformation. When organizations measure what matters, they make better content, reach more relevant audiences, and can demonstrate genuine impact to funders and stakeholders.
             </p>
             <p className="text-muted-foreground leading-relaxed mb-6">
               The tools exist. The frameworks are emerging. What's needed now is the courage to let go of big numbers in favor of meaningful ones.

@@ -33,7 +33,7 @@ const sections = [
   { id: "outcomes", label: "Outcomes", icon: BarChart3 },
 ];
 
-/* ─── Clips (Vimeo — from the user's library) ─── */
+/* ─── Clips (Vimeo, from the user's library) ─── */
 const clips = [
   { title: "Dr Akeem on Community Event Importance", vimeoId: "1174190910" },
   { title: "Victoria Testimonial 1", vimeoId: "1174191105" },
@@ -140,7 +140,7 @@ const partners = [
 const spotlights = [
   { name: "Church of St. Stephen Downsview", contribution: "Provided venue space and community coordination for the event series", outcome: "Hosted 3 events reaching 120+ community members" },
   { name: "Alliance for Healthier Communities", contribution: "Partner speaker Akeem Stewart, M.D. presented on community health and wellness", outcome: "Connected attendees with health resources and follow-up supports" },
-  { name: "Ella Charles Cuisine", contribution: "Led the Community Cooking Workshop — teaching, feeding, and equipping participants", outcome: "Participants left with meals, recipes, and supplies to take home" },
+  { name: "Ella Charles Cuisine", contribution: "Led the Community Cooking Workshop, teaching, feeding, and equipping participants", outcome: "Participants left with meals, recipes, and supplies to take home" },
 ];
 
 /* ─── Outcomes (dummy) ─── */
@@ -180,7 +180,7 @@ const HubBlackCreekBHM = () => {
   const heroVimeoId = "1174716851";
 
   const allMedia: MediaItem[] = useMemo(() => [
-    { type: "video" as const, src: heroVimeoId, title: "Black History Month Event Series — Full Story" },
+    { type: "video" as const, src: heroVimeoId, title: "Black History Month Event Series, Full Story" },
     ...clips.map(c => ({ type: "video" as const, src: c.vimeoId, title: c.title })),
     ...photoItems,
   ], []);
@@ -344,7 +344,7 @@ const HubBlackCreekBHM = () => {
               </div>
             </section>
 
-            {/* 3. Hero Video — DARK */}
+            {/* 3. Hero Video, DARK */}
             <section id="hero-video" className="section-dark py-20">
               <div className="container mx-auto px-6 max-w-4xl">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-8 text-center">Event Series Story</h2>
@@ -393,7 +393,7 @@ const HubBlackCreekBHM = () => {
               </div>
             </section>
 
-            {/* 5. Photo Gallery — DARK */}
+            {/* 5. Photo Gallery, DARK */}
             <section id="photos" className="section-dark py-20">
               <div className="container mx-auto px-6">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
@@ -516,7 +516,7 @@ const HubBlackCreekBHM = () => {
               </div>
             </section>
 
-            {/* 9. Quick Outcomes — DARK */}
+            {/* 9. Quick Outcomes, DARK */}
             <section id="outcomes" className="section-dark py-20">
               <div className="container mx-auto px-6">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-12 text-center">Quick Outcomes</h2>
@@ -531,7 +531,7 @@ const HubBlackCreekBHM = () => {
               </div>
             </section>
 
-            {/* 10. Final CTA — DARK */}
+            {/* 10. Final CTA, DARK */}
             <section className="section-dark py-24 border-t border-white/10">
               <div className="container mx-auto px-6 text-center max-w-2xl">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-6">Build your Impact Media Hub</h2>

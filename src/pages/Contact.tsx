@@ -19,7 +19,7 @@ const serviceOptions = [
 const Contact = () => {
   useEffect(() => {
     setSEO({
-      title: "Contact — Impact Loop",
+      title: "Contact: Impact Loop",
       description: "Get in touch with Impact Loop. Reach out about video production, consulting, workshops, or storytelling strategy.",
       ogType: "website",
     });
@@ -133,7 +133,7 @@ const Contact = () => {
               Let's Start a <span className="text-gradient">Conversation</span>
             </h1>
             <p className="text-white/70 text-lg leading-relaxed">
-              Whether you're exploring video production, consulting, or workshops — we'd love to hear from you.
+              Whether you're exploring video production, consulting, or workshops, we'd love to hear from you.
             </p>
           </motion.div>
         </div>

@@ -39,6 +39,13 @@ export interface GalleryPhoto {
   wide?: boolean;
 }
 
+export interface VideoTestimonial {
+  vimeoId: string;
+  title: string;
+  /** Optional start time (seconds) for the looping preview. */
+  previewStart?: number;
+}
+
 export interface CaseStudy {
   slug: string;
   title: string;
@@ -70,16 +77,22 @@ export interface CaseStudy {
   related?: string[];
   /**
    * Optional editorial photo gallery. Placeholder images from Unsplash are
-   * fine to start — swap with real production stills when available.
+   * fine to start, swap with real production stills when available.
    */
   gallery?: GalleryPhoto[];
+  /**
+   * Optional mini testimonial video gallery. When present, a "Voices from the
+   * Project" section is rendered on the case study page with a CTA linking
+   * to the full testimonial library on the Impact Media Hub page.
+   */
+  videoTestimonials?: VideoTestimonial[];
 }
 
 export const caseStudies: CaseStudy[] = [
   /* ────────────────────────── EmployNext ────────────────────────── */
   {
     slug: "employnext-youth-trades",
-    title: "EmployNext — Youth Trades Program",
+    title: "EmployNext: Youth Trades Program",
     client: "EmployNext",
     category: "Program Highlights",
     year: "2025",
@@ -91,23 +104,23 @@ export const caseStudies: CaseStudy[] = [
     theAsk: {
       headline: "Prove a youth trades program works to funders who have seen a dozen that didn't.",
       body:
-        "Youth unemployment in Ontario was rising while employers in the skilled trades sector were facing a critical worker shortage. Traditional job programs were placing young people in roles without the certifications, professional habits, or mentorship that employers actually needed — so placements collapsed within weeks. EmployNext had results to show, but no story assets to prove it to government funders, industry partners, or prospective participants. A written report couldn't do the job: funders needed to see the rigor of the training, hear from participants in their own words, and watch employers validate that the program was producing workers they would actually hire.",
+        "Youth unemployment in Ontario was rising while employers in the skilled trades sector were facing a critical worker shortage. Traditional job programs were placing young people in roles without the certifications, professional habits, or mentorship that employers actually needed, so placements collapsed within weeks. EmployNext had results to show, but no story assets to prove it to government funders, industry partners, or prospective participants. A written report couldn't do the job: funders needed to see the rigor of the training, hear from participants in their own words, and watch employers validate that the program was producing workers they would actually hire.",
     },
     theApproach: {
       headline: "A three-voice documentary so no one has to take anyone's word for it.",
       body:
-        "We built the film around three voices that had to line up on camera for the story to be credible: participants sharing their own transformation, instructors explaining the rigor of the training, and employers testifying to the quality of the workers coming out the other end. If all three voices aligned on the same story, the proof was self-evident. We designed the edit to anchor EmployNext's impact report while doubling as a cohort recruitment tool — one piece of content engineered from day one to serve funder reporting, partner recruitment, and participant intake.",
+        "We built the film around three voices that had to line up on camera for the story to be credible: participants sharing their own transformation, instructors explaining the rigor of the training, and employers testifying to the quality of the workers coming out the other end. If all three voices aligned on the same story, the proof was self-evident. We designed the edit to anchor EmployNext's impact report while doubling as a cohort recruitment tool, one piece of content engineered from day one to serve funder reporting, partner recruitment, and participant intake.",
     },
     theProcess: [
       {
         title: "Discovery and story architecture",
         description:
-          "We mapped the program's narrative arc against the three core audiences — funders, industry partners, and prospective participants — and identified the emotional beats the film had to hit for each. We built a shot list that gave each audience something to hold onto without fragmenting the story.",
+          "We mapped the program's narrative arc against the three core audiences, funders, industry partners, and prospective participants, and identified the emotional beats the film had to hit for each. We built a shot list that gave each audience something to hold onto without fragmenting the story.",
       },
       {
         title: "On-site filming across training centres",
         description:
-          "Our crew embedded inside active training sessions across multiple Ontario training centres to capture the hands-on reality of the program — welding sparks, power tools, safety briefings, real instruction. No recreated scenes. What happens on the ground is what ended up on screen.",
+          "Our crew embedded inside active training sessions across multiple Ontario training centres to capture the hands-on reality of the program, welding sparks, power tools, safety briefings, real instruction. No recreated scenes. What happens on the ground is what ended up on screen.",
       },
       {
         title: "Interview direction with participants, instructors, and employers",
@@ -141,7 +154,7 @@ export const caseStudies: CaseStudy[] = [
     theResult: {
       headline: "One film, three high-value uses.",
       body:
-        "The film gave EmployNext a credible, reusable story asset they could bring into every funder conversation, partner pitch, and recruitment event. It now serves as the primary piece for recruiting new cohorts and for demonstrating program outcomes in funding proposals. The same asset doing three jobs is what makes a film like this compound in value over time — not a single campaign, but an engine.",
+        "The film gave EmployNext a credible, reusable story asset they could bring into every funder conversation, partner pitch, and recruitment event. It now serves as the primary piece for recruiting new cohorts and for demonstrating program outcomes in funding proposals. The same asset doing three jobs is what makes a film like this compound in value over time, not a single campaign, but an engine.",
       outcomes: [
         { value: "3", label: "High-Value Uses from One Asset" },
         { value: "1", label: "Hero Film + Cutdowns" },
@@ -160,11 +173,11 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         src: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1400&q=80",
-        caption: "Training centre — where classroom meets industry.",
+        caption: "Training centre, where classroom meets industry.",
       },
       {
         src: "https://images.unsplash.com/photo-1607703703520-bb638e84caf2?w=1400&q=80",
-        caption: "Graduate portrait — the moment work becomes career.",
+        caption: "Graduate portrait, the moment work becomes career.",
       },
       {
         src: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1400&q=80",
@@ -190,23 +203,23 @@ export const caseStudies: CaseStudy[] = [
     theAsk: {
       headline: "Capture a program small enough to feel personal and big enough to replicate.",
       body:
-        "A young girl was contemplating self-harm because her family couldn't afford to get her hair done. The program that emerged around that moment was real and producing immediate impact inside classrooms. But impact that lives only in the memory of a handful of people in the room can't be shared with foundations, scaled to more schools, or replicated by other community organizations. The Muamba Foundation and its partners needed proof that a small, targeted investment in dignity produces measurable results in student wellbeing — proof that could open a conversation with any principal, board, or funder who might carry the model forward.",
+        "A young girl was contemplating self-harm because her family couldn't afford to get her hair done. The program that emerged around that moment was real and producing immediate impact inside classrooms. But impact that lives only in the memory of a handful of people in the room can't be shared with foundations, scaled to more schools, or replicated by other community organizations. The Muamba Foundation and its partners needed proof that a small, targeted investment in dignity produces measurable results in student wellbeing, proof that could open a conversation with any principal, board, or funder who might carry the model forward.",
     },
     theApproach: {
       headline: "Let real voices carry the story, because the story carries itself.",
       body:
-        "This was not a film that needed stylized storytelling. The story was already powerful — what it needed was production values that honored the people in it. We produced a documentary piece that followed the arc from the founding story to the classroom outcomes, letting braiders, educators, parents, and students describe what they saw in their own words. The creative restraint was the point: no manufactured drama, no voiceover narration. Dignity as a production principle.",
+        "This was not a film that needed stylized storytelling. The story was already powerful, what it needed was production values that honored the people in it. We produced a documentary piece that followed the arc from the founding story to the classroom outcomes, letting braiders, educators, parents, and students describe what they saw in their own words. The creative restraint was the point: no manufactured drama, no voiceover narration. Dignity as a production principle.",
     },
     theProcess: [
       {
         title: "Founding story interview",
         description:
-          "We sat down with the program's originators to capture the moment that sparked the initiative — the story that everything else in the film would point back to. This anchor interview set the emotional ceiling for the entire piece.",
+          "We sat down with the program's originators to capture the moment that sparked the initiative, the story that everything else in the film would point back to. This anchor interview set the emotional ceiling for the entire piece.",
       },
       {
         title: "Event day coverage",
         description:
-          "Our crew documented the hair session itself — professional braiders at work, Bartley Skills participants building trade hours, educators holding the space. We captured moments of transformation as they happened, without asking anyone to perform them.",
+          "Our crew documented the hair session itself, professional braiders at work, Bartley Skills participants building trade hours, educators holding the space. We captured moments of transformation as they happened, without asking anyone to perform them.",
       },
       {
         title: "Classroom and family follow-up",
@@ -240,7 +253,7 @@ export const caseStudies: CaseStudy[] = [
     theResult: {
       headline: "A community engagement and partnership development tool.",
       body:
-        "The film opened conversations with schools, foundations, and municipal partners about replicating the model elsewhere. It stands as one of the strongest examples in our portfolio of how a story told with care can shift perception at an organizational level — not by overstating the work, but by making space for what was already true about it to be seen clearly. The video demonstrated measurable gains in student confidence and classroom participation and opened doors to future community health partnerships.",
+        "The film opened conversations with schools, foundations, and municipal partners about replicating the model elsewhere. It stands as one of the strongest examples in our portfolio of how a story told with care can shift perception at an organizational level, not by overstating the work, but by making space for what was already true about it to be seen clearly. The video demonstrated measurable gains in student confidence and classroom participation and opened doors to future community health partnerships.",
       outcomes: [
         { value: "3", label: "Partnering Organizations" },
         { value: "1", label: "Documentary Hero Film" },
@@ -255,7 +268,7 @@ export const caseStudies: CaseStudy[] = [
     gallery: [
       {
         src: "https://images.unsplash.com/photo-1622296089780-290d1a81bde2?w=1400&q=80",
-        caption: "The chair — where the conversation starts.",
+        caption: "The chair, where the conversation starts.",
         wide: true,
       },
       {
@@ -264,11 +277,11 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         src: "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1400&q=80",
-        caption: "Community salon space — youth welcome.",
+        caption: "Community salon space, youth welcome.",
       },
       {
         src: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=1400&q=80",
-        caption: "The after — self-image, reset.",
+        caption: "The after, self-image, reset.",
       },
       {
         src: "https://images.unsplash.com/photo-1595475884562-073c30d45670?w=1400&q=80",
@@ -282,7 +295,7 @@ export const caseStudies: CaseStudy[] = [
   /* ─────────────────────── Black Creek BHM ─────────────────────── */
   {
     slug: "black-creek-bhm",
-    title: "Black Creek — Black History Month Event Series",
+    title: "Black Creek: Black History Month Event Series",
     client: "Black Creek Community Health Centre",
     category: "Event Recaps",
     year: "2025",
@@ -294,12 +307,12 @@ export const caseStudies: CaseStudy[] = [
     theAsk: {
       headline: "Make a care model visible to the people who fund it.",
       body:
-        "Black Creek was running culturally significant programming that was producing real health outcomes in a community that has historically been under-served and over-studied. But those outcomes were invisible to funders and community partners who needed to see barrier-free access, Afrocentric design, and culturally affirming care in action — not just described in a report. The challenge: document three distinct events across the series in a way that honored each one individually while also rolling up into a single story about the care model as a whole.",
+        "Black Creek was running culturally significant programming that was producing real health outcomes in a community that has historically been under-served and over-studied. But those outcomes were invisible to funders and community partners who needed to see barrier-free access, Afrocentric design, and culturally affirming care in action, not just described in a report. The challenge: document three distinct events across the series in a way that honored each one individually while also rolling up into a single story about the care model as a whole.",
     },
     theApproach: {
       headline: "Let each event breathe. Let them add up.",
       body:
-        "We treated each event as its own chapter with its own energy and emotional register: cultural food programming, community workshops, and partnership showcases. Then we designed the edit so all three chapters would accumulate into a clear statement about the model that produced them. We leaned heavily into community voices over institutional narration — the people receiving the care describing what it meant, directly. Spaces, food, movement, and laughter carried the rest.",
+        "We treated each event as its own chapter with its own energy and emotional register: cultural food programming, community workshops, and partnership showcases. Then we designed the edit so all three chapters would accumulate into a clear statement about the model that produced them. We leaned heavily into community voices over institutional narration, the people receiving the care describing what it meant, directly. Spaces, food, movement, and laughter carried the rest.",
     },
     theProcess: [
       {
@@ -315,7 +328,7 @@ export const caseStudies: CaseStudy[] = [
       {
         title: "Cinematic event coverage",
         description:
-          "Multi-camera coverage of each event captured both the warmth of the gatherings and the specific programming elements — cooking workshops, health talks, cultural food distribution — that make the care model visible.",
+          "Multi-camera coverage of each event captured both the warmth of the gatherings and the specific programming elements, cooking workshops, health talks, cultural food distribution, that make the care model visible.",
       },
       {
         title: "Integrated edit with partner spotlights",
@@ -366,10 +379,15 @@ export const caseStudies: CaseStudy[] = [
       { name: "Ella Charles Cuisine", role: "Cultural food programming" },
     ],
     hubLink: "/hub/black-creek-bhm",
+    videoTestimonials: [
+      { title: "Dr. Akeem Stewart on Community Events", vimeoId: "1174190910" },
+      { title: "Emma, Community Ambassador", vimeoId: "1174191016" },
+      { title: "Victoria: Participant Testimonial", vimeoId: "1174191105" },
+    ],
     gallery: [
       {
         src: "https://images.unsplash.com/photo-1531058020387-3be344556be6?w=1400&q=80",
-        caption: "Community gathering — Black Creek neighbours, together.",
+        caption: "Community gathering, Black Creek neighbours, together.",
         wide: true,
       },
       {
@@ -382,7 +400,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1400&q=80",
-        caption: "Performance spotlight — a cultural showcase moment.",
+        caption: "Performance spotlight, a cultural showcase moment.",
       },
       {
         src: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=1400&q=80",
@@ -396,7 +414,7 @@ export const caseStudies: CaseStudy[] = [
   /* ─────────────────────── CafCan OPKT ─────────────────────────── */
   {
     slug: "cafcan-opkt",
-    title: "CafCan — Our People's Keeper, Too",
+    title: "CafCan: Our People's Keeper, Too",
     client: "CAFCAN Social Services",
     category: "Program Highlights",
     year: "2025–2026",
@@ -408,28 +426,28 @@ export const caseStudies: CaseStudy[] = [
     theAsk: {
       headline: "Turn a newcomer program into a reusable library of proof.",
       body:
-        "CAFCAN had secured improved government funding in 2024 for their Our People's Keeper, Too (OPKT) program — a culturally responsive initiative designed to bridge the gap between arrival and long-term stability for African asylum seekers. But funders required clear evidence of outcomes to justify renewal, and text-based reports weren't capturing the human transformation happening inside the program. CAFCAN also needed story assets that could build a pipeline of future participants and demonstrate the program's value to potential community partners — which meant a single recap video wouldn't do the job.",
+        "CAFCAN had secured improved government funding in 2024 for their Our People's Keeper, Too (OPKT) program, a culturally responsive initiative designed to bridge the gap between arrival and long-term stability for African asylum seekers. But funders required clear evidence of outcomes to justify renewal, and text-based reports weren't capturing the human transformation happening inside the program. CAFCAN also needed story assets that could build a pipeline of future participants and demonstrate the program's value to potential community partners, which meant a single recap video wouldn't do the job.",
     },
     theApproach: {
       headline: "Build a library, not a deliverable.",
       body:
-        "We proposed a two-part production strategy: a launch recap anchored by candid testimonials from counselors and participants, and a series of ten cohort session videos documenting each phase of the employment journey — with enough coverage across multiple partner sites (Homes First, Christie Refugee Welcome Centre, CAFCAN's own location) that the final output could serve impact reporting, renewal submissions, cohort recruitment, and community outreach simultaneously. The intent from day one was a reusable story library, not a single video.",
+        "We proposed a two-part production strategy: a launch recap anchored by candid testimonials from counselors and participants, and a series of ten cohort session videos documenting each phase of the employment journey, with enough coverage across multiple partner sites (Homes First, Christie Refugee Welcome Centre, CAFCAN's own location) that the final output could serve impact reporting, renewal submissions, cohort recruitment, and community outreach simultaneously. The intent from day one was a reusable story library, not a single video.",
     },
     theProcess: [
       {
         title: "Partner-site scoping",
         description:
-          "We scoped filming across multiple delivery sites — CAFCAN Social Services, Homes First Shelter, Christie Refugee Welcome Centre — each with its own coordination process, cultural protocols, and participant privacy considerations.",
+          "We scoped filming across multiple delivery sites, CAFCAN Social Services, Homes First Shelter, Christie Refugee Welcome Centre, each with its own coordination process, cultural protocols, and participant privacy considerations.",
       },
       {
         title: "Culturally grounded interview direction",
         description:
-          "Interview direction was built around Africentric values, the Ma'at principles, and Nguzo Saba — the same frameworks the program itself is built on. Participants were invited to share on their own terms, in their own words, with every comfort level honored.",
+          "Interview direction was built around Africentric values, the Ma'at principles, and Nguzo Saba, the same frameworks the program itself is built on. Participants were invited to share on their own terms, in their own words, with every comfort level honored.",
       },
       {
         title: "Cohort-by-cohort production",
         description:
-          "We filmed each cohort session — Employment Readiness, Career Development, Health & Wellness, Civic Engagement, Skilled Trades, and Entrepreneurship — capturing the specific content of each while also building a consistent visual language across the series.",
+          "We filmed each cohort session, Employment Readiness, Career Development, Health & Wellness, Civic Engagement, Skilled Trades, and Entrepreneurship, capturing the specific content of each while also building a consistent visual language across the series.",
       },
       {
         title: "Modular edit architecture",
@@ -462,7 +480,7 @@ export const caseStudies: CaseStudy[] = [
     theResult: {
       headline: "A story library, not a single video.",
       body:
-        "CAFCAN had a complete library of story assets to support their impact report, funding renewal submissions, and community outreach. The cohort session videos gave future participants a transparent look at what the program involves, reducing drop-off between inquiry and enrollment. The Impact Media Hub page gave CAFCAN a single living destination they could share with funders, partners, and prospective participants — turning a one-time production engagement into a compounding communication asset.",
+        "CAFCAN had a complete library of story assets to support their impact report, funding renewal submissions, and community outreach. The cohort session videos gave future participants a transparent look at what the program involves, reducing drop-off between inquiry and enrollment. The Impact Media Hub page gave CAFCAN a single living destination they could share with funders, partners, and prospective participants, turning a one-time production engagement into a compounding communication asset.",
       outcomes: [
         { value: "7", label: "Cohort Sessions Delivered" },
         { value: "6", label: "Partner Locations" },
@@ -487,6 +505,11 @@ export const caseStudies: CaseStudy[] = [
       { name: "City of Toronto", role: "Municipal partner" },
     ],
     hubLink: "/hub/story-cafcan",
+    videoTestimonials: [
+      { title: "Session 1 Testimonial", vimeoId: "1183558854" },
+      { title: "Session 3 Testimonial", vimeoId: "1183604690" },
+      { title: "Session 5 Testimonial", vimeoId: "1183559582" },
+    ],
     gallery: [
       {
         src: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1400&q=80",
@@ -495,7 +518,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1400&q=80",
-        caption: "Group discussion — story work in practice.",
+        caption: "Group discussion, story work in practice.",
       },
       {
         src: "https://images.unsplash.com/photo-1515168833906-d2a3b82b302a?w=1400&q=80",
@@ -507,17 +530,17 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         src: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=1400&q=80",
-        caption: "Program graduation — a quiet milestone.",
+        caption: "Program graduation, a quiet milestone.",
         wide: true,
       },
     ],
     related: ["black-creek-bhm", "employnext-youth-trades"],
   },
 
-  /* ────────────────── Lakeridge Health — I Belong ──────────────── */
+  /* ────────────────── Lakeridge Health, I Belong ──────────────── */
   {
     slug: "lakeridge-i-belong",
-    title: "Lakeridge Health — I Belong Initiative",
+    title: "Lakeridge Health: I Belong Initiative",
     client: "Lakeridge Health",
     category: "Initiatives",
     year: "2023",
@@ -526,32 +549,32 @@ export const caseStudies: CaseStudy[] = [
     heroVimeoId: "1140641190",
     previewStart: 30,
     overview:
-      "In the summer of 2023, Lakeridge Health unveiled I Belong — its multi-year Inclusion, Diversity, Equity, Accessibility, and Anti-Racism (IDEAA) Action Plan. Serving the diverse communities of Durham Region with more than 8,700 staff, physicians, and volunteers, the initiative was designed so every patient, staff member, and family could honestly say: 'I belong at Lakeridge Health.' We produced the film built to anchor the public launch and internal culture-building effort around it.",
+      "In the summer of 2023, Lakeridge Health unveiled I Belong, its multi-year Inclusion, Diversity, Equity, Accessibility, and Anti-Racism (IDEAA) Action Plan. Serving the diverse communities of Durham Region with more than 8,700 staff, physicians, and volunteers, the initiative was designed so every patient, staff member, and family could honestly say: 'I belong at Lakeridge Health.' We produced the film built to anchor the public launch and internal culture-building effort around it.",
     theAsk: {
       headline: "Earn buy-in from staff who've seen initiatives come and go.",
       body:
-        "Lakeridge Health was launching a major, system-wide inclusion plan — the IDEAA Multi-Year Action Plan — across hospital sites from Ajax to Bowmanville. But they faced a trust challenge: hospital staff had seen similar initiatives come and go, and another corporate-feeling launch video risked undermining the work before it started. At the same time, external stakeholders in Durham Region and public accountability bodies needed to see clear alignment between the film and the IDEAA commitments the plan put on the record. The film had to feel genuine internally and stand up to scrutiny externally — at the same time, without compromise on either side.",
+        "Lakeridge Health was launching a major, system-wide inclusion plan, the IDEAA Multi-Year Action Plan, across hospital sites from Ajax to Bowmanville. But they faced a trust challenge: hospital staff had seen similar initiatives come and go, and another corporate-feeling launch video risked undermining the work before it started. At the same time, external stakeholders in Durham Region and public accountability bodies needed to see clear alignment between the film and the IDEAA commitments the plan put on the record. The film had to feel genuine internally and stand up to scrutiny externally, at the same time, without compromise on either side.",
     },
     theApproach: {
       headline: "Real staff, no script, no spokesperson.",
       body:
-        "We built the film entirely on real staff voices across departments and care levels — nurses, physicians, volunteers, administrators, and patient-facing roles — with no scripts and no spokesperson narration. The structure followed the core values of the initiative and showed how each one translated into lived experience for staff, patients, and families. The edit was designed to serve two audiences simultaneously: internal culture building for the 8,700 people inside the organization, and external accountability for the IDEAA commitments Lakeridge had made publicly.",
+        "We built the film entirely on real staff voices across departments and care levels, nurses, physicians, volunteers, administrators, and patient-facing roles, with no scripts and no spokesperson narration. The structure followed the core values of the initiative and showed how each one translated into lived experience for staff, patients, and families. The edit was designed to serve two audiences simultaneously: internal culture building for the 8,700 people inside the organization, and external accountability for the IDEAA commitments Lakeridge had made publicly.",
     },
     theProcess: [
       {
         title: "Cross-department recruitment",
         description:
-          "Working with Lakeridge's IDEAA leadership, we identified staff from multiple departments, career stages, and hospital sites — not the usual spokespeople. The goal was a cross-section of the organization that looked like the communities Durham Region actually serves.",
+          "Working with Lakeridge's IDEAA leadership, we identified staff from multiple departments, career stages, and hospital sites, not the usual spokespeople. The goal was a cross-section of the organization that looked like the communities Durham Region actually serves.",
       },
       {
         title: "Unscripted interview direction",
         description:
-          "We ran interviews without scripts, question prompts, or rehearsal. Staff spoke about inclusion, compassion, innovation, teamwork, and joy in their own words — including the hard parts. The resulting answers carry a credibility no prepared statement could.",
+          "We ran interviews without scripts, question prompts, or rehearsal. Staff spoke about inclusion, compassion, innovation, teamwork, and joy in their own words, including the hard parts. The resulting answers carry a credibility no prepared statement could.",
       },
       {
         title: "Multi-site cinematic coverage",
         description:
-          "Our crew captured footage across multiple Lakeridge Health sites to reflect the system-wide scope of the initiative. Visual pacing was built to match the reflective tone of the interviews — warm, deliberate, and honest.",
+          "Our crew captured footage across multiple Lakeridge Health sites to reflect the system-wide scope of the initiative. Visual pacing was built to match the reflective tone of the interviews, warm, deliberate, and honest.",
       },
       {
         title: "Dual-audience edit",
@@ -598,11 +621,11 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         src: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1400&q=80",
-        caption: "Hallway interview — an I Belong voice.",
+        caption: "Hallway interview, an I Belong voice.",
       },
       {
         src: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=1400&q=80",
-        caption: "Team huddle — inclusion lived day to day.",
+        caption: "Team huddle, inclusion lived day to day.",
       },
       {
         src: "https://images.unsplash.com/photo-1584982751601-97dcc096659c?w=1400&q=80",
@@ -610,7 +633,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         src: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=1400&q=80",
-        caption: "Leadership portrait — the story of I Belong from the top.",
+        caption: "Leadership portrait, the story of I Belong from the top.",
         wide: true,
       },
     ],

@@ -35,7 +35,7 @@ const deliverables = [
   {
     icon: Film,
     title: "Multi-Location Principal Photography",
-    desc: "2–3+ shoot days across your organization\'s most meaningful locations, with a full cinematic crew — DP, camera assistant, sound, gaffer, and production support.",
+    desc: "2–3+ shoot days across your organization\'s most meaningful locations, with a full cinematic crew, DP, camera assistant, sound, gaffer, and production support.",
   },
   {
     icon: Music,
@@ -45,7 +45,7 @@ const deliverables = [
   {
     icon: Sparkles,
     title: "Broadcast Motion Graphics Package",
-    desc: "Animated timelines, data visualization, program maps, and funder reveals built to broadcast standards — not template overlays.",
+    desc: "Animated timelines, data visualization, program maps, and funder reveals built to broadcast standards, not template overlays.",
   },
   {
     icon: Archive,
@@ -89,12 +89,12 @@ const processSteps = [
   {
     step: "03",
     title: "Blueprint",
-    desc: "Narrative architecture, emotional-beat mapping, shot lists, storyboards, production schedule, and creative brief — signed off before any camera rolls.",
+    desc: "Narrative architecture, emotional-beat mapping, shot lists, storyboards, production schedule, and creative brief, signed off before any camera rolls.",
   },
   {
     step: "04",
     title: "Capture",
-    desc: "Multi-location cinematic production with a full creative team. Interviews, B-roll, verite moments, event coverage — captured with the care of a feature documentary.",
+    desc: "Multi-location cinematic production with a full creative team. Interviews, B-roll, verite moments, event coverage, captured with the care of a feature documentary.",
   },
   {
     step: "05",
@@ -104,38 +104,38 @@ const processSteps = [
   {
     step: "06",
     title: "Finish",
-    desc: "Color grading, sound design, music mix, motion graphics polish, and mastering — culminating in a premiere-ready film and a deployment-ready asset library.",
+    desc: "Color grading, sound design, music mix, motion graphics polish, and mastering, culminating in a premiere-ready film and a deployment-ready asset library.",
   },
   {
     step: "07",
     title: "Premiere",
-    desc: "Technical delivery for your gala or premiere event, plus a strategic rollout plan for the film\'s life after — funder reports, social, partner channels, and year-over-year use.",
+    desc: "Technical delivery for your gala or premiere event, plus a strategic rollout plan for the film\'s life after, funder reports, social, partner channels, and year-over-year use.",
   },
 ];
 
 const signatureWork = [
   {
-    title: "CafCan — Our People\'s Keeper",
+    title: "CafCan: Our People\'s Keeper",
     category: "Program Launch Film",
     vimeoId: "1143331891",
   },
   {
-    title: "Black Creek — Black History Month",
+    title: "Black Creek: Black History Month",
     category: "Event Legacy Film",
     vimeoId: "1174716851",
   },
   {
-    title: "Lakeridge Health — I Belong",
+    title: "Lakeridge Health: I Belong",
     category: "Institutional Initiative",
     vimeoId: "1140641190",
   },
   {
-    title: "Hair for Self-Esteem — Muamba Foundation",
+    title: "Hair for Self-Esteem: Muamba Foundation",
     category: "Community Partnership",
     vimeoId: "1135409664",
   },
   {
-    title: "EmployNext — Youth Trades Program",
+    title: "EmployNext: Youth Trades Program",
     category: "Program Portrait",
     vimeoId: "1174716942",
   },
@@ -155,12 +155,12 @@ const principles = [
   {
     icon: Users,
     title: "The team scales with the stakes",
-    desc: "A small documentary is one person with a camera. A Signature Production is a full creative team: director, DP, camera assistant, sound, gaffer, composer, motion designer, and colorist — each chosen for the specific project.",
+    desc: "A small documentary is one person with a camera. A Signature Production is a full creative team: director, DP, camera assistant, sound, gaffer, composer, motion designer, and colorist, each chosen for the specific project.",
   },
   {
     icon: Gem,
     title: "Built to outlive the event",
-    desc: "Signature films are designed to work in the premiere moment AND to keep earning — driving donor renewals, funder conversations, partner trust, and recruitment for years after.",
+    desc: "Signature films are designed to work in the premiere moment AND to keep earning, driving donor renewals, funder conversations, partner trust, and recruitment for years after.",
   },
 ];
 
@@ -169,9 +169,9 @@ const SignatureProduction = () => {
 
   useEffect(() => {
     setSEO({
-      title: "Signature Productions — Impact Loop",
+      title: "Signature Productions: Impact Loop",
       description:
-        "Flagship cinematic films for galas, anniversaries, capital campaigns, and institutional milestones. Multi-location production, original score, broadcast-grade motion graphics, and cinema finishing — built for the moments that define an organization.",
+        "Flagship cinematic films for galas, anniversaries, capital campaigns, and institutional milestones. Multi-location production, original score, broadcast-grade motion graphics, and cinema finishing, built for the moments that define an organization.",
       ogType: "website",
     });
     return resetSEO;
@@ -258,7 +258,7 @@ const SignatureProduction = () => {
         </div>
       </section>
 
-      {/* Editorial break — Gala Premiere (full-bleed) */}
+      {/* Editorial break, Gala Premiere (full-bleed) */}
       <section className="relative h-[60vh] md:h-[70vh] overflow-hidden">
         <img
           src={galaPremierePhoto}
@@ -415,7 +415,7 @@ const SignatureProduction = () => {
         </div>
       </section>
 
-      {/* Editorial split — After the Premiere (funder boardroom) */}
+      {/* Editorial split, After the Premiere (funder boardroom) */}
       <section className="py-24 bg-[hsl(var(--impact-cream))]">
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
@@ -447,10 +447,10 @@ const SignatureProduction = () => {
                 The film\'s second life is where the return compounds.
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                A Signature Production doesn\'t retire after the gala. The same film is reframed for foundation meetings, government funder presentations, major-donor briefings, and board cultivation — wherever credibility with capital decision-makers matters.
+                A Signature Production doesn\'t retire after the gala. The same film is reframed for foundation meetings, government funder presentations, major-donor briefings, and board cultivation, wherever credibility with capital decision-makers matters.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                That\'s why every Signature Production ships with a multi-cut deployment pack — gala master, funder-report cut, social cut, and boardroom edit — engineered to keep earning long after the lights come up.
+                That\'s why every Signature Production ships with a multi-cut deployment pack, gala master, funder-report cut, social cut, and boardroom edit, engineered to keep earning long after the lights come up.
               </p>
             </motion.div>
           </div>
@@ -541,7 +541,7 @@ const SignatureProduction = () => {
         </div>
       </section>
 
-      {/* Editorial split — Partner & Stakeholder Stages (corporate) */}
+      {/* Editorial split, Partner & Stakeholder Stages (corporate) */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
@@ -559,7 +559,7 @@ const SignatureProduction = () => {
                 Built for every stage where trust is being earned.
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Signature Productions anchor more than a single gala. AGMs, investor days, ESG showcases, sponsor activations, and corporate-partner events all call for films that can hold a full room — and hold up on a big screen.
+                Signature Productions anchor more than a single gala. AGMs, investor days, ESG showcases, sponsor activations, and corporate-partner events all call for films that can hold a full room, and hold up on a big screen.
               </p>
               <p className="text-muted-foreground leading-relaxed">
                 When your nonprofit–corporate partnerships hit the main stage, the story needs to match the production value of the room. That\'s what this tier is built for.
@@ -604,7 +604,7 @@ const SignatureProduction = () => {
               Signature Productions are custom-scoped, not packaged. Investment levels are shaped by the number of shoot locations, the depth of archival work, the scale of the motion graphics package, the length of the final film, and the premiere context.
             </p>
             <p className="text-muted-foreground text-lg leading-relaxed mb-10">
-              Every engagement begins with a Signature Brief — a scoped, written proposal that reflects your specific moment, audience, and deliverables. No templates, no guesswork, no surprises.
+              Every engagement begins with a Signature Brief, a scoped, written proposal that reflects your specific moment, audience, and deliverables. No templates, no guesswork, no surprises.
             </p>
             <Link to="/bookings" className="btn-primary inline-flex items-center gap-2">
               Request a Signature Brief

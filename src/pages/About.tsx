@@ -11,7 +11,7 @@ const About = () => {
 
   useEffect(() => {
     setSEO({
-      title: "About — Impact Loop",
+      title: "About: Impact Loop",
       description: "Impact Loop bridges the trust gap for nonprofits and corporations through authentic, cinematic storytelling systems.",
       ogType: "website",
     });

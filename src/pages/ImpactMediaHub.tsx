@@ -14,10 +14,10 @@ import {
 
 const includes = [
   { icon: Globe, title: "Overview & Context", desc: "A branded hero section with your initiative brief, who/what/when/where, and call-to-action." },
-  { icon: Video, title: "Hero Video & Clips", desc: "A cinematic hero video plus individual clips — embedded from YouTube or Vimeo." },
+  { icon: Video, title: "Hero Video & Clips", desc: "A cinematic hero video plus individual clips, embedded from YouTube or Vimeo." },
   { icon: Images, title: "Photo Gallery", desc: "Upload and manage photos with captions. Lightbox viewing. Easy bulk upload." },
-  { icon: Quote, title: "Quotes & Voices", desc: "Participant, partner, and staff quotes with role labels — real voices woven in." },
-  { icon: Handshake, title: "Partners & Presenters", desc: "Logo tiles, spotlight cards, and a partner sharing kit — ready for co-promotion." },
+  { icon: Quote, title: "Quotes & Voices", desc: "Participant, partner, and staff quotes with role labels, real voices woven in." },
+  { icon: Handshake, title: "Partners & Presenters", desc: "Logo tiles, spotlight cards, and a partner sharing kit, ready for co-promotion." },
   { icon: BarChart3, title: "Quick Outcomes", desc: "A small metrics panel showing 4-6 key outcome numbers at a glance." },
   { icon: FileDown, title: "PDF Export", desc: "A polished downloadable report for board meetings and grant applications." },
 ];
@@ -37,8 +37,8 @@ const steps = [
 
 const faqs = [
   { q: "What is an Impact Media Hub?", a: "It's a shareable, story-first web page built for your program, event, campaign, or partnership. It combines video, photos, quotes, partner context, and outcomes into one polished, media-first experience." },
-  { q: "How is this different from a traditional impact report?", a: "Traditional reports are static PDFs. A Media Hub is a living, interactive web page with embedded video, photo galleries, and partner sharing tools — designed to be explored and shared, not just filed away." },
-  { q: "Can I upload my own photos?", a: "Yes. When you're logged in, a bulk photo uploader appears directly on your hub page. Drag and drop or browse to add images — they're stored securely and display in a gallery with lightbox viewing." },
+  { q: "How is this different from a traditional impact report?", a: "Traditional reports are static PDFs. A Media Hub is a living, interactive web page with embedded video, photo galleries, and partner sharing tools, designed to be explored and shared, not just filed away." },
+  { q: "Can I upload my own photos?", a: "Yes. When you're logged in, a bulk photo uploader appears directly on your hub page. Drag and drop or browse to add images, they're stored securely and display in a gallery with lightbox viewing." },
   { q: "Can we embed YouTube or Vimeo videos?", a: "Yes. Hubs support YouTube and Vimeo embeds natively. Your hero video and individual clips are embedded directly in the page." },
   { q: "Who manages the hub after launch?", a: "You do. Photos can be uploaded anytime. For content updates (quotes, partners, outcomes), we can do quarterly refreshes or hand off the keys." },
   { q: "How long does the process take?", a: "A typical hub takes 4–6 weeks from kickoff to launch, depending on the number of stories and complexity of media. Rush timelines are available." },
@@ -47,7 +47,7 @@ const faqs = [
 const ImpactMediaHub = () => {
   useEffect(() => {
     setSEO({
-      title: "Impact Media Hub — Impact Loop",
+      title: "Impact Media Hub: Impact Loop",
       description: "A media-first hub combining cinematic stories, photos, quotes, and outcomes into one shareable page for nonprofits and CSR teams.",
       ogType: "website",
     });
@@ -66,7 +66,7 @@ const ImpactMediaHub = () => {
             A media-first hub built to earn trust
           </motion.h1>
           <motion.p variants={slideUp} initial="hidden" animate="visible" className="text-white/60 text-lg mb-10 max-w-2xl mx-auto">
-            Combine cinematic stories, real outcomes, photos, quotes, and partner assets into one shareable web page — designed for nonprofits, CSR teams, and changemakers.
+            Combine cinematic stories, real outcomes, photos, quotes, and partner assets into one shareable web page, designed for nonprofits, CSR teams, and changemakers.
           </motion.p>
           <motion.div variants={slideUp} initial="hidden" animate="visible" className="flex flex-wrap justify-center gap-4">
             <Link to="/hub/black-creek-bhm" className="btn-primary">View Example Hub</Link>

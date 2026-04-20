@@ -18,7 +18,7 @@ const resourcesDropdown = [
   { href: "/research", label: "Research" },
 ];
 
-// Media Hubs — add corporate hub below when ready
+// Media Hubs, add corporate hub below when ready
 const mediaHubsDropdown = [
   { href: "/hub/black-creek-bhm", label: "Black Creek BHM Hub" },
   { href: "/hub/story-cafcan", label: "CAFCAN OPKT Hub" },

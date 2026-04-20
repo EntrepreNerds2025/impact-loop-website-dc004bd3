@@ -25,11 +25,11 @@ const PdfExportPreview = ({
 
   return (
     <motion.div variants={slideUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="max-w-2xl mx-auto">
-      {/* PDF Preview Card — simulates what the export would look like */}
+      {/* PDF Preview Card, simulates what the export would look like */}
       <div className="bg-card border border-border rounded-xl overflow-hidden shadow-lg">
         {/* Header band */}
         <div className="bg-[hsl(var(--impact-dark))] px-8 py-6 text-center">
-          <p className="text-impact-blue uppercase tracking-widest text-[10px] mb-1">Impact Media Hub — PDF Export</p>
+          <p className="text-impact-blue uppercase tracking-widest text-[10px] mb-1">Impact Media Hub, PDF Export</p>
           <h3 className="font-serif text-xl md:text-2xl text-white font-bold leading-tight">{hubTitle}</h3>
           <p className="text-white/50 text-xs mt-1">{hubSubtitle}</p>
         </div>
@@ -50,7 +50,7 @@ const PdfExportPreview = ({
           {topQuotes.map((q, i) => (
             <div key={i} className="border-l-2 border-impact-blue pl-3">
               <p className="text-foreground text-xs italic leading-relaxed">"{q.text}"</p>
-              <p className="text-muted-foreground text-[10px] mt-0.5">— {q.name}, {q.role}</p>
+              <p className="text-muted-foreground text-[10px] mt-0.5">,  {q.name}, {q.role}</p>
             </div>
           ))}
         </div>
@@ -73,12 +73,12 @@ const PdfExportPreview = ({
             {isDemoMode ? "Download PDF (Demo)" : "Download PDF"}
           </button>
           {isDemoMode && (
-            <p className="text-muted-foreground text-xs mt-3">Demo hub — PDF exports are available in real hubs.</p>
+            <p className="text-muted-foreground text-xs mt-3">Demo hub, PDF exports are available in real hubs.</p>
           )}
         </div>
       ) : (
         <p className="text-center text-muted-foreground text-xs mt-6 max-w-md mx-auto">
-          A branded PDF summary is included with every client engagement — ready to share with your board, funders, or media.
+          A branded PDF summary is included with every client engagement, ready to share with your board, funders, or media.
         </p>
       )}
     </motion.div>
