@@ -368,26 +368,8 @@ const ServiceCard = ({
             </div>
           )}
 
-          {/* Price + CTA row */}
-          <div className="mt-auto flex flex-wrap items-end justify-between gap-4 pt-4 border-t border-white/10">
-            <div>
-              <div
-                className={`font-bold text-lg font-serif ${
-                  isFeatured ? "text-white" : "text-foreground"
-                }`}
-              >
-                {displayPrice}
-              </div>
-              {displayPriceNote && (
-                <div
-                  className={`text-xs ${
-                    isFeatured ? "text-white/40" : "text-muted-foreground"
-                  }`}
-                >
-                  {displayPriceNote}
-                </div>
-              )}
-            </div>
+          {/* CTA row */}
+          <div className="mt-auto flex flex-wrap items-end justify-end gap-4 pt-4 border-t border-white/10">
             <Link
               to={service.ctaHref}
               className={`inline-flex items-center gap-2 font-medium text-sm transition-colors duration-300 ${
