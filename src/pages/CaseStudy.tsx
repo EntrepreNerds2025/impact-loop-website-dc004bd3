@@ -293,6 +293,35 @@ const CaseStudy = () => {
         </div>
       </section>
 
+      {/* ─── Editorial accent photo (single, tasteful break) ─── */}
+      {study.gallery && study.gallery.length > 0 && (
+        <section className="bg-background">
+          <div className="container mx-auto px-6 py-16">
+            <div className="max-w-6xl mx-auto">
+              <motion.figure
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.8 }}
+                className="group relative overflow-hidden rounded-xl bg-[hsl(var(--impact-dark))] shadow-lg"
+                style={{ aspectRatio: "16 / 9" }}
+              >
+                <img
+                  src={study.gallery[0].src}
+                  alt={study.gallery[0].caption}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--impact-dark))]/70 via-transparent to-transparent" />
+                <figcaption className="absolute bottom-0 left-0 right-0 p-6 text-white/90 text-sm md:text-base font-medium">
+                  {study.gallery[0].caption}
+                </figcaption>
+              </motion.figure>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ─── The Result ─── */}
       <section className="py-24 section-dark">
         <div className="container mx-auto px-6">

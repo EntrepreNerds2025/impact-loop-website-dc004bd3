@@ -30,10 +30,10 @@ const Footer = () => {
                 { href: "/about", label: "About" },
                 { href: "/work", label: "Work" },
                 { href: "/services", label: "Services" },
+                { href: "/signature-production", label: "Signature Production" },
                 { href: "/impact-media-hub", label: "Impact Media Hub" },
                 { href: "/research", label: "Research" },
                 { href: "/blog", label: "Blog" },
-                
                 { href: "/contact", label: "Contact Us" },
                 { href: "/bookings", label: "Book a Call" },
               ].map((link) => (
@@ -83,7 +83,7 @@ const Footer = () => {
               to="/login"
               className="inline-block text-impact-blue hover:text-impact-purple text-sm font-medium transition-colors duration-300"
             >
-              Login to Client Portal →
+              Login to Client Portal â
             </Link>
           </div>
         </div>
@@ -91,7 +91,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-white/40 text-sm">
-            © {currentYear} Impact Loop. All rights reserved.
+            Â© {currentYear} Impact Loop. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <Link

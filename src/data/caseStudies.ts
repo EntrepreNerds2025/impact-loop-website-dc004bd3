@@ -32,6 +32,13 @@ export interface Partner {
   role?: string;
 }
 
+export interface GalleryPhoto {
+  src: string;
+  caption: string;
+  /** When true, this image spans two columns in the grid for editorial rhythm. */
+  wide?: boolean;
+}
+
 export interface CaseStudy {
   slug: string;
   title: string;
@@ -61,6 +68,11 @@ export interface CaseStudy {
   partners?: Partner[];
   hubLink?: string;
   related?: string[];
+  /**
+   * Optional editorial photo gallery. Placeholder images from Unsplash are
+   * fine to start — swap with real production stills when available.
+   */
+  gallery?: GalleryPhoto[];
 }
 
 export const caseStudies: CaseStudy[] = [
@@ -136,10 +148,34 @@ export const caseStudies: CaseStudy[] = [
         { value: "Multi", label: "Training Centres Filmed" },
       ],
     },
+    gallery: [
+      {
+        src: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1400&q=80",
+        caption: "Program participants on the training floor.",
+        wide: true,
+      },
+      {
+        src: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1400&q=80",
+        caption: "Hands-on skills practice under supervisor guidance.",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1400&q=80",
+        caption: "Training centre — where classroom meets industry.",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1607703703520-bb638e84caf2?w=1400&q=80",
+        caption: "Graduate portrait — the moment work becomes career.",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1400&q=80",
+        caption: "Employer-partner site visit.",
+        wide: true,
+      },
+    ],
     related: ["hair-for-self-esteem", "cafcan-opkt"],
   },
 
-  /* ───────────────────── Hair for Self-Esteem ──────────────────── */
+  /* ──────────────────── Hair for Self-Esteem ──────────────────── */
   {
     slug: "hair-for-self-esteem",
     title: "Hair for Self-Esteem",
@@ -215,6 +251,30 @@ export const caseStudies: CaseStudy[] = [
       { name: "Muamba Foundation", role: "Program partner and funder" },
       { name: "Bartley Skills Development Program", role: "Trade hours and braiders" },
       { name: "Aylesbury Public School", role: "Host school and classroom access" },
+    ],
+    gallery: [
+      {
+        src: "https://images.unsplash.com/photo-1622296089780-290d1a81bde2?w=1400&q=80",
+        caption: "The chair — where the conversation starts.",
+        wide: true,
+      },
+      {
+        src: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=1400&q=80",
+        caption: "Care that goes beyond the cut.",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1400&q=80",
+        caption: "Community salon space — youth welcome.",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=1400&q=80",
+        caption: "The after — self-image, reset.",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1595475884562-073c30d45670?w=1400&q=80",
+        caption: "Mentorship in motion between Muamba and the barbers.",
+        wide: true,
+      },
     ],
     related: ["employnext-youth-trades", "black-creek-bhm"],
   },
@@ -306,6 +366,30 @@ export const caseStudies: CaseStudy[] = [
       { name: "Ella Charles Cuisine", role: "Cultural food programming" },
     ],
     hubLink: "/hub/black-creek-bhm",
+    gallery: [
+      {
+        src: "https://images.unsplash.com/photo-1531058020387-3be344556be6?w=1400&q=80",
+        caption: "Community gathering — Black Creek neighbours, together.",
+        wide: true,
+      },
+      {
+        src: "https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=1400&q=80",
+        caption: "Intergenerational moments on the community floor.",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=1400&q=80",
+        caption: "Families on the event floor.",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1400&q=80",
+        caption: "Performance spotlight — a cultural showcase moment.",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=1400&q=80",
+        caption: "Dr. Akeem Stewart addressing the community.",
+        wide: true,
+      },
+    ],
     related: ["cafcan-opkt", "hair-for-self-esteem"],
   },
 
@@ -403,6 +487,30 @@ export const caseStudies: CaseStudy[] = [
       { name: "City of Toronto", role: "Municipal partner" },
     ],
     hubLink: "/hub/story-cafcan",
+    gallery: [
+      {
+        src: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1400&q=80",
+        caption: "Refugee cohort participants in session together.",
+        wide: true,
+      },
+      {
+        src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1400&q=80",
+        caption: "Group discussion — story work in practice.",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1515168833906-d2a3b82b302a?w=1400&q=80",
+        caption: "CafCan staff guiding a cohort session.",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=1400&q=80",
+        caption: "Newcomer families connecting across cultures.",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=1400&q=80",
+        caption: "Program graduation — a quiet milestone.",
+        wide: true,
+      },
+    ],
     related: ["black-creek-bhm", "employnext-youth-trades"],
   },
 
@@ -481,6 +589,30 @@ export const caseStudies: CaseStudy[] = [
     },
     partners: [
       { name: "Lakeridge Health", role: "Lead organization" },
+    ],
+    gallery: [
+      {
+        src: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1400&q=80",
+        caption: "Lakeridge Health staff on the front line.",
+        wide: true,
+      },
+      {
+        src: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1400&q=80",
+        caption: "Hallway interview — an I Belong voice.",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=1400&q=80",
+        caption: "Team huddle — inclusion lived day to day.",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1584982751601-97dcc096659c?w=1400&q=80",
+        caption: "Care in practice across Durham Region.",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=1400&q=80",
+        caption: "Leadership portrait — the story of I Belong from the top.",
+        wide: true,
+      },
     ],
     related: ["cafcan-opkt", "black-creek-bhm"],
   },

@@ -32,7 +32,7 @@ const deliverables = [
   {
     icon: Film,
     title: "Multi-Location Principal Photography",
-    desc: "2\u20133+ shoot days across your organization's most meaningful locations, with a full cinematic crew \u2014 DP, camera assistant, sound, gaffer, and production support.",
+    desc: "2–3+ shoot days across your organization's most meaningful locations, with a full cinematic crew — DP, camera assistant, sound, gaffer, and production support.",
   },
   {
     icon: Music,
@@ -42,7 +42,7 @@ const deliverables = [
   {
     icon: Sparkles,
     title: "Broadcast Motion Graphics Package",
-    desc: "Animated timelines, data visualization, program maps, and funder reveals built to broadcast standards \u2014 not template overlays.",
+    desc: "Animated timelines, data visualization, program maps, and funder reveals built to broadcast standards — not template overlays.",
   },
   {
     icon: Archive,
@@ -86,12 +86,12 @@ const processSteps = [
   {
     step: "03",
     title: "Blueprint",
-    desc: "Narrative architecture, emotional-beat mapping, shot lists, storyboards, production schedule, and creative brief \u2014 signed off before any camera rolls.",
+    desc: "Narrative architecture, emotional-beat mapping, shot lists, storyboards, production schedule, and creative brief — signed off before any camera rolls.",
   },
   {
     step: "04",
     title: "Capture",
-    desc: "Multi-location cinematic production with a full creative team. Interviews, B-roll, verite moments, event coverage \u2014 captured with the care of a feature documentary.",
+    desc: "Multi-location cinematic production with a full creative team. Interviews, B-roll, verite moments, event coverage — captured with the care of a feature documentary.",
   },
   {
     step: "05",
@@ -101,38 +101,38 @@ const processSteps = [
   {
     step: "06",
     title: "Finish",
-    desc: "Color grading, sound design, music mix, motion graphics polish, and mastering \u2014 culminating in a premiere-ready film and a deployment-ready asset library.",
+    desc: "Color grading, sound design, music mix, motion graphics polish, and mastering — culminating in a premiere-ready film and a deployment-ready asset library.",
   },
   {
     step: "07",
     title: "Premiere",
-    desc: "Technical delivery for your gala or premiere event, plus a strategic rollout plan for the film's life after \u2014 funder reports, social, partner channels, and year-over-year use.",
+    desc: "Technical delivery for your gala or premiere event, plus a strategic rollout plan for the film's life after — funder reports, social, partner channels, and year-over-year use.",
   },
 ];
 
 const signatureWork = [
   {
-    title: "CafCan \u2014 Our People's Keeper",
+    title: "CafCan — Our People's Keeper",
     category: "Program Launch Film",
     vimeoId: "1143331891",
   },
   {
-    title: "Black Creek \u2014 Black History Month",
+    title: "Black Creek — Black History Month",
     category: "Event Legacy Film",
     vimeoId: "1174716851",
   },
   {
-    title: "Lakeridge Health \u2014 I Belong",
+    title: "Lakeridge Health — I Belong",
     category: "Institutional Initiative",
     vimeoId: "1140641190",
   },
   {
-    title: "Hair for Self-Esteem \u2014 Muamba Foundation",
+    title: "Hair for Self-Esteem — Muamba Foundation",
     category: "Community Partnership",
     vimeoId: "1135409664",
   },
   {
-    title: "EmployNext \u2014 Youth Trades Program",
+    title: "EmployNext — Youth Trades Program",
     category: "Program Portrait",
     vimeoId: "1174716942",
   },
@@ -140,6 +140,34 @@ const signatureWork = [
     title: "Reddit AI Search Event",
     category: "Event Recap",
     vimeoId: "1168847247",
+  },
+];
+
+// Behind-the-lens / on-set photography — placeholders, swap with real BTS later
+const craftGallery = [
+  {
+    src: "https://images.unsplash.com/photo-1500210439973-4e13a0fda3cb?w=1400&q=80",
+    caption: "On location — cinematic capture with a full creative team.",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1400&q=80",
+    caption: "Interview lighting — shaped for a portrait-grade documentary look.",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1574717024453-354441e77e2c?w=1400&q=80",
+    caption: "Camera team on a multi-location principal photography day.",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=1400&q=80",
+    caption: "Broadcast-grade post — color, sound, and motion in one finishing suite.",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1533928298208-27ff66555d8d?w=1400&q=80",
+    caption: "Original score session — composed to the emotional arc of the cut.",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1478720568477-b0829d60ba2a?w=1400&q=80",
+    caption: "Premiere night — the gala projection, built to land in the room.",
   },
 ];
 
@@ -152,12 +180,12 @@ const principles = [
   {
     icon: Users,
     title: "The team scales with the stakes",
-    desc: "A small documentary is one person with a camera. A Signature Production is a full creative team: director, DP, camera assistant, sound, gaffer, composer, motion designer, and colorist \u2014 each chosen for the specific project.",
+    desc: "A small documentary is one person with a camera. A Signature Production is a full creative team: director, DP, camera assistant, sound, gaffer, composer, motion designer, and colorist — each chosen for the specific project.",
   },
   {
     icon: Gem,
     title: "Built to outlive the event",
-    desc: "Signature films are designed to work in the premiere moment AND to keep earning \u2014 driving donor renewals, funder conversations, partner trust, and recruitment for years after.",
+    desc: "Signature films are designed to work in the premiere moment AND to keep earning — driving donor renewals, funder conversations, partner trust, and recruitment for years after.",
   },
 ];
 
@@ -166,9 +194,9 @@ const SignatureProduction = () => {
 
   useEffect(() => {
     setSEO({
-      title: "Signature Productions \u2014 Impact Loop",
+      title: "Signature Productions — Impact Loop",
       description:
-        "Flagship cinematic films for galas, anniversaries, capital campaigns, and institutional milestones. Multi-location production, original score, broadcast-grade motion graphics, and cinema finishing \u2014 built for the moments that define an organization.",
+        "Flagship cinematic films for galas, anniversaries, capital campaigns, and institutional milestones. Multi-location production, original score, broadcast-grade motion graphics, and cinema finishing — built for the moments that define an organization.",
       ogType: "website",
     });
     return resetSEO;
@@ -464,6 +492,60 @@ const SignatureProduction = () => {
               <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Behind the Lens — editorial photography strip */}
+      <section className="py-24 bg-[hsl(var(--impact-cream))]">
+        <div className="container mx-auto px-6">
+          <motion.div
+            variants={fadeIn}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0}
+            className="text-center mb-14 max-w-3xl mx-auto"
+          >
+            <p className="text-[hsl(var(--impact-blue))] text-xs font-semibold tracking-[0.3em] uppercase mb-4">
+              Behind the Lens
+            </p>
+            <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-4">
+              The Craft Behind the Film.
+            </h2>
+            <p className="text-muted-foreground">
+              A Signature Production is a full creative team on set for multiple shoot days, a dedicated finishing suite in post, and original score sessions written to the cut. The craft shows up on screen.
+            </p>
+          </motion.div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 max-w-6xl mx-auto">
+            {craftGallery.map((photo, i) => (
+              <motion.figure
+                key={photo.src}
+                variants={fadeIn}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={i}
+                className={`relative overflow-hidden rounded-lg bg-[hsl(var(--impact-dark))] group ${
+                  i === 0 || i === 3 ? "md:col-span-2 md:row-span-1" : ""
+                }`}
+                style={{ aspectRatio: i === 0 || i === 3 ? "16 / 9" : "4 / 5" }}
+              >
+                <img
+                  src={photo.src}
+                  alt={photo.caption}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--impact-dark))]/80 via-transparent to-transparent" />
+                <figcaption className="absolute bottom-0 left-0 right-0 p-4 text-white/90 text-xs md:text-sm font-medium">
+                  {photo.caption}
+                </figcaption>
+              </motion.figure>
+            ))}
+          </div>
+          <p className="text-center text-muted-foreground/70 text-xs mt-8 italic">
+            Selected production stills. Full behind-the-scenes galleries available on request.
+          </p>
         </div>
       </section>
 
