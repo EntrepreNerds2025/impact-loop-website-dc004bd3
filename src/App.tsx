@@ -18,6 +18,7 @@ import HubCafcanOPKT from "./pages/HubCafcanOPKT";
 import Research from "./pages/Research";
 import ReportMetricsThatMatter from "./pages/ReportMetricsThatMatter";
 import CinematicImpactFilms from "./pages/CinematicImpactFilms";
+import SignatureProduction from "./pages/SignatureProduction";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Blog from "./pages/Blog";
@@ -60,6 +61,9 @@ const App = () => (
           <Route path="/research" element={<Research />} />
           <Route path="/research/metrics-that-matter-2026" element={<ReportMetricsThatMatter />} />
           <Route path="/cinematic-impact-films" element={<CinematicImpactFilms />} />
+          <Route path="/signature-production" element={<SignatureProduction />} />
+          <Route path="/signature-productions" element={<Navigate to="/signature-production" replace />} />
+          <Route path="/signature" element={<Navigate to="/signature-production" replace />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/terms" element={<Terms />} />

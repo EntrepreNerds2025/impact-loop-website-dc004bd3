@@ -6,6 +6,7 @@ import logoWhite from "@/assets/logos/impact-loop-white.png";
 import logoBlack from "@/assets/logos/impact-loop-black.png";
 
 const servicesDropdown = [
+  { href: "/signature-production", label: "Signature Productions" },
   { href: "/cinematic-impact-films", label: "Cinematic Impact Films" },
   { href: "/impact-media-hub", label: "Impact Media Hub" },
   { href: "/services", label: "Workshops & Training" },
@@ -79,8 +80,9 @@ const Header = () => {
         : active ? "text-white" : "text-white/70 hover:text-white"
     }`;
 
-  const isServicesActive = ["/services", "/cinematic-impact-films"].includes(location.pathname) ||
-    location.pathname.startsWith("/services");
+  const isServicesActive = ["/services", "/cinematic-impact-films", "/signature-production", "/impact-media-hub"].includes(location.pathname) ||
+    location.pathname.startsWith("/services") ||
+    location.pathname.startsWith("/signature");
 
   const isResourcesActive = location.pathname.startsWith("/research") || location.pathname.startsWith("/blog");
 
@@ -192,42 +194,30 @@ const Header = () => {
     </>
   );
 
-  useEffect(() => {
-    if (!isMobileMenuOpen) {
-      document.body.style.overflow = "";
-      return;
-    }
-
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isMobileMenuOpen]);
-
-  const isHeaderSolid = isScrolled || isMobileMenuOpen;
-
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isHeaderSolid
+        isScrolled
           ? "bg-background/95 backdrop-blur-md py-4 shadow-sm"
           : "bg-transparent py-6"
       }`}
     >
-      <div className="container mx-auto px-6 flex items-center justify-between relative z-50">
-        <Link to="/" className="flex items-center gap-3">
+      <div className="container mx-auto px-6 flex items-center justify-between">
+        {/* Logo */}
+         <Link to="/" className="flex items-center gap-3">
           <img
-            src={isHeaderSolid ? logoBlack : logoWhite}
+            src={isScrolled ? logoBlack : logoWhite}
             alt="Impact Loop"
             className="h-10 w-auto transition-opacity duration-500"
           />
           <span className={`font-serif text-xl font-semibold tracking-wide transition-colors duration-500 ${
-            isHeaderSolid ? "text-foreground" : "text-white"
+            isScrolled ? "text-foreground" : "text-white"
           }`}>
             Impact Loop
           </span>
         </Link>
 
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
           <Link to="/" className={navLinkClass(location.pathname === "/")}>Home</Link>
           <Link to="/work" className={navLinkClass(location.pathname === "/work")}>Work</Link>
@@ -270,9 +260,10 @@ const Header = () => {
           </Link>
         </nav>
 
+        {/* Mobile Menu Button */}
         <button
           className={`md:hidden p-2 transition-colors duration-300 ${
-            isHeaderSolid ? "text-foreground" : "text-white"
+            isScrolled ? "text-foreground" : "text-white"
           }`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
@@ -281,16 +272,16 @@ const Header = () => {
         </button>
       </div>
 
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -24 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -24 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 md:hidden bg-background z-40 overflow-y-auto"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-background/98 backdrop-blur-md"
           >
-            <nav className="container mx-auto min-h-screen px-6 pt-24 pb-8 flex flex-col gap-1">
+            <nav className="container mx-auto px-6 py-6 flex flex-col gap-1">
               <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium py-2 text-foreground/60 hover:text-foreground">Home</Link>
               <Link to="/work" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium py-2 text-foreground/60 hover:text-foreground">Work</Link>
 
@@ -301,15 +292,13 @@ const Header = () => {
               <Link to="/about" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium py-2 text-foreground/60 hover:text-foreground">About</Link>
               <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium py-2 text-foreground/60 hover:text-foreground">Contact</Link>
 
-              <div className="mt-auto pt-6">
-                <Link
-                  to="/bookings"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="btn-primary block text-center"
-                >
-                  Book a Story Call
-                </Link>
-              </div>
+              <Link
+                to="/bookings"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="btn-primary text-center mt-4"
+              >
+                Book a Story Call
+              </Link>
             </nav>
           </motion.div>
         )}
