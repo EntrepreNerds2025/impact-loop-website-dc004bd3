@@ -177,10 +177,6 @@ const HubBlackCreekBHM = () => {
   const [showAllClips, setShowAllClips] = useState(false);
   const [showAllPhotos, setShowAllPhotos] = useState(false);
 
-  const handleDemoDownload = () => {
-    toast({ title: "Coming Soon", description: "PDF export will be available when this hub is finalized." });
-  };
-
   const heroVimeoId = "1174716851";
 
   const allMedia: MediaItem[] = useMemo(() => [
@@ -514,7 +510,8 @@ const HubBlackCreekBHM = () => {
                   hubSubtitle="Black Creek Community Health Centre • February 2025"
                   outcomes={outcomes}
                   quotes={quotes}
-                  onDownload={handleDemoDownload}
+                  isDemoMode={false}
+                  hideDownload
                 />
               </div>
             </section>
@@ -560,3 +557,4 @@ const HubBlackCreekBHM = () => {
 
 export default HubBlackCreekBHM;
 
+                                                                                                                                          

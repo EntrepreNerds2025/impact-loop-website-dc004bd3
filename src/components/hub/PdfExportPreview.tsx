@@ -9,6 +9,7 @@ interface PdfExportPreviewProps {
   quotes: { text: string; name: string; role: string }[];
   onDownload?: () => void;
   isDemoMode?: boolean;
+  hideDownload?: boolean;
 }
 
 const PdfExportPreview = ({
@@ -18,6 +19,7 @@ const PdfExportPreview = ({
   quotes,
   onDownload,
   isDemoMode = true,
+  hideDownload = false,
 }: PdfExportPreviewProps) => {
   const topQuotes = quotes.slice(0, 3);
 
@@ -60,21 +62,15 @@ const PdfExportPreview = ({
         </div>
       </div>
 
-      {/* Download button */}
-      <div className="text-center mt-6">
-        <button
-          onClick={onDownload}
-          className="btn-primary inline-flex items-center gap-2"
-        >
-          <FileDown className="w-4 h-4" />
-          {isDemoMode ? "Download PDF (Demo)" : "Download PDF"}
-        </button>
-        {isDemoMode && (
-          <p className="text-muted-foreground text-xs mt-3">Demo hub — PDF exports are available in real hubs.</p>
-        )}
-      </div>
-    </motion.div>
-  );
-};
-
-export default PdfExportPreview;
+      {/* Download button / caption */}
+      {!hideDownload ? (
+        <div className="text-center mt-6">
+          <button
+            onClick={onDownload}
+            className="btn-primary inline-flex items-center gap-2"
+          >
+            <FileDown className="w-4 h-4" />
+            {isDemoMode ? "Download PDF (Demo)" : "Download PDF"}
+          </button>
+          {isDemoMode && (
+            <p className="text-muted-foreground text-xs mt-3">Demo hub — PDF exports are available in

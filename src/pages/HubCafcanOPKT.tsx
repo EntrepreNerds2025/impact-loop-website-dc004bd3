@@ -17,17 +17,16 @@ import MediaLightbox, { type MediaItem } from "@/components/shared/MediaLightbox
 import cafcanLogo from "@/assets/logos/cafcan.png";
 import upwithwomenLogo from "@/assets/hub/cafcan-opkt/logos/upwithwomen.jpg";
 import cibcLogo from "@/assets/hub/cafcan-opkt/logos/cibc.svg";
-import tdgLogo from "@/assets/hub/cafcan-opkt/logos/tdg.webp";
+import tdgLogo from "@/assets/hub/cafcan-opkt/logos/tdg.png";
 import impaktLogo from "@/assets/hub/cafcan-opkt/logos/impakt-foundation.png";
-import homesFirstLogo from "@/assets/hub/cafcan-opkt/logos/homes-first.png";
-import christieLogo from "@/assets/hub/cafcan-opkt/logos/christie-refugee.jpg";
-import torontoLogo from "@/assets/hub/cafcan-opkt/logos/toronto.png";
-import cafcanFullLogo from "@/assets/hub/cafcan-opkt/logos/cafcan-full.png";
+import homesFirstLogo from "@/assets/hub/cafcan-opkt/logos/homes-first.svg";
+import christieLogo from "@/assets/hub/cafcan-opkt/logos/christie-refugee.png";
+import torontoLogo from "@/assets/hub/cafcan-opkt/logos/toronto.svg";
 
 /* ─── Sections nav ─── */
 const sections = [
   { id: "overview", label: "Overview", icon: BookOpen },
-  
+  { id: "program", label: "Program", icon: BookOpen },
   { id: "hero-video", label: "Main Film", icon: Video },
   { id: "testimonials", label: "Testimonials", icon: Quote },
   { id: "clips", label: "Testimonial Clips", icon: Play },
@@ -186,7 +185,7 @@ const programPillars = [
   { label: "System Navigation", value: "Guidance accessing federal and provincial programs, healthcare, and education." },
 ];
 
-/* ─── Quotes (placeholder, to be filled from real testimonials) ─── */
+/* ─── Participant testimonials from OPKT cohorts ─── */
 const quotes = [
   { text: "This program gave me the confidence to advocate for myself and my family in a country where everything felt unfamiliar.", name: "Program Participant", role: "OPKT Cohort Member" },
   { text: "The workshops helped me understand the Canadian job market and build connections I never thought possible.", name: "Program Participant", role: "OPKT Cohort Member" },
@@ -207,12 +206,12 @@ const outcomes = [
 const partnerLogos = [
   { name: "Up With Women", logo: upwithwomenLogo },
   { name: "CIBC", logo: cibcLogo },
-  { name: "TBDC", logo: tdgLogo },
+  { name: "TDG", logo: tdgLogo },
   { name: "Impakt Foundation for Social Change", logo: impaktLogo },
   { name: "Homes First", logo: homesFirstLogo },
   { name: "Christie Refugee Welcome Centre", logo: christieLogo },
   { name: "City of Toronto", logo: torontoLogo },
-  { name: "CAFCAN Social Services", logo: cafcanFullLogo },
+  { name: "CAFCAN Social Services", logo: cafcanLogo },
 ];
 
 const INITIAL_PHOTOS_VISIBLE = 12;
@@ -291,7 +290,7 @@ const HubCafcanOPKT = () => {
   const [zipProgress, setZipProgress] = useState(0);
 
   const heroVimeoId = "1143331891";
-  const featuredVimeoId = "1183558738";
+  const featuredYouTubeId = "lcdbgNcaMe8";
 
   /* Get current tab's photos */
   const currentPhotos = useMemo(() => {
@@ -324,10 +323,6 @@ const HubCafcanOPKT = () => {
     if (!photo) return;
     const idx = allMedia.findIndex(m => m.type === "photo" && m.src === photo.src);
     if (idx >= 0) setLightboxIndex(idx);
-  };
-
-  const handleDemoDownload = () => {
-    toast({ title: "Coming Soon", description: "PDF export will be available when this hub is finalized." });
   };
 
   const downloadSinglePhoto = useCallback(async (src: string, title?: string) => {
@@ -438,6 +433,22 @@ const HubCafcanOPKT = () => {
               </div>
             </section>
 
+            {/* 2. Program Pillars */}
+            <section id="program" className="py-16 md:py-20 bg-[hsl(var(--impact-cream))]">
+              <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
+                <h2 className="font-serif text-2xl md:text-5xl font-bold text-foreground mb-8 md:mb-12 text-center">Program Pillars</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                  {programPillars.map((d, idx) => (
+                    <div key={d.label} className="bg-white border border-border rounded-xl p-4 md:p-6 shadow-sm">
+                      <p className="text-impact-blue text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] md:tracking-widest mb-2">
+                        {String(idx + 1).padStart(2, "0")} &bull; {d.label}
+                      </p>
+                      <p className="text-foreground text-sm md:text-base leading-relaxed">{d.value}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
 
             {/* 3. Hero Video */}
             <section id="hero-video" className="section-dark py-20">
@@ -475,25 +486,16 @@ const HubCafcanOPKT = () => {
                 </p>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                  {/* Featured testimonial video (Vimeo) */}
-                  <div
-                    className="group relative overflow-hidden rounded-xl cursor-pointer bg-black lg:mt-8"
-                    style={{ aspectRatio: "16 / 9" }}
-                    onClick={() => openVideo(featuredVimeoId)}
-                  >
+                  {/* Featured testimonial video (YouTube) */}
+                  <div className="relative overflow-hidden rounded-xl bg-black lg:mt-8" style={{ aspectRatio: "16 / 9" }}>
                     <iframe
-                      src={`https://player.vimeo.com/video/${featuredVimeoId}?background=1&autoplay=1&loop=1&muted=1`}
-                      className="absolute pointer-events-none"
-                      style={{ border: 0, width: "140%", height: "140%", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
-                      allow="autoplay"
+                      src={`https://www.youtube.com/embed/${featuredYouTubeId}?rel=0&modestbranding=1`}
+                      className="absolute inset-0 w-full h-full"
+                      style={{ border: 0 }}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
                       title="Featured OPKT Participant Testimonial"
                     />
-                    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/60 transition-colors duration-300" />
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="w-16 h-16 rounded-full bg-primary/80 backdrop-blur-sm flex items-center justify-center">
-                        <Play className="w-7 h-7 text-primary-foreground ml-1" fill="white" />
-                      </div>
-                    </div>
                   </div>
 
                   {/* Write-up */}
@@ -670,10 +672,11 @@ const HubCafcanOPKT = () => {
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-12 text-center">PDF Export</h2>
                 <PdfExportPreview
                   hubTitle="Our People's Keeper, Too (OPKT)"
-                  hubSubtitle="CAFCAN Social Services \u2022 2025\u20132026"
+                  hubSubtitle="CAFCAN Social Services • 2025–2026"
                   outcomes={outcomes}
                   quotes={quotes}
-                  onDownload={handleDemoDownload}
+                  isDemoMode={false}
+                  hideDownload
                 />
               </div>
             </section>
@@ -718,3 +721,4 @@ const HubCafcanOPKT = () => {
 };
 
 export default HubCafcanOPKT;
+                                                                                                 
