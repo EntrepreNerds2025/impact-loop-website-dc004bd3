@@ -21,7 +21,7 @@ import CommunicationOSGraphic from "@/components/services/CommunicationOSGraphic
 import founderPhoto from "@/assets/founder/rovonn.png";
 import blackCreekPhoto from "@/assets/hub/black-creek-bhm/photos/DSC06165.jpg";
 
-// ─── Service definitions ───────────────────────────────────────────
+// ─── Service definitions ─────────────────────────────────────────────
 
 interface ServiceDef {
   id: string;
@@ -36,6 +36,9 @@ interface ServiceDef {
   cta: string;
   ctaHref: string;
   featured?: boolean;
+  /** Variant controls the featured card color. "primary" = warm dark (nonprofit/legacy), "secondary" = deep blue (corporate/everyday). */
+  featuredVariant?: "primary" | "secondary";
+  flagshipLabel?: string;
   outcomes?: string[];
   visual?: "employNextPreview" | "mediaHubPhoto" | "advisoryPhoto" | "commOSGraphic";
   lanes: ("nonprofit" | "corporate")[];
@@ -94,13 +97,15 @@ const allServices: ServiceDef[] = [
     phase: "04",
     label: "Signature Production",
     title: "Signature Productions",
-    tagline: "Flagship tier — for legacy moments and institutional milestones",
+    tagline: "Nonprofit flagship tier — for galas, capital campaigns, and legacy moments",
     description:
-      "Multi-location cinematic productions built for galas, anniversary celebrations, capital campaigns, and institutional milestones. A full creative team, original score, broadcast-grade motion graphics, archival integration, and cinema-grade finishing — designed to live as the definitive film of a defining moment.",
+      "Cinema-grade productions built for the moments that define a nonprofit's decade — gala premieres, capital campaign launches, anniversary celebrations, and major funder premieres. A full creative team, original score, broadcast-grade motion graphics, archival integration, and cinema-grade finishing — engineered to move a room of donors and keep earning value in every funder conversation that follows.",
     icon: Award,
     cta: "Explore Signature Productions",
     ctaHref: "/signature-production",
     featured: true,
+    featuredVariant: "primary",
+    flagshipLabel: "Nonprofit Flagship",
     outcomes: [
       "Multi-location principal photography (2–3+ shoot days)",
       "Original composed score and full sound design",
@@ -114,20 +119,23 @@ const allServices: ServiceDef[] = [
   {
     id: "cinematic-films",
     phase: "05",
-    label: "Documentary Tier",
+    label: "Corporate Flagship",
     title: "Cinematic Impact Films",
-    tagline: "Project-based — your most credible everyday story asset",
+    tagline: "Corporate flagship tier — brand films, ESG stories, and stakeholder trust assets",
     description:
-      "Documentary-style films that capture real people and real outcomes with the production quality that earns trust with donors, board members, funders, and corporate partners. Built to live for years and serve multiple audiences.",
+      "Documentary-style brand and impact films engineered for corporate audiences — investors, boards, employees, partners, and the public. We capture real people, real outcomes, and real work with the production quality that earns trust from institutional stakeholders. Built to anchor ESG reports, investor communications, recruitment narratives, and corporate social impact storytelling for years.",
     icon: Video,
     cta: "See Our Work",
     ctaHref: "/cinematic-impact-films",
+    featured: true,
+    featuredVariant: "secondary",
+    flagshipLabel: "Corporate Flagship",
     visual: "employNextPreview",
     outcomes: [
-      "Flagship impact film (60–180 seconds)",
-      "6–12 short cutdowns for LinkedIn and social",
-      "Story blueprint and interview plan",
-      "Strategic deployment guidance",
+      "Flagship brand film (60–180 seconds)",
+      "6–12 short cutdowns for LinkedIn, investor decks, and internal comms",
+      "Story blueprint and stakeholder interview plan",
+      "Deployment guidance for board, investor, and public audiences",
     ],
     lanes: ["nonprofit", "corporate"],
   },
@@ -194,7 +202,7 @@ const allServices: ServiceDef[] = [
   },
 ];
 
-// ─── Visual asset renderers ────────────────────────────────────────
+// ─── Visual asset renderers ──────────────────────────────────────────
 
 const EmployNextPreview = () => (
   <div
@@ -263,7 +271,7 @@ const VisualAsset = ({ type }: { type: ServiceDef["visual"] }) => {
   }
 };
 
-// ─── Service card ──────────────────────────────────────────────────
+// ─── Service card ───────────────────────────────────────────────────
 
 const ServiceCard = ({
   service,
@@ -277,6 +285,8 @@ const ServiceCard = ({
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const isFeatured = service.featured;
+  const variant = service.featuredVariant ?? "primary";
+  const isSecondaryFeatured = isFeatured && variant === "secondary";
   const hasVisual = !!service.visual;
 
   const displayInvestment = service.investment;
@@ -290,14 +300,22 @@ const ServiceCard = ({
       transition={{ duration: 0.6, delay: Math.min(index * 0.05, 0.25) }}
       className={`relative rounded-xl border transition-all duration-300 overflow-hidden ${
         isFeatured
-          ? "bg-[hsl(var(--impact-dark))] text-white border-primary/40 shadow-lg shadow-primary/10"
+          ? isSecondaryFeatured
+            ? "bg-gradient-to-br from-[hsl(var(--impact-blue))] to-[hsl(220_55%_18%)] text-white border-[hsl(var(--impact-blue))]/50 shadow-lg shadow-[hsl(var(--impact-blue))]/20"
+            : "bg-[hsl(var(--impact-dark))] text-white border-primary/40 shadow-lg shadow-primary/10"
           : "bg-white border-border hover:shadow-md"
       }`}
     >
       {isFeatured && (
         <div className="absolute -top-0 right-8 z-10">
-          <span className="bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-b-lg uppercase tracking-wider">
-            Flagship Tier
+          <span
+            className={`text-xs font-semibold px-3 py-1 rounded-b-lg uppercase tracking-wider ${
+              isSecondaryFeatured
+                ? "bg-white text-[hsl(var(--impact-blue))]"
+                : "bg-primary text-primary-foreground"
+            }`}
+          >
+            {service.flagshipLabel ?? "Flagship Tier"}
           </span>
         </div>
       )}
@@ -309,17 +327,23 @@ const ServiceCard = ({
           <div className="flex items-center gap-3 mb-4">
             <div
               className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                isFeatured ? "bg-primary/20" : "bg-primary/8"
+                isSecondaryFeatured
+                  ? "bg-white/15"
+                  : isFeatured
+                  ? "bg-primary/20"
+                  : "bg-primary/8"
               }`}
             >
               <service.icon
-                className={`w-5 h-5 ${isFeatured ? "text-primary" : "text-primary"}`}
+                className={`w-5 h-5 ${
+                  isSecondaryFeatured ? "text-white" : "text-primary"
+                }`}
               />
             </div>
             <div>
               <span
                 className={`text-[10px] font-semibold uppercase tracking-widest block ${
-                  isFeatured ? "text-primary" : "text-primary"
+                  isSecondaryFeatured ? "text-white/80" : "text-primary"
                 }`}
               >
                 {service.label}
@@ -360,7 +384,11 @@ const ServiceCard = ({
                       isFeatured ? "text-white/65" : "text-foreground/65"
                     }`}
                   >
-                    <ChevronRight className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-primary" />
+                    <ChevronRight
+                      className={`w-3.5 h-3.5 mt-0.5 flex-shrink-0 ${
+                        isSecondaryFeatured ? "text-white" : "text-primary"
+                      }`}
+                    />
                     {outcome}
                   </div>
                 ))}
@@ -410,7 +438,9 @@ const ServiceCard = ({
             <Link
               to={service.ctaHref}
               className={`inline-flex items-center gap-2 font-medium text-sm transition-colors duration-300 ${
-                isFeatured
+                isSecondaryFeatured
+                  ? "text-white hover:text-white/70"
+                  : isFeatured
                   ? "text-primary hover:text-white"
                   : "text-primary hover:text-primary/70"
               }`}
@@ -432,7 +462,7 @@ const ServiceCard = ({
   );
 };
 
-// ─── Page ──────────────────────────────────────────────────────────
+// ─── Page ──────────────────────────────────────────────────────
 
 type Lane = "nonprofit" | "corporate";
 
@@ -456,7 +486,7 @@ const Services = () => {
 
   useEffect(() => {
     setSEO({
-      title: "Services \u2014 Impact Loop",
+      title: "Services — Impact Loop",
       description:
         "From free diagnostics to cinematic impact films and custom technology. Choose the storytelling pathway that matches where your organization is and where it needs to go.",
       ogType: "website",

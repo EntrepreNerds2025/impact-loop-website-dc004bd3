@@ -18,6 +18,9 @@ import {
 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import VimeoLightbox from "@/components/shared/VimeoLightbox";
+import galaPremierePhoto from "@/assets/signature/gala-premiere.png";
+import boardroomFundersPhoto from "@/assets/signature/boardroom-funders.png";
+import corporateBrandFilmPhoto from "@/assets/signature/corporate-brand-film.jpg";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -32,7 +35,7 @@ const deliverables = [
   {
     icon: Film,
     title: "Multi-Location Principal Photography",
-    desc: "2–3+ shoot days across your organization's most meaningful locations, with a full cinematic crew — DP, camera assistant, sound, gaffer, and production support.",
+    desc: "2–3+ shoot days across your organization\'s most meaningful locations, with a full cinematic crew — DP, camera assistant, sound, gaffer, and production support.",
   },
   {
     icon: Music,
@@ -106,13 +109,13 @@ const processSteps = [
   {
     step: "07",
     title: "Premiere",
-    desc: "Technical delivery for your gala or premiere event, plus a strategic rollout plan for the film's life after — funder reports, social, partner channels, and year-over-year use.",
+    desc: "Technical delivery for your gala or premiere event, plus a strategic rollout plan for the film\'s life after — funder reports, social, partner channels, and year-over-year use.",
   },
 ];
 
 const signatureWork = [
   {
-    title: "CafCan — Our People's Keeper",
+    title: "CafCan — Our People\'s Keeper",
     category: "Program Launch Film",
     vimeoId: "1143331891",
   },
@@ -143,39 +146,11 @@ const signatureWork = [
   },
 ];
 
-// Behind-the-lens / on-set photography — placeholders, swap with real BTS later
-const craftGallery = [
-  {
-    src: "https://images.unsplash.com/photo-1500210439973-4e13a0fda3cb?w=1400&q=80",
-    caption: "On location — cinematic capture with a full creative team.",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1400&q=80",
-    caption: "Interview lighting — shaped for a portrait-grade documentary look.",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1574717024453-354441e77e2c?w=1400&q=80",
-    caption: "Camera team on a multi-location principal photography day.",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=1400&q=80",
-    caption: "Broadcast-grade post — color, sound, and motion in one finishing suite.",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1533928298208-27ff66555d8d?w=1400&q=80",
-    caption: "Original score session — composed to the emotional arc of the cut.",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1478720568477-b0829d60ba2a?w=1400&q=80",
-    caption: "Premiere night — the gala projection, built to land in the room.",
-  },
-];
-
 const principles = [
   {
     icon: Clapperboard,
     title: "Every Signature Production is custom-scoped",
-    desc: "We don't run Signature Productions on packages. Scope, locations, crew size, music, and finishing are all tailored to the moment the film is being made for.",
+    desc: "We don\'t run Signature Productions on packages. Scope, locations, crew size, music, and finishing are all tailored to the moment the film is being made for.",
   },
   {
     icon: Users,
@@ -279,6 +254,35 @@ const SignatureProduction = () => {
                 <p className="text-white/60 text-sm leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Editorial break — Gala Premiere (full-bleed) */}
+      <section className="relative h-[60vh] md:h-[70vh] overflow-hidden">
+        <img
+          src={galaPremierePhoto}
+          alt="A Signature Production playing on the big screen at a nonprofit gala premiere"
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--impact-dark))]/90 via-[hsl(var(--impact-dark))]/35 to-transparent" />
+        <div className="relative z-10 h-full flex items-end">
+          <div className="container mx-auto px-6 pb-14 md:pb-20">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.8 }}
+              className="max-w-2xl"
+            >
+              <p className="text-[hsl(var(--impact-blue))] text-xs font-semibold tracking-[0.3em] uppercase mb-3">
+                The Premiere Moment
+              </p>
+              <p className="font-serif text-2xl md:text-3xl text-white leading-snug">
+                A full ballroom holds its breath. A Signature Production is the film that plays on the big screen at the defining fundraising moment of your year.
+              </p>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -411,6 +415,48 @@ const SignatureProduction = () => {
         </div>
       </section>
 
+      {/* Editorial split — After the Premiere (funder boardroom) */}
+      <section className="py-24 bg-[hsl(var(--impact-cream))]">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
+            <motion.figure
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.8 }}
+              className="relative overflow-hidden rounded-xl shadow-lg bg-[hsl(var(--impact-dark))]"
+              style={{ aspectRatio: "4 / 5" }}
+            >
+              <img
+                src={boardroomFundersPhoto}
+                alt="Executive director presenting a Signature Production to funders in a boardroom"
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </motion.figure>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+            >
+              <p className="text-[hsl(var(--impact-blue))] text-xs font-semibold tracking-[0.3em] uppercase mb-4">
+                After the Premiere
+              </p>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-5 leading-tight">
+                The film\'s second life is where the return compounds.
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                A Signature Production doesn\'t retire after the gala. The same film is reframed for foundation meetings, government funder presentations, major-donor briefings, and board cultivation — wherever credibility with capital decision-makers matters.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                That\'s why every Signature Production ships with a multi-cut deployment pack — gala master, funder-report cut, social cut, and boardroom edit — engineered to keep earning long after the lights come up.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Selected Signature Work */}
       <section id="signature-work" className="py-24 section-dark">
         <div className="container mx-auto px-6">
@@ -495,57 +541,46 @@ const SignatureProduction = () => {
         </div>
       </section>
 
-      {/* Behind the Lens — editorial photography strip */}
-      <section className="py-24 bg-[hsl(var(--impact-cream))]">
-        <div className="container mx-auto px-6">
-          <motion.div
-            variants={fadeIn}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={0}
-            className="text-center mb-14 max-w-3xl mx-auto"
-          >
-            <p className="text-[hsl(var(--impact-blue))] text-xs font-semibold tracking-[0.3em] uppercase mb-4">
-              Behind the Lens
-            </p>
-            <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-4">
-              The Craft Behind the Film.
-            </h2>
-            <p className="text-muted-foreground">
-              A Signature Production is a full creative team on set for multiple shoot days, a dedicated finishing suite in post, and original score sessions written to the cut. The craft shows up on screen.
-            </p>
-          </motion.div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 max-w-6xl mx-auto">
-            {craftGallery.map((photo, i) => (
-              <motion.figure
-                key={photo.src}
-                variants={fadeIn}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={i}
-                className={`relative overflow-hidden rounded-lg bg-[hsl(var(--impact-dark))] group ${
-                  i === 0 || i === 3 ? "md:col-span-2 md:row-span-1" : ""
-                }`}
-                style={{ aspectRatio: i === 0 || i === 3 ? "16 / 9" : "4 / 5" }}
-              >
-                <img
-                  src={photo.src}
-                  alt={photo.caption}
-                  loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--impact-dark))]/80 via-transparent to-transparent" />
-                <figcaption className="absolute bottom-0 left-0 right-0 p-4 text-white/90 text-xs md:text-sm font-medium">
-                  {photo.caption}
-                </figcaption>
-              </motion.figure>
-            ))}
+      {/* Editorial split — Partner & Stakeholder Stages (corporate) */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.8 }}
+              className="md:order-1 order-2"
+            >
+              <p className="text-[hsl(var(--impact-blue))] text-xs font-semibold tracking-[0.3em] uppercase mb-4">
+                Partner & Stakeholder Stages
+              </p>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-5 leading-tight">
+                Built for every stage where trust is being earned.
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                Signature Productions anchor more than a single gala. AGMs, investor days, ESG showcases, sponsor activations, and corporate-partner events all call for films that can hold a full room — and hold up on a big screen.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                When your nonprofit–corporate partnerships hit the main stage, the story needs to match the production value of the room. That\'s what this tier is built for.
+              </p>
+            </motion.div>
+            <motion.figure
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="relative overflow-hidden rounded-xl shadow-lg bg-[hsl(var(--impact-dark))] md:order-2 order-1"
+              style={{ aspectRatio: "4 / 5" }}
+            >
+              <img
+                src={corporateBrandFilmPhoto}
+                alt="A Signature Production on the main stage at a corporate partner event"
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </motion.figure>
           </div>
-          <p className="text-center text-muted-foreground/70 text-xs mt-8 italic">
-            Selected production stills. Full behind-the-scenes galleries available on request.
-          </p>
         </div>
       </section>
 
@@ -592,7 +627,7 @@ const SignatureProduction = () => {
               A Defining Moment Deserves a Defining Film.
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto mb-8 text-lg">
-              Let's talk about what you're building toward and how a Signature Production can meet the moment.
+              Let\'s talk about what you\'re building toward and how a Signature Production can meet the moment.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/bookings" className="btn-primary">
