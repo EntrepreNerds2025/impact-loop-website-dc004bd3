@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { setSEO, resetSEO } from "@/lib/seo";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Play, ChevronDown, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Player from "@vimeo/player";
 import Layout from "@/components/layout/Layout";
 import VimeoLightbox from "@/components/shared/VimeoLightbox";
@@ -13,10 +13,11 @@ const categories = ["All", "Impact Stories", "Initiatives", "Program Highlights"
 const projects = [
   {
     id: 13,
-    title: "EmployNext — Youth Trades Program",
+    title: "EmployNext \u2014 Youth Trades Program",
     category: "Program Highlights",
     description: "EmployNext partnered with construction organizations, employers, and training centres to address youth unemployment and the growing skilled trades shortage across Ontario. Participants gained hands-on experience, industry certifications, and the soft skills employers demand. We produced a documentary-style piece capturing real voices from participants, instructors, and employers to demonstrate the program's impact and inspire the next cohort.",
     vimeoId: "1174716942",
+    caseStudySlug: "employnext-youth-trades",
     caseStudy: {
       problem: "Youth unemployment in Ontario was rising while employers in the skilled trades sector faced a critical worker shortage. Existing job programs were placing young people in roles without the certifications or professional habits employers actually needed. EmployNext had results to show but no story assets to prove it to funders, partners, or prospective participants.",
       process: "We developed a documentary-style film structured around three voices: participants sharing their journeys, instructors explaining the rigor of the training, and employers validating what changed. On-site filming across training centres captured the hands-on reality of the program. The edit was built to anchor their impact report and double as a cohort recruitment tool.",
@@ -26,10 +27,11 @@ const projects = [
   },
   {
     id: 14,
-    title: "Black Creek — Black History Month Event Series",
+    title: "Black Creek \u2014 Black History Month Event Series",
     category: "Event Recaps",
     description: "Black Creek Community Health Centre's Black History Month programming was designed to strengthen social connection, reduce isolation, and create culturally affirming care pathways. Through barrier-free workshops, cultural food programming, and collaboration with Black-owned businesses and trusted partners, these events helped build trust and improve access to community health supports.",
     vimeoId: "1174716851",
+    caseStudySlug: "black-creek-bhm",
     caseStudy: {
       problem: "Black Creek Community Health Centre was running culturally significant programming that was having real health outcomes. But without documentation, those outcomes were invisible to funders and community partners who needed to see barrier-free access in action, not just described in a report.",
       process: "We produced a cinematic recap spanning three separate events across the series. Each event had its own energy and purpose: cultural food programming, community workshops, and partnership showcases. The film layered authentic community voices with the warmth and movement of each gathering, showing the care pathways being built in real time.",
@@ -43,6 +45,7 @@ const projects = [
     category: "Program Highlights",
     description: "In collaboration with the Muamba Foundation, the Bartley Skills Development Program, and Aylesbury Public School, this initiative was born from a heartbreaking reality: a young girl was contemplating self-harm because her family couldn't afford to have her hair done. Professional braiders volunteered their craft, educators created safe spaces, and students walked away with the confidence to raise their hands in class.",
     vimeoId: "1135409664",
+    caseStudySlug: "hair-for-self-esteem",
     caseStudy: {
       problem: "A young girl was contemplating self-harm because her family couldn't afford to get her hair done. The program that emerged was real and had immediate impact, but without documentation, that impact couldn't be shared, scaled, or replicated. Community organizations needed proof that small, targeted investments in dignity produce measurable results in student wellbeing.",
       process: "We produced a documentary-style piece capturing the partnership in action: professional braiders donating their time, Bartley Skills development program participants building trade hours, and students visibly transformed by the experience. The film followed the arc from the founding story to the classroom outcomes, letting real voices carry the proof.",
@@ -52,10 +55,11 @@ const projects = [
   },
   {
     id: 4,
-    title: "CafCan — Our People's Keeper Program Launch",
+    title: "CafCan \u2014 Our People's Keeper Program Launch",
     category: "Program Highlights",
     description: "After securing improved funding in 2024, CafCan needed to visually demonstrate the real-world impact of their Our People's Keeper employment program for newcomers. We produced a launch recap featuring candid testimonials from counselors and program participants, followed by a series of ten cohort session videos capturing each stage of the journey.",
     vimeoId: "1143331891",
+    caseStudySlug: "cafcan-opkt",
     caseStudy: {
       problem: "CafCan had secured improved government funding in 2024, but funders required clear evidence of outcomes to justify renewal. Text-based reports weren't capturing the human transformation happening inside the program. They also needed story assets that could build a pipeline of future participants and demonstrate the program's value to potential community partners.",
       process: "We built a two-part production strategy: a launch recap anchored by candid testimonials from counselors and participants, and a series of ten cohort session videos documenting each phase of the employment journey. The intent was to create a library of reusable story assets, not a single deliverable.",
@@ -65,11 +69,12 @@ const projects = [
   },
   {
     id: 2,
-    title: "Lakeridge Health — I Belong Initiative",
+    title: "Lakeridge Health \u2014 I Belong Initiative",
     category: "Initiatives",
     description: "Lakeridge Health needed to bring their I Belong initiative to life as a genuine reflection of the culture they were building. The challenge was showing how values like inclusion, compassion, innovation, teamwork, and joy actually translate into better outcomes for staff, patients, and families.",
     vimeoId: "1140641190",
     previewStart: 30,
+    caseStudySlug: "lakeridge-i-belong",
     caseStudy: {
       problem: "Lakeridge Health was launching a major inclusion initiative across their health system, but they faced a trust challenge: staff had seen similar initiatives come and go. The organization needed a film that felt genuine, not corporate, to earn real buy-in from the people delivering care every day. At the same time, public stakeholders needed to see alignment with their IDEAA action plans.",
       process: "We produced a documentary-style film built entirely on real staff voices, across departments and care levels. No scripts. No spokesperson narration. The structure followed the values of the initiative and showed how each one translated into lived experience for staff, patients, and families. The edit was built for multiple audiences: internal culture building and external accountability.",
@@ -105,7 +110,7 @@ const projects = [
   },
   {
     id: 1,
-    title: "Octavia Sampson — Wellness Educator",
+    title: "Octavia Sampson \u2014 Wellness Educator",
     category: "Impact Stories",
     description: "Octavia is a psychotherapist and wellness educator who had spent years transforming lives one session at a time, but she knew her message was bigger than her practice. We crafted a cinematic hero video anchored in her authentic story, from a childhood curiosity about what makes people tick to becoming a safe place for women ready to heal.",
     vimeoId: "1142229793",
@@ -118,7 +123,7 @@ const projects = [
   },
   {
     id: 8,
-    title: "Iris Ministries — Malawi",
+    title: "Iris Ministries \u2014 Malawi",
     category: "Impact Stories",
     description: "Iris Ministries needed to give their global supporters a window into the daily reality of their work in southern Malawi, from feeding programs and children's education to church planting and prison ministry. The challenge was translating the scale of 450 churches and countless lives touched into something personal and emotionally resonant.",
     vimeoId: "1140283574",
@@ -227,10 +232,20 @@ const ProjectRow = ({
   index: number;
   onPlay: (id: string) => void;
 }) => {
+  const navigate = useNavigate();
   const ref = useRef(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const isEven = index % 2 === 0;
+
+  const hasCaseStudyPage = Boolean(project.caseStudySlug);
+  const handleVideoClick = () => {
+    if (hasCaseStudyPage && project.caseStudySlug) {
+      navigate(`/work/${project.caseStudySlug}`);
+    } else {
+      onPlay(project.vimeoId);
+    }
+  };
 
   const textVariants = isEven ? slideFromLeft : slideFromRight;
   const videoOrder = isEven ? "md:order-2" : "md:order-1";
@@ -294,7 +309,7 @@ const ProjectRow = ({
           animate={isInView ? "visible" : "hidden"}
           className={`${videoOrder} group relative overflow-hidden rounded-xl cursor-pointer bg-[hsl(var(--impact-dark))]`}
           style={{ aspectRatio: "2.35 / 1" }}
-          onClick={() => onPlay(project.vimeoId)}
+          onClick={handleVideoClick}
         >
           <iframe
             ref={iframeRef}
@@ -306,10 +321,22 @@ const ProjectRow = ({
           />
           <div className="absolute inset-0 bg-[hsl(var(--impact-dark))]/40 group-hover:bg-[hsl(var(--impact-dark))]/60 transition-colors duration-300" />
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <div className="w-16 h-16 rounded-full bg-primary/80 backdrop-blur-sm flex items-center justify-center">
-              <Play className="w-7 h-7 text-primary-foreground ml-1" fill="white" />
-            </div>
+            {hasCaseStudyPage ? (
+              <div className="px-5 py-2.5 rounded-full bg-primary/90 backdrop-blur-sm text-primary-foreground text-sm font-semibold flex items-center gap-2">
+                Read the Case Study
+                <ArrowRight className="w-4 h-4" />
+              </div>
+            ) : (
+              <div className="w-16 h-16 rounded-full bg-primary/80 backdrop-blur-sm flex items-center justify-center">
+                <Play className="w-7 h-7 text-primary-foreground ml-1" fill="white" />
+              </div>
+            )}
           </div>
+          {hasCaseStudyPage && (
+            <div className="absolute top-3 left-3 bg-impact-blue/90 text-white text-[10px] uppercase tracking-widest font-semibold px-2.5 py-1 rounded-sm">
+              Case Study
+            </div>
+          )}
         </motion.div>
       </div>
 
@@ -321,7 +348,7 @@ const ProjectRow = ({
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 0.4, delay: 0.3 }}
-        className="mt-6 flex items-center gap-6"
+        className="mt-6 flex flex-wrap items-center gap-6"
       >
         <button
           onClick={() => onPlay(project.vimeoId)}
@@ -330,6 +357,15 @@ const ProjectRow = ({
           <Play className="w-4 h-4" fill="currentColor" />
           Watch the Film
         </button>
+        {hasCaseStudyPage && project.caseStudySlug && (
+          <Link
+            to={`/work/${project.caseStudySlug}`}
+            className="inline-flex items-center gap-2 text-impact-blue hover:text-white transition-colors duration-300 text-sm font-medium"
+          >
+            Read the Full Case Study
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        )}
         <Link
           to="/bookings"
           className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors duration-300 text-sm font-medium"
@@ -349,7 +385,7 @@ const Work = () => {
 
   useEffect(() => {
     setSEO({
-      title: "Our Work — Impact Loop",
+      title: "Our Work \u2014 Impact Loop",
       description: "Explore Impact Loop's portfolio of cinematic impact stories, event recaps, and documentary films for nonprofits and changemakers.",
       ogType: "website",
     });

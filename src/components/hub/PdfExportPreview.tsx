@@ -73,4 +73,16 @@ const PdfExportPreview = ({
             {isDemoMode ? "Download PDF (Demo)" : "Download PDF"}
           </button>
           {isDemoMode && (
-            <p className="text-muted-foreground text-xs mt-3">Demo hub — PDF exports are available in
+            <p className="text-muted-foreground text-xs mt-3">Demo hub — PDF exports are available in real hubs.</p>
+          )}
+        </div>
+      ) : (
+        <p className="text-center text-muted-foreground text-xs mt-6 max-w-md mx-auto">
+          A branded PDF summary is included with every client engagement — ready to share with your board, funders, or media.
+        </p>
+      )}
+    </motion.div>
+  );
+};
+
+export default PdfExportPreview;
