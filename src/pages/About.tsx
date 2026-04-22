@@ -253,4 +253,8 @@ const About = () => {
         </div>
       </section>
 
-      {/* Trust Ban
+      {/* Trust Ban    </Layout>
+  );
+};
+
+export default About;
