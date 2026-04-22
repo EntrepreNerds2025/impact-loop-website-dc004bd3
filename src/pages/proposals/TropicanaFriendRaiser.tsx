@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import VimeoLightbox from "@/components/shared/VimeoLightbox";
+import TropicanaMotionGraphics from "./components/TropicanaMotionGraphics";
 import galaPremierePhoto from "@/assets/signature/gala-premiere.png";
 import corporateBrandFilmPhoto from "@/assets/signature/corporate-brand-film.jpg";
 import founderPhoto from "@/assets/founder/rovonn.png";
@@ -292,20 +293,7 @@ const TropicanaFriendRaiser = () => {
                 For FriendRaiser, motion graphics serve three jobs: name your eight programs, animate the 45-year legacy timeline, and visualize the future-vision sequence (S.E.S.B.I. Hub, Legacy Foundation, Youth Centres). Reference clips are being curated for your review.
               </p>
             </motion.div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {graphicsReferences.map((ref, i) => (
-                <motion.div key={ref.label + i} custom={i} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-impact-cream rounded-sm overflow-hidden">
-                  <div className="relative aspect-video w-full bg-gradient-to-br from-primary/10 to-impact-cream border-b border-impact-dark/10 flex flex-col items-center justify-center">
-                    <Palette className="w-12 h-12 text-primary/50 mb-2" />
-                    <p className="text-impact-dark/40 text-[11px] uppercase tracking-[0.25em]">Reference clip placeholder</p>
-                  </div>
-                  <div className="p-6">
-                    <p className="text-primary text-xs uppercase tracking-widest mb-2">{ref.label}</p>
-                    <p className="text-impact-dark/70 leading-relaxed text-sm">{ref.note}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            <TropicanaMotionGraphics />
             <p className="text-impact-dark/60 text-sm text-center mt-12 max-w-2xl mx-auto italic">
               Signature Production+ includes a custom-designed motion graphics package built from Tropicana's brand kit. Signature Production uses a refined standard package: lower thirds, program titles, closing tag.
             </p>
@@ -618,4 +606,3 @@ const TropicanaFriendRaiser = () => {
 };
 
 export default TropicanaFriendRaiser;
-                  
