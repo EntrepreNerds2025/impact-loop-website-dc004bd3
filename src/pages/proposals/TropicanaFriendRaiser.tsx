@@ -25,6 +25,13 @@ import TropicanaMotionGraphics from "./components/TropicanaMotionGraphics";
 import galaPremierePhoto from "@/assets/signature/gala-premiere.png";
 import corporateBrandFilmPhoto from "@/assets/signature/corporate-brand-film.jpg";
 import founderPhoto from "@/assets/founder/rovonn.png";
+import rovonnOnSet from "@/assets/tropicana/rovonn-on-set.jpg";
+import btsInterviewSetup from "@/assets/tropicana/bts-interview-setup.jpg";
+import fullProductionGear from "@/assets/tropicana/full-production-gear.jpg";
+import cinemaCameraExecutive from "@/assets/tropicana/cinema-camera-executive-interview.jpg";
+import scoreSample1 from "@/assets/tropicana/sample-1.mp3";
+import scoreSample2 from "@/assets/tropicana/sample-2.mp3";
+import scoreSample3 from "@/assets/tropicana/sample-3.mp3";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -99,9 +106,25 @@ const portfolio = [
   { title: "EmployNext - Youth Trades Program", category: "Workforce Development", desc: "Program highlight film built around three youth participants. Used in funder reporting and community recruitment. Closest analogue to Tropicana's employment + pre-apprenticeship work.", vimeoId: "1174716942", slug: "employnext-youth-trades", relevance: "Direct program-type analogue" },
 ];
 
-const scoreReferences = [
-  { label: "Original Score Example", note: "Reference clip being curated for your review. We'll share a Lakeridge-tier scoring example before our first call so you can hear the standard we hold for FriendRaiser." },
-  { label: "Sound Design Example", note: "Reference clip being curated for your review. We'll share a layered ambient + interview-room example showing how we make a quiet moment feel alive." },
+const scoreSamples = [
+  {
+    label: "Sample 01",
+    title: "Hybrid Cinematic Warm",
+    note: "Soft piano open, warm strings build, subtle hybrid pulse underneath. Lands inspirational. The safest pick for your full 5-minute film.",
+    src: scoreSample1,
+  },
+  {
+    label: "Sample 02",
+    title: "Hybrid Cinematic Soulful",
+    note: "Soft piano with subtle gospel roots, warm Hammond pad, gentle modern beat under the orchestral lift. Bridges elder and youth audiences in the gala room.",
+    src: scoreSample2,
+  },
+  {
+    label: "Sample 03",
+    title: "Hybrid Cinematic Rising",
+    note: "Soft piano arpeggios into ascending strings and rising horn swell over driving hybrid groove. Built for the future-vision and One Tropicana finale beats.",
+    src: scoreSample3,
+  },
 ];
 
 const creativeApproach = [
@@ -326,11 +349,21 @@ const TropicanaFriendRaiser = () => {
                 </motion.div>
               ))}
             </div>
-            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.4 }} className="mt-12 max-w-3xl mx-auto text-center">
-              <p className="text-impact-dark/80 text-base italic leading-relaxed">
-                &ldquo;Your guests are giving you their evening. They deserve a film that respects what they came in with, and earns the next step on its own merit.&rdquo;
-              </p>
-              <p className="text-impact-dark/50 text-xs uppercase tracking-widest mt-4">Rovonn Russell, Director</p>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mt-16 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+              <div className="md:col-span-5">
+                <div className="aspect-[4/3] rounded-sm overflow-hidden">
+                  <img src={btsInterviewSetup} alt="Documentary-style interview setup with boom mic and pro lighting" className="w-full h-full object-cover" />
+                </div>
+                <p className="text-impact-dark/50 text-xs italic mt-3">Behind the scenes on a recent Impact Loop interview shoot.</p>
+              </div>
+              <div className="md:col-span-7 md:pl-4">
+                <p className="text-primary text-xs uppercase tracking-widest mb-3 font-medium">A Note From the Director</p>
+                <p className="text-impact-dark/80 text-lg italic leading-relaxed mb-4">
+                  &ldquo;Your guests are giving you their evening. They deserve a film that respects what they came in with, and earns the next step on its own merit. We don&rsquo;t set out to make a fundraising film. We set out to make a film worth watching, and trust that the friendship follows.&rdquo;
+                </p>
+                <p className="text-impact-dark/60 text-sm uppercase tracking-widest font-medium">Rovonn Russell</p>
+                <p className="text-impact-dark/50 text-xs italic">Creative Director &amp; Director, FriendRaiser</p>
+              </div>
             </motion.div>
           </div>
         </div>
@@ -344,24 +377,35 @@ const TropicanaFriendRaiser = () => {
               <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">03 &middot; Sound & Score</p>
               <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">The Sound Carries the Story.</h2>
               <p className="text-white/70 text-lg max-w-3xl mx-auto leading-relaxed">
-                Sound design and score do the emotional heavy lifting in a five-minute film. Here's the standard we'd hold for FriendRaiser. Reference clips are being curated and will be shared with you ahead of our first call.
+                Sound design and score do the emotional heavy lifting in a five-minute film. Below are three Hybrid Cinematic samples in the lane your brief asked for: soft piano open, warm orchestral build, powerful crescendo. Press play on each to compare.
               </p>
             </motion.div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {scoreReferences.map((ref, i) => (
-                <motion.div key={ref.label + i} custom={i} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-white/5 border border-white/10 rounded-sm overflow-hidden">
-                  <div className="relative aspect-video w-full bg-gradient-to-br from-impact-blue/10 to-white/5 border-b border-white/10 flex flex-col items-center justify-center">
-                    <Music className="w-12 h-12 text-impact-blue/50 mb-2" />
-                    <p className="text-white/40 text-[11px] uppercase tracking-[0.25em]">Reference clip placeholder</p>
-                  </div>
-                  <div className="p-6">
-                    <p className="text-impact-blue text-xs uppercase tracking-widest mb-2">{ref.label}</p>
-                    <p className="text-white/80 leading-relaxed text-sm">{ref.note}</p>
-                  </div>
-                </motion.div>
-              ))}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 items-center">
+              <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="lg:col-span-5">
+                <div className="aspect-[4/3] rounded-sm overflow-hidden">
+                  <img src={cinemaCameraExecutive} alt="Sony cinema camera framing an executive interview at desk" className="w-full h-full object-cover" />
+                </div>
+                <p className="text-white/50 text-xs italic mt-3">Behind the lens on a recent executive-tier interview shoot. Broadcast-grade audio capture is the foundation every score sits on.</p>
+              </motion.div>
+              <div className="lg:col-span-7 space-y-4">
+                {scoreSamples.map((sample, i) => (
+                  <motion.div key={sample.label} custom={i} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-white/5 border border-white/10 rounded-sm p-5 hover:border-impact-blue/40 transition-colors">
+                    <div className="flex items-start justify-between gap-4 mb-2">
+                      <div>
+                        <p className="text-impact-blue text-xs uppercase tracking-widest font-medium">{sample.label}</p>
+                        <h3 className="font-serif text-lg font-semibold text-white mt-1">{sample.title}</h3>
+                      </div>
+                    </div>
+                    <p className="text-white/70 text-sm leading-relaxed mb-4">{sample.note}</p>
+                    <audio controls preload="none" className="w-full" style={{ filter: "invert(0.85) hue-rotate(180deg)" }}>
+                      <source src={sample.src} type="audio/mpeg" />
+                      Your browser does not support audio playback.
+                    </audio>
+                  </motion.div>
+                ))}
+              </div>
             </div>
-            <p className="text-white/60 text-sm text-center mt-12 max-w-2xl mx-auto italic">
+            <p className="text-white/60 text-sm text-center max-w-2xl mx-auto italic">
               Signature Production+ includes original composition by a credited composer. Signature Production uses high-quality licensed score curated to the exact emotional register of your film.
             </p>
           </div>
@@ -387,7 +431,7 @@ const TropicanaFriendRaiser = () => {
         </div>
       </section>
 
-      <section className="py-24 bg-impact-dark text-white relative" style={{ backgroundImage: `linear-gradient(rgba(11, 11, 22, 0.92), rgba(11, 11, 22, 0.95)), url(${corporateBrandFilmPhoto})`, backgroundSize: "cover", backgroundPosition: "center", backgroundAttachment: "fixed" }}>
+      <section className="py-24 bg-impact-dark text-white relative" style={{ backgroundImage: `linear-gradient(rgba(11, 11, 22, 0.92), rgba(11, 11, 22, 0.95)), url(${fullProductionGear})`, backgroundSize: "cover", backgroundPosition: "center", backgroundAttachment: "fixed" }}>
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
@@ -603,7 +647,7 @@ const TropicanaFriendRaiser = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
               <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="lg:sticky lg:top-24">
                 <div className="aspect-[4/5] rounded-sm overflow-hidden mb-4 relative">
-                  <img src={founderPhoto} alt="Rovonn Russell, Founder of Impact Loop" className="w-full h-full object-cover object-top" />
+                  <img src={rovonnOnSet} alt="Rovonn Russell, Creative Director, on set with cinema camera" className="w-full h-full object-cover object-center" />
                   <div className="absolute -bottom-3 -right-3 w-24 h-24 bg-primary/10 rounded-sm -z-10" />
                 </div>
                 <p className="text-primary text-xs uppercase tracking-widest mb-2 font-medium">Direct Contact for Tropicana</p>
