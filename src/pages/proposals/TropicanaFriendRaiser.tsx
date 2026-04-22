@@ -149,7 +149,14 @@ const teamRoles = [
     role: "Producer & Story Coordinator",
     initials: "PR",
     tier: "Both Tiers",
-    desc: "Coordinates across your eight program areas, manages release forms and scheduling, and keeps every shoot day on schedule and on story.",
+    desc: "Coordinates across your eight program areas, manages release forms, and keeps every shoot day on story. The creative liaison between Tropicana\u2019s teams and the production crew.",
+  },
+  {
+    role: "Production Manager",
+    name: "Timotheus Greene",
+    initials: "TG",
+    tier: "Both Tiers",
+    desc: "Owns scheduling and crew logistics across all shoot days. Coordinates call times, gear movement, and Tropicana site access from pre-production through wrap.",
   },
   {
     role: "Editor & Post Producer",
@@ -607,12 +614,12 @@ const TropicanaFriendRaiser = () => {
                 </div>
                 <p className="text-primary text-xs uppercase tracking-widest mb-2 font-medium">Direct Contact for Tropicana</p>
                 <h3 className="font-serif text-2xl font-bold text-impact-dark mb-1">Rovonn Russell</h3>
-                <p className="text-impact-dark/60 italic text-sm mb-4">Founder &amp; Director of Impact Loop</p>
+                <p className="text-impact-dark/60 italic text-sm mb-4">Creative Director &amp; Director, FriendRaiser · Founder of Impact Loop</p>
                 <p className="text-impact-dark/70 text-sm leading-relaxed">
                   Documentary filmmaker and storytelling strategist. Toronto-based. Designs the story strategy, leads every interview, directs every shoot, oversees every cut. No account managers. No handoffs. Recent Signature Productions for Lakeridge Health, CAFCAN, Black Creek BHM, and the Muamba Foundation.
                 </p>
               </motion.div>
-              <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+              <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {teamRoles.map((member, i) => (
                   <motion.div key={member.role} custom={i} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="p-5 bg-white rounded-sm flex flex-col">
                     <div className="flex items-center gap-3 mb-4">
@@ -621,7 +628,9 @@ const TropicanaFriendRaiser = () => {
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-primary text-[10px] uppercase tracking-widest font-medium leading-tight">{member.role}</p>
-                        <p className="text-impact-dark/50 text-[10px] uppercase tracking-wider mt-1">[Name TBD]</p>
+                        <p className={`text-[11px] mt-1 ${member.name ? "text-impact-dark font-medium" : "text-impact-dark/50 uppercase tracking-wider"}`}>
+                          {member.name || "[Name TBD]"}
+                        </p>
                       </div>
                     </div>
                     <p className="text-impact-dark/70 text-[13px] leading-relaxed mb-4 flex-1">{member.desc}</p>
