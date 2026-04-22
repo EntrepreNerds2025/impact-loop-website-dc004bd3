@@ -104,16 +104,71 @@ const scoreReferences = [
   { label: "Sound Design Example", note: "Reference clip being curated for your review. We'll share a layered ambient + interview-room example showing how we make a quiet moment feel alive." },
 ];
 
+const creativeApproach = [
+  {
+    label: "The Central Idea",
+    title: "Friendship Is Earned Through Proximity, Not Pitch",
+    body: "Your goal is 100 new friends in one night. Friendship doesn\u2019t happen at a podium. It happens when a stranger sees something true and recognizes themselves in it. Our job in five minutes is to put the room close enough to a Tropicana family that they can\u2019t stay strangers.",
+  },
+  {
+    label: "The Throughline",
+    title: "Five Voices, One Question: Who Is Tropicana For?",
+    body: "We anchor the film on five real people, one from each of your major program areas: a Childcare parent, a SNAP BACK youth, a TEC employment graduate, a Caribbean Lime senior, and one Tropicana team member who has been there for the long arc. The film is a chorus, not a narration.",
+  },
+  {
+    label: "The Emotional Arc",
+    title: "Open Intimate. Scale in the Middle. Land as a Host, Not a Fundraiser.",
+    body: "The first 60 seconds are one face, one room, one truth, quiet enough that the room leans in. The middle scales to the 45-year legacy and the eight programs through motion graphics. The close hands the room a role, not an ask. We treat your guest as a future friend, not a wallet.",
+  },
+  {
+    label: "Why This Earns 100 Friends",
+    title: "Treat the Viewer As a Guest. Not a Target.",
+    body: "Donor films that try too hard to convert produce polite applause. Films that make the viewer feel trusted with something real produce signed cards at the table. That\u2019s the version we make for FriendRaiser.",
+  },
+];
+
 const graphicsReferences = [
   { label: "Lower Thirds + Program Titles", note: "Reference clip being curated for your review. We'll share a clean, branded lower-thirds example you can press play on before our kickoff." },
   { label: "Animated Data + Timelines", note: "Reference clip being curated for your review. We'll share an animated impact-data example showing the visual language we'd build for Tropicana's 45-year legacy moment." },
 ];
 
 const teamRoles = [
-  { role: "Director of Photography", name: "Vetted Toronto-based DP", desc: "Cinematic camera work. Selected per project from a roster of DPs Rovonn has shot with on healthcare and community films." },
-  { role: "Sound Engineer", name: "Field & Post Sound Lead", desc: "Broadcast-grade location sound and final mix. Critical for gala-room playback where audio failure is unrecoverable." },
-  { role: "Composer & Motion Designer", name: "Original Score + Graphics Team", desc: "Signature Production+ tier only. Original composition and broadcast motion graphics built specifically for the FriendRaiser film." },
-  { role: "Producer & Story Coordinator", name: "Field Producer", desc: "Coordinates with Tropicana's program teams across the eight programs, handles release forms, and keeps every shoot day on schedule and on story." },
+  {
+    role: "Director of Photography",
+    initials: "DP",
+    tier: "Both Tiers",
+    desc: "Cinematic camera work, lensing, and lighting. Selected from Rovonn\u2019s vetted roster of Toronto-based DPs with documentary and healthcare experience.",
+  },
+  {
+    role: "Field Sound Mixer",
+    initials: "SM",
+    tier: "Both Tiers",
+    desc: "Broadcast-grade location sound on every interview and B-roll moment. Critical for gala-room playback where audio failure is unrecoverable.",
+  },
+  {
+    role: "Producer & Story Coordinator",
+    initials: "PR",
+    tier: "Both Tiers",
+    desc: "Coordinates across your eight program areas, manages release forms and scheduling, and keeps every shoot day on schedule and on story.",
+  },
+  {
+    role: "Editor & Post Producer",
+    initials: "ED",
+    tier: "Both Tiers",
+    desc: "Story-led editor working alongside Rovonn through three review rounds. Handles colour, audio sweetening, and final delivery in your gala playback spec.",
+  },
+  {
+    role: "Composer",
+    initials: "CO",
+    tier: "Signature Production+ Only",
+    desc: "Original score written to picture by a credited composer. Built specifically for FriendRaiser\u2019s emotional arc and your 45-year legacy moment.",
+  },
+  {
+    role: "Motion Designer",
+    initials: "MD",
+    tier: "Signature Production+ Only",
+    desc: "Broadcast-grade animated graphics for your eight programs, the legacy timeline, and the future-vision sequence (S.E.S.B.I. Hub, Legacy Foundation, Youth Centres).",
+  },
 ];
 
 const references = [
@@ -250,12 +305,42 @@ const TropicanaFriendRaiser = () => {
         </div>
       </section>
 
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="max-w-6xl mx-auto">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
+              <Sparkles className="w-10 h-10 text-primary mx-auto mb-4" />
+              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">02 &middot; Creative Approach</p>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">How We Turn Your Investor Goal Into a Film That Earns Friends</h2>
+              <p className="text-impact-dark/70 text-lg max-w-3xl mx-auto leading-relaxed">
+                The brief is clear: 100 new friends, not just donors. A 5-minute film that earns them. Here is the creative thinking that drives every decision in production, from who we point the camera at first to how the final frame lands.
+              </p>
+            </motion.div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {creativeApproach.map((item, i) => (
+                <motion.div key={item.label} custom={i} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="p-8 bg-impact-cream rounded-sm border-l-4 border-primary">
+                  <p className="text-primary text-xs uppercase tracking-widest mb-3 font-medium">{item.label}</p>
+                  <h3 className="font-serif text-xl font-semibold text-impact-dark mb-3 leading-snug">{item.title}</h3>
+                  <p className="text-impact-dark/70 leading-relaxed text-[15px]">{item.body}</p>
+                </motion.div>
+              ))}
+            </div>
+            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.4 }} className="mt-12 max-w-3xl mx-auto text-center">
+              <p className="text-impact-dark/80 text-base italic leading-relaxed">
+                &ldquo;Your guests are giving you their evening. They deserve a film that respects what they came in with, and earns the next step on its own merit.&rdquo;
+              </p>
+              <p className="text-impact-dark/50 text-xs uppercase tracking-widest mt-4">Rovonn Russell, Director</p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 bg-impact-dark text-white">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
               <Music className="w-10 h-10 text-impact-blue mx-auto mb-4" />
-              <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">02 &middot; Sound & Score</p>
+              <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">03 &middot; Sound & Score</p>
               <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">The Sound Carries the Story.</h2>
               <p className="text-white/70 text-lg max-w-3xl mx-auto leading-relaxed">
                 Sound design and score do the emotional heavy lifting in a five-minute film. Here's the standard we'd hold for FriendRaiser. Reference clips are being curated and will be shared with you ahead of our first call.
@@ -287,7 +372,7 @@ const TropicanaFriendRaiser = () => {
           <div className="max-w-6xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
               <Palette className="w-10 h-10 text-primary mx-auto mb-4" />
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">03 &middot; Motion Graphics</p>
+              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">04 &middot; Motion Graphics</p>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Graphics That Earn Their Place</h2>
               <p className="text-impact-dark/70 text-lg max-w-3xl mx-auto leading-relaxed">
                 For FriendRaiser, motion graphics serve three jobs: name your eight programs, animate the 45-year legacy timeline, and visualize the future-vision sequence (S.E.S.B.I. Hub, Legacy Foundation, Youth Centres). Reference clips are being curated for your review.
@@ -305,7 +390,7 @@ const TropicanaFriendRaiser = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">04 &middot; Production Plan</p>
+              <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">05 &middot; Production Plan</p>
               <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">From Kickoff to Gala Premiere in Five Weeks</h2>
               <p className="text-white/80 text-lg max-w-3xl mx-auto leading-relaxed">
                 Built backwards from your two non-negotiable dates: final delivery Friday May 29, FriendRaiser premiere Thursday June 4.
@@ -340,7 +425,7 @@ const TropicanaFriendRaiser = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <p className="text-white/70 font-medium text-sm uppercase tracking-widest mb-4">05 &middot; Investment</p>
+              <p className="text-white/70 font-medium text-sm uppercase tracking-widest mb-4">06 &middot; Investment</p>
               <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">Two Tiers, Same Story Standard</h2>
               <p className="text-white/80 text-lg max-w-3xl mx-auto leading-relaxed">
                 Both tiers deliver the full 5-minute FriendRaiser film at broadcast quality. Signature Production+ adds production scale: original score, expanded crew, broadcast motion graphics, and the Friend Activation Kit.
@@ -398,7 +483,7 @@ const TropicanaFriendRaiser = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">06 &middot; Beyond the Five-Minute Film</p>
+              <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">07 &middot; Beyond the Five-Minute Film</p>
               <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">Two Innovations Built for FriendRaiser</h2>
               <p className="text-white/70 text-lg max-w-3xl mx-auto leading-relaxed">
                 A film that lives only on June 4 is a film that retires on June 5. We've designed two add-ons that extend the FriendRaiser arc before, during, and after the gala.
@@ -469,7 +554,7 @@ const TropicanaFriendRaiser = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">07 &middot; Portfolio</p>
+              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">08 &middot; Portfolio</p>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Closest Reference Work</h2>
               <p className="text-impact-dark/70 text-lg max-w-3xl mx-auto leading-relaxed">
                 Each of these projects shares meaningful DNA with FriendRaiser - multi-program nonprofit, community-rooted, Black-led or Black-serving, built to hold up in front of high-stakes audiences. Click any tile to read the full case study.
@@ -508,10 +593,10 @@ const TropicanaFriendRaiser = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">08 &middot; Team</p>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Founder-Led, Vetted Toronto Crew</h2>
+              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">09 &middot; Planned Crew</p>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Planned Crew for FriendRaiser</h2>
               <p className="text-impact-dark/70 text-lg max-w-3xl mx-auto leading-relaxed">
-                Every Impact Loop project is directed by Rovonn Russell. For Signature productions, he assembles a vetted Toronto-based crew chosen specifically for this project.
+                Every Impact Loop project is directed by Rovonn Russell. Below is the crew composition planned for FriendRaiser. Final crew names and credits are confirmed at kickoff based on shoot-date availability (May 8\u201317, 2026), and are drawn from a vetted Toronto-based roster Rovonn has worked with on prior healthcare and community films.
               </p>
             </motion.div>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
@@ -527,12 +612,24 @@ const TropicanaFriendRaiser = () => {
                   Documentary filmmaker and storytelling strategist. Toronto-based. Designs the story strategy, leads every interview, directs every shoot, oversees every cut. No account managers. No handoffs. Recent Signature Productions for Lakeridge Health, CAFCAN, Black Creek BHM, and the Muamba Foundation.
                 </p>
               </motion.div>
-              <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
                 {teamRoles.map((member, i) => (
-                  <motion.div key={member.role} custom={i} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="p-6 bg-white rounded-sm">
-                    <p className="text-primary text-xs uppercase tracking-widest mb-2 font-medium">{member.role}</p>
-                    <h3 className="font-serif text-lg font-semibold text-impact-dark mb-2">{member.name}</h3>
-                    <p className="text-impact-dark/70 text-sm leading-relaxed">{member.desc}</p>
+                  <motion.div key={member.role} custom={i} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="p-5 bg-white rounded-sm flex flex-col">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+                        <span className="text-primary font-serif font-semibold text-sm tracking-wider">{member.initials}</span>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-primary text-[10px] uppercase tracking-widest font-medium leading-tight">{member.role}</p>
+                        <p className="text-impact-dark/50 text-[10px] uppercase tracking-wider mt-1">[Name TBD]</p>
+                      </div>
+                    </div>
+                    <p className="text-impact-dark/70 text-[13px] leading-relaxed mb-4 flex-1">{member.desc}</p>
+                    <div className="pt-3 border-t border-impact-dark/10">
+                      <span className={`inline-block text-[10px] uppercase tracking-widest font-medium px-2 py-1 rounded-sm ${member.tier === "Signature Production+ Only" ? "bg-impact-blue/10 text-impact-blue" : "bg-primary/10 text-primary"}`}>
+                        {member.tier}
+                      </span>
+                    </div>
                   </motion.div>
                 ))}
               </div>
@@ -551,7 +648,7 @@ const TropicanaFriendRaiser = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">09 &middot; References</p>
+              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">10 &middot; References</p>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Two Past Clients Available for Reference Calls</h2>
               <p className="text-impact-dark/70 text-lg max-w-3xl mx-auto leading-relaxed">
                 Direct contact information shared upon request to protect their inboxes. We're happy to schedule a 15-minute call with either reference before contract sign.
