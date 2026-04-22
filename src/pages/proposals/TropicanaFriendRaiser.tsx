@@ -18,12 +18,10 @@ import {
   Music,
   Palette,
   Play,
-  ImageIcon,
 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import VimeoLightbox from "@/components/shared/VimeoLightbox";
 import galaPremierePhoto from "@/assets/signature/gala-premiere.png";
-import boardroomFundersPhoto from "@/assets/signature/boardroom-funders.png";
 import corporateBrandFilmPhoto from "@/assets/signature/corporate-brand-film.jpg";
 import founderPhoto from "@/assets/founder/rovonn.png";
 
@@ -90,7 +88,7 @@ const tierBetter = [
   "3 rounds of revisions",
   "Multi-cut deployment pack: gala master, 90-sec social, 60-sec donor outreach, 30-sec teaser",
   "Day-of-event on-call support and backup playback files on-site",
-  "Friend Activation Kit (see below): 5-7 personalized cutdowns for pre-event invitee outreach",
+  "CEO Post-Event Video Series (see below): 5 personalized messages from Tropicana's CEO for each invitee archetype",
 ];
 
 const portfolio = [
@@ -207,6 +205,22 @@ const TropicanaFriendRaiser = () => {
                 </div>
               </button>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 section-blue">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+              <Sparkles className="w-10 h-10 text-impact-blue mx-auto mb-6" />
+              <h2 className="font-serif text-3xl md:text-4xl font-bold mb-8">Why Impact Loop for FriendRaiser</h2>
+              <div className="space-y-6 text-white/85 text-lg leading-relaxed text-left max-w-3xl mx-auto">
+                <p>Most production companies will treat your brief as a video-services job. Capture, edit, deliver. We don't, and that's the difference.</p>
+                <p>Impact Loop builds storytelling systems for organizations whose work has to earn trust before it can earn dollars. Healthcare. Black-serving community organizations. Workforce development. Faith communities. The exact territory Tropicana operates in.</p>
+                <p>We bring three things to FriendRaiser that matter more than gear: a director who understands why your 45 years are an asset, not a backstory; a community-first interview practice that makes clients feel safe enough to give you the moment you actually need; and a deployment mindset that guarantees the film is still working in October, not just on June 4.</p>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -429,23 +443,32 @@ const TropicanaFriendRaiser = () => {
                 </div>
               </motion.div>
               <motion.div custom={1} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="border border-white/20 rounded-sm overflow-hidden hover:border-impact-blue/50 transition-colors">
-                <div className="relative aspect-video bg-black overflow-hidden grid grid-cols-3 gap-1 p-1">
-                  {[1, 2, 3].map((n) => (
-                    <div key={n} className="relative bg-gradient-to-br from-impact-blue/15 via-black/70 to-impact-dark flex flex-col items-center justify-center">
-                      <MessageSquare className="w-6 h-6 text-impact-blue/40 mb-1" />
-                      <p className="text-white/40 text-[10px] uppercase tracking-widest">Cut {n}</p>
+                <div className="relative aspect-video bg-black overflow-hidden grid grid-cols-5 gap-1 p-1">
+                  {[
+                    { label: "Corporate", icon: Users },
+                    { label: "Faith", icon: Heart },
+                    { label: "Alumni", icon: Award },
+                    { label: "Government", icon: Globe2 },
+                    { label: "Community", icon: Sparkles },
+                  ].map((v) => (
+                    <div key={v.label} className="relative bg-gradient-to-br from-impact-blue/15 via-black/70 to-impact-dark flex flex-col items-center justify-center px-1">
+                      <v.icon className="w-5 h-5 text-impact-blue/50 mb-1" />
+                      <p className="text-white/50 text-[9px] uppercase tracking-widest text-center leading-tight">{v.label}</p>
                     </div>
                   ))}
                 </div>
                 <div className="p-8">
                   <MessageSquare className="w-8 h-8 text-impact-blue mb-3" />
-                  <h3 className="font-serif text-2xl font-bold mb-2">Innovation #2: The Friend Activation Kit</h3>
+                  <h3 className="font-serif text-2xl font-bold mb-2">Innovation #2: The CEO Post-Event Video Series</h3>
                   <p className="text-white/50 text-xs uppercase tracking-widest mb-4">Included with Signature Production+</p>
                   <p className="text-white/80 leading-relaxed mb-3">
-                    Five to seven 30-to-60-second cutdowns, each shaped for a different invitee archetype: corporate partner, faith community leader, alumni donor, government contact, community ally.
+                    Five personalized 60-to-90-second video messages recorded by Tropicana's CEO, each addressed to a specific archetype of new friend made at FriendRaiser: <span className="text-white">corporate partner, faith community leader, alumni donor, government contact, community ally</span>.
+                  </p>
+                  <p className="text-white/80 leading-relaxed mb-3">
+                    Sent within 48 hours of the event, while the room is still warm. Each version speaks to that audience's specific reasons for being there, what their relationship with Tropicana could become, and a clear next step.
                   </p>
                   <p className="text-white/80 leading-relaxed">
-                    Tropicana's team sends these directly to the 100 prospective friends <em className="not-italic">before</em> the event, so guests arrive on June 4 already warmed up. The room becomes friends faster because the conversation started two weeks earlier.
+                    Recorded in a single 2-hour wraparound session during principal photography. The CEO's relationship-building energy gets to scale to all 100 new friends at once, without losing the personal feel that made the night work.
                   </p>
                 </div>
               </motion.div>
@@ -526,20 +549,6 @@ const TropicanaFriendRaiser = () => {
                 ))}
               </div>
             </div>
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mt-16">
-              <p className="text-impact-dark/50 text-xs uppercase tracking-[0.25em] text-center mb-6">Recent Signature Production stills</p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="aspect-[4/3] rounded-sm overflow-hidden">
-                  <img src={galaPremierePhoto} alt="Gala premiere film" className="w-full h-full object-cover" />
-                </div>
-                <div className="aspect-[4/3] rounded-sm overflow-hidden">
-                  <img src={boardroomFundersPhoto} alt="Boardroom + funders film" className="w-full h-full object-cover" />
-                </div>
-                <div className="aspect-[4/3] rounded-sm overflow-hidden">
-                  <img src={corporateBrandFilmPhoto} alt="Corporate brand film" className="w-full h-full object-cover" />
-                </div>
-              </div>
-            </motion.div>
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mt-12">
               <Link to="/about" className="inline-flex items-center gap-2 text-primary hover:text-secondary transition-colors duration-300 font-medium">
                 Read more about Rovonn and Impact Loop
@@ -576,22 +585,6 @@ const TropicanaFriendRaiser = () => {
         </div>
       </section>
 
-      <section className="py-24 section-blue">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-              <Sparkles className="w-10 h-10 text-impact-blue mx-auto mb-6" />
-              <h2 className="font-serif text-3xl md:text-4xl font-bold mb-8">Why Impact Loop for FriendRaiser</h2>
-              <div className="space-y-6 text-white/85 text-lg leading-relaxed text-left max-w-3xl mx-auto">
-                <p>Most production companies will treat your brief as a video-services job. Capture, edit, deliver. We don't, and that's the difference.</p>
-                <p>Impact Loop builds storytelling systems for organizations whose work has to earn trust before it can earn dollars. Healthcare. Black-serving community organizations. Workforce development. Faith communities. The exact territory Tropicana operates in.</p>
-                <p>We bring three things to FriendRaiser that matter more than gear: a director who understands why your 45 years are an asset, not a backstory; a community-first interview practice that makes clients feel safe enough to give you the moment you actually need; and a deployment mindset that guarantees the film is still working in October, not just on June 4.</p>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
       <section className="py-24 bg-impact-dark relative overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-25">
           <iframe src="https://player.vimeo.com/video/1143331891?background=1&autoplay=1&loop=1&muted=1" className="absolute inset-0 w-full h-full pointer-events-none" style={{ width: "100vw", height: "56.25vw", minHeight: "100%", minWidth: "177.77vh", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} allow="autoplay" title="CTA background" />
@@ -599,10 +592,13 @@ const TropicanaFriendRaiser = () => {
         </div>
         <div className="container mx-auto px-6 text-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="max-w-3xl mx-auto">
-            <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">Next Step</p>
-            <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-6">Let's Have a 30-Minute Conversation</h2>
+            <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">From Rovonn &amp; the Impact Loop Team</p>
+            <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-6">Thank You for Reading.</h2>
+            <p className="text-white/80 text-lg leading-relaxed mb-6">
+              We know your team reviewed every proposal that landed in your inbox with care, and we're honoured to have been considered for a moment as significant as Tropicana's 45-year FriendRaiser.
+            </p>
             <p className="text-white/80 text-lg leading-relaxed mb-10">
-              Whether or not we end up working together, the conversation will sharpen the film you commission. Book a time directly with Rovonn, or reply to this proposal email and we'll find a slot that works.
+              Whether we end up working together or not, we're rooting for this film to land the way you've envisioned it, for June 4 to turn into 100 new friends, and for the next 45 years of Tropicana to be as bold as the first. If you'd like to keep the conversation going, Rovonn is one click away.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/bookings" className="btn-primary inline-flex items-center gap-2">
@@ -622,3 +618,4 @@ const TropicanaFriendRaiser = () => {
 };
 
 export default TropicanaFriendRaiser;
+                  
