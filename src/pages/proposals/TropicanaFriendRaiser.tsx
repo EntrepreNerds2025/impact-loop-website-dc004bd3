@@ -18,6 +18,7 @@ import {
   Music,
   Palette,
   Play,
+  ImageIcon,
 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import VimeoLightbox from "@/components/shared/VimeoLightbox";
@@ -58,54 +59,6 @@ const understandingPoints = [
   },
 ];
 
-const threeAct = [
-  {
-    act: "ACT I",
-    title: "The Tropicana Effect",
-    runtime: "0:00 - 1:15",
-    arcStage: "Trust & Legacy",
-    desc: "Open on a single client face, hold the silence, then earn the title card. We pull the room in with one human moment before we ever say the word 'organization.' From there we layer in 45 years of legacy not as a timeline but as a feeling, archival texture, present-day faces, the same neighbourhood across decades.",
-    deliverables: [
-      "Cold open on a single FriendRaiser-worthy moment",
-      "Title card: The Tropicana Effect - We Change Lives",
-      "Legacy montage: archival + present, scored, no narration",
-    ],
-    referenceVimeoId: "1143331891",
-    referenceLabel: "Reference: CAFCAN - Our People's Keeper",
-    referenceNote: "The cold-open + community legacy treatment we'd adapt for Tropicana's opening 75 seconds.",
-  },
-  {
-    act: "ACT II",
-    title: "The Eight Doors",
-    runtime: "1:15 - 3:30",
-    arcStage: "Impact & Humanity \u2192 Credibility & Scale",
-    desc: "Tropicana runs eight programs. Most fundraising videos turn that into a list. We turn it into eight doors, each one opened by a real person who walked through it. Childcare. Youth. Seniors. Employment. Food security. Counselling. Justice. Community economic development. Then we widen the lens, Board Chair, CEO, staff, partner, donor, rapid-cut, all five voices answering the same off-camera question: what does Tropicana mean to you?",
-    deliverables: [
-      "8 program vignettes, each anchored by one client voice",
-      "Voices of Tropicana rapid-cut sequence",
-      "Visual proof of scale: spaces, hands, the work happening",
-    ],
-    referenceVimeoId: "1174716942",
-    referenceLabel: "Reference: EmployNext - Youth Trades Program",
-    referenceNote: "Same approach we'd use for the 8-program section: real participants, rapid-cut, no narrator standing in the way.",
-  },
-  {
-    act: "ACT III",
-    title: "The Best Is Yet To Come",
-    runtime: "3:30 - 5:00",
-    arcStage: "Vision & Momentum \u2192 Inspiration & Belonging",
-    desc: "The pivot from what is to what's next. S.E.S.B.I. Hub. The Tropicana Legacy Foundation in 2029. The Youth Resource Centres. We frame the future not as a slide deck but as a promise the audience is being invited to keep. We close on the same client face from the cold open, transformed, and the room is now ready to become a friend.",
-    deliverables: [
-      "Future-vision sequence: S.E.S.B.I. Hub, Legacy Foundation, Youth Centres",
-      "UN / PFPAD / SBCCI alignment moment, earned not labeled",
-      "Closing tag: One Tropicana - The Best Is Yet To Come",
-    ],
-    referenceVimeoId: "1140641190",
-    referenceLabel: "Reference: Lakeridge Health - I Belong",
-    referenceNote: "The 'belonging + future' tone we'd carry into Tropicana's closing 90 seconds.",
-  },
-];
-
 const timeline = [
   { phase: "Week 1", dates: "Apr 28 - May 4", title: "Discovery & Story Strategy", items: ["Kickoff call with Tropicana leadership", "Story strategy doc + interview list approval", "Program-team coordination for client participation"] },
   { phase: "Week 2", dates: "May 5 - May 11", title: "Pre-Production", items: ["Shot list, location lock, release forms", "Crew confirmation, gear prep", "Archival research + rights review"] },
@@ -128,7 +81,7 @@ const tierGood = [
 ];
 
 const tierBetter = [
-  "Everything in the Cinematic Impact Film tier, plus:",
+  "Everything in the Signature Production tier, plus:",
   "3 shoot days with expanded crew (DP, camera assistant, dedicated sound engineer, gaffer)",
   "Original score composed for the film by a credited composer",
   "Broadcast-grade motion graphics: animated timelines, program-impact data viz, future-vision sequence",
@@ -141,33 +94,32 @@ const tierBetter = [
 ];
 
 const portfolio = [
-  { title: "CAFCAN - Our People's Keeper", category: "Caribbean African Canadian Social Services", desc: "Multi-program documentary anchoring CAFCAN's community justice work. Cited by their leadership as a turning point in donor and funder conversations.", vimeoId: "1143331891", relevance: "Closest cultural + structural fit to Tropicana" },
-  { title: "Lakeridge Health - I Belong", category: "Healthcare Institution", desc: "Cinematic film for one of Ontario's largest healthcare systems. Built to hold up in front of board, government, and patient-family audiences simultaneously.", vimeoId: "1140641190", relevance: "Closest scale + institutional-trust match" },
-  { title: "Black Creek - Black History Month", category: "Community Initiative", desc: "Event film and program documentation for a flagship community moment. The kind of work that makes the next year of programming easier to fund.", vimeoId: "1174716851", relevance: "Event-anchored film closest to FriendRaiser format" },
-  { title: "EmployNext - Youth Trades Program", category: "Workforce Development", desc: "Program highlight film built around three youth participants. Used in funder reporting and community recruitment. Closest analogue to Tropicana's employment + pre-apprenticeship work.", vimeoId: "1174716942", relevance: "Direct program-type analogue" },
+  { title: "CAFCAN - Our People's Keeper", category: "Caribbean African Canadian Social Services", desc: "Multi-program documentary anchoring CAFCAN's community justice work. Cited by their leadership as a turning point in donor and funder conversations.", vimeoId: "1143331891", slug: "cafcan-opkt", relevance: "Closest cultural + structural fit to Tropicana" },
+  { title: "Lakeridge Health - I Belong", category: "Healthcare Institution", desc: "Cinematic film for one of Ontario's largest healthcare systems. Built to hold up in front of board, government, and patient-family audiences simultaneously.", vimeoId: "1140641190", slug: "lakeridge-i-belong", relevance: "Closest scale + institutional-trust match" },
+  { title: "Black Creek - Black History Month", category: "Community Initiative", desc: "Event film and program documentation for a flagship community moment. The kind of work that makes the next year of programming easier to fund.", vimeoId: "1174716851", slug: "black-creek-bhm", relevance: "Event-anchored film closest to FriendRaiser format" },
+  { title: "EmployNext - Youth Trades Program", category: "Workforce Development", desc: "Program highlight film built around three youth participants. Used in funder reporting and community recruitment. Closest analogue to Tropicana's employment + pre-apprenticeship work.", vimeoId: "1174716942", slug: "employnext-youth-trades", relevance: "Direct program-type analogue" },
 ];
 
 const scoreReferences = [
-  { vimeoId: "1140641190", label: "Original Score Example", note: "Lakeridge I Belong - listen to how the score carries the emotional arc without ever overpowering the human voice. We'd compose to this same standard for Tropicana." },
-  { vimeoId: "1135409664", label: "Sound Design Example", note: "Hair for Self-Esteem - notice the layered ambient sound, room tones, and subtle musical motifs that make the room feel alive even in interview moments." },
+  { label: "Original Score Example", note: "Reference clip being curated for your review. We'll share a Lakeridge-tier scoring example before our first call so you can hear the standard we hold for FriendRaiser." },
+  { label: "Sound Design Example", note: "Reference clip being curated for your review. We'll share a layered ambient + interview-room example showing how we make a quiet moment feel alive." },
 ];
 
 const graphicsReferences = [
-  { vimeoId: "1143331891", label: "Lower Thirds + Program Titles", note: "CAFCAN - clean, branded motion graphics that read on any screen size and never compete with the human story." },
-  { vimeoId: "1174716942", label: "Animated Data + Timelines", note: "EmployNext - the kind of animated impact visualization we'd build for Tropicana's 45-year legacy moment and the future-vision sequence." },
+  { label: "Lower Thirds + Program Titles", note: "Reference clip being curated for your review. We'll share a clean, branded lower-thirds example you can press play on before our kickoff." },
+  { label: "Animated Data + Timelines", note: "Reference clip being curated for your review. We'll share an animated impact-data example showing the visual language we'd build for Tropicana's 45-year legacy moment." },
 ];
 
 const teamRoles = [
-  { role: "Founder & Director", name: "Rovonn Russell", desc: "Designs the story strategy, leads every interview, directs every shoot, oversees every cut. No account managers. No handoffs." },
   { role: "Director of Photography", name: "Vetted Toronto-based DP", desc: "Cinematic camera work. Selected per project from a roster of DPs Rovonn has shot with on healthcare and community films." },
   { role: "Sound Engineer", name: "Field & Post Sound Lead", desc: "Broadcast-grade location sound and final mix. Critical for gala-room playback where audio failure is unrecoverable." },
-  { role: "Composer & Motion Designer", name: "Original Score + Graphics Team", desc: "Signature Production tier only. Original composition and broadcast motion graphics built specifically for the FriendRaiser film." },
+  { role: "Composer & Motion Designer", name: "Original Score + Graphics Team", desc: "Signature Production+ tier only. Original composition and broadcast motion graphics built specifically for the FriendRaiser film." },
+  { role: "Producer & Story Coordinator", name: "Field Producer", desc: "Coordinates with Tropicana's program teams across the eight programs, handles release forms, and keeps every shoot day on schedule and on story." },
 ];
 
 const references = [
-  { org: "CAFCAN Social Services (Caribbean African Canadian)", contact: "Reference contact provided on request", project: "Multi-program documentary, 2024", note: "Closest reference for cultural fit, community-rooted production approach, and working with multi-program nonprofits." },
-  { org: "Lakeridge Health", contact: "Reference contact provided on request", project: "I Belong Signature Production, 2024", note: "Reference for production scale, working with a large institution's communications and leadership team, and broadcast-grade delivery." },
-  { org: "Black Creek Community Health Centre - Black History Month", contact: "Reference contact provided on request", project: "Event documentary, 2024", note: "Reference for community-centered storytelling, multi-stakeholder coordination, and event-anchored video work." },
+  { org: "Black Creek Community Health Centre", contact: "Cheryl Prescod, Executive Director", project: "Black History Month documentary, 2024", note: "Reference for community-centered storytelling, multi-stakeholder coordination, and event-anchored video work, the closest format match to FriendRaiser." },
+  { org: "CAFCAN Social Services (Caribbean African Canadian)", contact: "Floydeen Charles-Fridal, Executive Director", project: "Multi-program documentary, 2024", note: "Reference for cultural fit, community-rooted production approach, and the experience of working with a Black-serving multi-program nonprofit." },
 ];
 
 const TropicanaFriendRaiser = () => {
@@ -283,76 +235,24 @@ const TropicanaFriendRaiser = () => {
         </div>
       </section>
 
-      <section className="py-24 bg-impact-cream">
-        <div className="container mx-auto px-6">
-          <div className="max-w-6xl mx-auto">
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">02 &middot; Creative Approach</p>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">A Three-Act Film, Mapped to Your Five-Stage Arc</h2>
-              <p className="text-impact-dark/70 text-lg max-w-3xl mx-auto leading-relaxed">
-                Your outline calls for an emotional journey from Trust &amp; Legacy through to Inspiration &amp; Belonging. We've translated that into a three-act cinematic structure that delivers the same arc with a tighter narrative spine. Each act below has a real reference film you can press play on.
-              </p>
-            </motion.div>
-            <div className="space-y-12">
-              {threeAct.map((act, i) => (
-                <motion.div key={act.act} custom={i} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-white rounded-sm shadow-sm overflow-hidden grid grid-cols-1 lg:grid-cols-5">
-                  <button onClick={() => setLightboxVideo(act.referenceVimeoId)} className="lg:col-span-2 group relative aspect-video lg:aspect-auto lg:min-h-[420px] bg-black overflow-hidden cursor-pointer" aria-label={`Play ${act.referenceLabel}`}>
-                    <iframe src={`https://player.vimeo.com/video/${act.referenceVimeoId}?background=1&autoplay=1&loop=1&muted=1`} className="absolute inset-0 w-full h-full pointer-events-none scale-110" allow="autoplay" title={act.referenceLabel} />
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex flex-col items-center justify-center">
-                      <Play className="w-14 h-14 text-white/80 group-hover:text-white mb-3 transition-colors" />
-                      <p className="text-white/70 text-xs uppercase tracking-widest text-center px-4">{act.referenceLabel}</p>
-                    </div>
-                  </button>
-                  <div className="lg:col-span-3 p-8 md:p-10">
-                    <div className="flex flex-col md:flex-row md:items-baseline md:gap-6 mb-4">
-                      <span className="text-primary font-serif text-3xl font-bold">{act.act}</span>
-                      <h3 className="font-serif text-2xl md:text-3xl font-bold text-impact-dark">{act.title}</h3>
-                    </div>
-                    <div className="flex flex-wrap gap-3 mb-5 text-xs">
-                      <span className="bg-impact-cream px-3 py-1 rounded-sm text-impact-dark/70 uppercase tracking-wider">{act.runtime}</span>
-                      <span className="bg-impact-blue/10 text-impact-blue px-3 py-1 rounded-sm uppercase tracking-wider">{act.arcStage}</span>
-                    </div>
-                    <p className="text-impact-dark/70 leading-relaxed mb-5">{act.desc}</p>
-                    <p className="text-impact-dark/50 text-sm italic mb-5 border-l-2 border-primary/30 pl-3">{act.referenceNote}</p>
-                    <div className="border-t border-impact-dark/10 pt-5">
-                      <p className="text-impact-dark/50 text-xs uppercase tracking-widest mb-3">Key Deliverables in this Act</p>
-                      <ul className="space-y-2">
-                        {act.deliverables.map((d) => (
-                          <li key={d} className="flex items-start gap-3 text-impact-dark/80 text-sm">
-                            <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-1" />
-                            <span>{d}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="py-24 bg-impact-dark text-white">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
               <Music className="w-10 h-10 text-impact-blue mx-auto mb-4" />
-              <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">03 &middot; Sound & Score</p>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">Press Play. Listen with the Sound On.</h2>
+              <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">02 &middot; Sound & Score</p>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">The Sound Carries the Story.</h2>
               <p className="text-white/70 text-lg max-w-3xl mx-auto leading-relaxed">
-                The sound design and score do the emotional heavy lifting in a five-minute film. Here's the standard we'd hold for FriendRaiser, the same standard we held on these two reference projects.
+                Sound design and score do the emotional heavy lifting in a five-minute film. Here's the standard we'd hold for FriendRaiser. Reference clips are being curated and will be shared with you ahead of our first call.
               </p>
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {scoreReferences.map((ref, i) => (
-                <motion.div key={ref.vimeoId + i} custom={i} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-white/5 border border-white/10 rounded-sm overflow-hidden hover:border-impact-blue/40 transition-colors">
-                  <button onClick={() => setLightboxVideo(ref.vimeoId)} className="group relative aspect-video w-full bg-black overflow-hidden cursor-pointer" aria-label={`Play ${ref.label}`}>
-                    <iframe src={`https://player.vimeo.com/video/${ref.vimeoId}?background=1&autoplay=1&loop=1&muted=1`} className="absolute inset-0 w-full h-full pointer-events-none scale-110" allow="autoplay" title={ref.label} />
-                    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                      <Play className="w-12 h-12 text-white/80 group-hover:text-white transition-colors" />
-                    </div>
-                  </button>
+                <motion.div key={ref.label + i} custom={i} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-white/5 border border-white/10 rounded-sm overflow-hidden">
+                  <div className="relative aspect-video w-full bg-gradient-to-br from-impact-blue/10 to-white/5 border-b border-white/10 flex flex-col items-center justify-center">
+                    <Music className="w-12 h-12 text-impact-blue/50 mb-2" />
+                    <p className="text-white/40 text-[11px] uppercase tracking-[0.25em]">Reference clip placeholder</p>
+                  </div>
                   <div className="p-6">
                     <p className="text-impact-blue text-xs uppercase tracking-widest mb-2">{ref.label}</p>
                     <p className="text-white/80 leading-relaxed text-sm">{ref.note}</p>
@@ -361,7 +261,7 @@ const TropicanaFriendRaiser = () => {
               ))}
             </div>
             <p className="text-white/60 text-sm text-center mt-12 max-w-2xl mx-auto italic">
-              Signature tier includes original composition by a credited composer. Tier 1 uses high-quality licensed score curated to the exact emotional register of your film.
+              Signature Production+ includes original composition by a credited composer. Signature Production uses high-quality licensed score curated to the exact emotional register of your film.
             </p>
           </div>
         </div>
@@ -372,21 +272,19 @@ const TropicanaFriendRaiser = () => {
           <div className="max-w-6xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
               <Palette className="w-10 h-10 text-primary mx-auto mb-4" />
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">04 &middot; Motion Graphics</p>
+              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">03 &middot; Motion Graphics</p>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Graphics That Earn Their Place</h2>
               <p className="text-impact-dark/70 text-lg max-w-3xl mx-auto leading-relaxed">
-                For FriendRaiser, motion graphics serve three jobs: name your eight programs, animate the 45-year legacy timeline, and visualize the future-vision sequence (S.E.S.B.I. Hub, Legacy Foundation, Youth Centres). Below is the visual language we'd build.
+                For FriendRaiser, motion graphics serve three jobs: name your eight programs, animate the 45-year legacy timeline, and visualize the future-vision sequence (S.E.S.B.I. Hub, Legacy Foundation, Youth Centres). Reference clips are being curated for your review.
               </p>
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {graphicsReferences.map((ref, i) => (
-                <motion.div key={ref.vimeoId + i} custom={i} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-impact-cream rounded-sm overflow-hidden hover:shadow-md transition-shadow">
-                  <button onClick={() => setLightboxVideo(ref.vimeoId)} className="group relative aspect-video w-full bg-black overflow-hidden cursor-pointer" aria-label={`Play ${ref.label}`}>
-                    <iframe src={`https://player.vimeo.com/video/${ref.vimeoId}?background=1&autoplay=1&loop=1&muted=1`} className="absolute inset-0 w-full h-full pointer-events-none scale-110" allow="autoplay" title={ref.label} />
-                    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                      <Play className="w-12 h-12 text-white/80 group-hover:text-white transition-colors" />
-                    </div>
-                  </button>
+                <motion.div key={ref.label + i} custom={i} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-impact-cream rounded-sm overflow-hidden">
+                  <div className="relative aspect-video w-full bg-gradient-to-br from-primary/10 to-impact-cream border-b border-impact-dark/10 flex flex-col items-center justify-center">
+                    <Palette className="w-12 h-12 text-primary/50 mb-2" />
+                    <p className="text-impact-dark/40 text-[11px] uppercase tracking-[0.25em]">Reference clip placeholder</p>
+                  </div>
                   <div className="p-6">
                     <p className="text-primary text-xs uppercase tracking-widest mb-2">{ref.label}</p>
                     <p className="text-impact-dark/70 leading-relaxed text-sm">{ref.note}</p>
@@ -395,7 +293,7 @@ const TropicanaFriendRaiser = () => {
               ))}
             </div>
             <p className="text-impact-dark/60 text-sm text-center mt-12 max-w-2xl mx-auto italic">
-              Signature tier includes a custom-designed motion graphics package built from Tropicana's brand kit. Tier 1 uses a refined standard package: lower thirds, program titles, closing tag.
+              Signature Production+ includes a custom-designed motion graphics package built from Tropicana's brand kit. Signature Production uses a refined standard package: lower thirds, program titles, closing tag.
             </p>
           </div>
         </div>
@@ -405,7 +303,7 @@ const TropicanaFriendRaiser = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">05 &middot; Production Plan</p>
+              <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">04 &middot; Production Plan</p>
               <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">From Kickoff to Gala Premiere in Five Weeks</h2>
               <p className="text-white/80 text-lg max-w-3xl mx-auto leading-relaxed">
                 Built backwards from your two non-negotiable dates: final delivery Friday May 29, FriendRaiser premiere Thursday June 4.
@@ -440,17 +338,17 @@ const TropicanaFriendRaiser = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <p className="text-white/70 font-medium text-sm uppercase tracking-widest mb-4">06 &middot; Investment</p>
+              <p className="text-white/70 font-medium text-sm uppercase tracking-widest mb-4">05 &middot; Investment</p>
               <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">Two Tiers, Same Story Standard</h2>
               <p className="text-white/80 text-lg max-w-3xl mx-auto leading-relaxed">
-                Both tiers deliver the full 5-minute FriendRaiser film at broadcast quality. The Signature tier adds production scale: original score, expanded crew, broadcast motion graphics, and the Friend Activation Kit.
+                Both tiers deliver the full 5-minute FriendRaiser film at broadcast quality. Signature Production+ adds production scale: original score, expanded crew, broadcast motion graphics, and the Friend Activation Kit.
               </p>
             </motion.div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <motion.div custom={0} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-white/5 border border-white/20 rounded-sm p-8 md:p-10 backdrop-blur-sm">
                 <div className="mb-6">
                   <p className="text-white/60 text-xs uppercase tracking-widest mb-2">Tier 1</p>
-                  <h3 className="font-serif text-2xl md:text-3xl font-bold mb-2">Cinematic Impact Film</h3>
+                  <h3 className="font-serif text-2xl md:text-3xl font-bold mb-2">Signature Production</h3>
                   <p className="text-white/70 text-sm italic">The full FriendRaiser film, lean crew, gala-ready</p>
                 </div>
                 <div className="border-t border-b border-white/10 py-6 mb-6">
@@ -470,7 +368,7 @@ const TropicanaFriendRaiser = () => {
                 <div className="absolute -top-3 right-8 bg-impact-blue text-white text-xs uppercase tracking-widest px-3 py-1 rounded-sm">Recommended</div>
                 <div className="mb-6">
                   <p className="text-impact-dark/60 text-xs uppercase tracking-widest mb-2">Tier 2</p>
-                  <h3 className="font-serif text-2xl md:text-3xl font-bold mb-2">Signature Production</h3>
+                  <h3 className="font-serif text-2xl md:text-3xl font-bold mb-2">Signature Production<span className="text-primary">+</span></h3>
                   <p className="text-impact-dark/70 text-sm italic">Premiere-grade scale for a 45-year legacy moment</p>
                 </div>
                 <div className="border-t border-b border-impact-dark/10 py-6 mb-6">
@@ -498,7 +396,7 @@ const TropicanaFriendRaiser = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">07 &middot; Beyond the Five-Minute Film</p>
+              <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">06 &middot; Beyond the Five-Minute Film</p>
               <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">Two Innovations Built for FriendRaiser</h2>
               <p className="text-white/70 text-lg max-w-3xl mx-auto leading-relaxed">
                 A film that lives only on June 4 is a film that retires on June 5. We've designed two add-ons that extend the FriendRaiser arc before, during, and after the gala.
@@ -514,17 +412,14 @@ const TropicanaFriendRaiser = () => {
                     <span className="ml-3 text-white/40 text-xs font-mono">tropicanacommunity.org/friendraiser</span>
                   </div>
                 </div>
-                <div className="relative aspect-video bg-black overflow-hidden">
-                  <iframe src="https://player.vimeo.com/video/1140641190?background=1&autoplay=1&loop=1&muted=1" className="absolute inset-0 w-full h-full pointer-events-none scale-110" allow="autoplay" title="Story Hub mockup background" />
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/80 flex flex-col items-center justify-center p-6">
-                    <p className="text-white text-2xl font-serif font-bold mb-2 text-center">The Tropicana Story Hub</p>
-                    <p className="text-white/60 text-xs uppercase tracking-widest text-center">Always-on. Every film, every cutdown, every story.</p>
-                  </div>
+                <div className="relative aspect-video bg-gradient-to-br from-impact-blue/20 via-black/60 to-impact-dark flex flex-col items-center justify-center">
+                  <Layers className="w-12 h-12 text-impact-blue/60 mb-3" />
+                  <p className="text-white/60 text-[11px] uppercase tracking-[0.25em]">Story Hub mockup placeholder</p>
                 </div>
                 <div className="p-8">
                   <Layers className="w-8 h-8 text-impact-blue mb-3" />
                   <h3 className="font-serif text-2xl font-bold mb-2">Innovation #1: The Story Hub</h3>
-                  <p className="text-white/50 text-xs uppercase tracking-widest mb-4">Included with Signature tier &middot; +$4,500 add-on for Tier 1</p>
+                  <p className="text-white/50 text-xs uppercase tracking-widest mb-4">Included with Signature Production+ &middot; +$4,500 add-on for Signature Production</p>
                   <p className="text-white/80 leading-relaxed mb-3">
                     An always-on microsite hosted under tropicana.org (or as a standalone link) that holds the gala film, every cutdown, the eight program vignettes as standalone shareables, and a downloadable press / partner kit.
                   </p>
@@ -535,19 +430,17 @@ const TropicanaFriendRaiser = () => {
               </motion.div>
               <motion.div custom={1} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="border border-white/20 rounded-sm overflow-hidden hover:border-impact-blue/50 transition-colors">
                 <div className="relative aspect-video bg-black overflow-hidden grid grid-cols-3 gap-1 p-1">
-                  {portfolio.slice(0, 3).map((p, idx) => (
-                    <div key={p.vimeoId} className="relative bg-black overflow-hidden">
-                      <iframe src={`https://player.vimeo.com/video/${p.vimeoId}?background=1&autoplay=1&loop=1&muted=1`} className="absolute inset-0 w-full h-full pointer-events-none scale-125" allow="autoplay" title={`Activation kit preview ${idx}`} />
-                      <div className="absolute inset-0 bg-black/40 flex items-end p-2">
-                        <p className="text-white/70 text-[10px] uppercase tracking-widest">Cut {idx + 1}</p>
-                      </div>
+                  {[1, 2, 3].map((n) => (
+                    <div key={n} className="relative bg-gradient-to-br from-impact-blue/15 via-black/70 to-impact-dark flex flex-col items-center justify-center">
+                      <MessageSquare className="w-6 h-6 text-impact-blue/40 mb-1" />
+                      <p className="text-white/40 text-[10px] uppercase tracking-widest">Cut {n}</p>
                     </div>
                   ))}
                 </div>
                 <div className="p-8">
                   <MessageSquare className="w-8 h-8 text-impact-blue mb-3" />
                   <h3 className="font-serif text-2xl font-bold mb-2">Innovation #2: The Friend Activation Kit</h3>
-                  <p className="text-white/50 text-xs uppercase tracking-widest mb-4">Included with Signature tier</p>
+                  <p className="text-white/50 text-xs uppercase tracking-widest mb-4">Included with Signature Production+</p>
                   <p className="text-white/80 leading-relaxed mb-3">
                     Five to seven 30-to-60-second cutdowns, each shaped for a different invitee archetype: corporate partner, faith community leader, alumni donor, government contact, community ally.
                   </p>
@@ -565,25 +458,28 @@ const TropicanaFriendRaiser = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">08 &middot; Portfolio</p>
+              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">07 &middot; Portfolio</p>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Closest Reference Work</h2>
               <p className="text-impact-dark/70 text-lg max-w-3xl mx-auto leading-relaxed">
-                Each of these projects shares meaningful DNA with FriendRaiser - multi-program nonprofit, community-rooted, Black-led or Black-serving, built to hold up in front of high-stakes audiences. Click any tile to watch.
+                Each of these projects shares meaningful DNA with FriendRaiser - multi-program nonprofit, community-rooted, Black-led or Black-serving, built to hold up in front of high-stakes audiences. Click any tile to read the full case study.
               </p>
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {portfolio.map((p, i) => (
-                <motion.div key={p.title} custom={i} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="group cursor-pointer" onClick={() => setLightboxVideo(p.vimeoId)}>
-                  <div className="relative aspect-video bg-black rounded-sm overflow-hidden mb-4">
-                    <iframe src={`https://player.vimeo.com/video/${p.vimeoId}?background=1&autoplay=1&loop=1&muted=1`} className="absolute inset-0 w-full h-full pointer-events-none scale-110" allow="autoplay" title={`${p.title} preview`} />
-                    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                      <Play className="w-14 h-14 text-white/0 group-hover:text-white transition-all" />
+                <motion.div key={p.title} custom={i} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                  <Link to={`/work/${p.slug}`} className="group block">
+                    <div className="relative aspect-video bg-black rounded-sm overflow-hidden mb-4">
+                      <iframe src={`https://player.vimeo.com/video/${p.vimeoId}?background=1&autoplay=1&loop=1&muted=1`} className="absolute inset-0 w-full h-full pointer-events-none scale-110" allow="autoplay" title={`${p.title} preview`} />
+                      <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                        <ArrowRight className="w-12 h-12 text-white/0 group-hover:text-white transition-all" />
+                      </div>
+                      <div className="absolute top-3 left-3 bg-impact-blue text-white text-[10px] uppercase tracking-widest px-2 py-1 rounded-sm">{p.relevance}</div>
+                      <div className="absolute bottom-3 right-3 bg-white/90 text-impact-dark text-[10px] uppercase tracking-widest px-2 py-1 rounded-sm font-medium">View case study &rarr;</div>
                     </div>
-                    <div className="absolute top-3 left-3 bg-impact-blue text-white text-[10px] uppercase tracking-widest px-2 py-1 rounded-sm">{p.relevance}</div>
-                  </div>
-                  <p className="text-primary text-xs uppercase tracking-widest mb-2 font-medium">{p.category}</p>
-                  <h3 className="font-serif text-xl font-semibold text-impact-dark mb-2 group-hover:text-primary transition-colors">{p.title}</h3>
-                  <p className="text-impact-dark/70 text-sm leading-relaxed">{p.desc}</p>
+                    <p className="text-primary text-xs uppercase tracking-widest mb-2 font-medium">{p.category}</p>
+                    <h3 className="font-serif text-xl font-semibold text-impact-dark mb-2 group-hover:text-primary transition-colors">{p.title}</h3>
+                    <p className="text-impact-dark/70 text-sm leading-relaxed">{p.desc}</p>
+                  </Link>
                 </motion.div>
               ))}
             </div>
@@ -601,7 +497,7 @@ const TropicanaFriendRaiser = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">09 &middot; Team</p>
+              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">08 &middot; Team</p>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Founder-Led, Vetted Toronto Crew</h2>
               <p className="text-impact-dark/70 text-lg max-w-3xl mx-auto leading-relaxed">
                 Every Impact Loop project is directed by Rovonn Russell. For Signature productions, he assembles a vetted Toronto-based crew chosen specifically for this project.
@@ -615,9 +511,9 @@ const TropicanaFriendRaiser = () => {
                 </div>
                 <p className="text-primary text-xs uppercase tracking-widest mb-2 font-medium">Direct Contact for Tropicana</p>
                 <h3 className="font-serif text-2xl font-bold text-impact-dark mb-1">Rovonn Russell</h3>
-                <p className="text-impact-dark/60 italic text-sm mb-4">Founder &amp; Storytelling Director</p>
+                <p className="text-impact-dark/60 italic text-sm mb-4">Founder &amp; Director of Impact Loop</p>
                 <p className="text-impact-dark/70 text-sm leading-relaxed">
-                  Documentary filmmaker, storytelling strategist, founder of Impact Loop. Toronto-based. Recent Signature Productions for Lakeridge Health, CAFCAN, Black Creek BHM, and the Muamba Foundation.
+                  Documentary filmmaker and storytelling strategist. Toronto-based. Designs the story strategy, leads every interview, directs every shoot, oversees every cut. No account managers. No handoffs. Recent Signature Productions for Lakeridge Health, CAFCAN, Black Creek BHM, and the Muamba Foundation.
                 </p>
               </motion.div>
               <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -658,10 +554,10 @@ const TropicanaFriendRaiser = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">10 &middot; References</p>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Three Past Clients Available for Reference Calls</h2>
+              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">09 &middot; References</p>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Two Past Clients Available for Reference Calls</h2>
               <p className="text-impact-dark/70 text-lg max-w-3xl mx-auto leading-relaxed">
-                Direct contact information shared upon request to protect their inboxes. We're happy to schedule a 15-minute call with any of the three before contract sign.
+                Direct contact information shared upon request to protect their inboxes. We're happy to schedule a 15-minute call with either reference before contract sign.
               </p>
             </motion.div>
             <div className="space-y-6">
