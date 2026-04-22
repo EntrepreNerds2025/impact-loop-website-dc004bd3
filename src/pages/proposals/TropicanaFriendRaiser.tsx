@@ -146,10 +146,11 @@ const teamRoles = [
     desc: "Broadcast-grade location sound on every interview and B-roll moment. Critical for gala-room playback where audio failure is unrecoverable.",
   },
   {
-    role: "Producer & Story Coordinator",
-    initials: "PR",
+    role: "Producer & Account Lead",
+    name: "Camesha Russell",
+    initials: "CR",
     tier: "Both Tiers",
-    desc: "Coordinates across your eight program areas, manages release forms, and keeps every shoot day on story. The creative liaison between Tropicana\u2019s teams and the production crew.",
+    desc: "Your direct point of contact at Impact Loop. Owns the engagement end-to-end: program-team coordination across Tropicana\u2019s eight areas, release-form management, scheduling check-ins, and keeping the project on milestone from kickoff through final delivery.",
   },
   {
     role: "Production Manager",
