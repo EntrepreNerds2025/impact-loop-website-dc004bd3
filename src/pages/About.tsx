@@ -253,7 +253,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Trust Ban    </Layout>
+      </Layout>
   );
 };
 
