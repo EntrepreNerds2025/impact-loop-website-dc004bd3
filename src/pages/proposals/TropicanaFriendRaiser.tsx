@@ -146,18 +146,11 @@ const teamRoles = [
     desc: "Broadcast-grade location sound on every interview and B-roll moment. Critical for gala-room playback where audio failure is unrecoverable.",
   },
   {
-    role: "Producer & Account Lead",
-    name: "Camesha Russell",
-    initials: "CR",
-    tier: "Both Tiers",
-    desc: "Your direct point of contact at Impact Loop. Owns the engagement end-to-end: program-team coordination across Tropicana\u2019s eight areas, release-form management, scheduling check-ins, and keeping the project on milestone from kickoff through final delivery.",
-  },
-  {
     role: "Production Manager",
     name: "Timotheus Greene",
     initials: "TG",
     tier: "Both Tiers",
-    desc: "Owns scheduling and crew logistics across all shoot days. Coordinates call times, gear movement, and Tropicana site access from pre-production through wrap.",
+    desc: "Owns scheduling, crew logistics, and release-form management across all shoot days. Coordinates call times, gear movement, Tropicana site access, and subject paperwork from pre-production through wrap.",
   },
   {
     role: "Editor & Post Producer",
