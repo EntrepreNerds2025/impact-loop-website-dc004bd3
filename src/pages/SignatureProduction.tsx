@@ -229,6 +229,9 @@ const SignatureProduction = () => {
                 Request a Signature Brief
               </Link>
             </div>
+            <p className="text-white/50 text-xs md:text-sm uppercase tracking-[0.25em] mt-10">
+              Built for programs with 50+ participants, multi-day shoots, and audiences that demand premiere-grade production.
+            </p>
           </motion.div>
         </div>
       </section>
@@ -640,17 +643,4 @@ const SignatureProduction = () => {
                 See Documentary Tier
               </Link>
             </div>
-          </motion.div>
-        </div>
-      </section>
-
-      <VimeoLightbox
-        vimeoId={lightboxVideo}
-        isOpen={!!lightboxVideo}
-        onClose={() => setLightboxVideo(null)}
-      />
-    </Layout>
-  );
-};
-
-export default SignatureProduction;
+          </motion.

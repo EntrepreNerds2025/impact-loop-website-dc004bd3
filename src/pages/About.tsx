@@ -2,6 +2,7 @@ import { useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
+import ClientLogosSection from "@/components/home/ClientLogosSection";
 import { setSEO, resetSEO } from "@/lib/seo";
 import founderPhoto from "@/assets/founder/rovonn.png";
 
@@ -38,6 +39,9 @@ const About = () => {
             <p className="text-white/70 text-lg leading-relaxed">
               In a world drowning in content, trust has become the scarcest resource.
               We help organizations earn it through authentic stories.
+            </p>
+            <p className="text-white/50 text-xs md:text-sm uppercase tracking-[0.25em] mt-8">
+              Toronto-based. Serving nonprofits, healthcare institutions, and community organizations across Canada.
             </p>
           </motion.div>
         </div>
@@ -214,15 +218,25 @@ const About = () => {
                 <p>
                   His background spans healthcare, community development,
                   corporate partnerships, and faith-based organizations across
-                  Canada and internationally. That range gives him a sharp eye for
-                  what makes a story hold up under scrutiny, whether the audience
-                  is a government funder, a corporate board, or a community that
+                  Canada and internationally, with recent Signature Productions
+                  for Lakeridge Health, CAFCAN Social Services (Caribbean
+                  African Canadian), Black Creek Black History Month, and the
+                  Muamba Foundation. That range gives him a sharp eye for what
+                  makes a story hold up under scrutiny, whether the audience is
+                  a government funder, a corporate board, or a community that
                   has been burned by empty promises before.
                 </p>
                 <p>
                   Every client works directly with Rovonn. No account managers,
                   no handoffs. The person who designs your story strategy is the
                   same person who directs the shoot and oversees the edit.
+                </p>
+                <p>
+                  For larger productions, Rovonn assembles a vetted Toronto-based
+                  creative team: directors of photography, camera assistants,
+                  sound engineers, gaffers, composers, motion designers, and
+                  colorists, each chosen for the specific project. The scale
+                  matches the stakes.
                 </p>
               </div>
               <div className="mt-8">
@@ -239,30 +253,4 @@ const About = () => {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-24 bg-impact-dark">
-        <div className="container mx-auto px-6 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-6">
-              Ready to Build Your Story System?
-            </h2>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto mb-8">
-              Book a Storytelling Diagnostic to explore how authentic stories can
-              transform your organization's trust and impact.
-            </p>
-            <Link to="/bookings" className="btn-primary">
-              Book Your Diagnostic
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-    </Layout>
-  );
-};
-
-export default About;
+      {/* Trust Ban
