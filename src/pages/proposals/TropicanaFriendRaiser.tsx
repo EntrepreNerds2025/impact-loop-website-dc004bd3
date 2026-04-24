@@ -395,17 +395,15 @@ const TropicanaFriendRaiser = () => {
               </p>
             </motion.div>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 items-center">
-              <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="lg:col-span-5 flex flex-col gap-4 self-stretch">
-                <div className="rounded-sm overflow-hidden flex-1 min-h-[200px]">
-                  <img src={btsInterviewSetup} alt="Documentary-style interview setup with boom mic and pro lighting" className="w-full h-full object-cover" />
-                </div>
-                <div className="relative bg-white/5 border border-white/10 rounded-sm overflow-hidden flex-1 min-h-[140px] p-4">
+              <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="lg:col-span-5 self-stretch">
+                <div className="relative bg-white/5 border border-white/10 rounded-sm overflow-hidden h-full min-h-[480px] p-6">
+                  <p className="absolute top-4 left-5 text-impact-blue/80 text-[10px] uppercase tracking-[0.25em] font-medium">Broadcast Audio Signature</p>
                   <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-impact-blue/20" />
                   <div className="relative h-full w-full flex items-center justify-center gap-[3px]">
-                    {Array.from({ length: 36 }).map((_, idx) => (
+                    {Array.from({ length: 44 }).map((_, idx) => (
                       <motion.span
                         key={idx}
-                        className="block w-[4px] bg-gradient-to-b from-impact-blue via-impact-blue/80 to-impact-blue rounded-full"
+                        className="block w-[5px] bg-gradient-to-b from-impact-blue via-impact-blue/80 to-impact-blue rounded-full"
                         initial={{ scaleY: 0.2 }}
                         animate={{ scaleY: [0.2, 0.95, 0.45, 0.85, 0.25, 0.7, 0.3] }}
                         transition={{
@@ -414,13 +412,12 @@ const TropicanaFriendRaiser = () => {
                           ease: "easeInOut",
                           delay: (idx % 12) * 0.07,
                         }}
-                        style={{ height: "70%", transformOrigin: "center" }}
+                        style={{ height: "85%", transformOrigin: "center" }}
                       />
                     ))}
                   </div>
-                  <p className="absolute bottom-2 right-3 text-impact-blue/60 text-[10px] uppercase tracking-[0.2em] font-mono">Live waveform</p>
+                  <p className="absolute bottom-3 right-4 text-impact-blue/60 text-[10px] uppercase tracking-[0.2em] font-mono">Live waveform</p>
                 </div>
-                <p className="text-white/50 text-xs italic">Behind the scenes on a recent Impact Loop interview shoot. Broadcast-grade audio capture is the foundation every score sits on.</p>
               </motion.div>
               <div className="lg:col-span-7 space-y-4">
                 {scoreSamples.map((sample, i) => (
