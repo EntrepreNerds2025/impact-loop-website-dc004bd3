@@ -371,13 +371,18 @@ const TropicanaFriendRaiser = () => {
                 </motion.div>
               ))}
             </div>
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mt-16 max-w-3xl mx-auto text-center">
-              <p className="text-primary text-xs uppercase tracking-widest mb-3 font-medium">A Note From the Director</p>
-              <p className="text-impact-dark/80 text-lg italic leading-relaxed mb-4">
-                &ldquo;Your guests are giving you their evening. They deserve a film that respects what they came in with, and earns the next step on its own merit. We don&rsquo;t set out to make a fundraising film. We set out to make a film worth watching, and trust that the friendship follows.&rdquo;
-              </p>
-              <p className="text-impact-dark/60 text-sm uppercase tracking-widest font-medium">Rovonn Russell</p>
-              <p className="text-impact-dark/50 text-xs italic">Creative Director &amp; Director</p>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mt-16 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
+              <div className="md:col-span-2 rounded-sm overflow-hidden aspect-[4/5]">
+                <img src={btsInterviewSetup} alt="Behind the scenes on a recent Impact Loop interview shoot" className="w-full h-full object-cover" />
+              </div>
+              <div className="md:col-span-3">
+                <p className="text-primary text-xs uppercase tracking-widest mb-3 font-medium">A Note From the Director</p>
+                <p className="text-impact-dark/80 text-lg italic leading-relaxed mb-4">
+                  &ldquo;Your guests are giving you their evening. They deserve a film that respects what they came in with, and earns the next step on its own merit. We don&rsquo;t set out to make a fundraising film. We set out to make a film worth watching, and trust that the friendship follows.&rdquo;
+                </p>
+                <p className="text-impact-dark/60 text-sm uppercase tracking-widest font-medium">Rovonn Russell</p>
+                <p className="text-impact-dark/50 text-xs italic">Creative Director &amp; Director</p>
+              </div>
             </motion.div>
           </div>
         </div>
