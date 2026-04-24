@@ -136,9 +136,9 @@ const creativeApproach = [
     body: "We anchor the film on five real people drawn from across Tropicana\u2019s program areas: a Childcare & Youth parent, an Employment & Pre-Apprenticeship graduate, a Timeless Treasures senior, a Counselling or Village Pantry community member, and one Tropicana team member who has been there for the long arc. Final program areas confirmed with your team at kickoff. The film is a chorus, not a narration.",
   },
   {
-    label: "The Emotional Arc",
-    title: "Open Intimate. Scale in the Middle. Land as a Host, Not a Fundraiser.",
-    body: "The first 60 seconds are one face, one room, one truth, quiet enough that the room leans in. The middle scales to the 45-year legacy and the eight programs through motion graphics. The close hands the room a role, not an ask. We treat your guest as a future friend, not a wallet.",
+    label: "Built Around Your Vision",
+    title: "We Build to Your Outline, Not Our Template.",
+    body: "You have a second-by-second video outline, and we take that seriously. Your structure is the spine we edit to, not ours. Our job in pre-production is to pressure-test every beat so the film your team already imagined is the one that lands in the room, executed at a level that earns 100 friends.",
   },
   {
     label: "Why This Earns 100 Friends",
@@ -167,8 +167,7 @@ const teamRoles = [
   },
   {
     role: "Production Manager",
-    name: "Timotheus Greene",
-    initials: "TG",
+    initials: "PM",
     tier: "Both Tiers",
     desc: "Owns scheduling, crew logistics, and release-form management across all shoot days. Coordinates call times, gear movement, Tropicana site access, and subject paperwork from pre-production through wrap.",
   },
@@ -192,9 +191,29 @@ const teamRoles = [
   },
 ];
 
+const supportingRoles = [
+  { role: "Colorist", tier: "Signature Production+" },
+  { role: "Sound Designer", tier: "Signature Production+" },
+  { role: "Audio Engineer", tier: "Both Tiers" },
+  { role: "Gaffer", tier: "Signature Production+" },
+  { role: "Grip", tier: "Signature Production+" },
+  { role: "DP Assistant", tier: "Signature Production+" },
+  { role: "Production Assistant", tier: "Both Tiers" },
+  { role: "Still Photographer", tier: "Signature Production+" },
+];
+
 const references = [
-  { org: "Black Creek Community Health Centre", contact: "Cheryl Prescod, Executive Director", note: "Reference for community-centered storytelling, multi-stakeholder coordination, and event-anchored video work, the closest format match to FriendRaiser." },
-  { org: "CAFCAN Social Services (Caribbean African Canadian)", contact: "Floydeen Charles-Fridal, Executive Director", note: "Reference for cultural fit, community-rooted production approach, and the experience of working with a Black-serving multi-program nonprofit." },
+  { person: "Cheryl Prescod", title: "Executive Director", org: "Black Creek Community Health Centre", note: "Reference for community-centered storytelling, multi-stakeholder coordination, and event-anchored video work, the closest format match to FriendRaiser." },
+  { person: "Floydeen Charles-Fridal", title: "Executive Director", org: "CAFCAN Social Services (Caribbean African Canadian)", note: "Reference for cultural fit, community-rooted production approach, and the experience of working with a Black-serving multi-program nonprofit." },
+];
+
+const tierValueAdds = [
+  { title: "Original Score", value: "$5K\u2013$15K value" },
+  { title: "Broadcast Motion Graphics", value: "$5K\u2013$15K value" },
+  { title: "Expanded Crew", value: "$3K\u2013$7K value" },
+  { title: "Archival Research + HDR Master", value: "Included" },
+  { title: "Multi-Cut Deployment Pack", value: "Included" },
+  { title: "CEO Post-Event Video Series", value: "Included" },
 ];
 
 const TropicanaFriendRaiser = () => {
@@ -249,13 +268,25 @@ const TropicanaFriendRaiser = () => {
             <p className="text-white/80 text-xl leading-relaxed mb-8">
               A five-minute cinematic portrait of 45 years of community impact, built to turn 100 new strangers into 100 new friends on June 4, 2026.
             </p>
-            <div className="aspect-video w-full max-w-3xl mx-auto bg-black/40 border border-white/10 rounded-sm flex items-center justify-center my-12 group cursor-pointer hover:border-impact-blue/40 transition-colors">
-              <div className="text-center">
-                <PlayCircle className="w-16 h-16 text-white/40 group-hover:text-impact-blue mx-auto mb-3 transition-colors" />
-                <p className="text-white/70 text-sm uppercase tracking-widest">90-Second Video Pitch from Rovonn</p>
-                <p className="text-white/40 text-xs mt-2">Direct-to-camera walkthrough of how we'd approach the FriendRaiser film</p>
+            <button
+              onClick={() => setLightboxVideo("1186367128")}
+              className="relative aspect-video w-full max-w-3xl mx-auto bg-black/40 border border-white/10 rounded-sm overflow-hidden my-12 group cursor-pointer hover:border-impact-blue/50 transition-colors block"
+              aria-label="Play 90-second video pitch from Rovonn"
+            >
+              <iframe
+                src="https://player.vimeo.com/video/1186367128?background=1&autoplay=1&loop=1&muted=1"
+                className="absolute inset-0 w-full h-full pointer-events-none scale-110"
+                allow="autoplay"
+                title="Video pitch from Rovonn"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/40 group-hover:from-black/60 transition-colors flex flex-col items-center justify-center">
+                <div className="w-20 h-20 rounded-full bg-impact-blue/90 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-2xl">
+                  <Play className="w-8 h-8 text-white ml-1" fill="currentColor" />
+                </div>
+                <p className="text-white text-sm uppercase tracking-widest font-medium">90-Second Video Pitch from Rovonn</p>
+                <p className="text-white/70 text-xs mt-2 px-6 text-center">Direct-to-camera walkthrough of how we'd approach the FriendRaiser film</p>
               </div>
-            </div>
+            </button>
             <p className="text-white/60 text-xs md:text-sm uppercase tracking-[0.25em]">
               Submitted by Impact Loop &middot; Toronto-based &middot; Founder-led production
             </p>
@@ -270,14 +301,13 @@ const TropicanaFriendRaiser = () => {
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {portfolio.map((p) => (
-              <button key={p.vimeoId} onClick={() => setLightboxVideo(p.vimeoId)} className="group relative aspect-video bg-black/40 overflow-hidden rounded-sm cursor-pointer" aria-label={`Play ${p.title}`}>
+              <div key={p.vimeoId} className="relative aspect-video bg-black/40 overflow-hidden rounded-sm" aria-label={`${p.title} preview`}>
                 <iframe src={`https://player.vimeo.com/video/${p.vimeoId}?background=1&autoplay=1&loop=1&muted=1`} className="absolute inset-0 w-full h-full pointer-events-none scale-110" allow="autoplay" title={`${p.title} preview`} />
-                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                  <Play className="w-10 h-10 text-white/0 group-hover:text-white/90 transition-colors" />
-                </div>
-              </button>
+                <div className="absolute inset-0 bg-black/20" />
+              </div>
             ))}
           </div>
+          <p className="text-center text-white/40 text-xs italic mt-6">Full case studies linked in Section 08 below.</p>
         </div>
       </section>
 
@@ -290,7 +320,7 @@ const TropicanaFriendRaiser = () => {
               <div className="space-y-6 text-white/85 text-lg leading-relaxed text-left max-w-3xl mx-auto">
                 <p>Most production companies will treat your brief as a video-services job. Capture, edit, deliver. We don't, and that's the difference.</p>
                 <p>Impact Loop builds storytelling systems for organizations whose work has to earn trust before it can earn dollars. Healthcare. Black-serving community organizations. Workforce development. Faith communities. The exact territory Tropicana operates in.</p>
-                <p>We bring three things to FriendRaiser that matter more than gear: a director who understands why your 45 years are an asset, not a backstory; a community-first interview practice that makes clients feel safe enough to give you the moment you actually need; and a deployment mindset that guarantees the film is still working in October, not just on June 4.</p>
+                <p>We bring three things to FriendRaiser that matter more than gear: a director who understands why your 45 years are an asset, not a backstory; a community first interview practice that makes clients feel safe enough to give you the moment you actually need; and a deployment mindset that guarantees the film is still working in October, not just on June 4.</p>
               </div>
             </motion.div>
           </div>
@@ -341,13 +371,18 @@ const TropicanaFriendRaiser = () => {
                 </motion.div>
               ))}
             </div>
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mt-16 max-w-3xl mx-auto text-center">
-              <p className="text-primary text-xs uppercase tracking-widest mb-3 font-medium">A Note From the Director</p>
-              <p className="text-impact-dark/80 text-lg italic leading-relaxed mb-4">
-                &ldquo;Your guests are giving you their evening. They deserve a film that respects what they came in with, and earns the next step on its own merit. We don&rsquo;t set out to make a fundraising film. We set out to make a film worth watching, and trust that the friendship follows.&rdquo;
-              </p>
-              <p className="text-impact-dark/60 text-sm uppercase tracking-widest font-medium">Rovonn Russell</p>
-              <p className="text-impact-dark/50 text-xs italic">Creative Director &amp; Director, FriendRaiser</p>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mt-16 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
+              <div className="md:col-span-2 rounded-sm overflow-hidden aspect-[4/5]">
+                <img src={btsInterviewSetup} alt="Behind the scenes on a recent Impact Loop interview shoot" className="w-full h-full object-cover" />
+              </div>
+              <div className="md:col-span-3">
+                <p className="text-primary text-xs uppercase tracking-widest mb-3 font-medium">A Note From the Director</p>
+                <p className="text-impact-dark/80 text-lg italic leading-relaxed mb-4">
+                  &ldquo;Your guests are giving you their evening. They deserve a film that respects what they came in with, and earns the next step on its own merit. We don&rsquo;t set out to make a fundraising film. We set out to make a film worth watching, and trust that the friendship follows.&rdquo;
+                </p>
+                <p className="text-impact-dark/60 text-sm uppercase tracking-widest font-medium">Rovonn Russell</p>
+                <p className="text-impact-dark/50 text-xs italic">Creative Director &amp; Director</p>
+              </div>
             </motion.div>
           </div>
         </div>
@@ -365,17 +400,15 @@ const TropicanaFriendRaiser = () => {
               </p>
             </motion.div>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 items-center">
-              <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="lg:col-span-5 flex flex-col gap-4 self-stretch">
-                <div className="rounded-sm overflow-hidden flex-1 min-h-[200px]">
-                  <img src={btsInterviewSetup} alt="Documentary-style interview setup with boom mic and pro lighting" className="w-full h-full object-cover" />
-                </div>
-                <div className="relative bg-white/5 border border-white/10 rounded-sm overflow-hidden flex-1 min-h-[140px] p-4">
+              <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="lg:col-span-5 self-stretch">
+                <div className="relative bg-white/5 border border-white/10 rounded-sm overflow-hidden h-full min-h-[480px] p-6">
+                  <p className="absolute top-4 left-5 text-impact-blue/80 text-[10px] uppercase tracking-[0.25em] font-medium">Broadcast Audio Signature</p>
                   <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-impact-blue/20" />
                   <div className="relative h-full w-full flex items-center justify-center gap-[3px]">
-                    {Array.from({ length: 36 }).map((_, idx) => (
+                    {Array.from({ length: 44 }).map((_, idx) => (
                       <motion.span
                         key={idx}
-                        className="block w-[4px] bg-gradient-to-b from-impact-blue via-impact-blue/80 to-impact-blue rounded-full"
+                        className="block w-[5px] bg-gradient-to-b from-impact-blue via-impact-blue/80 to-impact-blue rounded-full"
                         initial={{ scaleY: 0.2 }}
                         animate={{ scaleY: [0.2, 0.95, 0.45, 0.85, 0.25, 0.7, 0.3] }}
                         transition={{
@@ -384,13 +417,12 @@ const TropicanaFriendRaiser = () => {
                           ease: "easeInOut",
                           delay: (idx % 12) * 0.07,
                         }}
-                        style={{ height: "70%", transformOrigin: "center" }}
+                        style={{ height: "85%", transformOrigin: "center" }}
                       />
                     ))}
                   </div>
-                  <p className="absolute bottom-2 right-3 text-impact-blue/60 text-[10px] uppercase tracking-[0.2em] font-mono">Live waveform</p>
+                  <p className="absolute bottom-3 right-4 text-impact-blue/60 text-[10px] uppercase tracking-[0.2em] font-mono">Live waveform</p>
                 </div>
-                <p className="text-white/50 text-xs italic">Behind the scenes on a recent Impact Loop interview shoot. Broadcast-grade audio capture is the foundation every score sits on.</p>
               </motion.div>
               <div className="lg:col-span-7 space-y-4">
                 {scoreSamples.map((sample, i) => (
@@ -522,6 +554,24 @@ const TropicanaFriendRaiser = () => {
                 </ul>
               </motion.div>
             </div>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mt-10 bg-white/5 border-l-4 border-impact-blue rounded-sm p-8 md:p-10">
+              <p className="text-impact-blue text-[10px] uppercase tracking-[0.3em] font-medium mb-2">Tier Value Breakdown</p>
+              <h3 className="font-serif text-2xl md:text-3xl font-bold text-white mb-6">What the Extra $17,500 Buys You</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mb-6">
+                {tierValueAdds.map((item) => (
+                  <div key={item.title} className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-impact-blue flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-white font-medium leading-tight">{item.title}</p>
+                      <p className="text-white/55 text-xs italic mt-0.5">{item.value}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="text-white/65 text-sm italic leading-relaxed border-t border-white/10 pt-5">
+                At market rates, these additions typically price at $21K&ndash;$45K standalone. Bundled into Signature Production+, the gap is $17,500 because the same crew, same production, same post pipeline absorbs the added scale efficiently.
+              </p>
+            </motion.div>
             <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-white/60 text-sm text-center mt-10 max-w-2xl mx-auto">
               Payment terms: 40% on signed agreement, 40% at first cut, 20% on final delivery. We hold these prices through May 5, 2026.
             </motion.p>
@@ -630,33 +680,42 @@ const TropicanaFriendRaiser = () => {
                 </div>
                 <p className="text-primary text-xs uppercase tracking-widest mb-2 font-medium">Direct Contact for Tropicana</p>
                 <h3 className="font-serif text-2xl font-bold text-impact-dark mb-1">Rovonn Russell</h3>
-                <p className="text-impact-dark/60 italic text-sm mb-4">Creative Director &amp; Director, FriendRaiser · Founder of Impact Loop</p>
+                <p className="text-impact-dark/60 italic text-sm mb-4">Creative Director &amp; Director · Founder of Impact Loop</p>
                 <p className="text-impact-dark/70 text-sm leading-relaxed">
                   Documentary filmmaker and storytelling strategist. Toronto-based. Designs the story strategy, leads every interview, directs every shoot, oversees every cut. No account managers. No handoffs. Recent Signature Productions for Lakeridge Health, CAFCAN, Black Creek BHM, and the Muamba Foundation.
                 </p>
               </motion.div>
-              <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {teamRoles.map((member, i) => (
-                  <motion.div key={member.role} custom={i} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="p-5 bg-white rounded-sm flex flex-col">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
-                        <span className="text-primary font-serif font-semibold text-sm tracking-wider">{member.initials}</span>
+              <div className="lg:col-span-2 space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {teamRoles.map((member, i) => (
+                    <motion.div key={member.role} custom={i} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="p-5 bg-white rounded-sm flex flex-col">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+                          <span className="text-primary font-serif font-semibold text-sm tracking-wider">{member.initials}</span>
+                        </div>
+                        <h3 className="font-serif text-base font-semibold text-impact-dark leading-tight flex-1">{member.role}</h3>
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-primary text-[10px] uppercase tracking-widest font-medium leading-tight">{member.role}</p>
-                        <p className={`text-[11px] mt-1 ${member.name ? "text-impact-dark font-medium" : "text-impact-dark/50 uppercase tracking-wider"}`}>
-                          {member.name || "[Name TBD]"}
-                        </p>
+                      <p className="text-impact-dark/70 text-[13px] leading-relaxed mb-4 flex-1">{member.desc}</p>
+                      <div className="pt-3 border-t border-impact-dark/10">
+                        <span className={`inline-block text-[10px] uppercase tracking-widest font-medium px-2 py-1 rounded-sm ${member.tier === "Signature Production+ Only" ? "bg-impact-blue/10 text-impact-blue" : "bg-primary/10 text-primary"}`}>
+                          {member.tier}
+                        </span>
                       </div>
-                    </div>
-                    <p className="text-impact-dark/70 text-[13px] leading-relaxed mb-4 flex-1">{member.desc}</p>
-                    <div className="pt-3 border-t border-impact-dark/10">
-                      <span className={`inline-block text-[10px] uppercase tracking-widest font-medium px-2 py-1 rounded-sm ${member.tier === "Signature Production+ Only" ? "bg-impact-blue/10 text-impact-blue" : "bg-primary/10 text-primary"}`}>
-                        {member.tier}
-                      </span>
-                    </div>
-                  </motion.div>
-                ))}
+                    </motion.div>
+                  ))}
+                </div>
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="p-6 bg-white rounded-sm border-l-4 border-impact-blue">
+                  <p className="text-impact-blue text-[10px] uppercase tracking-[0.25em] font-medium mb-4">Supporting Roles · Assembled Per Project</p>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-3">
+                    {supportingRoles.map((sr) => (
+                      <div key={sr.role} className="flex flex-col">
+                        <p className="font-serif text-sm font-semibold text-impact-dark leading-tight">{sr.role}</p>
+                        <p className={`text-[10px] uppercase tracking-widest mt-1 ${sr.tier === "Signature Production+" ? "text-impact-blue" : "text-primary"}`}>{sr.tier}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-impact-dark/55 text-xs italic mt-5">Every supporting role is filled by a vetted Toronto-based specialist Rovonn has directly worked with or been recommended by trusted collaborators. Names confirmed at contract sign.</p>
+                </motion.div>
               </div>
             </div>
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mt-12">
@@ -681,13 +740,12 @@ const TropicanaFriendRaiser = () => {
             </motion.div>
             <div className="space-y-6">
               {references.map((r, i) => (
-                <motion.div key={r.org} custom={i} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex flex-col md:flex-row gap-6 p-6 border border-impact-dark/10 rounded-sm">
-                  <Award className="w-8 h-8 text-primary flex-shrink-0" />
-                  <div className="flex-1">
-                    <h3 className="font-serif text-xl font-semibold text-impact-dark mb-1">{r.org}</h3>
-                    <p className="text-impact-dark/50 text-sm mb-3">{r.contact}</p>
-                    <p className="text-impact-dark/70 leading-relaxed">{r.note}</p>
-                  </div>
+                <motion.div key={r.org} custom={i} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-impact-cream rounded-sm border-l-4 border-primary p-8 md:p-10">
+                  <p className="text-primary text-[10px] uppercase tracking-[0.3em] font-medium mb-3">Past Client Reference</p>
+                  <h3 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark leading-tight mb-2">{r.person}</h3>
+                  <p className="text-impact-dark/80 text-base font-medium mb-1">{r.title}</p>
+                  <p className="text-impact-dark/55 text-sm italic mb-5">{r.org}</p>
+                  <p className="text-impact-dark/75 leading-relaxed border-t border-impact-dark/10 pt-5">{r.note}</p>
                 </motion.div>
               ))}
             </div>
