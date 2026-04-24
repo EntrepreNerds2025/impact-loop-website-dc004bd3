@@ -163,48 +163,83 @@ const ProgramWheelLoop = () => {
 /* ---------- 4. Map of Impact ---------- */
 const MapOfImpactLoop = () => {
   const sites = [
-    { x: 60, y: 55, label: "Huntingwood HQ", delay: 0 },
-    { x: 52, y: 72, label: "Childcare 425", delay: 0.5 },
-    { x: 56, y: 70, label: "Childcare 431", delay: 1.0 },
-    { x: 32, y: 40, label: "TEC North York", delay: 1.5 },
+    { x: 70, y: 48, label: "Huntingwood HQ", neighborhood: "Scarborough", delay: 0 },
+    { x: 73, y: 52, label: "Childcare 425", neighborhood: "Scarborough", delay: 0.6 },
+    { x: 67, y: 55, label: "Childcare 431", neighborhood: "Scarborough", delay: 1.2 },
+    { x: 48, y: 42, label: "TEC", neighborhood: "North York", delay: 1.8 },
   ];
   return (
     <div className="relative w-full h-full bg-gradient-to-br from-[#0a1628] to-impact-dark flex flex-col items-center justify-center overflow-hidden">
       <p className="absolute top-4 left-5 text-impact-blue/80 text-[10px] uppercase tracking-[0.25em] font-medium">GTA Footprint &amp; National Reach</p>
-      <svg viewBox="0 0 100 100" className="w-[78%] h-auto max-h-[80%]">
-        {/* Loose Toronto/GTA silhouette */}
+      <p className="absolute top-4 right-5 text-impact-blue/60 text-[9px] uppercase tracking-[0.25em] font-medium">Toronto + National SBCCI</p>
+      <svg viewBox="0 0 100 100" className="w-[88%] h-auto max-h-[78%] mt-2">
+        {/* Subtle grid */}
+        <defs>
+          <pattern id="gtaGrid" width="8" height="8" patternUnits="userSpaceOnUse">
+            <path d="M 8 0 L 0 0 0 8" fill="none" stroke="rgba(96, 165, 250, 0.07)" strokeWidth="0.2" />
+          </pattern>
+        </defs>
+        <rect x="0" y="0" width="100" height="100" fill="url(#gtaGrid)" />
+
+        {/* GTA region outline (recognizable) */}
         <motion.path
-          d="M 18 38 L 28 32 L 42 28 L 58 26 L 72 30 L 82 38 L 86 50 L 84 62 L 78 72 L 68 80 L 56 84 L 42 82 L 30 76 L 22 66 L 18 54 Z"
-          fill="rgba(59, 130, 246, 0.08)"
-          stroke="rgba(96, 165, 250, 0.4)"
-          strokeWidth="0.5"
+          d="M 14 30 L 24 24 L 38 22 L 52 22 L 66 24 L 78 28 L 86 34 L 90 44 L 90 56 L 88 66 L 84 74 L 14 74 Z"
+          fill="rgba(59, 130, 246, 0.07)"
+          stroke="rgba(96, 165, 250, 0.45)"
+          strokeWidth="0.4"
           initial={{ pathLength: 0 }}
-          animate={{ pathLength: [0, 1] }}
-          transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 2.5, ease: "easeInOut" }}
         />
-        {/* Lake Ontario hint */}
-        <line x1="18" y1="80" x2="86" y2="84" stroke="#1e3a5f" strokeWidth="0.6" />
-        {sites.map((s, i) => (
+
+        {/* Lake Ontario */}
+        <path
+          d="M 6 76 Q 50 82 94 76 L 94 96 L 6 96 Z"
+          fill="rgba(30, 58, 95, 0.55)"
+          stroke="rgba(96, 165, 250, 0.25)"
+          strokeWidth="0.3"
+        />
+        <text x="50" y="88" textAnchor="middle" fill="rgba(147, 197, 253, 0.55)" fontSize="2.6" fontStyle="italic" letterSpacing="0.4">Lake Ontario</text>
+
+        {/* Highway hints (dashed) */}
+        <line x1="14" y1="46" x2="90" y2="46" stroke="rgba(96, 165, 250, 0.18)" strokeWidth="0.25" strokeDasharray="1.2 1.2" />
+        <line x1="56" y1="22" x2="56" y2="74" stroke="rgba(96, 165, 250, 0.18)" strokeWidth="0.25" strokeDasharray="1.2 1.2" />
+        <text x="88" y="44.5" fill="rgba(147, 197, 253, 0.4)" fontSize="1.6">401</text>
+        <text x="57" y="26" fill="rgba(147, 197, 253, 0.4)" fontSize="1.6">404</text>
+
+        {/* City labels */}
+        <text x="22" y="52" fill="rgba(255,255,255,0.32)" fontSize="2.4" fontStyle="italic">Mississauga</text>
+        <text x="44" y="28" fill="rgba(255,255,255,0.32)" fontSize="2.4" fontStyle="italic">Vaughan · Markham</text>
+        <text x="80" y="52" fill="rgba(255,255,255,0.32)" fontSize="2.4" fontStyle="italic" textAnchor="middle">Pickering</text>
+        <text x="50" y="68" fill="rgba(255,255,255,0.55)" fontSize="3.6" fontWeight="700" textAnchor="middle" letterSpacing="0.3">TORONTO</text>
+
+        {sites.map((s) => (
           <g key={s.label}>
             <motion.circle
               cx={s.x} cy={s.y} r="2"
-              fill="rgba(96, 165, 250, 0.2)"
+              fill="rgba(96, 165, 250, 0.25)"
               animate={{ r: [1, 6, 1], opacity: [0.6, 0, 0.6] }}
               transition={{ duration: 2.5, repeat: Infinity, delay: s.delay, ease: "easeOut" }}
             />
             <motion.circle
               cx={s.x} cy={s.y} r="1.4"
               fill="#60a5fa"
-              initial={{ scale: 0, y: -5 }}
-              animate={{ scale: [0, 1.4, 1], y: [-5, 0, 0] }}
-              transition={{ duration: 0.6, delay: s.delay, repeat: Infinity, repeatDelay: 5.4 }}
+              initial={{ scale: 0 }}
+              animate={{ scale: [0, 1.4, 1] }}
+              transition={{ duration: 0.6, delay: s.delay + 0.2 }}
             />
             <motion.text
-              x={s.x + 3} y={s.y + 0.8} fill="#ffffff" fontSize="2.4" fontWeight="500"
+              x={s.x + 2.5} y={s.y - 0.4} fill="#ffffff" fontSize="2.3" fontWeight="600"
               initial={{ opacity: 0 }}
-              animate={{ opacity: [0, 1, 1, 0] }}
-              transition={{ duration: 6, times: [0, 0.1 + i * 0.05, 0.85, 1], repeat: Infinity, delay: s.delay }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: s.delay + 0.4 }}
             >{s.label}</motion.text>
+            <motion.text
+              x={s.x + 2.5} y={s.y + 2.2} fill="#60a5fa" fontSize="1.8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: s.delay + 0.5 }}
+            >{s.neighborhood}</motion.text>
           </g>
         ))}
       </svg>
