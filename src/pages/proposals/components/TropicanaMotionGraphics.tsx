@@ -315,13 +315,12 @@ const TropicanaMotionGraphics = () => {
     { Component: TimelineLoop, caption: "Animated 45-year timeline. Locks to narration as the CEO walks through Tropicana's evolution." },
     { Component: NumbersTickerLoop, caption: "Stat ticker built from real Tropicana audited figures. Each number earns its place by tying to the donor ask." },
     { Component: ProgramWheelLoop, caption: "Radial diagram that reveals each of the 8 program areas as the narrator names them." },
-    { Component: MapOfImpactLoop, caption: "Geographic reveal of Tropicana's 4 GTA sites, then pulls back to show national SBCCI reach." },
-    { Component: FutureVisionLoop, caption: "Closing graphic. The 6 strategic priorities assemble around the vision statement, leading directly into the donor ask." },
+    { Component: FutureVisionLoop, caption: "Strategic Plan 2022\u20132027. The 6 priorities assemble around the vision statement, leading directly into the donor ask." },
   ];
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {tiles.slice(0, 4).map((t, i) => (
+        {tiles.map((t, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, y: 30 }}
@@ -339,20 +338,6 @@ const TropicanaMotionGraphics = () => {
           </motion.div>
         ))}
       </div>
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.6, delay: 0.4 }}
-        className="rounded-sm overflow-hidden border border-impact-dark/10 bg-impact-cream"
-      >
-        <div className="relative aspect-[16/6] w-full">
-          <FutureVisionLoop />
-        </div>
-        <div className="p-5">
-          <p className="text-impact-dark/70 leading-relaxed text-sm">{tiles[4].caption}</p>
-        </div>
-      </motion.div>
     </div>
   );
 };
