@@ -554,6 +554,24 @@ const TropicanaFriendRaiser = () => {
                 </ul>
               </motion.div>
             </div>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mt-10 bg-white/5 border-l-4 border-impact-blue rounded-sm p-8 md:p-10">
+              <p className="text-impact-blue text-[10px] uppercase tracking-[0.3em] font-medium mb-2">Tier Value Breakdown</p>
+              <h3 className="font-serif text-2xl md:text-3xl font-bold text-white mb-6">What the Extra $17,500 Buys You</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mb-6">
+                {tierValueAdds.map((item) => (
+                  <div key={item.title} className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-impact-blue flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-white font-medium leading-tight">{item.title}</p>
+                      <p className="text-white/55 text-xs italic mt-0.5">{item.value}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="text-white/65 text-sm italic leading-relaxed border-t border-white/10 pt-5">
+                At market rates, these additions typically price at $21K&ndash;$45K standalone. Bundled into Signature Production+, the gap is $17,500 because the same crew, same production, same post pipeline absorbs the added scale efficiently.
+              </p>
+            </motion.div>
             <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-white/60 text-sm text-center mt-10 max-w-2xl mx-auto">
               Payment terms: 40% on signed agreement, 40% at first cut, 20% on final delivery. We hold these prices through May 5, 2026.
             </motion.p>
