@@ -667,28 +667,37 @@ const TropicanaFriendRaiser = () => {
                   Documentary filmmaker and storytelling strategist. Toronto-based. Designs the story strategy, leads every interview, directs every shoot, oversees every cut. No account managers. No handoffs. Recent Signature Productions for Lakeridge Health, CAFCAN, Black Creek BHM, and the Muamba Foundation.
                 </p>
               </motion.div>
-              <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {teamRoles.map((member, i) => (
-                  <motion.div key={member.role} custom={i} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="p-5 bg-white rounded-sm flex flex-col">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
-                        <span className="text-primary font-serif font-semibold text-sm tracking-wider">{member.initials}</span>
+              <div className="lg:col-span-2 space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {teamRoles.map((member, i) => (
+                    <motion.div key={member.role} custom={i} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="p-5 bg-white rounded-sm flex flex-col">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+                          <span className="text-primary font-serif font-semibold text-sm tracking-wider">{member.initials}</span>
+                        </div>
+                        <h3 className="font-serif text-base font-semibold text-impact-dark leading-tight flex-1">{member.role}</h3>
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-primary text-[10px] uppercase tracking-widest font-medium leading-tight">{member.role}</p>
-                        <p className={`text-[11px] mt-1 ${member.name ? "text-impact-dark font-medium" : "text-impact-dark/50 uppercase tracking-wider"}`}>
-                          {member.name || "[Name TBD]"}
-                        </p>
+                      <p className="text-impact-dark/70 text-[13px] leading-relaxed mb-4 flex-1">{member.desc}</p>
+                      <div className="pt-3 border-t border-impact-dark/10">
+                        <span className={`inline-block text-[10px] uppercase tracking-widest font-medium px-2 py-1 rounded-sm ${member.tier === "Signature Production+ Only" ? "bg-impact-blue/10 text-impact-blue" : "bg-primary/10 text-primary"}`}>
+                          {member.tier}
+                        </span>
                       </div>
-                    </div>
-                    <p className="text-impact-dark/70 text-[13px] leading-relaxed mb-4 flex-1">{member.desc}</p>
-                    <div className="pt-3 border-t border-impact-dark/10">
-                      <span className={`inline-block text-[10px] uppercase tracking-widest font-medium px-2 py-1 rounded-sm ${member.tier === "Signature Production+ Only" ? "bg-impact-blue/10 text-impact-blue" : "bg-primary/10 text-primary"}`}>
-                        {member.tier}
-                      </span>
-                    </div>
-                  </motion.div>
-                ))}
+                    </motion.div>
+                  ))}
+                </div>
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="p-6 bg-white rounded-sm border-l-4 border-impact-blue">
+                  <p className="text-impact-blue text-[10px] uppercase tracking-[0.25em] font-medium mb-4">Supporting Roles · Assembled Per Project</p>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-3">
+                    {supportingRoles.map((sr) => (
+                      <div key={sr.role} className="flex flex-col">
+                        <p className="font-serif text-sm font-semibold text-impact-dark leading-tight">{sr.role}</p>
+                        <p className={`text-[10px] uppercase tracking-widest mt-1 ${sr.tier === "Signature Production+" ? "text-impact-blue" : "text-primary"}`}>{sr.tier}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-impact-dark/55 text-xs italic mt-5">Every supporting role is filled by a vetted Toronto-based specialist Rovonn has directly worked with or been recommended by trusted collaborators. Names confirmed at contract sign.</p>
+                </motion.div>
               </div>
             </div>
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mt-12">
