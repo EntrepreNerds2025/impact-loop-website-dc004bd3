@@ -268,13 +268,25 @@ const TropicanaFriendRaiser = () => {
             <p className="text-white/80 text-xl leading-relaxed mb-8">
               A five-minute cinematic portrait of 45 years of community impact, built to turn 100 new strangers into 100 new friends on June 4, 2026.
             </p>
-            <div className="aspect-video w-full max-w-3xl mx-auto bg-black/40 border border-white/10 rounded-sm flex items-center justify-center my-12 group cursor-pointer hover:border-impact-blue/40 transition-colors">
-              <div className="text-center">
-                <PlayCircle className="w-16 h-16 text-white/40 group-hover:text-impact-blue mx-auto mb-3 transition-colors" />
-                <p className="text-white/70 text-sm uppercase tracking-widest">90-Second Video Pitch from Rovonn</p>
-                <p className="text-white/40 text-xs mt-2">Direct-to-camera walkthrough of how we'd approach the FriendRaiser film</p>
+            <button
+              onClick={() => setLightboxVideo("1186367128")}
+              className="relative aspect-video w-full max-w-3xl mx-auto bg-black/40 border border-white/10 rounded-sm overflow-hidden my-12 group cursor-pointer hover:border-impact-blue/50 transition-colors block"
+              aria-label="Play 90-second video pitch from Rovonn"
+            >
+              <iframe
+                src="https://player.vimeo.com/video/1186367128?background=1&autoplay=1&loop=1&muted=1"
+                className="absolute inset-0 w-full h-full pointer-events-none scale-110"
+                allow="autoplay"
+                title="Video pitch from Rovonn"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/40 group-hover:from-black/60 transition-colors flex flex-col items-center justify-center">
+                <div className="w-20 h-20 rounded-full bg-impact-blue/90 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-2xl">
+                  <Play className="w-8 h-8 text-white ml-1" fill="currentColor" />
+                </div>
+                <p className="text-white text-sm uppercase tracking-widest font-medium">90-Second Video Pitch from Rovonn</p>
+                <p className="text-white/70 text-xs mt-2 px-6 text-center">Direct-to-camera walkthrough of how we'd approach the FriendRaiser film</p>
               </div>
-            </div>
+            </button>
             <p className="text-white/60 text-xs md:text-sm uppercase tracking-[0.25em]">
               Submitted by Impact Loop &middot; Toronto-based &middot; Founder-led production
             </p>
