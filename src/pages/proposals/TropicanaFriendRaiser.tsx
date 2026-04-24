@@ -308,7 +308,6 @@ const TropicanaFriendRaiser = () => {
             ))}
           </div>
           <p className="text-center text-white/40 text-xs italic mt-6">Full case studies linked in Section 08 below.</p>
-          </div>
         </div>
       </section>
 
