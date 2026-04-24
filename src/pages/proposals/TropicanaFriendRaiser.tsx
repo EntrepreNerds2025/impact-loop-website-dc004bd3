@@ -301,13 +301,13 @@ const TropicanaFriendRaiser = () => {
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {portfolio.map((p) => (
-              <button key={p.vimeoId} onClick={() => setLightboxVideo(p.vimeoId)} className="group relative aspect-video bg-black/40 overflow-hidden rounded-sm cursor-pointer" aria-label={`Play ${p.title}`}>
+              <div key={p.vimeoId} className="relative aspect-video bg-black/40 overflow-hidden rounded-sm" aria-label={`${p.title} preview`}>
                 <iframe src={`https://player.vimeo.com/video/${p.vimeoId}?background=1&autoplay=1&loop=1&muted=1`} className="absolute inset-0 w-full h-full pointer-events-none scale-110" allow="autoplay" title={`${p.title} preview`} />
-                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                  <Play className="w-10 h-10 text-white/0 group-hover:text-white/90 transition-colors" />
-                </div>
-              </button>
+                <div className="absolute inset-0 bg-black/20" />
+              </div>
             ))}
+          </div>
+          <p className="text-center text-white/40 text-xs italic mt-6">Full case studies linked in Section 08 below.</p>
           </div>
         </div>
       </section>
