@@ -320,7 +320,7 @@ const TropicanaFriendRaiser = () => {
               <div className="space-y-6 text-white/85 text-lg leading-relaxed text-left max-w-3xl mx-auto">
                 <p>Most production companies will treat your brief as a video-services job. Capture, edit, deliver. We don't, and that's the difference.</p>
                 <p>Impact Loop builds storytelling systems for organizations whose work has to earn trust before it can earn dollars. Healthcare. Black-serving community organizations. Workforce development. Faith communities. The exact territory Tropicana operates in.</p>
-                <p>We bring three things to FriendRaiser that matter more than gear: a director who understands why your 45 years are an asset, not a backstory; a community-first interview practice that makes clients feel safe enough to give you the moment you actually need; and a deployment mindset that guarantees the film is still working in October, not just on June 4.</p>
+                <p>We bring three things to FriendRaiser that matter more than gear: a director who understands why your 45 years are an asset, not a backstory; a community first interview practice that makes clients feel safe enough to give you the moment you actually need; and a deployment mindset that guarantees the film is still working in October, not just on June 4.</p>
               </div>
             </motion.div>
           </div>
