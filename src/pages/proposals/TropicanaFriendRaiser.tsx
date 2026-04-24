@@ -377,7 +377,7 @@ const TropicanaFriendRaiser = () => {
                 &ldquo;Your guests are giving you their evening. They deserve a film that respects what they came in with, and earns the next step on its own merit. We don&rsquo;t set out to make a fundraising film. We set out to make a film worth watching, and trust that the friendship follows.&rdquo;
               </p>
               <p className="text-impact-dark/60 text-sm uppercase tracking-widest font-medium">Rovonn Russell</p>
-              <p className="text-impact-dark/50 text-xs italic">Creative Director &amp; Director, FriendRaiser</p>
+              <p className="text-impact-dark/50 text-xs italic">Creative Director &amp; Director</p>
             </motion.div>
           </div>
         </div>
