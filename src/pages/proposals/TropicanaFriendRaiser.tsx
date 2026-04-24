@@ -660,7 +660,7 @@ const TropicanaFriendRaiser = () => {
                 </div>
                 <p className="text-primary text-xs uppercase tracking-widest mb-2 font-medium">Direct Contact for Tropicana</p>
                 <h3 className="font-serif text-2xl font-bold text-impact-dark mb-1">Rovonn Russell</h3>
-                <p className="text-impact-dark/60 italic text-sm mb-4">Creative Director &amp; Director, FriendRaiser · Founder of Impact Loop</p>
+                <p className="text-impact-dark/60 italic text-sm mb-4">Creative Director &amp; Director · Founder of Impact Loop</p>
                 <p className="text-impact-dark/70 text-sm leading-relaxed">
                   Documentary filmmaker and storytelling strategist. Toronto-based. Designs the story strategy, leads every interview, directs every shoot, oversees every cut. No account managers. No handoffs. Recent Signature Productions for Lakeridge Health, CAFCAN, Black Creek BHM, and the Muamba Foundation.
                 </p>
