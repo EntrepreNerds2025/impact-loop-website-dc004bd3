@@ -167,8 +167,7 @@ const teamRoles = [
   },
   {
     role: "Production Manager",
-    name: "Timotheus Greene",
-    initials: "TG",
+    initials: "PM",
     tier: "Both Tiers",
     desc: "Owns scheduling, crew logistics, and release-form management across all shoot days. Coordinates call times, gear movement, Tropicana site access, and subject paperwork from pre-production through wrap.",
   },
@@ -192,9 +191,29 @@ const teamRoles = [
   },
 ];
 
+const supportingRoles = [
+  { role: "Colorist", tier: "Signature Production+" },
+  { role: "Sound Designer", tier: "Signature Production+" },
+  { role: "Audio Engineer", tier: "Both Tiers" },
+  { role: "Gaffer", tier: "Signature Production+" },
+  { role: "Grip", tier: "Signature Production+" },
+  { role: "DP Assistant", tier: "Signature Production+" },
+  { role: "Production Assistant", tier: "Both Tiers" },
+  { role: "Still Photographer", tier: "Signature Production+" },
+];
+
 const references = [
-  { org: "Black Creek Community Health Centre", contact: "Cheryl Prescod, Executive Director", note: "Reference for community-centered storytelling, multi-stakeholder coordination, and event-anchored video work, the closest format match to FriendRaiser." },
-  { org: "CAFCAN Social Services (Caribbean African Canadian)", contact: "Floydeen Charles-Fridal, Executive Director", note: "Reference for cultural fit, community-rooted production approach, and the experience of working with a Black-serving multi-program nonprofit." },
+  { person: "Cheryl Prescod", title: "Executive Director", org: "Black Creek Community Health Centre", note: "Reference for community-centered storytelling, multi-stakeholder coordination, and event-anchored video work, the closest format match to FriendRaiser." },
+  { person: "Floydeen Charles-Fridal", title: "Executive Director", org: "CAFCAN Social Services (Caribbean African Canadian)", note: "Reference for cultural fit, community-rooted production approach, and the experience of working with a Black-serving multi-program nonprofit." },
+];
+
+const tierValueAdds = [
+  { title: "Original Score", value: "$5K\u2013$15K value" },
+  { title: "Broadcast Motion Graphics", value: "$5K\u2013$15K value" },
+  { title: "Expanded Crew", value: "$3K\u2013$7K value" },
+  { title: "Archival Research + HDR Master", value: "Included" },
+  { title: "Multi-Cut Deployment Pack", value: "Included" },
+  { title: "CEO Post-Event Video Series", value: "Included" },
 ];
 
 const TropicanaFriendRaiser = () => {
