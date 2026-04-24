@@ -136,9 +136,9 @@ const creativeApproach = [
     body: "We anchor the film on five real people drawn from across Tropicana\u2019s program areas: a Childcare & Youth parent, an Employment & Pre-Apprenticeship graduate, a Timeless Treasures senior, a Counselling or Village Pantry community member, and one Tropicana team member who has been there for the long arc. Final program areas confirmed with your team at kickoff. The film is a chorus, not a narration.",
   },
   {
-    label: "The Emotional Arc",
-    title: "Open Intimate. Scale in the Middle. Land as a Host, Not a Fundraiser.",
-    body: "The first 60 seconds are one face, one room, one truth, quiet enough that the room leans in. The middle scales to the 45-year legacy and the eight programs through motion graphics. The close hands the room a role, not an ask. We treat your guest as a future friend, not a wallet.",
+    label: "Built Around Your Vision",
+    title: "We Build to Your Outline, Not Our Template.",
+    body: "You have a second-by-second video outline, and we take that seriously. Your structure is the spine we edit to, not ours. Our job in pre-production is to pressure-test every beat so the film your team already imagined is the one that lands in the room, executed at a level that earns 100 friends.",
   },
   {
     label: "Why This Earns 100 Friends",
