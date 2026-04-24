@@ -722,13 +722,12 @@ const TropicanaFriendRaiser = () => {
             </motion.div>
             <div className="space-y-6">
               {references.map((r, i) => (
-                <motion.div key={r.org} custom={i} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex flex-col md:flex-row gap-6 p-6 border border-impact-dark/10 rounded-sm">
-                  <Award className="w-8 h-8 text-primary flex-shrink-0" />
-                  <div className="flex-1">
-                    <h3 className="font-serif text-xl font-semibold text-impact-dark mb-1">{r.org}</h3>
-                    <p className="text-impact-dark/50 text-sm mb-3">{r.contact}</p>
-                    <p className="text-impact-dark/70 leading-relaxed">{r.note}</p>
-                  </div>
+                <motion.div key={r.org} custom={i} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-impact-cream rounded-sm border-l-4 border-primary p-8 md:p-10">
+                  <p className="text-primary text-[10px] uppercase tracking-[0.3em] font-medium mb-3">Past Client Reference</p>
+                  <h3 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark leading-tight mb-2">{r.person}</h3>
+                  <p className="text-impact-dark/80 text-base font-medium mb-1">{r.title}</p>
+                  <p className="text-impact-dark/55 text-sm italic mb-5">{r.org}</p>
+                  <p className="text-impact-dark/75 leading-relaxed border-t border-impact-dark/10 pt-5">{r.note}</p>
                 </motion.div>
               ))}
             </div>
