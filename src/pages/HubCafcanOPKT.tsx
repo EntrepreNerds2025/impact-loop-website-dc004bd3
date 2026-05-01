@@ -47,23 +47,23 @@ interface CohortTab {
 
 const cohortTabs: CohortTab[] = [
   { id: "featured", label: "Featured", location: "" },
-  { id: "launch-day", label: "Launch Day", location: "CAFCAN Social Services" },
-  { id: "cohort-1", label: "Cohort 1", location: "CAFCAN Social Services" },
-  { id: "cohort-2", label: "Cohort 2", location: "Homes First Shelter" },
-  { id: "cohort-3", label: "Cohort 3", location: "Christie Refugee Welcome Centre" },
-  { id: "cohort-4", label: "Cohort 4", location: "Homes First Shelter" },
-  { id: "cohort-5", label: "Cohort 5", location: "Skilled Trades" },
-  { id: "cohort-6", label: "Cohort 6", location: "Entrepreneurship Module" },
+  { id: "launch-day", label: "Launch Day", location: "Nov 13, 2025 · 72 participants" },
+  { id: "cohort-1", label: "Cohort 1", location: "Employment Readiness · 18 participants" },
+  { id: "cohort-2", label: "Cohort 2", location: "Employment Readiness · 25 participants" },
+  { id: "cohort-3", label: "Cohort 3", location: "Employment Readiness · 21 participants" },
+  { id: "cohort-4", label: "Cohort 4", location: "Employment Readiness · 26 participants" },
+  { id: "cohort-5", label: "Cohort 5", location: "Skilled Trades · Mar 11, 2026 · 25 participants" },
+  { id: "cohort-6", label: "Cohort 6", location: "Entrepreneurship · Mar 17–19, 2026 · 25 participants" },
 ];
 
 const clipTabs: CohortTab[] = [
   { id: "featured", label: "Featured", location: "" },
-  { id: "cohort-1", label: "Session 1", location: "CAFCAN Social Services" },
-  { id: "cohort-2", label: "Session 2", location: "Homes First Shelter" },
-  { id: "cohort-3", label: "Session 3", location: "Christie Refugee Welcome Centre" },
-  { id: "cohort-4", label: "Session 4", location: "Homes First Shelter" },
-  { id: "cohort-5", label: "Session 5", location: "Skilled Trades" },
-  { id: "cohort-6", label: "Session 6", location: "Entrepreneurship Module" },
+  { id: "cohort-1", label: "Session 1", location: "Employment Readiness · 18 participants" },
+  { id: "cohort-2", label: "Session 2", location: "Employment Readiness · 25 participants" },
+  { id: "cohort-3", label: "Session 3", location: "Employment Readiness · 21 participants" },
+  { id: "cohort-4", label: "Session 4", location: "Employment Readiness · 26 participants" },
+  { id: "cohort-5", label: "Session 5", location: "Skilled Trades · Mar 11, 2026 · 25 participants" },
+  { id: "cohort-6", label: "Session 6", location: "Entrepreneurship · Mar 17–19, 2026 · 25 participants" },
 ];
 
 /* ─── Photo imports (auto-discovered per cohort) ─── */
