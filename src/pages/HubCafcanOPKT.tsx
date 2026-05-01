@@ -775,31 +775,95 @@ const HubCafcanOPKT = () => {
             </section>
 
             {/* 8. Partners */}
-            <section id="partners" className="py-20 bg-background">
-              <div className="container mx-auto px-6">
-                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-4 text-center">Partners</h2>
-                <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12">
-                  Community and institutional partners helping deliver the OPKT program across the GTA.
+            {/* 7b. Hiring Event & Community Job Fair */}
+            <section id="hiring-event" className="py-20 bg-[hsl(var(--impact-cream))]">
+              <div className="container mx-auto px-6 max-w-5xl">
+                <div className="text-center mb-10">
+                  <p className="text-impact-blue uppercase tracking-widest text-xs font-semibold mb-3">Hiring Event & Community Job Fair · March 25, 2026</p>
+                  <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-6">The Bridge to Employment</h2>
+                  <p className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
+                    The OPKT program culminated in a large-scale Hiring Event and Community Job Fair, connecting trained participants directly to employers across five high-demand sectors. The event translated months of preparation into real interviews, real job offers, and lasting employer relationships.
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap justify-center gap-2 mb-10">
+                  {hiringSectors.map((s) => (
+                    <span key={s} className="px-4 py-2 rounded-full bg-white border border-border text-foreground text-sm font-medium">
+                      {s}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8">
+                  {hiringOutcomes.map((o) => (
+                    <div key={o.label} className="bg-white border border-border border-l-4 border-l-primary rounded-xl p-6 text-center">
+                      <p className="font-serif text-4xl md:text-5xl font-bold text-impact-blue">{o.value}</p>
+                      <p className="text-muted-foreground text-sm mt-2">{o.label}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <p className="italic text-center text-muted-foreground text-sm md:text-base max-w-3xl mx-auto">
+                  Expanded employer connections and referrals across all five sectors will continue to feed participant placements beyond the event itself.
                 </p>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
-                  {partnerLogos.map((partner) => (
-                    <motion.div
-                      key={partner.name}
-                      variants={slideUp}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: true }}
-                      className="bg-white border border-border rounded-xl p-4 md:p-5 flex flex-col items-center justify-center gap-3 min-h-32"
-                    >
-                      <img
-                        src={partner.logo}
-                        alt={`${partner.name} logo`}
-                        className="max-h-14 w-auto max-w-full object-contain"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <p className="text-foreground text-xs md:text-sm text-center leading-tight">{partner.name}</p>
-                    </motion.div>
+              </div>
+            </section>
+
+            {/* 7c. Key Outcomes & Impact */}
+            <section id="key-outcomes" className="py-20 bg-background">
+              <div className="container mx-auto px-6 max-w-6xl">
+                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-12 text-center">Key Outcomes & Impact</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+                  {keyOutcomes.map((card) => (
+                    <div key={card.title} className="bg-white border border-border rounded-xl p-6 shadow-sm">
+                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                        <card.icon className="w-5 h-5 text-primary" />
+                      </div>
+                      <h3 className="font-serif text-lg md:text-xl font-bold text-foreground mb-3 leading-tight">{card.title}</h3>
+                      <ul className="space-y-2">
+                        {card.bullets.map((b) => (
+                          <li key={b} className="text-muted-foreground text-sm leading-relaxed flex gap-2">
+                            <span className="text-primary mt-1">•</span>
+                            <span>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* 8. Partners (tiered) */}
+            <section id="partners" className="py-20 bg-background">
+              <div className="container mx-auto px-6 max-w-6xl">
+                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-4 text-center">Partners</h2>
+                <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-14">
+                  Facilitators, employers, agencies, and community organizations who made the OPKT program possible.
+                </p>
+
+                <div className="space-y-12">
+                  {partnerTiers.map((tier) => (
+                    <div key={tier.label}>
+                      <p className="text-impact-blue uppercase tracking-widest text-xs font-semibold mb-5 text-center md:text-left">
+                        {tier.label}
+                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {tier.partners.map((p) => (
+                          <motion.div
+                            key={p.name}
+                            variants={slideUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            className="bg-white border border-border rounded-xl p-5"
+                          >
+                            <p className="font-serif text-base md:text-lg font-bold text-foreground leading-tight">{p.name}</p>
+                            <p className="text-muted-foreground text-xs md:text-sm mt-1.5 leading-relaxed">{p.role}</p>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>
