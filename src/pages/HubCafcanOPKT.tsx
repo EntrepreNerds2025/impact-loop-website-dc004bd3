@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   BookOpen, Video, Images, Quote, Handshake, FileDown, BarChart3,
-  ChevronDown, Menu, X, Play, Download, Star
+  ChevronDown, Menu, X, Play, Download, Star, Calendar, Users, Layers, Award,
+  Briefcase, GraduationCap, Heart, Link as LinkIcon
 } from "lucide-react";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
@@ -46,23 +47,23 @@ interface CohortTab {
 
 const cohortTabs: CohortTab[] = [
   { id: "featured", label: "Featured", location: "" },
-  { id: "launch-day", label: "Launch Day", location: "CAFCAN Social Services" },
-  { id: "cohort-1", label: "Cohort 1", location: "CAFCAN Social Services" },
-  { id: "cohort-2", label: "Cohort 2", location: "Homes First Shelter" },
-  { id: "cohort-3", label: "Cohort 3", location: "Christie Refugee Welcome Centre" },
-  { id: "cohort-4", label: "Cohort 4", location: "Homes First Shelter" },
-  { id: "cohort-5", label: "Cohort 5", location: "Skilled Trades" },
-  { id: "cohort-6", label: "Cohort 6", location: "Entrepreneurship Module" },
+  { id: "launch-day", label: "Launch Day", location: "Nov 13, 2025 · 72 participants" },
+  { id: "cohort-1", label: "Cohort 1", location: "Employment Readiness · 18 participants" },
+  { id: "cohort-2", label: "Cohort 2", location: "Employment Readiness · 25 participants" },
+  { id: "cohort-3", label: "Cohort 3", location: "Employment Readiness · 21 participants" },
+  { id: "cohort-4", label: "Cohort 4", location: "Employment Readiness · 26 participants" },
+  { id: "cohort-5", label: "Cohort 5", location: "Skilled Trades · Mar 11, 2026 · 25 participants" },
+  { id: "cohort-6", label: "Cohort 6", location: "Entrepreneurship · Mar 17–19, 2026 · 25 participants" },
 ];
 
 const clipTabs: CohortTab[] = [
   { id: "featured", label: "Featured", location: "" },
-  { id: "cohort-1", label: "Session 1", location: "CAFCAN Social Services" },
-  { id: "cohort-2", label: "Session 2", location: "Homes First Shelter" },
-  { id: "cohort-3", label: "Session 3", location: "Christie Refugee Welcome Centre" },
-  { id: "cohort-4", label: "Session 4", location: "Homes First Shelter" },
-  { id: "cohort-5", label: "Session 5", location: "Skilled Trades" },
-  { id: "cohort-6", label: "Session 6", location: "Entrepreneurship Module" },
+  { id: "cohort-1", label: "Session 1", location: "Employment Readiness · 18 participants" },
+  { id: "cohort-2", label: "Session 2", location: "Employment Readiness · 25 participants" },
+  { id: "cohort-3", label: "Session 3", location: "Employment Readiness · 21 participants" },
+  { id: "cohort-4", label: "Session 4", location: "Employment Readiness · 26 participants" },
+  { id: "cohort-5", label: "Session 5", location: "Skilled Trades · Mar 11, 2026 · 25 participants" },
+  { id: "cohort-6", label: "Session 6", location: "Entrepreneurship · Mar 17–19, 2026 · 25 participants" },
 ];
 
 /* ─── Photo imports (auto-discovered per cohort) ─── */
@@ -175,14 +176,22 @@ const clips: ClipDef[] = [
   { title: "Session 6 - Testimonial 4", vimeoId: "1183559617", cohort: "cohort-6" },
 ];
 
-/* ─── Program pillars ─── */
+/* ─── Program pillars (official report) ─── */
 const programPillars = [
-  { label: "Employment Readiness", value: "Canadian workplace culture training, resume development, and networking strategies." },
-  { label: "Career Development", value: "Career exploration, interview skills, and entrepreneurship foundations." },
-  { label: "Health & Wellness", value: "Culturally safe workshops on mental health, physical wellbeing, and coping with displacement." },
-  { label: "Civic Engagement", value: "Volunteering opportunities and leadership development within local communities." },
-  { label: "Food Security", value: "Weekly culturally relevant food baskets through Afri-Can FoodBasket partnerships." },
-  { label: "System Navigation", value: "Guidance accessing federal and provincial programs, healthcare, and education." },
+  { label: "Career Exploration & Assessment", value: "Industry insights, labor market trends, and structured career discovery for newcomers navigating the Canadian job market." },
+  { label: "Employment Readiness", value: "Resume building, interview preparation, mock interviews, job search strategies, and Canadian workplace standards." },
+  { label: "Health & Wellness", value: "Holistic supports including mental health, physical wellbeing, and community health partnerships during settlement." },
+  { label: "Digital Literacy Training", value: "Online job platforms, modern application tools, and the role of technology in contemporary work." },
+  { label: "Entrepreneurship Development", value: "Business foundations, financial literacy, alternative financing (Esusu/Susu), pitching, and 30-day implementation plans." },
+  { label: "Skilled Trades Exposure", value: "Hands-on tool demonstrations, certification pathways, and direct engagement with industry professionals." },
+];
+
+/* ─── Program at a Glance ─── */
+const programGlance = [
+  { icon: Calendar, label: "Timeframe", value: "November 2025 – March 2026" },
+  { icon: Users, label: "Community Served", value: "Black African asylum seekers and refugees — youth, women, men, and LGBTQ+ individuals across the Greater Toronto Area" },
+  { icon: Layers, label: "Three Streams", value: "Employment Readiness (4 cohorts), Skilled Trades Boot Camp, Entrepreneurship Workshop" },
+  { icon: Award, label: "Culmination", value: "Hiring Event & Community Job Fair, March 25, 2026" },
 ];
 
 /* ─── Participant testimonials from OPKT cohorts ─── */
@@ -195,12 +204,124 @@ const quotes = [
   { text: "OPKT is more than a program. It is a family that helps you stand on your own feet.", name: "Program Participant", role: "OPKT Cohort Member" },
 ];
 
-/* ─── Outcomes ─── */
+/* ─── Outcomes (official report) ─── */
 const outcomes = [
-  { value: "7", label: "Cohort Sessions Delivered" },
-  { value: "6", label: "Partner Locations" },
-  { value: "150+", label: "Photos Captured" },
-  { value: "1", label: "Job Fair Hosted" },
+  { value: "532", label: "Total Participant Engagements" },
+  { value: "6", label: "Cohorts Delivered" },
+  { value: "53", label: "Direct CIBC Interviews" },
+  { value: "8", label: "Direct Job Placements" },
+  { value: "30", label: "Volunteers Engaged" },
+  { value: "320", label: "Hiring Event Attendance" },
+];
+
+/* ─── Hiring Event ─── */
+const hiringSectors = [
+  "Banking & Finance",
+  "Healthcare & Social Services",
+  "Security & Emergency Services",
+  "Retail & Customer Service",
+  "Warehousing & General Operations",
+];
+
+const hiringOutcomes = [
+  { value: "320", label: "Total Attendance" },
+  { value: "53", label: "Direct CIBC Interviews" },
+  { value: "8", label: "Productive Security Hires" },
+];
+
+/* ─── Key Outcomes & Impact ─── */
+const keyOutcomes = [
+  {
+    icon: Briefcase,
+    title: "Enhanced Employment Readiness",
+    bullets: [
+      "Strong resumes and tailored job applications",
+      "Interview confidence and communication skills",
+      "Independent job search capabilities",
+      "Understanding of Canadian workplace standards",
+    ],
+  },
+  {
+    icon: GraduationCap,
+    title: "Specialized Skills Development",
+    bullets: [
+      "Digital literacy and technical competencies",
+      "Financial literacy and alternative financing knowledge",
+      "Entrepreneurial skills and business planning",
+      "Exposure to skilled trades and vocational pathways",
+    ],
+  },
+  {
+    icon: Heart,
+    title: "Community Integration & Wellbeing",
+    bullets: [
+      "Strengthened social networks and sense of belonging",
+      "Improved access to community and legal resources",
+      "Increased resilience through culturally responsive programming",
+    ],
+  },
+  {
+    icon: LinkIcon,
+    title: "Employer Linkages",
+    bullets: [
+      "Direct hiring outcomes",
+      "Expanded professional networks",
+      "Strengthened partnerships with employers and agencies",
+    ],
+  },
+];
+
+/* ─── Tiered partners ─── */
+const partnerTiers = [
+  {
+    label: "Facilitators & Subject Matter Experts",
+    partners: [
+      { name: "Genevieve D'Iori", role: "Workers' Health and Safety Legal Clinic — Employment Rights, Health & Safety" },
+      { name: "Patrick Shaw / Fatima", role: "Black Creek Community Centre — Health & Wellness" },
+      { name: "Rawle Boodoo", role: "Institute of Machine Tool Technology — Skilled Trades Pathways" },
+      { name: "Patrick Mwesigye", role: "Hope for Refugees — Networking & Job Search" },
+      { name: "Maximilliana Odibo", role: "Maxi Foods — Entrepreneurship Pathways" },
+      { name: "Bernie Uche", role: "Black Mint — Digital Skills & Technology" },
+      { name: "Crystal White-Dawe", role: "Blue Drop — Specialty Vehicle Operations" },
+      { name: "Oluwakemi Gaji & Marjeta Biba", role: "Toronto Employment & Social Services — Ontario Works" },
+      { name: "Joanne Tran", role: "Up With Women — Coaching Program" },
+      { name: "Barrister Evelyn Umudi", role: "Kairos Legal Advisory PC — Immigration Law" },
+      { name: "Jonathan Knott & Mustafa Ansari", role: "Toronto Business Development Centre — Skilled Trades Boot Camp" },
+      { name: "Alex Adefemi", role: "Alex Adefemi Advisory — Entrepreneurship Workshop" },
+      { name: "Nik-Keisha Moodie", role: "Toronto Business Development Centre — Financial Literacy" },
+      { name: "Tolu Okogie", role: "Greelz — Guest Speaker · Entrepreneurship" },
+    ],
+  },
+  {
+    label: "Employers",
+    partners: [
+      { name: "CIBC", role: "Banking Roles" },
+      { name: "Productive Security", role: "Security Officers" },
+      { name: "Toronto Fire Services", role: "Various Roles" },
+      { name: "PLASP", role: "Early Childhood Educators" },
+      { name: "Care Provide", role: "PSW, DSW, Home Care Workers" },
+    ],
+  },
+  {
+    label: "Staffing Agencies",
+    partners: [
+      { name: "Topnotch Employment", role: "Various Roles" },
+      { name: "Upstaff", role: "Various Roles" },
+      { name: "SereneAid", role: "PSW, DSW & Related" },
+    ],
+  },
+  {
+    label: "Community Partners",
+    partners: [
+      { name: "Anatoli Kaddu", role: "Impakt Foundation — Homes First Shelter Contact" },
+      { name: "Megan Wilkinson", role: "Christie Refugee Welcome Centre" },
+      { name: "Erika Acomata", role: "Christie Ossington Neighbourhood Centre" },
+      { name: "Up With Women", role: "Community Partner" },
+      { name: "CLI College", role: "PSW, DSW, Logistics, Supply Chain Programs" },
+      { name: "Hammer Heads", role: "Skilled Trades" },
+      { name: "Toronto Employment & Social Services (TESS)", role: "Government Services" },
+    ],
+  },
 ];
 
 const partnerLogos = [
@@ -436,6 +557,24 @@ const HubCafcanOPKT = () => {
             {/* 2. Program Pillars */}
             <section id="program" className="py-16 md:py-20 bg-[hsl(var(--impact-cream))]">
               <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
+                {/* Program at a Glance */}
+                <div className="bg-white border border-border border-l-4 border-l-primary rounded-xl p-6 md:p-8 shadow-sm mb-10 md:mb-14">
+                  <p className="text-impact-blue uppercase tracking-widest text-xs font-semibold mb-4">Program at a Glance</p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+                    {programGlance.map((g) => (
+                      <div key={g.label} className="flex items-start gap-3">
+                        <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                          <g.icon className="w-4 h-4 text-primary" />
+                        </div>
+                        <div>
+                          <p className="text-foreground font-semibold text-sm">{g.label}</p>
+                          <p className="text-muted-foreground text-sm leading-relaxed mt-0.5">{g.value}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
                 <h2 className="font-serif text-2xl md:text-5xl font-bold text-foreground mb-8 md:mb-12 text-center">Program Pillars</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   {programPillars.map((d, idx) => (
@@ -636,31 +775,95 @@ const HubCafcanOPKT = () => {
             </section>
 
             {/* 8. Partners */}
-            <section id="partners" className="py-20 bg-background">
-              <div className="container mx-auto px-6">
-                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-4 text-center">Partners</h2>
-                <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12">
-                  Community and institutional partners helping deliver the OPKT program across the GTA.
+            {/* 7b. Hiring Event & Community Job Fair */}
+            <section id="hiring-event" className="py-20 bg-[hsl(var(--impact-cream))]">
+              <div className="container mx-auto px-6 max-w-5xl">
+                <div className="text-center mb-10">
+                  <p className="text-impact-blue uppercase tracking-widest text-xs font-semibold mb-3">Hiring Event & Community Job Fair · March 25, 2026</p>
+                  <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-6">The Bridge to Employment</h2>
+                  <p className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
+                    The OPKT program culminated in a large-scale Hiring Event and Community Job Fair, connecting trained participants directly to employers across five high-demand sectors. The event translated months of preparation into real interviews, real job offers, and lasting employer relationships.
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap justify-center gap-2 mb-10">
+                  {hiringSectors.map((s) => (
+                    <span key={s} className="px-4 py-2 rounded-full bg-white border border-border text-foreground text-sm font-medium">
+                      {s}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8">
+                  {hiringOutcomes.map((o) => (
+                    <div key={o.label} className="bg-white border border-border border-l-4 border-l-primary rounded-xl p-6 text-center">
+                      <p className="font-serif text-4xl md:text-5xl font-bold text-impact-blue">{o.value}</p>
+                      <p className="text-muted-foreground text-sm mt-2">{o.label}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <p className="italic text-center text-muted-foreground text-sm md:text-base max-w-3xl mx-auto">
+                  Expanded employer connections and referrals across all five sectors will continue to feed participant placements beyond the event itself.
                 </p>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
-                  {partnerLogos.map((partner) => (
-                    <motion.div
-                      key={partner.name}
-                      variants={slideUp}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: true }}
-                      className="bg-white border border-border rounded-xl p-4 md:p-5 flex flex-col items-center justify-center gap-3 min-h-32"
-                    >
-                      <img
-                        src={partner.logo}
-                        alt={`${partner.name} logo`}
-                        className="max-h-14 w-auto max-w-full object-contain"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <p className="text-foreground text-xs md:text-sm text-center leading-tight">{partner.name}</p>
-                    </motion.div>
+              </div>
+            </section>
+
+            {/* 7c. Key Outcomes & Impact */}
+            <section id="key-outcomes" className="py-20 bg-background">
+              <div className="container mx-auto px-6 max-w-6xl">
+                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-12 text-center">Key Outcomes & Impact</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+                  {keyOutcomes.map((card) => (
+                    <div key={card.title} className="bg-white border border-border rounded-xl p-6 shadow-sm">
+                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                        <card.icon className="w-5 h-5 text-primary" />
+                      </div>
+                      <h3 className="font-serif text-lg md:text-xl font-bold text-foreground mb-3 leading-tight">{card.title}</h3>
+                      <ul className="space-y-2">
+                        {card.bullets.map((b) => (
+                          <li key={b} className="text-muted-foreground text-sm leading-relaxed flex gap-2">
+                            <span className="text-primary mt-1">•</span>
+                            <span>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* 8. Partners (tiered) */}
+            <section id="partners" className="py-20 bg-background">
+              <div className="container mx-auto px-6 max-w-6xl">
+                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-4 text-center">Partners</h2>
+                <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-14">
+                  Facilitators, employers, agencies, and community organizations who made the OPKT program possible.
+                </p>
+
+                <div className="space-y-12">
+                  {partnerTiers.map((tier) => (
+                    <div key={tier.label}>
+                      <p className="text-impact-blue uppercase tracking-widest text-xs font-semibold mb-5 text-center md:text-left">
+                        {tier.label}
+                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {tier.partners.map((p) => (
+                          <motion.div
+                            key={p.name}
+                            variants={slideUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            className="bg-white border border-border rounded-xl p-5"
+                          >
+                            <p className="font-serif text-base md:text-lg font-bold text-foreground leading-tight">{p.name}</p>
+                            <p className="text-muted-foreground text-xs md:text-sm mt-1.5 leading-relaxed">{p.role}</p>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -685,7 +888,7 @@ const HubCafcanOPKT = () => {
             <section id="outcomes" className="section-dark py-20">
               <div className="container mx-auto px-6">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-12 text-center">Quick Outcomes</h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
                   {outcomes.map((o) => (
                     <div key={o.label} className="bg-white/5 border border-white/10 rounded-sm p-6 text-center">
                       <p className="font-serif text-3xl font-bold text-impact-blue">{o.value}</p>
@@ -693,6 +896,15 @@ const HubCafcanOPKT = () => {
                     </div>
                   ))}
                 </div>
+              </div>
+            </section>
+
+            {/* 10b. Program credits */}
+            <section className="section-dark py-10 border-t border-white/10">
+              <div className="container mx-auto px-6 text-center max-w-3xl">
+                <p className="italic text-white/50 text-xs md:text-sm leading-relaxed">
+                  Program designed and delivered by CAFCAN Program Coordinators Mansur Mussa, Patrick Nkugwa, and Martina Ambiri. November 2025 – March 2026.
+                </p>
               </div>
             </section>
 
