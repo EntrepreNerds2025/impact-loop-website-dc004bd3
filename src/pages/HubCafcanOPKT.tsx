@@ -869,21 +869,6 @@ const HubCafcanOPKT = () => {
               </div>
             </section>
 
-            {/* 9. PDF Export */}
-            <section id="pdf-export" className="py-20 bg-background">
-              <div className="container mx-auto px-6">
-                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-12 text-center">PDF Export</h2>
-                <PdfExportPreview
-                  hubTitle="Our People's Keeper, Too (OPKT)"
-                  hubSubtitle="CAFCAN Social Services • 2025–2026"
-                  outcomes={outcomes}
-                  quotes={quotes}
-                  isDemoMode={false}
-                  hideDownload
-                />
-              </div>
-            </section>
-
             {/* 10. Quick Outcomes, DARK */}
             <section id="outcomes" className="section-dark py-20">
               <div className="container mx-auto px-6">
