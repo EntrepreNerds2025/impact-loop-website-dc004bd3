@@ -176,14 +176,22 @@ const clips: ClipDef[] = [
   { title: "Session 6 - Testimonial 4", vimeoId: "1183559617", cohort: "cohort-6" },
 ];
 
-/* ─── Program pillars ─── */
+/* ─── Program pillars (official report) ─── */
 const programPillars = [
-  { label: "Employment Readiness", value: "Canadian workplace culture training, resume development, and networking strategies." },
-  { label: "Career Development", value: "Career exploration, interview skills, and entrepreneurship foundations." },
-  { label: "Health & Wellness", value: "Culturally safe workshops on mental health, physical wellbeing, and coping with displacement." },
-  { label: "Civic Engagement", value: "Volunteering opportunities and leadership development within local communities." },
-  { label: "Food Security", value: "Weekly culturally relevant food baskets through Afri-Can FoodBasket partnerships." },
-  { label: "System Navigation", value: "Guidance accessing federal and provincial programs, healthcare, and education." },
+  { label: "Career Exploration & Assessment", value: "Industry insights, labor market trends, and structured career discovery for newcomers navigating the Canadian job market." },
+  { label: "Employment Readiness", value: "Resume building, interview preparation, mock interviews, job search strategies, and Canadian workplace standards." },
+  { label: "Health & Wellness", value: "Holistic supports including mental health, physical wellbeing, and community health partnerships during settlement." },
+  { label: "Digital Literacy Training", value: "Online job platforms, modern application tools, and the role of technology in contemporary work." },
+  { label: "Entrepreneurship Development", value: "Business foundations, financial literacy, alternative financing (Esusu/Susu), pitching, and 30-day implementation plans." },
+  { label: "Skilled Trades Exposure", value: "Hands-on tool demonstrations, certification pathways, and direct engagement with industry professionals." },
+];
+
+/* ─── Program at a Glance ─── */
+const programGlance = [
+  { icon: Calendar, label: "Timeframe", value: "November 2025 – March 2026" },
+  { icon: Users, label: "Community Served", value: "Black African asylum seekers and refugees — youth, women, men, and LGBTQ+ individuals across the Greater Toronto Area" },
+  { icon: Layers, label: "Three Streams", value: "Employment Readiness (4 cohorts), Skilled Trades Boot Camp, Entrepreneurship Workshop" },
+  { icon: Award, label: "Culmination", value: "Hiring Event & Community Job Fair, March 25, 2026" },
 ];
 
 /* ─── Participant testimonials from OPKT cohorts ─── */
@@ -196,12 +204,124 @@ const quotes = [
   { text: "OPKT is more than a program. It is a family that helps you stand on your own feet.", name: "Program Participant", role: "OPKT Cohort Member" },
 ];
 
-/* ─── Outcomes ─── */
+/* ─── Outcomes (official report) ─── */
 const outcomes = [
-  { value: "7", label: "Cohort Sessions Delivered" },
-  { value: "6", label: "Partner Locations" },
-  { value: "150+", label: "Photos Captured" },
-  { value: "1", label: "Job Fair Hosted" },
+  { value: "532", label: "Total Participant Engagements" },
+  { value: "6", label: "Cohorts Delivered" },
+  { value: "53", label: "Direct CIBC Interviews" },
+  { value: "8", label: "Direct Job Placements" },
+  { value: "30", label: "Volunteers Engaged" },
+  { value: "320", label: "Hiring Event Attendance" },
+];
+
+/* ─── Hiring Event ─── */
+const hiringSectors = [
+  "Banking & Finance",
+  "Healthcare & Social Services",
+  "Security & Emergency Services",
+  "Retail & Customer Service",
+  "Warehousing & General Operations",
+];
+
+const hiringOutcomes = [
+  { value: "320", label: "Total Attendance" },
+  { value: "53", label: "Direct CIBC Interviews" },
+  { value: "8", label: "Productive Security Hires" },
+];
+
+/* ─── Key Outcomes & Impact ─── */
+const keyOutcomes = [
+  {
+    icon: Briefcase,
+    title: "Enhanced Employment Readiness",
+    bullets: [
+      "Strong resumes and tailored job applications",
+      "Interview confidence and communication skills",
+      "Independent job search capabilities",
+      "Understanding of Canadian workplace standards",
+    ],
+  },
+  {
+    icon: GraduationCap,
+    title: "Specialized Skills Development",
+    bullets: [
+      "Digital literacy and technical competencies",
+      "Financial literacy and alternative financing knowledge",
+      "Entrepreneurial skills and business planning",
+      "Exposure to skilled trades and vocational pathways",
+    ],
+  },
+  {
+    icon: Heart,
+    title: "Community Integration & Wellbeing",
+    bullets: [
+      "Strengthened social networks and sense of belonging",
+      "Improved access to community and legal resources",
+      "Increased resilience through culturally responsive programming",
+    ],
+  },
+  {
+    icon: LinkIcon,
+    title: "Employer Linkages",
+    bullets: [
+      "Direct hiring outcomes",
+      "Expanded professional networks",
+      "Strengthened partnerships with employers and agencies",
+    ],
+  },
+];
+
+/* ─── Tiered partners ─── */
+const partnerTiers = [
+  {
+    label: "Facilitators & Subject Matter Experts",
+    partners: [
+      { name: "Genevieve D'Iori", role: "Workers' Health and Safety Legal Clinic — Employment Rights, Health & Safety" },
+      { name: "Patrick Shaw / Fatima", role: "Black Creek Community Centre — Health & Wellness" },
+      { name: "Rawle Boodoo", role: "Institute of Machine Tool Technology — Skilled Trades Pathways" },
+      { name: "Patrick Mwesigye", role: "Hope for Refugees — Networking & Job Search" },
+      { name: "Maximilliana Odibo", role: "Maxi Foods — Entrepreneurship Pathways" },
+      { name: "Bernie Uche", role: "Black Mint — Digital Skills & Technology" },
+      { name: "Crystal White-Dawe", role: "Blue Drop — Specialty Vehicle Operations" },
+      { name: "Oluwakemi Gaji & Marjeta Biba", role: "Toronto Employment & Social Services — Ontario Works" },
+      { name: "Joanne Tran", role: "Up With Women — Coaching Program" },
+      { name: "Barrister Evelyn Umudi", role: "Kairos Legal Advisory PC — Immigration Law" },
+      { name: "Jonathan Knott & Mustafa Ansari", role: "Toronto Business Development Centre — Skilled Trades Boot Camp" },
+      { name: "Alex Adefemi", role: "Alex Adefemi Advisory — Entrepreneurship Workshop" },
+      { name: "Nik-Keisha Moodie", role: "Toronto Business Development Centre — Financial Literacy" },
+      { name: "Tolu Okogie", role: "Greelz — Guest Speaker · Entrepreneurship" },
+    ],
+  },
+  {
+    label: "Employers",
+    partners: [
+      { name: "CIBC", role: "Banking Roles" },
+      { name: "Productive Security", role: "Security Officers" },
+      { name: "Toronto Fire Services", role: "Various Roles" },
+      { name: "PLASP", role: "Early Childhood Educators" },
+      { name: "Care Provide", role: "PSW, DSW, Home Care Workers" },
+    ],
+  },
+  {
+    label: "Staffing Agencies",
+    partners: [
+      { name: "Topnotch Employment", role: "Various Roles" },
+      { name: "Upstaff", role: "Various Roles" },
+      { name: "SereneAid", role: "PSW, DSW & Related" },
+    ],
+  },
+  {
+    label: "Community Partners",
+    partners: [
+      { name: "Anatoli Kaddu", role: "Impakt Foundation — Homes First Shelter Contact" },
+      { name: "Megan Wilkinson", role: "Christie Refugee Welcome Centre" },
+      { name: "Erika Acomata", role: "Christie Ossington Neighbourhood Centre" },
+      { name: "Up With Women", role: "Community Partner" },
+      { name: "CLI College", role: "PSW, DSW, Logistics, Supply Chain Programs" },
+      { name: "Hammer Heads", role: "Skilled Trades" },
+      { name: "Toronto Employment & Social Services (TESS)", role: "Government Services" },
+    ],
+  },
 ];
 
 const partnerLogos = [
