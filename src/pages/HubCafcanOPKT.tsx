@@ -2,7 +2,7 @@ import { useState, useMemo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
-  BookOpen, Video, Images, Quote, Handshake, FileDown, BarChart3,
+  BookOpen, Video, Images, Quote, Handshake, BarChart3,
   ChevronDown, Menu, X, Play, Download, Star, Calendar, Users, Layers, Award,
   Briefcase, GraduationCap, Heart, Link as LinkIcon
 } from "lucide-react";
@@ -13,7 +13,7 @@ import { slideUp, staggerContainer, fadeIn } from "@/hooks/useScrollAnimation";
 import { useToast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
 import HubVideoClips from "@/components/hub/HubVideoClips";
-import PdfExportPreview from "@/components/hub/PdfExportPreview";
+
 import MediaLightbox, { type MediaItem } from "@/components/shared/MediaLightbox";
 import cafcanLogo from "@/assets/logos/cafcan.png";
 import upwithwomenLogo from "@/assets/hub/cafcan-opkt/logos/upwithwomen.jpg";
@@ -34,7 +34,7 @@ const sections = [
   { id: "photos", label: "Photos", icon: Images },
   { id: "voices", label: "Voices", icon: Quote },
   { id: "partners", label: "Partners", icon: Handshake },
-  { id: "pdf-export", label: "PDF Export", icon: FileDown },
+  
   { id: "outcomes", label: "Outcomes", icon: BarChart3 },
 ];
 
@@ -866,21 +866,6 @@ const HubCafcanOPKT = () => {
                     </div>
                   ))}
                 </div>
-              </div>
-            </section>
-
-            {/* 9. PDF Export */}
-            <section id="pdf-export" className="py-20 bg-background">
-              <div className="container mx-auto px-6">
-                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-12 text-center">PDF Export</h2>
-                <PdfExportPreview
-                  hubTitle="Our People's Keeper, Too (OPKT)"
-                  hubSubtitle="CAFCAN Social Services • 2025–2026"
-                  outcomes={outcomes}
-                  quotes={quotes}
-                  isDemoMode={false}
-                  hideDownload
-                />
               </div>
             </section>
 
