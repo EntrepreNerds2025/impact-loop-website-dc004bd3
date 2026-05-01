@@ -888,7 +888,7 @@ const HubCafcanOPKT = () => {
             <section id="outcomes" className="section-dark py-20">
               <div className="container mx-auto px-6">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-12 text-center">Quick Outcomes</h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
                   {outcomes.map((o) => (
                     <div key={o.label} className="bg-white/5 border border-white/10 rounded-sm p-6 text-center">
                       <p className="font-serif text-3xl font-bold text-impact-blue">{o.value}</p>
