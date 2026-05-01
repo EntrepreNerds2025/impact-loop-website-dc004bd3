@@ -557,6 +557,24 @@ const HubCafcanOPKT = () => {
             {/* 2. Program Pillars */}
             <section id="program" className="py-16 md:py-20 bg-[hsl(var(--impact-cream))]">
               <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
+                {/* Program at a Glance */}
+                <div className="bg-white border border-border border-l-4 border-l-primary rounded-xl p-6 md:p-8 shadow-sm mb-10 md:mb-14">
+                  <p className="text-impact-blue uppercase tracking-widest text-xs font-semibold mb-4">Program at a Glance</p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+                    {programGlance.map((g) => (
+                      <div key={g.label} className="flex items-start gap-3">
+                        <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                          <g.icon className="w-4 h-4 text-primary" />
+                        </div>
+                        <div>
+                          <p className="text-foreground font-semibold text-sm">{g.label}</p>
+                          <p className="text-muted-foreground text-sm leading-relaxed mt-0.5">{g.value}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
                 <h2 className="font-serif text-2xl md:text-5xl font-bold text-foreground mb-8 md:mb-12 text-center">Program Pillars</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   {programPillars.map((d, idx) => (
