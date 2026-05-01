@@ -13,7 +13,7 @@ import { slideUp, staggerContainer, fadeIn } from "@/hooks/useScrollAnimation";
 import { useToast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
 import HubVideoClips from "@/components/hub/HubVideoClips";
-import PdfExportPreview from "@/components/hub/PdfExportPreview";
+
 import MediaLightbox, { type MediaItem } from "@/components/shared/MediaLightbox";
 import cafcanLogo from "@/assets/logos/cafcan.png";
 import upwithwomenLogo from "@/assets/hub/cafcan-opkt/logos/upwithwomen.jpg";
@@ -34,7 +34,7 @@ const sections = [
   { id: "photos", label: "Photos", icon: Images },
   { id: "voices", label: "Voices", icon: Quote },
   { id: "partners", label: "Partners", icon: Handshake },
-  { id: "pdf-export", label: "PDF Export", icon: FileDown },
+  
   { id: "outcomes", label: "Outcomes", icon: BarChart3 },
 ];
 
