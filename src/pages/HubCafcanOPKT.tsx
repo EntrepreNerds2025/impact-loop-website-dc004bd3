@@ -546,10 +546,10 @@ const HubCafcanOPKT = () => {
                   Empowering African asylum seekers as they transition into life in Canada.
                 </motion.p>
                 <motion.p variants={slideUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 max-w-2xl mx-auto">
-                  The Our People's Keeper, Too (OPKT) program is a culturally responsive initiative by CAFCAN, specifically designed to bridge the gap between arrival and long-term stability for African asylum seekers. Through interactive workshops covering employment readiness, career development, health and wellness, and civic engagement, participants gain practical skills, community connections, and the confidence to build new lives in Canada.
+                  The Our People's Keeper, Too (OPKT) program is a culturally grounded, community-led initiative developed by CAFCAN Social Services to support Black African asylum seekers and refugees — including youth, women, men, and LGBTQ+ individuals — across the Greater Toronto Area (November 2025 – March 2026).
                 </motion.p>
-                <motion.p variants={slideUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-muted-foreground/60 text-xs leading-relaxed max-w-xl mx-auto">
-                  Grounded in Africentric values, the Ma'at principles, and Nguzo Saba (Seven Principles of Kwanzaa), OPKT ensures that support is practical, spiritually affirming, and culturally responsive for the African diaspora.
+                <motion.p variants={slideUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-muted-foreground/80 text-sm leading-relaxed max-w-2xl mx-auto">
+                  Rooted in both professional expertise and lived experience, OPKT delivered an integrated model of support across six cohorts — addressing systemic barriers to economic integration through career exploration, employment readiness, health and wellness, digital literacy, entrepreneurship, and skilled trades exposure.
                 </motion.p>
               </div>
             </section>
