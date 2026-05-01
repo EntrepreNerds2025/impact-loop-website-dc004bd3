@@ -899,6 +899,15 @@ const HubCafcanOPKT = () => {
               </div>
             </section>
 
+            {/* 10b. Program credits */}
+            <section className="section-dark py-10 border-t border-white/10">
+              <div className="container mx-auto px-6 text-center max-w-3xl">
+                <p className="italic text-white/50 text-xs md:text-sm leading-relaxed">
+                  Program designed and delivered by CAFCAN Program Coordinators Mansur Mussa, Patrick Nkugwa, and Martina Ambiri. November 2025 – March 2026.
+                </p>
+              </div>
+            </section>
+
             {/* 11. Final CTA */}
             <section className="section-dark py-24 border-t border-white/10">
               <div className="container mx-auto px-6 text-center max-w-2xl">
