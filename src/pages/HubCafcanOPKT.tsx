@@ -2,7 +2,7 @@ import { useState, useMemo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
-  BookOpen, Video, Images, Quote, Handshake, FileDown, BarChart3,
+  BookOpen, Video, Images, Quote, Handshake, BarChart3,
   ChevronDown, Menu, X, Play, Download, Star, Calendar, Users, Layers, Award,
   Briefcase, GraduationCap, Heart, Link as LinkIcon
 } from "lucide-react";
