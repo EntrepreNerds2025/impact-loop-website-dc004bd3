@@ -537,7 +537,7 @@ const HubCafcanOPKT = () => {
             <section id="overview" className="py-16 md:py-28 bg-background">
               <div className="container mx-auto px-4 sm:px-6 text-center max-w-3xl">
                 <motion.p variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-impact-blue uppercase tracking-widest text-xs mb-4">
-                  Caribbean African Canadian Social Services (CAFCAN) &bull; Impact Media Hub
+                  CAFCAN Social Services &bull; Impact Media Hub
                 </motion.p>
                 <motion.h1 variants={slideUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-serif text-3xl sm:text-4xl md:text-6xl font-bold text-foreground leading-tight mb-4">
                   Our People's Keeper, Too
