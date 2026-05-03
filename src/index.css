@@ -132,6 +132,10 @@
     @apply bg-transparent border border-foreground text-foreground hover:bg-foreground hover:text-background font-medium px-8 py-3.5 rounded-sm transition-all duration-300 uppercase tracking-widest text-sm;
   }
 
+  .ivs-input {
+    @apply w-full rounded-lg border border-[#dbc5aa] bg-[#fffaf3] px-4 py-3 text-sm text-[#201b17] placeholder:text-[#9a8877] outline-none transition focus:border-[#9d6a3c] focus:ring-2 focus:ring-[#9d6a3c]/20;
+  }
+
   /* Editorial blog styles */
   .editorial-content {
     @apply text-lg leading-[1.9];

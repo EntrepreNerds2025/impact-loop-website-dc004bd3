@@ -21,6 +21,7 @@ import ReportMetricsThatMatter from "./pages/ReportMetricsThatMatter";
 import CinematicImpactFilms from "./pages/CinematicImpactFilms";
 import SignatureProduction from "./pages/SignatureProduction";
 import AdaptAITraining from "./pages/AdaptAITraining";
+import ImpactVisibilitySystem from "./pages/ImpactVisibilitySystem";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Blog from "./pages/Blog";
@@ -29,6 +30,7 @@ import BookingConfirmed from "./pages/BookingConfirmed";
 import RescheduleBooking from "./pages/RescheduleBooking";
 import CancelBooking from "./pages/CancelBooking";
 import TropicanaFriendRaiser from "./pages/proposals/TropicanaFriendRaiser";
+import SampleContentRequests from "./pages/admin/SampleContentRequests";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -70,6 +72,8 @@ const App = () => (
           <Route path="/signature" element={<Navigate to="/signature-production" replace />} />
           <Route path="/adapt-ai-training" element={<AdaptAITraining />} />
           <Route path="/adapt" element={<Navigate to="/adapt-ai-training" replace />} />
+          <Route path="/impact-visibility-system" element={<ImpactVisibilitySystem />} />
+          <Route path="/admin/sample-content-requests" element={<SampleContentRequests />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/terms" element={<Terms />} />

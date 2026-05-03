@@ -6,6 +6,7 @@ import logoWhite from "@/assets/logos/impact-loop-white.png";
 import logoBlack from "@/assets/logos/impact-loop-black.png";
 
 const servicesDropdown = [
+  { href: "/impact-visibility-system", label: "Impact Visibility System" },
   { href: "/adapt-ai-training", label: "ADAPT AI Training" },
   { href: "/signature-production", label: "Signature Productions" },
   { href: "/cinematic-impact-films", label: "Cinematic Impact Films" },
@@ -81,10 +82,11 @@ const Header = () => {
         : active ? "text-white" : "text-white/70 hover:text-white"
     }`;
 
-  const isServicesActive = ["/services", "/cinematic-impact-films", "/signature-production", "/impact-media-hub", "/adapt-ai-training"].includes(location.pathname) ||
+  const isServicesActive = ["/services", "/cinematic-impact-films", "/signature-production", "/impact-media-hub", "/adapt-ai-training", "/impact-visibility-system"].includes(location.pathname) ||
     location.pathname.startsWith("/services") ||
     location.pathname.startsWith("/signature") ||
-    location.pathname.startsWith("/adapt");
+    location.pathname.startsWith("/adapt") ||
+    location.pathname.startsWith("/impact-visibility");
 
   const isResourcesActive = location.pathname.startsWith("/research") || location.pathname.startsWith("/blog");
 
