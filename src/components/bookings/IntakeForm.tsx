@@ -2,9 +2,12 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import {
-  BUDGET_RANGE_OPTIONS,
-  CHALLENGE_TYPE_OPTIONS,
+  ADAPT_SESSION_TYPE_OPTIONS,
+  getChallengeTypeOptions,
+  getCallTypeConfig,
   REFERRAL_SOURCE_OPTIONS,
+  SUPPORT_LEVEL_OPTIONS,
+  trackBookingEvent,
   type BookingCallType,
 } from "@/lib/booking";
 import type { BookingLeadRecord, IntakePayload } from "./types";
@@ -12,10 +15,20 @@ import type { BookingLeadRecord, IntakePayload } from "./types";
 type IntakeFormProps = {
   callType: BookingCallType;
   callDurationMin: number;
+  preselectedSessionType?: string | null;
   onComplete: (lead: BookingLeadRecord) => void;
 };
 
-const IntakeForm = ({ callType, callDurationMin, onComplete }: IntakeFormProps) => {
+const sessionParamToLabel = (value?: string | null) => {
+  if (!value) return "";
+  const cleaned = value.toLowerCase();
+  if (cleaned === "clarity" || cleaned === "clarity-session") return "ADAPT Clarity Session";
+  if (cleaned === "working" || cleaned === "working-session") return "ADAPT Working Session";
+  if (cleaned === "training" || cleaned === "training-day") return "ADAPT Training Day";
+  return "";
+};
+
+const IntakeForm = ({ callType, callDurationMin, preselectedSessionType, onComplete }: IntakeFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState<IntakePayload>({
     full_name: "",
@@ -25,7 +38,13 @@ const IntakeForm = ({ callType, callDurationMin, onComplete }: IntakeFormProps) 
     challenge_type: "",
     budget_range: "",
     referral_source: "",
+    project_context: "",
+    preferred_session_type: sessionParamToLabel(preselectedSessionType),
   });
+
+  const callConfig = getCallTypeConfig(callType);
+  const challengeOptions = getChallengeTypeOptions(callType);
+  const isAdaptAdvisory = callType === "adapt-advisory" || callType === "workshop";
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
@@ -54,16 +73,26 @@ const IntakeForm = ({ callType, callDurationMin, onComplete }: IntakeFormProps) 
 
     try {
       const payload = {
-        ...form,
         full_name: form.full_name.trim(),
         email: form.email.trim(),
         organization: form.organization.trim(),
         organization_website: form.organization_website?.trim() || null,
+        challenge_type: form.challenge_type,
         budget_range: form.budget_range || null,
         referral_source: form.referral_source || null,
         call_type: callType,
         call_duration_min: callDurationMin,
         status: "intake_complete",
+        pre_call_answers: {
+          project_context: form.project_context?.trim() || null,
+          preferred_session_type: form.preferred_session_type || null,
+          service_path: callConfig.title,
+          lead_source: isAdaptAdvisory ? "adapt_advisory" : "booking",
+          service_interest: isAdaptAdvisory ? "adapt_advisory" : callType,
+          tags: isAdaptAdvisory
+            ? ["adapt_advisory", "ai_training_lead", "team_capacity_lead", "impact_loop"]
+            : ["impact_loop", `${callType}_booking`],
+        },
       };
 
       const { data, error } = await (supabase as any)
@@ -79,6 +108,12 @@ const IntakeForm = ({ callType, callDurationMin, onComplete }: IntakeFormProps) 
       }
 
       onComplete(data as BookingLeadRecord);
+      if (isAdaptAdvisory) {
+        trackBookingEvent("adapt_advisory_form_submitted", {
+          call_type: callType,
+          preferred_session_type: form.preferred_session_type || "not_selected",
+        });
+      }
       toast.success("Great. Let's pick a time.");
     } catch (error) {
       console.error(error);
@@ -159,7 +194,7 @@ const IntakeForm = ({ callType, callDurationMin, onComplete }: IntakeFormProps) 
 
       <div>
         <label htmlFor="challenge_type" className="block text-sm font-medium text-foreground mb-2">
-          What's the main challenge right now? <span className="text-destructive">*</span>
+          {isAdaptAdvisory ? "What do you want help understanding or improving with AI?" : "What's the main focus right now?"} <span className="text-destructive">*</span>
         </label>
         <select
           id="challenge_type"
@@ -172,7 +207,7 @@ const IntakeForm = ({ callType, callDurationMin, onComplete }: IntakeFormProps) 
           <option value="" disabled>
             Select challenge type
           </option>
-          {CHALLENGE_TYPE_OPTIONS.map((option) => (
+          {challengeOptions.map((option) => (
             <option key={option} value={option}>
               {option}
             </option>
@@ -180,10 +215,47 @@ const IntakeForm = ({ callType, callDurationMin, onComplete }: IntakeFormProps) 
         </select>
       </div>
 
+      {isAdaptAdvisory && (
+        <div>
+          <label htmlFor="preferred_session_type" className="block text-sm font-medium text-foreground mb-2">
+            Preferred session type
+          </label>
+          <select
+            id="preferred_session_type"
+            name="preferred_session_type"
+            value={form.preferred_session_type || ""}
+            onChange={handleChange}
+            className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30"
+          >
+            <option value="">Not selected</option>
+            {ADAPT_SESSION_TYPE_OPTIONS.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+
+      <div>
+        <label htmlFor="project_context" className="block text-sm font-medium text-foreground mb-2">
+          {isAdaptAdvisory ? "What should we know about your team or workflow?" : "What should we know before the call?"}
+        </label>
+        <textarea
+          id="project_context"
+          name="project_context"
+          value={form.project_context || ""}
+          onChange={handleChange}
+          rows={4}
+          className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30"
+          placeholder={isAdaptAdvisory ? "Example: We want to save time on reports, stakeholder updates, internal notes, or content workflows." : "Share timeline, goals, context, or anything you want us to understand."}
+        />
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="budget_range" className="block text-sm font-medium text-foreground mb-2">
-            Budget Range
+            Level of support you are considering
           </label>
           <select
             id="budget_range"
@@ -193,7 +265,7 @@ const IntakeForm = ({ callType, callDurationMin, onComplete }: IntakeFormProps) 
             className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30"
           >
             <option value="">Not selected</option>
-            {BUDGET_RANGE_OPTIONS.map((option) => (
+            {SUPPORT_LEVEL_OPTIONS.map((option) => (
               <option key={option} value={option}>
                 {option}
               </option>

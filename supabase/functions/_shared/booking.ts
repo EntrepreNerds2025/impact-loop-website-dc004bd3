@@ -15,12 +15,23 @@ import {
   enumerateDateStrings,
 } from "./time.ts";
 
-export type CallType = "diagnostic" | "workshop" | "pilot";
+export type CallType =
+  | "strategy"
+  | "story-capture"
+  | "visibility"
+  | "adapt-advisory"
+  | "diagnostic"
+  | "workshop"
+  | "pilot";
 
 export const CALL_TYPE_META: Record<
   CallType,
   { label: string; durationMinutes: number }
 > = {
+  strategy: { label: "Impact Strategy Call", durationMinutes: 45 },
+  "story-capture": { label: "Story Capture Call", durationMinutes: 45 },
+  visibility: { label: "Visibility System Call", durationMinutes: 45 },
+  "adapt-advisory": { label: "ADAPT Advisory Call", durationMinutes: 60 },
   diagnostic: { label: "Storytelling Diagnostic", durationMinutes: 45 },
   workshop: { label: "Workshop Discovery Call", durationMinutes: 30 },
   pilot: { label: "System Pilot Call", durationMinutes: 45 },

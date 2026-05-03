@@ -34,6 +34,26 @@ const fadeUp = {
   }),
 };
 
+const ADAPT_ADVISORY_BOOKING_URL =
+  import.meta.env.VITE_ADAPT_ADVISORY_BOOKING_URL || "/bookings?type=adapt-advisory";
+
+const getAdaptAdvisoryBookingLink = (session: string) =>
+  `${ADAPT_ADVISORY_BOOKING_URL}${ADAPT_ADVISORY_BOOKING_URL.includes("?") ? "&" : "?"}session=${session}`;
+
+function trackAdaptEvent(eventName: string, payload?: Record<string, unknown>) {
+  if (typeof window === "undefined") return;
+
+  const win = window as Window & {
+    gtag?: (...args: unknown[]) => void;
+    plausible?: (event: string, options?: { props?: Record<string, unknown> }) => void;
+    dataLayer?: unknown[];
+  };
+
+  win.gtag?.("event", eventName, payload || {});
+  win.plausible?.(eventName, payload ? { props: payload } : undefined);
+  win.dataLayer?.push({ event: eventName, ...(payload || {}) });
+}
+
 const painPoints = [
   {
     icon: Clock,
@@ -83,6 +103,83 @@ const frameworkSteps = [
     title: "Transform",
     desc: "Build repeatable systems so AI becomes a thoughtful assistant for communication, not a random tool on the side.",
   },
+];
+
+const pageAnchors = [
+  { href: "#framework", label: "Framework" },
+  { href: "#adapt-score", label: "Readiness Score" },
+  { href: "#advisory", label: "Advisory" },
+  { href: "#training-day", label: "Training Day" },
+  { href: "#use-cases", label: "Use Cases" },
+];
+
+const advisoryHelp = [
+  {
+    icon: Clock,
+    title: "Identify Time Drains",
+    desc: "Find the repetitive tasks, communication gaps, and workflow bottlenecks slowing your team down.",
+  },
+  {
+    icon: MessageSquareText,
+    title: "Map Practical AI Use Cases",
+    desc: "Discover where AI can support real work, including content, reporting, internal communication, admin, planning, and stakeholder updates.",
+  },
+  {
+    icon: ClipboardCheck,
+    title: "Clarify Tools and Workflows",
+    desc: "Understand which AI tools are worth using, what to avoid, and how to create simple workflows your team can actually follow.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Build Confidence",
+    desc: "Give leaders and teams a clearer understanding of how to use AI safely, practically, and without losing the human side of the work.",
+  },
+  {
+    icon: Sparkles,
+    title: "Create a Next-Step Plan",
+    desc: "Leave with a clear opportunity map and recommended next steps for training, implementation, or internal adoption.",
+  },
+];
+
+const advisoryOffers = [
+  {
+    name: "ADAPT Clarity Session",
+    bestFor:
+      "One leader, founder, executive director, business owner, or small team that wants focused direction.",
+    format: "60 to 90 minute strategy session",
+    outcome: "You leave with a clear AI opportunity map and practical next steps.",
+    cta: "Book a Clarity Session",
+    event: "adapt_clarity_session_clicked",
+    session: "clarity",
+  },
+  {
+    name: "ADAPT Working Session",
+    bestFor:
+      "Small teams that want to explore AI through real examples from their current work.",
+    format: "Half-day working session",
+    outcome:
+      "You leave with 2 to 3 practical workflows started, plus recommendations for how your team can continue.",
+    cta: "Plan a Working Session",
+    event: "adapt_working_session_clicked",
+    session: "working",
+  },
+  {
+    name: "ADAPT Training Day",
+    bestFor: "Organizations ready to train their team and build shared AI confidence.",
+    format: "Full-day team training",
+    outcome:
+      "Your team leaves with shared understanding, practical workflows, templates, and a 30-day action plan.",
+    cta: "Bring ADAPT to Your Team",
+    event: "adapt_training_day_clicked",
+    session: "training-day",
+  },
+];
+
+const adaptLadder = [
+  { step: "01", title: "ADAPT Readiness Score", desc: "Free diagnostic" },
+  { step: "02", title: "ADAPT Advisory", desc: "Focused guidance" },
+  { step: "03", title: "ADAPT Training Day", desc: "Team activation" },
+  { step: "04", title: "ADAPT Implementation", desc: "Custom systems and workflow buildout" },
 ];
 
 const questions = [
@@ -338,6 +435,20 @@ const AdaptAITraining = () => {
           </div>
         </section>
 
+        <nav className="sticky top-[72px] z-30 border-b border-[#eadfce] bg-[#fffaf3]/92 backdrop-blur-md" aria-label="ADAPT page sections">
+          <div className="container mx-auto flex gap-2 overflow-x-auto px-6 py-3">
+            {pageAnchors.map((anchor) => (
+              <a
+                key={anchor.href}
+                href={anchor.href}
+                className="whitespace-nowrap rounded-full border border-[#eadfce] bg-white px-4 py-2 text-xs font-bold uppercase tracking-wide text-[#6e5d4b] transition hover:border-[#a86f39] hover:text-[#241f1a]"
+              >
+                {anchor.label}
+              </a>
+            ))}
+          </div>
+        </nav>
+
         <section className="py-20 md:py-28">
           <div className="container mx-auto px-6">
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mx-auto mb-12 max-w-3xl text-center">
@@ -369,7 +480,7 @@ const AdaptAITraining = () => {
           </div>
         </section>
 
-        <section className="overflow-hidden bg-[#241f1a] py-20 text-white md:py-28">
+        <section id="framework" className="scroll-mt-28 overflow-hidden bg-[#241f1a] py-20 text-white md:py-28">
           <div className="container mx-auto px-6">
             <div className="mx-auto mb-12 max-w-3xl text-center">
               <p className="mb-3 text-xs font-bold uppercase text-[#f4b15f]">The ADAPT Framework</p>
@@ -433,7 +544,7 @@ const AdaptAITraining = () => {
           </div>
         </section>
 
-        <section id="adapt-score" className="bg-gradient-to-b from-[#fffaf3] to-[#f2e4d2] py-20 md:py-28">
+        <section id="adapt-score" className="scroll-mt-28 bg-gradient-to-b from-[#fffaf3] to-[#f2e4d2] py-20 md:py-28">
           <div className="container mx-auto px-6">
             <div className="grid items-start gap-10 lg:grid-cols-[0.85fr_1.15fr]">
               <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="lg:sticky lg:top-28">
@@ -517,7 +628,7 @@ const AdaptAITraining = () => {
                     <h3 className="mt-6 font-serif text-3xl font-bold text-[#241f1a]">{tier.label}</h3>
                     <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-[#6e5d4b]">{tier.desc}</p>
                     <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-                      <Link to="/bookings" className="inline-flex items-center justify-center gap-2 rounded-md bg-[#241f1a] px-5 py-3 text-sm font-bold uppercase text-white transition hover:bg-[#3a3028]">
+                      <Link to="/bookings?type=adapt-advisory" className="inline-flex items-center justify-center gap-2 rounded-md bg-[#241f1a] px-5 py-3 text-sm font-bold uppercase text-white transition hover:bg-[#3a3028]">
                         <PhoneCall size={16} />
                         Book an ADAPT Strategy Call
                       </Link>
@@ -533,7 +644,153 @@ const AdaptAITraining = () => {
           </div>
         </section>
 
-        <section id="training-day" className="py-20 md:py-28">
+        <motion.section
+          id="advisory"
+          className="scroll-mt-28 bg-[#241f1a] py-20 text-white md:py-28"
+          onViewportEnter={() => trackAdaptEvent("adapt_advisory_section_viewed")}
+          viewport={{ once: true, amount: 0.25 }}
+        >
+          <div className="container mx-auto px-6">
+            <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+              <div className="lg:sticky lg:top-32">
+                <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-[#f4b15f]">
+                  Need focused guidance before a full training day?
+                </p>
+                <h2 className="font-serif text-4xl font-bold leading-tight md:text-6xl">
+                  Book an ADAPT Advisory Session
+                </h2>
+                <p className="mt-5 text-lg leading-relaxed text-white/78">
+                  A focused strategy session for leaders and teams who want to understand where AI fits into their real work before committing to full training or implementation.
+                </p>
+                <div className="mt-7 rounded-2xl border border-[#f4b15f]/25 bg-[#f4b15f]/10 p-5">
+                  <p className="font-serif text-2xl font-bold text-[#f7c37f]">
+                    Most AI training starts with tools. ADAPT starts with your actual work.
+                  </p>
+                </div>
+                <div className="mt-7 space-y-4 text-white/70">
+                  <p>AI is moving fast, but your organization does not need to chase every tool.</p>
+                  <p>
+                    ADAPT Advisory gives you practical, human-centered guidance so you can identify where AI can save time, improve communication, support your team, and create better systems without overwhelming your people.
+                  </p>
+                  <p className="font-semibold text-white">
+                    In a focused session, we help you look at your actual work and map the clearest next step.
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-8">
+                <div>
+                  <h3 className="font-serif text-3xl font-bold">What we help with</h3>
+                  <div className="mt-6 grid gap-4 md:grid-cols-2">
+                    {advisoryHelp.map((item, index) => (
+                      <motion.article
+                        key={item.title}
+                        variants={fadeUp}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        custom={index}
+                        className={`rounded-xl border border-white/10 bg-white/8 p-5 backdrop-blur ${index === advisoryHelp.length - 1 ? "md:col-span-2" : ""}`}
+                      >
+                        <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-[#f4b15f] text-[#241f1a]">
+                          <item.icon size={21} />
+                        </div>
+                        <h4 className="font-serif text-xl font-bold">{item.title}</h4>
+                        <p className="mt-3 text-sm leading-relaxed text-white/66">{item.desc}</p>
+                      </motion.article>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#f4b15f]">Offer ladder</p>
+                      <h3 className="mt-2 font-serif text-3xl font-bold">Start with the right level of guidance.</h3>
+                    </div>
+                    <div className="hidden items-center text-sm font-semibold text-white/50 md:flex">
+                      Clarity <ArrowRight className="mx-2 h-4 w-4 text-[#f4b15f]" /> Working Session <ArrowRight className="mx-2 h-4 w-4 text-[#f4b15f]" /> Training Day
+                    </div>
+                  </div>
+
+                  <div className="grid gap-5 lg:grid-cols-3">
+                    {advisoryOffers.map((offer, index) => (
+                      <motion.article
+                        key={offer.name}
+                        variants={fadeUp}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        custom={index}
+                        className="relative overflow-hidden rounded-2xl border border-white/12 bg-[#fffaf3] p-6 text-[#241f1a] shadow-2xl"
+                      >
+                        <div className="absolute right-5 top-5 flex h-9 w-9 items-center justify-center rounded-full bg-[#f4b15f] text-xs font-bold">
+                          {index + 1}
+                        </div>
+                        <h4 className="max-w-[12rem] font-serif text-2xl font-bold">{offer.name}</h4>
+                        <div className="mt-6 space-y-4 text-sm leading-relaxed text-[#675645]">
+                          <p><span className="font-bold text-[#241f1a]">Best for:</span> {offer.bestFor}</p>
+                          <p><span className="font-bold text-[#241f1a]">Format:</span> {offer.format}</p>
+                          <p><span className="font-bold text-[#241f1a]">Outcome:</span> {offer.outcome}</p>
+                        </div>
+                        <Link
+                          to={getAdaptAdvisoryBookingLink(offer.session)}
+                          onClick={() => trackAdaptEvent(offer.event, { offer: offer.name })}
+                          className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#241f1a] px-4 py-3 text-xs font-bold uppercase text-white transition hover:bg-[#3a3028]"
+                        >
+                          {offer.cta}
+                          <ArrowRight size={15} />
+                        </Link>
+                      </motion.article>
+                    ))}
+                  </div>
+
+                  <p className="mt-5 rounded-xl border border-white/12 bg-white/8 p-5 text-sm leading-relaxed text-white/70">
+                    Not sure where to start? Begin with an ADAPT Clarity Session and we'll help you identify the most useful next step for your team.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-[#f4b15f]/25 bg-[#f4b15f]/12 p-6 md:p-8">
+                  <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
+                    <div>
+                      <h3 className="font-serif text-3xl font-bold">Start with clarity before complexity.</h3>
+                      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/72">
+                        If your team knows AI matters but does not know where to begin, ADAPT Advisory gives you a practical first step.
+                      </p>
+                    </div>
+                    <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+                      <Link
+                        to={ADAPT_ADVISORY_BOOKING_URL}
+                        onClick={() => trackAdaptEvent("adapt_clarity_session_clicked", { source: "advisory_cta" })}
+                        className="inline-flex items-center justify-center gap-2 rounded-md bg-[#f4b15f] px-5 py-3 text-xs font-bold uppercase text-[#241f1a] transition hover:bg-[#ffd08a]"
+                      >
+                        Book an ADAPT Advisory Session
+                      </Link>
+                      <a
+                        href="#adapt-score"
+                        className="inline-flex items-center justify-center gap-2 rounded-md border border-white/22 px-5 py-3 text-xs font-bold uppercase text-white transition hover:bg-white hover:text-[#241f1a]"
+                      >
+                        Take the ADAPT Readiness Score
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid gap-3 md:grid-cols-4">
+                  {adaptLadder.map((item) => (
+                    <div key={item.title} className="rounded-xl border border-white/10 bg-white/8 p-4">
+                      <p className="text-xs font-bold text-[#f4b15f]">{item.step}</p>
+                      <p className="mt-2 font-serif text-lg font-bold">{item.title}</p>
+                      <p className="mt-1 text-xs text-white/58">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        <section id="training-day" className="scroll-mt-28 py-20 md:py-28">
           <div className="container mx-auto px-6">
             <div className="mx-auto mb-14 max-w-3xl text-center">
               <p className="mb-3 text-xs font-bold uppercase text-[#a86f39]">Training Day Breakdown</p>
@@ -568,7 +825,7 @@ const AdaptAITraining = () => {
           </div>
         </section>
 
-        <section className="bg-[#f7efe5] py-20 md:py-28">
+        <section id="use-cases" className="scroll-mt-28 bg-[#f7efe5] py-20 md:py-28">
           <div className="container mx-auto px-6">
             <div className="mx-auto mb-12 max-w-3xl text-center">
               <p className="mb-3 text-xs font-bold uppercase text-[#a86f39]">Use cases</p>
@@ -644,7 +901,7 @@ const AdaptAITraining = () => {
                   Get Your ADAPT Score
                   <ArrowRight size={16} />
                 </a>
-                <Link to="/bookings" className="inline-flex items-center justify-center gap-2 rounded-md border border-[#241f1a] px-6 py-3 text-sm font-bold uppercase text-[#241f1a] transition hover:bg-[#241f1a] hover:text-white">
+                <Link to="/bookings?type=adapt-advisory&session=training-day" className="inline-flex items-center justify-center gap-2 rounded-md border border-[#241f1a] px-6 py-3 text-sm font-bold uppercase text-[#241f1a] transition hover:bg-[#241f1a] hover:text-white">
                   Book a Training Call
                 </Link>
               </div>

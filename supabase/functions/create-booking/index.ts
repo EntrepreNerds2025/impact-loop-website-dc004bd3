@@ -53,7 +53,7 @@ serve(async (req) => {
     const { data: lead, error: leadError } = await supabase
       .from("booking_leads")
       .select(
-        "id, full_name, email, organization, challenge_type, budget_range, referral_source, organization_website, call_type, call_duration_min, status, cancel_token",
+        "id, full_name, email, organization, challenge_type, budget_range, referral_source, organization_website, call_type, call_duration_min, status, cancel_token, pre_call_answers",
       )
       .eq("id", bookingLeadId)
       .single();
@@ -118,19 +118,24 @@ serve(async (req) => {
       "https://zoom.us/j/0000000000";
 
     const callTypeLabel = getCallTypeLabel(lead.call_type);
+    const preCallAnswers = (lead.pre_call_answers || {}) as Record<string, unknown>;
+    const projectContext = String(preCallAnswers.project_context || "").trim();
+    const preferredSessionType = String(preCallAnswers.preferred_session_type || "").trim();
     const summary = `Impact Loop: ${callTypeLabel} with ${lead.full_name} (${lead.organization})`;
     const description = [
       `Call Type: ${callTypeLabel}`,
+      preferredSessionType ? `Preferred Session Type: ${preferredSessionType}` : null,
       `Name: ${lead.full_name}`,
       `Email: ${lead.email}`,
       `Organization: ${lead.organization}`,
-      `Challenge Type: ${lead.challenge_type}`,
-      `Budget Range: ${lead.budget_range || "Not provided"}`,
+      `Primary Focus: ${lead.challenge_type}`,
+      `Support Level: ${lead.budget_range || "Not provided"}`,
       `Referral Source: ${lead.referral_source || "Not provided"}`,
       `Website: ${lead.organization_website || "Not provided"}`,
+      projectContext ? `Context: ${projectContext}` : null,
       "",
       "Booked via impactloop.ca custom scheduler.",
-    ].join("\n");
+    ].filter(Boolean).join("\n");
 
     const event = await createCalendarEvent({
       summary,
@@ -207,7 +212,7 @@ serve(async (req) => {
         email: updatedLead.email,
         companyName: updatedLead.organization,
         serviceInterest: `${callTypeLabel} Booking`,
-        message: `Scheduled for ${updatedLead.scheduled_at}. Challenge: ${updatedLead.challenge_type}. Budget: ${updatedLead.budget_range || "Not provided"}. Source: ${updatedLead.referral_source || "Not provided"}.`,
+        message: `Scheduled for ${updatedLead.scheduled_at}. Focus: ${updatedLead.challenge_type}. Support level: ${updatedLead.budget_range || "Not provided"}. Source: ${updatedLead.referral_source || "Not provided"}.${preferredSessionType ? ` Preferred session: ${preferredSessionType}.` : ""}${projectContext ? ` Context: ${projectContext}` : ""}`,
       });
     } catch (error) {
       console.warn("CRM booking sync failed", error);

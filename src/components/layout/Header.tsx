@@ -6,14 +6,9 @@ import logoWhite from "@/assets/logos/impact-loop-white.png";
 import logoBlack from "@/assets/logos/impact-loop-black.png";
 
 const servicesDropdown = [
+  { href: "/impact-story-capture", label: "Impact Story Capture" },
   { href: "/impact-visibility-system", label: "Impact Visibility System" },
   { href: "/adapt-ai-training", label: "ADAPT AI Training" },
-  { href: "/signature-production", label: "Signature Productions" },
-  { href: "/cinematic-impact-films", label: "Cinematic Impact Films" },
-  { href: "/impact-media-hub", label: "Impact Media Hub" },
-  { href: "/services", label: "Workshops & Training" },
-  { href: "/services", label: "Strategic Advisory" },
-  { href: "/services", label: "Impact Technology Solutions" },
 ];
 
 const resourcesDropdown = [
@@ -82,8 +77,9 @@ const Header = () => {
         : active ? "text-white" : "text-white/70 hover:text-white"
     }`;
 
-  const isServicesActive = ["/services", "/cinematic-impact-films", "/signature-production", "/impact-media-hub", "/adapt-ai-training", "/impact-visibility-system"].includes(location.pathname) ||
+  const isServicesActive = ["/services", "/cinematic-impact-films", "/signature-production", "/adapt-ai-training", "/impact-visibility-system", "/impact-story-capture"].includes(location.pathname) ||
     location.pathname.startsWith("/services") ||
+    location.pathname.startsWith("/impact-story") ||
     location.pathname.startsWith("/signature") ||
     location.pathname.startsWith("/adapt") ||
     location.pathname.startsWith("/impact-visibility");
@@ -259,8 +255,8 @@ const Header = () => {
           <Link to="/about" className={navLinkClass(location.pathname === "/about")}>About</Link>
           <Link to="/contact" className={navLinkClass(location.pathname === "/contact")}>Contact</Link>
 
-          <Link to="/bookings" className="btn-primary text-xs !px-5 !py-2">
-            Book a Story Call
+          <Link to="/bookings?type=strategy" className="btn-primary text-xs !px-5 !py-2">
+            Book a Strategy Call
           </Link>
         </nav>
 
@@ -297,11 +293,11 @@ const Header = () => {
               <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium py-2 text-foreground/60 hover:text-foreground">Contact</Link>
 
               <Link
-                to="/bookings"
+                to="/bookings?type=strategy"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="btn-primary text-center mt-4"
               >
-                Book a Story Call
+                Book a Strategy Call
               </Link>
             </nav>
           </motion.div>

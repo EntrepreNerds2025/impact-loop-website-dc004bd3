@@ -71,7 +71,7 @@ export const SAMPLE_CONTENT_TAGS = [
   "impact_loop",
 ] as const;
 
-export const BOOKING_LINK = "/bookings?type=diagnostic";
+export const BOOKING_LINK = "/bookings?type=visibility";
 
 export const statusLabels: Record<SampleContentStatus, string> = {
   sample_requested: "Sample requested",

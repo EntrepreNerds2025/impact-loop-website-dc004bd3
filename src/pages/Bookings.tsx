@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Calendar, CheckCircle2, Clock, MessageSquare } from "lucide-react";
+import { ArrowLeft, BrainCircuit, Calendar, Camera, CheckCircle2, Clock, MessageSquare, Repeat2 } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { setSEO, resetSEO } from "@/lib/seo";
@@ -19,6 +19,10 @@ import {
 } from "@/lib/booking";
 
 const callTypeIcons = {
+  strategy: MessageSquare,
+  "story-capture": Camera,
+  visibility: Repeat2,
+  "adapt-advisory": BrainCircuit,
   diagnostic: MessageSquare,
   workshop: Calendar,
   pilot: Clock,
@@ -32,6 +36,7 @@ const Bookings = () => {
     () => normalizeCallType(searchParams.get("type")),
     [searchParams],
   );
+  const preselectedSessionType = searchParams.get("session");
 
   const [selectedCallType, setSelectedCallType] = useState<BookingCallType | null>(
     preselectedCallType,
@@ -44,7 +49,7 @@ const Bookings = () => {
     setSEO({
       title: "Book a Call - Impact Loop",
       description:
-        "Book a Storytelling Diagnostic, Workshop Discovery, or System Pilot call with Impact Loop.",
+        "Book an Impact Strategy, Story Capture, Visibility System, or ADAPT Advisory call with Impact Loop.",
       ogType: "website",
     });
     return resetSEO;
@@ -116,7 +121,7 @@ const Bookings = () => {
   const renderStepContent = () => {
     if (currentStep === 1 || !selectedCallType) {
       return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           {BOOKING_CALL_TYPES.map((type) => {
             const Icon = callTypeIcons[type.id];
             return (
@@ -151,6 +156,7 @@ const Bookings = () => {
           <IntakeForm
             callType={selectedCallType}
             callDurationMin={selectedCallConfig?.durationMinutes || 45}
+            preselectedSessionType={preselectedSessionType}
             onComplete={handleIntakeComplete}
           />
           {!preselectedCallType && (
@@ -212,13 +218,13 @@ const Bookings = () => {
             className="max-w-3xl mx-auto text-center"
           >
             <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">
-              Smart Booking
+              Start Here
             </p>
             <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-              Book Your <span className="text-gradient">Impact Loop Call</span>
+              Book Your <span className="text-gradient">Impact Strategy Call</span>
             </h1>
             <p className="text-white/70 text-lg leading-relaxed">
-              Choose your call type, share context, and reserve a time with real availability.
+              Choose the starting point that matches your needs, share context, and reserve a time with real availability.
             </p>
           </motion.div>
         </div>
@@ -244,7 +250,7 @@ const Bookings = () => {
                 </div>
                 <h4 className="font-semibold text-impact-dark mb-2">We Listen</h4>
                 <p className="text-impact-dark/60 text-sm">
-                  You share your current challenges, goals, and storytelling context.
+                  You share your current goals, context, and what your team is trying to move forward.
                 </p>
               </div>
               <div>
@@ -253,7 +259,7 @@ const Bookings = () => {
                 </div>
                 <h4 className="font-semibold text-impact-dark mb-2">We Explore</h4>
                 <p className="text-impact-dark/60 text-sm">
-                  Together, we identify opportunities and align around what matters most.
+                  Together, we look at whether capture, visibility, ADAPT, or a combined path makes the most sense.
                 </p>
               </div>
               <div>

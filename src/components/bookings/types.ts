@@ -8,6 +8,8 @@ export type IntakePayload = {
   challenge_type: string;
   budget_range?: string | null;
   referral_source?: string | null;
+  project_context?: string | null;
+  preferred_session_type?: string | null;
 };
 
 export type BookingLeadRecord = {
@@ -19,6 +21,7 @@ export type BookingLeadRecord = {
   challenge_type: string;
   budget_range?: string | null;
   referral_source?: string | null;
+  pre_call_answers?: Record<string, unknown> | null;
   call_type: BookingCallType;
   call_duration_min: number;
   status: string;
