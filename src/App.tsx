@@ -20,6 +20,7 @@ import Research from "./pages/Research";
 import ReportMetricsThatMatter from "./pages/ReportMetricsThatMatter";
 import CinematicImpactFilms from "./pages/CinematicImpactFilms";
 import SignatureProduction from "./pages/SignatureProduction";
+import AdaptAITraining from "./pages/AdaptAITraining";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Blog from "./pages/Blog";
@@ -67,6 +68,8 @@ const App = () => (
           <Route path="/signature-production" element={<SignatureProduction />} />
           <Route path="/signature-productions" element={<Navigate to="/signature-production" replace />} />
           <Route path="/signature" element={<Navigate to="/signature-production" replace />} />
+          <Route path="/adapt-ai-training" element={<AdaptAITraining />} />
+          <Route path="/adapt" element={<Navigate to="/adapt-ai-training" replace />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/terms" element={<Terms />} />
