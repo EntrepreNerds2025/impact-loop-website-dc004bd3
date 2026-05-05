@@ -21,11 +21,13 @@ import ReportMetricsThatMatter from "./pages/ReportMetricsThatMatter";
 import CinematicImpactFilms from "./pages/CinematicImpactFilms";
 import SignatureProduction from "./pages/SignatureProduction";
 import AdaptAITraining from "./pages/AdaptAITraining";
+import NonprofitAIWorkbook from "./pages/NonprofitAIWorkbook";
 import ImpactVisibilitySystem from "./pages/ImpactVisibilitySystem";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import BlogCategory from "./pages/BlogCategory";
 import BookingConfirmed from "./pages/BookingConfirmed";
 import RescheduleBooking from "./pages/RescheduleBooking";
 import CancelBooking from "./pages/CancelBooking";
@@ -73,9 +75,12 @@ const App = () => (
           <Route path="/signature" element={<Navigate to="/signature-production" replace />} />
           <Route path="/adapt-ai-training" element={<AdaptAITraining />} />
           <Route path="/adapt" element={<Navigate to="/adapt-ai-training" replace />} />
+          <Route path="/nonprofit-ai-workbook" element={<NonprofitAIWorkbook />} />
+          <Route path="/workbook" element={<Navigate to="/nonprofit-ai-workbook" replace />} />
           <Route path="/impact-visibility-system" element={<ImpactVisibilitySystem />} />
           <Route path="/admin/sample-content-requests" element={<SampleContentRequests />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/category/:categorySlug" element={<BlogCategory />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
