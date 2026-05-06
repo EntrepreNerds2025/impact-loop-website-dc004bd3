@@ -65,6 +65,75 @@ export type Database = {
         }
         Relationships: []
       }
+      booking_leads: {
+        Row: {
+          brief_sent_at: string | null
+          budget_range: string | null
+          call_duration_min: number
+          call_type: string
+          cancel_token: string
+          challenge_type: string
+          created_at: string
+          email: string
+          full_name: string
+          google_event_id: string | null
+          id: string
+          meeting_link: string | null
+          organization: string
+          organization_website: string | null
+          pre_call_answers: Json | null
+          referral_source: string | null
+          reminder_sent_at: string | null
+          scheduled_at: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          brief_sent_at?: string | null
+          budget_range?: string | null
+          call_duration_min: number
+          call_type: string
+          cancel_token?: string
+          challenge_type: string
+          created_at?: string
+          email: string
+          full_name: string
+          google_event_id?: string | null
+          id?: string
+          meeting_link?: string | null
+          organization: string
+          organization_website?: string | null
+          pre_call_answers?: Json | null
+          referral_source?: string | null
+          reminder_sent_at?: string | null
+          scheduled_at?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          brief_sent_at?: string | null
+          budget_range?: string | null
+          call_duration_min?: number
+          call_type?: string
+          cancel_token?: string
+          challenge_type?: string
+          created_at?: string
+          email?: string
+          full_name?: string
+          google_event_id?: string | null
+          id?: string
+          meeting_link?: string | null
+          organization?: string
+          organization_website?: string | null
+          pre_call_answers?: Json | null
+          referral_source?: string | null
+          reminder_sent_at?: string | null
+          scheduled_at?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           created_at: string
@@ -188,6 +257,84 @@ export type Database = {
           slug?: string
           sort_order?: number
           title?: string
+        }
+        Relationships: []
+      }
+      sample_content_requests: {
+        Row: {
+          assigned_team_member: string | null
+          created_at: string
+          email: string
+          first_name: string
+          follow_up_email_status: string
+          generated_post_ideas: string | null
+          id: string
+          interested_in_ongoing_content_support: boolean
+          internal_notes: string | null
+          last_name: string
+          lead_magnet: string
+          organization_name: string
+          organization_type: string
+          sample_pack_notes: string | null
+          sample_pack_url: string | null
+          source: string
+          stage: string
+          status: string
+          tags: string[]
+          updated_at: string
+          visibility_goal: string
+          visual_prompt_notes: string | null
+          website_or_social_link: string
+        }
+        Insert: {
+          assigned_team_member?: string | null
+          created_at?: string
+          email: string
+          first_name: string
+          follow_up_email_status?: string
+          generated_post_ideas?: string | null
+          id?: string
+          interested_in_ongoing_content_support?: boolean
+          internal_notes?: string | null
+          last_name: string
+          lead_magnet?: string
+          organization_name: string
+          organization_type: string
+          sample_pack_notes?: string | null
+          sample_pack_url?: string | null
+          source?: string
+          stage?: string
+          status?: string
+          tags?: string[]
+          updated_at?: string
+          visibility_goal: string
+          visual_prompt_notes?: string | null
+          website_or_social_link: string
+        }
+        Update: {
+          assigned_team_member?: string | null
+          created_at?: string
+          email?: string
+          first_name?: string
+          follow_up_email_status?: string
+          generated_post_ideas?: string | null
+          id?: string
+          interested_in_ongoing_content_support?: boolean
+          internal_notes?: string | null
+          last_name?: string
+          lead_magnet?: string
+          organization_name?: string
+          organization_type?: string
+          sample_pack_notes?: string | null
+          sample_pack_url?: string | null
+          source?: string
+          stage?: string
+          status?: string
+          tags?: string[]
+          updated_at?: string
+          visibility_goal?: string
+          visual_prompt_notes?: string | null
+          website_or_social_link?: string
         }
         Relationships: []
       }
