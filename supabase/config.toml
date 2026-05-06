@@ -1,1 +1,31 @@
 project_id = "vmlmdyoedicwdkbtenaf"
+
+[functions.create-booking]
+verify_jwt = false
+
+[functions.get-availability]
+verify_jwt = false
+
+[functions.cancel-booking]
+verify_jwt = false
+
+[functions.reschedule-booking]
+verify_jwt = false
+
+[functions.submit-pre-call-answers]
+verify_jwt = false
+
+[functions.pre-call-email]
+verify_jwt = false
+
+[functions.pre-call-brief]
+verify_jwt = false
+
+[functions.send-contact-notification]
+verify_jwt = false
+
+[functions.impact-visibility-sample]
+verify_jwt = false
+
+[functions.send-lead-emails]
+verify_jwt = false
