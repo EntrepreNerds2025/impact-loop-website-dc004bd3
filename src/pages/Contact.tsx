@@ -65,19 +65,25 @@ const Contact = () => {
 
       if (dbError) throw dbError;
 
-      // Send email notification
+      // Send internal alert + submitter confirmation
       try {
-        await supabase.functions.invoke("send-contact-notification", {
+        await supabase.functions.invoke("send-lead-emails", {
           body: {
-            name: form.name.trim(),
-            email: form.email.trim(),
-            organization: form.organization.trim(),
-            service_interest: form.service_interest,
-            message: form.message.trim(),
+            source: "contact",
+            lead_id: `${form.email.trim()}-${Date.now()}`,
+            submitter: {
+              name: form.name.trim(),
+              email: form.email.trim(),
+              organization: form.organization.trim() || undefined,
+            },
+            details: {
+              "Service Interest": form.service_interest,
+              Message: form.message.trim(),
+            },
           },
         });
       } catch {
-        console.warn("Email notification could not be sent.");
+        console.warn("Lead emails could not be sent.");
       }
 
       // POST to CRM
