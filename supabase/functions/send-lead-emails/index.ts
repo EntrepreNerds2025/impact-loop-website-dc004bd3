@@ -6,7 +6,7 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const FROM = Deno.env.get("LEAD_EMAIL_FROM") || Deno.env.get("BOOKING_EMAIL_FROM") || "Impact Loop <onboarding@resend.dev>";
+const FROM = Deno.env.get("LEAD_EMAIL_FROM") || Deno.env.get("BOOKING_EMAIL_FROM") || "Impact Loop <hello@impactloop.ca>";
 const INTERNAL = Deno.env.get("BOOKING_INTERNAL_EMAIL") || "rovonn@impactloop.ca";
 const REPLY_TO = "rovonn@impactloop.ca";
 
