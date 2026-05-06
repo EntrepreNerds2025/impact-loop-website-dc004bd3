@@ -20,6 +20,7 @@ import {
   Users,
 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
+import { supabase } from "@/integrations/supabase/client";
 import { setSEO, resetSEO } from "@/lib/seo";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
@@ -317,6 +318,36 @@ const AdaptAITraining = () => {
     setLeadInfo((prev) => ({ ...prev, [key]: value }));
   };
 
+  const submitAdaptScore = async () => {
+    setCompleted(true);
+    if (!leadInfo.email.trim() || !leadInfo.name.trim()) return;
+    try {
+      await supabase.functions.invoke("send-lead-emails", {
+        body: {
+          source: "adapt-readiness",
+          lead_id: `${leadInfo.email.trim()}-${Date.now()}`,
+          submitter: {
+            name: leadInfo.name.trim(),
+            email: leadInfo.email.trim(),
+            organization: leadInfo.organization.trim() || undefined,
+          },
+          details: {
+            Role: leadInfo.role,
+            "Organization Type": leadInfo.organizationType,
+            Score: `${score}%`,
+            Tier: tier.label,
+            Recommendation: tier.desc,
+            Answers: questions
+              .map((q, i) => `${i + 1}. ${q} — ${answers[i]}/5`)
+              .join(" | "),
+          },
+        },
+      });
+    } catch (err) {
+      console.warn("ADAPT lead emails failed", err);
+    }
+  };
+
   const downloadSummary = () => {
     const lines = [
       "ADAPT Readiness Summary",
@@ -612,7 +643,7 @@ const AdaptAITraining = () => {
                     <div className="mt-6">{renderQuestionGroup(5, 10)}</div>
                     <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-between">
                       <button type="button" onClick={() => setQuizStep(1)} className="rounded-md border border-[#cdb99f] px-5 py-3 text-sm font-bold uppercase text-[#5b3f2a]">Back</button>
-                      <button type="button" onClick={() => setCompleted(true)} className="rounded-md bg-[#a86f39] px-5 py-3 text-sm font-bold uppercase text-white">Calculate My Score</button>
+                      <button type="button" onClick={submitAdaptScore} className="rounded-md bg-[#a86f39] px-5 py-3 text-sm font-bold uppercase text-white">Calculate My Score</button>
                     </div>
                   </div>
                 )}
