@@ -111,6 +111,37 @@ serve(async (req) => {
       }
     }
 
+    // Send internal alert + submitter confirmation via Resend
+    try {
+      const fnUrl = `${Deno.env.get("SUPABASE_URL")}/functions/v1/send-lead-emails`;
+      await fetch(fnUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")}`,
+        },
+        body: JSON.stringify({
+          source: "impact-visibility-sample",
+          lead_id: data.id,
+          submitter: {
+            name: `${requestPayload.first_name} ${requestPayload.last_name}`.trim(),
+            email: requestPayload.email,
+            organization: requestPayload.organization_name,
+          },
+          details: {
+            "Organization Type": requestPayload.organization_type,
+            "Website / Social": requestPayload.website_or_social_link,
+            "Visibility Goal": requestPayload.visibility_goal,
+            "Wants Ongoing Support": requestPayload.interested_in_ongoing_content_support ? "Yes" : "No",
+            Stage: requestPayload.stage,
+          },
+        }),
+      });
+    } catch (emailError) {
+      console.warn("Lead emails failed.", emailError);
+      crmWarnings.push("Lead emails failed.");
+    }
+
     return jsonResponse({ success: true, request: data, warnings: crmWarnings });
   } catch (error) {
     console.error("impact-visibility-sample error:", error);
