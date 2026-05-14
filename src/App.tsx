@@ -33,6 +33,7 @@ import RescheduleBooking from "./pages/RescheduleBooking";
 import CancelBooking from "./pages/CancelBooking";
 import TropicanaFriendRaiser from "./pages/proposals/TropicanaFriendRaiser";
 import SampleContentRequests from "./pages/admin/SampleContentRequests";
+import CaseStudyDeck from "./pages/CaseStudyDeck";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -86,6 +87,7 @@ const App = () => (
           <Route path="/privacy" element={<Privacy />} />
           {/* Unlisted proposal routes - not in nav, not in sitemap, noindex via meta */}
           <Route path="/proposals/tropicana-friendraiser" element={<TropicanaFriendRaiser />} />
+          <Route path="/case-studies" element={<CaseStudyDeck />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
