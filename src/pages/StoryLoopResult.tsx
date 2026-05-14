@@ -270,14 +270,20 @@ export default function StoryLoopResult() {
         return;
       }
       try {
-        const { data, error: dbErr } = await supabase
-          .from("story_loop_sessions" as never)
-          .select("output, status, error")
-          .eq("id", id)
-          .maybeSingle();
-        if (dbErr) throw new Error(dbErr.message);
-        if (!data) throw new Error("Session not found");
-        const row = data as { output: LoopResult | null; status: string; error: string | null };
+        const { data, error: functionError } = await supabase.functions.invoke(
+          "get-story-loop-result",
+          { body: { id } },
+        );
+        if (functionError) throw new Error(functionError.message);
+        const payload = data as {
+          ok?: boolean;
+          error?: string;
+          session?: { output: LoopResult | null; status: string; error: string | null };
+        } | null;
+        if (!payload?.ok || !payload.session) {
+          throw new Error(payload?.error || "Session not found");
+        }
+        const row = payload.session;
         if (row.status === "failed") {
           throw new Error(row.error || "Generation failed");
         }
