@@ -34,6 +34,9 @@ import CancelBooking from "./pages/CancelBooking";
 import TropicanaFriendRaiser from "./pages/proposals/TropicanaFriendRaiser";
 import SampleContentRequests from "./pages/admin/SampleContentRequests";
 import CaseStudyDeck from "./pages/CaseStudyDeck";
+import StoryLoop from "./pages/StoryLoop";
+import StoryLoopResult from "./pages/StoryLoopResult";
+import StoryLoopSessions from "./pages/admin/StoryLoopSessions";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -88,6 +91,9 @@ const App = () => (
           {/* Unlisted proposal routes - not in nav, not in sitemap, noindex via meta */}
           <Route path="/proposals/tropicana-friendraiser" element={<TropicanaFriendRaiser />} />
           <Route path="/case-studies" element={<CaseStudyDeck />} />
+          <Route path="/loop" element={<StoryLoop />} />
+          <Route path="/loop/result/:id" element={<StoryLoopResult />} />
+          <Route path="/admin/loop-sessions" element={<StoryLoopSessions />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
