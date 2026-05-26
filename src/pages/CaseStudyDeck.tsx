@@ -241,9 +241,11 @@ const ChapterSection = ({ study, index }: { study: CaseStudy; index: number }) =
         variants={fadeUp}
         className="mb-12 rounded-xl overflow-hidden border border-border shadow-lg aspect-video"
       >
-        <VimeoLightbox
-          vimeoId={study.heroVimeoId}
-          previewStart={study.previewStart}
+        <iframe
+          src={`https://player.vimeo.com/video/${study.heroVimeoId}?title=0&byline=0&portrait=0`}
+          className="w-full h-full"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowFullScreen
           title={study.title}
         />
       </motion.div>
