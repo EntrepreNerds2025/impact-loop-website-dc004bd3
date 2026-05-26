@@ -518,29 +518,32 @@ const AdaptAITraining = () => {
               <h2 className="font-serif text-3xl font-bold md:text-5xl">A practical loop for real teams doing real work.</h2>
             </div>
 
-            <div className="relative mx-auto hidden min-h-[520px] max-w-5xl md:block">
-              <div className="absolute inset-10 rounded-full border border-[#f4b15f]/25" />
-              <div className="absolute left-1/2 top-1/2 flex h-56 w-56 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-white/8 p-8 text-center shadow-2xl backdrop-blur-md">
-                <p className="font-serif text-3xl font-bold leading-tight">More Capacity. Better Communication. Greater Impact.</p>
+            <div className="relative mx-auto hidden h-[760px] max-w-5xl md:block">
+              <div className="absolute left-1/2 top-1/2 h-[460px] w-[460px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#f4b15f]/25" />
+              <div className="absolute left-1/2 top-1/2 flex h-52 w-52 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-white/[0.08] p-6 text-center shadow-2xl backdrop-blur-md">
+                <p className="font-serif text-xl font-bold leading-snug">More Capacity. Better Communication. Greater Impact.</p>
               </div>
 
               {frameworkSteps.map((step, index) => {
+                // Pentagon positions (top, right, lower-right, lower-left, left) as % of container
                 const positions = [
-                  "left-1/2 top-0 -translate-x-1/2",
-                  "right-0 top-32",
-                  "right-20 bottom-0",
-                  "left-20 bottom-0",
-                  "left-0 top-32",
+                  { top: "4%", left: "50%" },
+                  { top: "38%", left: "92%" },
+                  { top: "92%", left: "72%" },
+                  { top: "92%", left: "28%" },
+                  { top: "38%", left: "8%" },
                 ];
+                const pos = positions[index];
                 return (
                   <button
                     key={`${step.letter}-${step.title}`}
                     type="button"
                     onClick={() => setActiveStep(index)}
-                    className={`absolute w-56 rounded-lg border p-5 text-left transition-all ${positions[index]} ${
+                    style={{ top: pos.top, left: pos.left, transform: "translate(-50%, -50%)" }}
+                    className={`absolute w-60 rounded-lg border p-5 text-left transition-all ${
                       activeStep === index
-                        ? "border-[#f4b15f] bg-[#f4b15f] text-[#241f1a] shadow-xl"
-                        : "border-white/12 bg-white/8 text-white hover:border-[#f4b15f]/60"
+                        ? "border-[#f4b15f] bg-[#f4b15f] text-[#241f1a] shadow-xl z-10"
+                        : "border-white/12 bg-white/[0.08] text-white hover:border-[#f4b15f]/60"
                     }`}
                   >
                     <span className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-[#241f1a] font-serif text-xl font-bold text-[#f4b15f]">

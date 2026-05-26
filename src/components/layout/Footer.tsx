@@ -73,19 +73,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Client Access */}
-          <div className="space-y-4">
-            <h4 className="font-serif text-lg font-semibold">Client Access</h4>
-            <p className="text-white/60 text-sm">
-              Already a client? Access your framework materials and resources.
-            </p>
-            <Link
-              to="/login"
-              className="inline-block text-impact-blue hover:text-impact-purple text-sm font-medium transition-colors duration-300"
-            >
-              Login to Client Portal â
-            </Link>
-          </div>
         </div>
 
         {/* Bottom Bar */}
