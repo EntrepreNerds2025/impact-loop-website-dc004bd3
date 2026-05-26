@@ -7,7 +7,15 @@
  * across both brands. Same author voice, different audience emphasis.
  */
 import yaml from "js-yaml";
-import readingTime from "reading-time";
+
+// Lightweight browser-safe reading-time replacement (the `reading-time` npm
+// package pulls in Node `stream`/`util` and crashes in the browser).
+function readingTime(text: string): { minutes: number; text: string; words: number } {
+  const words = (text.match(/\S+/g) || []).length;
+  const minutes = words / 200;
+  const displayMinutes = Math.max(1, Math.ceil(minutes));
+  return { minutes, text: `${displayMinutes} min read`, words };
+}
 
 export type BlogCategory =
   | "Storytelling"

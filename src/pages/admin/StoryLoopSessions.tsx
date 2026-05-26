@@ -152,8 +152,8 @@ export default function StoryLoopSessions() {
     const d = drafts[id];
     if (!d) return;
     setSavingId(id);
-    const { error } = await supabase
-      .from("story_loop_sessions" as never)
+    const { error } = await (supabase as any)
+      .from("story_loop_sessions")
       .update({ lead_status: d.lead_status, lead_notes: d.lead_notes })
       .eq("id", id);
     setSavingId(null);
