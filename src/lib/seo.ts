@@ -21,6 +21,7 @@ export function setSEO({
   ogImage,
   ogType = "article",
   canonical,
+  path,
 }: {
   title?: string;
   description?: string;
@@ -29,6 +30,7 @@ export function setSEO({
   ogImage?: string;
   ogType?: string;
   canonical?: string;
+  path?: string;
 }) {
   document.title = title || DEFAULT_TITLE;
   setOrCreateMeta("description", description || DEFAULT_DESCRIPTION);
@@ -36,14 +38,17 @@ export function setSEO({
   setOrCreateMeta("og:description", ogDescription || description || DEFAULT_DESCRIPTION, true);
   setOrCreateMeta("og:type", ogType, true);
   if (ogImage) setOrCreateMeta("og:image", ogImage, true);
-  if (canonical) {
+  const resolvedCanonical =
+    canonical ||
+    (path && typeof window !== "undefined" ? `${window.location.origin}${path}` : undefined);
+  if (resolvedCanonical) {
     let link = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
     if (!link) {
       link = document.createElement("link");
       link.setAttribute("rel", "canonical");
       document.head.appendChild(link);
     }
-    link.setAttribute("href", canonical);
+    link.setAttribute("href", resolvedCanonical);
   }
 }
 
