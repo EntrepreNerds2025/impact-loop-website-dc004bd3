@@ -13,6 +13,7 @@ const servicesDropdown = [
 
 const resourcesDropdown = [
   { href: "/research", label: "Research" },
+  { href: "/nonprofit-growth-study", label: "Nonprofit Growth Study" },
 ];
 
 // Media Hubs, add corporate hub below when ready
@@ -84,7 +85,7 @@ const Header = () => {
     location.pathname.startsWith("/adapt") ||
     location.pathname.startsWith("/impact-visibility");
 
-  const isResourcesActive = location.pathname.startsWith("/research") || location.pathname.startsWith("/blog");
+  const isResourcesActive = location.pathname.startsWith("/research") || location.pathname.startsWith("/blog") || location.pathname.startsWith("/nonprofit-growth-study");
 
   const isHubsActive = location.pathname.startsWith("/hub");
 

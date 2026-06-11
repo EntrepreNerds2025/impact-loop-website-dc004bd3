@@ -16,7 +16,9 @@ import ImpactMediaHub from "./pages/ImpactMediaHub";
 import HubExamples from "./pages/HubExamples";
 import HubBlackCreekBHM from "./pages/HubBlackCreekBHM";
 import HubCafcanOPKT from "./pages/HubCafcanOPKT";
+import HubCafcanBYP from "./pages/HubCafcanBYP";
 import Research from "./pages/Research";
+import NonprofitGrowthStudy from "./pages/NonprofitGrowthStudy";
 import ReportMetricsThatMatter from "./pages/ReportMetricsThatMatter";
 import CinematicImpactFilms from "./pages/CinematicImpactFilms";
 import SignatureProduction from "./pages/SignatureProduction";
@@ -63,6 +65,8 @@ const App = () => (
           <Route path="/hub/corporate-demo" element={<HubBlackCreekBHM />} />
           <Route path="/hub/black-creek-bhm" element={<HubBlackCreekBHM />} />
           <Route path="/hub/story-cafcan" element={<HubCafcanOPKT />} />
+          <Route path="/hub/cafcan-byp-newtonbrook" element={<HubCafcanBYP />} />
+          <Route path="/hub/cafcan-black-youth" element={<Navigate to="/hub/cafcan-byp-newtonbrook" replace />} />
           <Route path="/hub/story-cafcan/*" element={<HubCafcanOPKT />} />
           <Route path="/hub/cafcan-opkt" element={<Navigate to="/hub/story-cafcan" replace />} />
           <Route path="/hub/cafcan" element={<Navigate to="/hub/story-cafcan" replace />} />
@@ -71,6 +75,8 @@ const App = () => (
           <Route path="/hub/cafcan-opkt-hub" element={<Navigate to="/hub/story-cafcan" replace />} />
           <Route path="/hub/cafcan-hub" element={<Navigate to="/hub/story-cafcan" replace />} />
           <Route path="/research" element={<Research />} />
+          <Route path="/nonprofit-growth-study" element={<NonprofitGrowthStudy />} />
+          <Route path="/growth-study" element={<Navigate to="/nonprofit-growth-study" replace />} />
           <Route path="/research/metrics-that-matter-2026" element={<ReportMetricsThatMatter />} />
           <Route path="/cinematic-impact-films" element={<CinematicImpactFilms />} />
           <Route path="/impact-story-capture" element={<CinematicImpactFilms />} />

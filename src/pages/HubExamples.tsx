@@ -12,6 +12,12 @@ const hubs = [
     description: "A media-first hub featuring community voices, photos, video clips, partners, and outcomes from Black Creek's Black History Month programming.",
     link: "/hub/black-creek-bhm",
   },
+  {
+    title: "CAFCAN Black Youth Program at Newtonbrook",
+    type: "Featured Example",
+    description: "A media-first hub for CAFCAN's Black Youth Program with Newtonbrook Secondary School, sharing the program's work helping young Black men know their history, identity, and future.",
+    link: "/hub/cafcan-byp-newtonbrook",
+  },
 ];
 
 const HubExamples = () => {
