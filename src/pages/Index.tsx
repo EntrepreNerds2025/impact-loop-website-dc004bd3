@@ -10,6 +10,7 @@ import ImpactStatsSection from "@/components/home/ImpactStatsSection";
 import ServicesPreviewSection from "@/components/home/ServicesPreviewSection";
 import ImpactMediaHubSection from "@/components/home/ImpactMediaHubSection";
 import TechSolutionsSection from "@/components/home/TechSolutionsSection";
+import ImpactStandardSection from "@/components/home/ImpactStandardSection";
 import FounderSection from "@/components/home/FounderSection";
 
 const Index = () => {
@@ -32,6 +33,7 @@ const Index = () => {
       <ServicesPreviewSection />
       <ImpactMediaHubSection />
       <TechSolutionsSection />
+      <ImpactStandardSection />
       <FrameworkPreviewSection />
       <FounderSection />
     </Layout>
