@@ -26,6 +26,7 @@ import AdaptAITraining from "./pages/AdaptAITraining";
 import NonprofitAIWorkbook from "./pages/NonprofitAIWorkbook";
 import ImpactVisibilitySystem from "./pages/ImpactVisibilitySystem";
 import ImpactStandard from "./pages/ImpactStandard";
+import ImpactPage from "./pages/ImpactPage";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Blog from "./pages/Blog";
@@ -56,7 +57,7 @@ const App = () => (
           <Route path="/services" element={<Services />} />
           <Route path="/bookings" element={<Bookings />} />
           <Route path="/contact" element={<Contact />} />
-          
+
           <Route path="/booking-confirmed" element={<BookingConfirmed />} />
           <Route path="/booking/reschedule/:token" element={<RescheduleBooking />} />
           <Route path="/booking/cancel/:token" element={<CancelBooking />} />
@@ -91,6 +92,7 @@ const App = () => (
           <Route path="/impact-visibility-system" element={<ImpactVisibilitySystem />} />
           <Route path="/impact-standard" element={<ImpactStandard />} />
           <Route path="/the-impact-standard" element={<Navigate to="/impact-standard" replace />} />
+          <Route path="/impact/:slug" element={<ImpactPage />} />
           <Route path="/admin/sample-content-requests" element={<SampleContentRequests />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/category/:categorySlug" element={<BlogCategory />} />
