@@ -54,7 +54,7 @@ const clips: { title: string; vimeoId: string }[] = [
    Drop image files into:  src/assets/hub/cafcan-byp-newtonbrook/photos
    They auto-load below. The group photo (HERO_PHOTO_BASENAME) is pulled out
    to use as the hero and is excluded from the gallery. */
-const HERO_PHOTO_BASENAME = "NLSC CAM 27005.00_01_47_42.Still005";
+const HERO_PHOTO_BASENAME = "nlsc-cam-27005-00-01-47-42-still005";
 
 const localPhotoModules = import.meta.glob<{ default: string }>(
   "../assets/hub/cafcan-byp-newtonbrook/photos/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP,AVIF}",
