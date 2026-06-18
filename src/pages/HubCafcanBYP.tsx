@@ -102,16 +102,20 @@ const photoItems: MediaItem[] = seededShuffle(galleryPhotoEntries).map(([filePat
   title: toTitleFromPath(filePath) || `Program Photo ${index + 1}`,
 }));
 
-/* ─── Voices ───
-   Placeholder quotes themed to the program. Replace with real participant,
-   mentor, and educator quotes when you have consent to publish them. */
+/* ─── Voices ─── */
 const quotes = [
-  { text: "I learned things about my history that no class ever taught me. Now I walk different because I know where I come from.", name: "Participant", role: "Newtonbrook Student" },
-  { text: "These young men arrive unsure of themselves and leave standing taller, speaking up, and looking out for each other.", name: "Participant", role: "Newtonbrook Student" },
-  { text: "It is not just about the past. It is about who they are becoming and the future they now believe is theirs.", name: "Participant", role: "Newtonbrook Student" },
-  { text: "We see brotherhood form in this room. They hold each other accountable and celebrate each other's wins.", name: "Participant", role: "Newtonbrook Student" },
-  { text: "Having this space inside our school tells our Black students they belong here and their story matters.", name: "Participant", role: "Newtonbrook Student" },
-  { text: "For the first time, I see myself in the people we learn about. That changes how I see what I can do.", name: "Participant", role: "Newtonbrook Student" },
+  { text: "I wasn't always confident, but now going to CAFCAN, it brings out confidence. I feel free.", name: "Participant", role: "Newtonbrook Student" },
+  { text: "You can really open up to everyone and talk with people who are just like you.", name: "Participant", role: "Newtonbrook Student" },
+  { text: "I learned so much about my community, being Black, why it is good to be Black, to express yourself.", name: "Participant", role: "Newtonbrook Student" },
+  { text: "This is for us, a program for us. You really do feel wanted and needed in a program like that.", name: "Participant", role: "Newtonbrook Student" },
+  { text: "Every Thursday, we're always discussing things, important topics that need to be spoken about as people together, as one.", name: "Participant", role: "Newtonbrook Student" },
+  { text: "When you're surrounded by people that look like you and are there to support you, you feel so proud. You feel so confident.", name: "Participant", role: "Newtonbrook Student" },
+  { text: "I actually do intend to take a trade in my future, and I feel like this is a great opportunity to learn and network.", name: "Participant", role: "Newtonbrook Student" },
+  { text: "It did help me see what I could do in the future because this is one of the things I really want to pursue.", name: "Participant", role: "Newtonbrook Student" },
+  { text: "We got to do little exercises here, team building, and we got to see what it was like to build stuff. It's definitely given me some more options.", name: "Participant", role: "Newtonbrook Student" },
+  { text: "In my life, I didn't learn a lot about tools and all that, so being here is pretty nice.", name: "Participant", role: "Newtonbrook Student" },
+  { text: "People's true goals came out because they weren't scared to say it anymore.", name: "Participant", role: "Newtonbrook Student" },
+  { text: "I can be whoever I want. It doesn't matter who I am, my skin color, or anything. I can do whatever I want.", name: "Participant", role: "Newtonbrook Student" },
 ];
 
 /* ─── Program Pillars ─── */
