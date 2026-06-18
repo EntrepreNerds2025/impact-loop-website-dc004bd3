@@ -2,7 +2,7 @@ import { useState, useMemo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
-  BookOpen, Video, Images, Quote, Handshake, FileDown, BarChart3,
+  BookOpen, Video, Images, Quote, Handshake, BarChart3,
   ChevronDown, Menu, X, Play, Download
 } from "lucide-react";
 import JSZip from "jszip";
@@ -12,10 +12,10 @@ import { slideUp, staggerContainer, fadeIn } from "@/hooks/useScrollAnimation";
 import { useToast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
 import HubVideoClips from "@/components/hub/HubVideoClips";
-import PdfExportPreview from "@/components/hub/PdfExportPreview";
 import MediaLightbox, { type MediaItem } from "@/components/shared/MediaLightbox";
 
 import cafcanLogo from "@/assets/hub/cafcan-opkt/logos/cafcan-full.png";
+import newtonbrookLogo from "@/assets/hub/cafcan-byp-newtonbrook/logos/newtonbrook-secondary-school.jpg";
 
 /* ─────────────────────────────────────────────────────────────
    CAFCAN Black Youth Program × Newtonbrook Secondary School
@@ -31,7 +31,6 @@ const baseSectionsBottom = [
   { id: "photos", label: "Photos", icon: Images },
   { id: "quotes", label: "Voices", icon: Quote },
   { id: "partners", label: "Partners", icon: Handshake },
-  { id: "pdf-export", label: "PDF Export", icon: FileDown },
   { id: "outcomes", label: "Outcomes", icon: BarChart3 },
 ];
 
@@ -42,13 +41,13 @@ const heroVimeoId = "";
 
 /* ─── Clips (Vimeo) ─── */
 const clips: { title: string; vimeoId: string }[] = [
-  { title: "Javonte — Program Testimonial", vimeoId: "1200474919" },
-  { title: "Isaiah — Program Testimonial", vimeoId: "1200474918" },
-  { title: "Ben — Program Testimonial", vimeoId: "1200474920" },
-  { title: "Refugee Skills Trade Session — Reflection 1", vimeoId: "1200479865" },
-  { title: "Refugee Skills Trade Session — Reflection 2", vimeoId: "1200479868" },
-  { title: "Refugee Skills Trade Session — Reflection 3", vimeoId: "1200479866" },
-  { title: "Refugee Skills Trade Session — Reflection 4", vimeoId: "1200479869" },
+  { title: "Javonte Testimonial Segment", vimeoId: "1200474919" },
+  { title: "Isaiah Testomonial Segment", vimeoId: "1200474918" },
+  { title: "Ben Testimonial Segment", vimeoId: "1200474920" },
+  { title: "Testimonial 4", vimeoId: "1200479865" },
+  { title: "Testimonial 3", vimeoId: "1200479868" },
+  { title: "Testimonial 2", vimeoId: "1200479866" },
+  { title: "Testimonial 1", vimeoId: "1200479869" },
 ];
 
 /* ─── Photos ───
@@ -91,7 +90,7 @@ const sortedPhotoEntries = Object.entries(localPhotoModules).sort(([pathA], [pat
 const heroPhotoEntry = sortedPhotoEntries.find(
   ([filePath]) => toBaseNameFromPath(filePath) === HERO_PHOTO_BASENAME
 );
-const heroImage: string | undefined = heroPhotoEntry ? heroPhotoEntry[1].default : undefined;
+const heroImage: string | undefined = heroPhotoEntry?.[1].default ?? sortedPhotoEntries[0]?.[1].default;
 
 const galleryPhotoEntries = sortedPhotoEntries.filter(
   ([filePath]) => toBaseNameFromPath(filePath) !== HERO_PHOTO_BASENAME
@@ -107,12 +106,12 @@ const photoItems: MediaItem[] = seededShuffle(galleryPhotoEntries).map(([filePat
    Placeholder quotes themed to the program. Replace with real participant,
    mentor, and educator quotes when you have consent to publish them. */
 const quotes = [
-  { text: "I learned things about my history that no class ever taught me. Now I walk different because I know where I come from.", name: "Program Participant", role: "Newtonbrook Student" },
-  { text: "These young men arrive unsure of themselves and leave standing taller, speaking up, and looking out for each other.", name: "Program Mentor", role: "CAFCAN Black Youth Program" },
-  { text: "It is not just about the past. It is about who they are becoming and the future they now believe is theirs.", name: "Program Facilitator", role: "CAFCAN" },
-  { text: "We see brotherhood form in this room. They hold each other accountable and celebrate each other's wins.", name: "Program Mentor", role: "CAFCAN Black Youth Program" },
-  { text: "Having this space inside our school tells our Black students they belong here and their story matters.", name: "School Staff", role: "Newtonbrook Secondary School" },
-  { text: "For the first time, I see myself in the people we learn about. That changes how I see what I can do.", name: "Program Participant", role: "Newtonbrook Student" },
+  { text: "I learned things about my history that no class ever taught me. Now I walk different because I know where I come from.", name: "Participant", role: "Newtonbrook Student" },
+  { text: "These young men arrive unsure of themselves and leave standing taller, speaking up, and looking out for each other.", name: "Participant", role: "Newtonbrook Student" },
+  { text: "It is not just about the past. It is about who they are becoming and the future they now believe is theirs.", name: "Participant", role: "Newtonbrook Student" },
+  { text: "We see brotherhood form in this room. They hold each other accountable and celebrate each other's wins.", name: "Participant", role: "Newtonbrook Student" },
+  { text: "Having this space inside our school tells our Black students they belong here and their story matters.", name: "Participant", role: "Newtonbrook Student" },
+  { text: "For the first time, I see myself in the people we learn about. That changes how I see what I can do.", name: "Participant", role: "Newtonbrook Student" },
 ];
 
 /* ─── Program Pillars ─── */
@@ -130,7 +129,7 @@ const pillars = [
 /* ─── Partners ─── */
 const partners: { name: string; logo?: string }[] = [
   { name: "CAFCAN Social Services", logo: cafcanLogo },
-  { name: "Newtonbrook Secondary School" },
+  { name: "Newtonbrook Secondary School", logo: newtonbrookLogo },
 ];
 
 const spotlights = [
@@ -153,7 +152,7 @@ const INITIAL_PHOTOS_VISIBLE = 12;
 
 const sections = [
   ...baseSectionsTop,
-  ...((heroVimeoId || heroImage) ? [{ id: "hero-video", label: "Story", icon: Video }] : []),
+  ...(heroVimeoId ? [{ id: "hero-video", label: "Story", icon: Video }] : []),
   ...(clips.length > 0 ? [{ id: "clips", label: "Clips", icon: Play }] : []),
   ...baseSectionsBottom,
 ];
@@ -312,6 +311,20 @@ const HubCafcanBYP = () => {
                 <motion.p variants={slideUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-muted-foreground text-sm md:text-base leading-relaxed mb-10 max-w-2xl mx-auto">
                   CAFCAN's Black Youth Program, hosted in partnership with Newtonbrook Secondary School, gives young Black men a space to learn the history and heritage they are rarely taught, to understand who they are, and to build the confidence and brotherhood that carry them forward. Grounded in CAFCAN's decades of service to Caribbean and African Canadian communities, the program treats identity not as a lesson but as a foundation, turning self-knowledge into aspiration, leadership, and a clear belief in the future they are capable of building.
                 </motion.p>
+                {heroImage && (
+                  <motion.div variants={slideUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="relative mx-auto overflow-hidden rounded-2xl border border-border bg-muted shadow-2xl max-w-4xl">
+                    <img
+                      src={heroImage}
+                      alt="CAFCAN Black Youth Program participants at Newtonbrook Secondary School"
+                      className="w-full aspect-[16/9] object-cover"
+                      loading="eager"
+                      decoding="async"
+                    />
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4 text-left">
+                      <p className="text-white text-xs md:text-sm font-medium">CAFCAN Black Youth Program at Newtonbrook Secondary School</p>
+                    </div>
+                  </motion.div>
+                )}
               </div>
             </section>
 
@@ -333,7 +346,7 @@ const HubCafcanBYP = () => {
             </section>
 
             {/* 3. Hero Story, DARK — group photo now, swaps to video when heroVimeoId is set */}
-            {(heroVimeoId || heroImage) && (
+            {heroVimeoId && (
               <section id="hero-video" className="section-dark py-20">
                 <div className="container mx-auto px-6 max-w-4xl">
                   <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-8 text-center">Program Story</h2>
@@ -428,18 +441,17 @@ const HubCafcanBYP = () => {
                 ) : (
                   <>
                     <p className="text-white/40 text-sm text-center sm:text-left mb-12">Photos from the CAFCAN Black Youth Program at Newtonbrook Secondary School.</p>
-                    <div className="columns-1 sm:columns-2 lg:columns-3 [column-gap:1rem]">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
                       {visiblePhotos.map((photo, i) => (
                         <div
-                          key={i}
-                          className="group relative mb-4 w-full overflow-hidden rounded-xl bg-white/5"
-                          style={{ breakInside: "avoid" }}
+                          key={`${photo.src}-${i}`}
+                          className="group relative overflow-hidden rounded-xl bg-white/5 border border-white/10 shadow-lg"
                         >
-                          <button onClick={() => openPhoto(i)} className="w-full">
+                          <button onClick={() => openPhoto(i)} className="block w-full text-left">
                             <img
                               src={photo.src}
                               alt={photo.title || "Hub photo"}
-                              className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                              className="w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                               decoding="async"
                               loading="lazy"
@@ -447,15 +459,15 @@ const HubCafcanBYP = () => {
                           </button>
                           <button
                             onClick={(e) => { e.stopPropagation(); downloadSinglePhoto(photo.src, photo.title); }}
-                            className="absolute top-2 right-2 w-9 h-9 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                            className="absolute top-2 right-2 w-9 h-9 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300 z-10"
                             aria-label="Download photo"
                             title="Download photo"
                           >
                             <Download size={14} className="text-white" />
                           </button>
                           {photo.title && (
-                            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-3 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                              <p className="text-white text-xs">{photo.title}</p>
+                            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-3 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity pointer-events-none">
+                              <p className="text-white text-xs line-clamp-2">{photo.title}</p>
                             </div>
                           )}
                         </div>
@@ -523,22 +535,7 @@ const HubCafcanBYP = () => {
               </div>
             </section>
 
-            {/* 8. PDF Export */}
-            <section id="pdf-export" className="py-20 bg-background">
-              <div className="container mx-auto px-6">
-                <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-12 text-center">PDF Export</h2>
-                <PdfExportPreview
-                  hubTitle="CAFCAN Black Youth Program at Newtonbrook"
-                  hubSubtitle="CAFCAN Social Services • Newtonbrook Secondary School"
-                  outcomes={outcomes}
-                  quotes={quotes}
-                  isDemoMode={false}
-                  hideDownload
-                />
-              </div>
-            </section>
-
-            {/* 9. Quick Outcomes, DARK */}
+{/* 8. Quick Outcomes, DARK */}
             <section id="outcomes" className="section-dark py-20">
               <div className="container mx-auto px-6">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-12 text-center">What the Program Builds</h2>
@@ -553,7 +550,7 @@ const HubCafcanBYP = () => {
               </div>
             </section>
 
-            {/* 10. Final CTA, DARK */}
+            {/* 9. Final CTA, DARK */}
             <section className="section-dark py-24 border-t border-white/10">
               <div className="container mx-auto px-6 text-center max-w-2xl">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-6">Build your Impact Media Hub</h2>
