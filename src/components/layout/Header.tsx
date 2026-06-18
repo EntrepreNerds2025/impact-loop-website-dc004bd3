@@ -21,6 +21,7 @@ const resourcesDropdown = [
 const mediaHubsDropdown = [
   { href: "/hub/black-creek-bhm", label: "Black Creek BHM Hub" },
   { href: "/hub/story-cafcan", label: "CAFCAN OPKT Hub" },
+  { href: "/hub/cafcan-byp-newtonbrook", label: "CAFCAN Black Youth Program Hub" },
   // { href: "/hub/corporate-demo", label: "Corporate Impact Hub" },
 ];
 
