@@ -50,12 +50,12 @@ const problemCards = [
   {
     icon: Clock,
     title: "Content Takes Too Much Time",
-    body: "Many organizations know they need to post, share updates, and tell better stories — but creating consistent content can feel like another full-time job.",
+    body: "Many organizations know they need to post, share updates, and tell better stories, but creating consistent content can feel like another full-time job.",
   },
   {
     icon: Database,
     title: "Data Lives in Too Many Places",
-    body: "Impact stories, program numbers, testimonials, and funder updates are often scattered across spreadsheets, documents, emails — and memory.",
+    body: "Impact stories, program numbers, testimonials, and funder updates are often scattered across spreadsheets, documents, emails, and memory.",
   },
   {
     icon: Sparkles,
@@ -78,12 +78,12 @@ const steps = [
   {
     icon: Lightbulb,
     title: "You Receive a Practical Recommendation",
-    body: "We provide a simple, tailored recommendation — a social post idea, campaign angle, messaging improvement, or content opportunity.",
+    body: "We provide a simple, tailored recommendation, a social post idea, campaign angle, messaging improvement, or content opportunity.",
   },
   {
     icon: LineChart,
     title: "We Track Learnings & Share Insights",
-    body: "Where possible, we track public-facing results and summarize what we learn. You may be invited into a future case study — only with permission.",
+    body: "Where possible, we track public-facing results and summarize what we learn. You may be invited into a future case study, only with permission.",
   },
 ];
 
@@ -129,7 +129,7 @@ const researchFocus = [
   {
     icon: Bot,
     title: "AI Readiness",
-    body: "Where could AI reduce repetitive work — without replacing the human care and judgment mission-driven work requires?",
+    body: "Where could AI reduce repetitive work, without replacing the human care and judgment mission-driven work requires?",
   },
 ];
 
@@ -139,7 +139,7 @@ const trustPoints = [
   "No confidential client information needed",
   "No case study published without permission",
   "Public-facing review only, unless your team chooses to share more",
-  "Recommendations support your mission — they don't replace your voice",
+  "Recommendations support your mission, they don't replace your voice",
 ];
 
 const osCapabilities = [
@@ -167,7 +167,7 @@ const faqs = [
   },
   {
     q: "What kind of recommendation will we receive?",
-    a: "You may receive a content idea, messaging suggestion, campaign angle, engagement insight, or a simple AI/system recommendation based on what we observe.",
+    a: "You may receive a content idea, messaging suggestion, campaign angle, engagement insight, or a simple AI or system recommendation based on what we observe.",
   },
   {
     q: "Is this only for large nonprofits?",
@@ -461,7 +461,7 @@ const NonprofitGrowthStudy = () => {
               Great Work Often Goes Underseen
             </h2>
             <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-              Nonprofits are often stretched thin — serving communities, managing programs, reporting to
+              Nonprofits are often stretched thin, serving communities, managing programs, reporting to
               funders, creating content, writing grants, and keeping up with new technology, all at once.
               The issue is rarely a lack of impact. It's usually a lack of capacity, clarity, and systems.
             </p>
@@ -493,7 +493,7 @@ const NonprofitGrowthStudy = () => {
               </h2>
               <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
                 The Impact Loop Nonprofit Growth Study is designed to help organizations test small,
-                practical improvements — without adding more pressure to their teams. Instead of asking
+                practical improvements, without adding more pressure to their teams. Instead of asking
                 nonprofits to overhaul everything, we start with simple public-facing insights:
               </p>
               <ul className="mt-6 space-y-3">
@@ -519,10 +519,10 @@ const NonprofitGrowthStudy = () => {
                     Before
                   </p>
                   <ul className="mt-3 space-y-1.5 text-foreground/80">
-                    <li>— Scattered posts</li>
-                    <li>— Manual reporting</li>
-                    <li>— Unclear messaging</li>
-                    <li>— Missed stories</li>
+                    <li>Scattered posts</li>
+                    <li>Manual reporting</li>
+                    <li>Unclear messaging</li>
+                    <li>Missed stories</li>
                   </ul>
                 </div>
                 <div className="flex justify-center py-2 text-[hsl(var(--impact-blue))]">
@@ -559,7 +559,7 @@ const NonprofitGrowthStudy = () => {
             <SectionLabel>The Process</SectionLabel>
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground">How It Works</h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Four simple steps — designed to be lightweight from the first click to the final insight.
+              Four simple steps, designed to be lightweight from the first click to the final insight.
             </p>
           </Reveal>
           <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -601,7 +601,7 @@ const NonprofitGrowthStudy = () => {
               What Your Organization Gets
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Real value, delivered upfront — with no obligation to purchase anything.
+              Real value, delivered upfront, with no obligation to purchase anything.
             </p>
           </Reveal>
           <div className="mx-auto mt-12 grid max-w-4xl grid-cols-1 md:grid-cols-2 gap-4">
@@ -703,7 +703,7 @@ const NonprofitGrowthStudy = () => {
               <div className="rounded-2xl border border-white/15 bg-white/5 p-8 md:p-10">
                 <span className="font-serif text-6xl leading-none text-[hsl(var(--impact-blue))]">"</span>
                 <p className="mt-2 font-serif text-2xl md:text-3xl leading-snug text-white">
-                  Impact Loop believes AI should strengthen mission-driven work — not strip away the
+                  Impact Loop believes AI should strengthen mission-driven work, not strip away the
                   humanity that makes it meaningful.
                 </p>
               </div>
@@ -725,7 +725,7 @@ const NonprofitGrowthStudy = () => {
               </h2>
               <p className="mt-4 max-w-2xl text-lg text-muted-foreground leading-relaxed">
                 This initiative is part of a larger vision: building an <strong className="text-foreground">Impact OS</strong> for
-                mission-driven organizations — a working concept for a practical ecosystem of tools,
+                mission-driven organizations, a working concept for a practical ecosystem of tools,
                 workflows, and AI-supported systems that help organizations:
               </p>
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -739,9 +739,48 @@ const NonprofitGrowthStudy = () => {
                   </div>
                 ))}
               </div>
+
+              {/* Connection to the Standard */}
+              <div className="mt-8 rounded-2xl border border-border bg-white/70 p-6 md:p-7">
+                <p className="max-w-2xl text-base text-muted-foreground leading-relaxed">
+                  The measurement layer of this Impact OS is the <strong className="text-foreground">Impact Loop Standard</strong>,
+                  a method we're developing for turning frontline moments into comparable, fundable data.
+                  This Study is how that Standard is being shaped, with real organizations, instead of
+                  built in isolation.
+                </p>
+                <Link
+                  to="/impact-standard"
+                  className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[hsl(var(--impact-blue))] hover:underline"
+                >
+                  See the Impact Loop Standard
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+
+                {/* Connector graphic: Study -> Standard -> Impact OS */}
+                <div className="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+                  {[
+                    { label: "This Study", caption: "Learn with real organizations", color: "hsl(var(--impact-blue))" },
+                    { label: "The Standard", caption: "The measurement layer", color: "hsl(var(--impact-purple))" },
+                    { label: "The Impact OS", caption: "The larger system", color: "hsl(var(--impact-dark))" },
+                  ].map((node, idx, arr) => (
+                    <div key={node.label} className="flex flex-1 flex-col items-center sm:flex-row sm:items-stretch">
+                      <div className="w-full rounded-xl border border-border bg-card p-4 text-center">
+                        <p className="text-sm font-bold text-foreground">{node.label}</p>
+                        <p className="mt-1 text-xs leading-snug text-muted-foreground">{node.caption}</p>
+                      </div>
+                      {idx < arr.length - 1 && (
+                        <div className="flex items-center justify-center py-1.5 text-muted-foreground sm:px-2 sm:py-0">
+                          <ArrowRight className="h-5 w-5 rotate-90 sm:rotate-0" />
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               <p className="mt-7 max-w-2xl text-sm italic text-muted-foreground">
                 This study helps us learn directly from real organizations before building tools in
-                isolation. Impact OS is an evolving concept — we're starting with people, not a finished
+                isolation. Impact OS is an evolving concept, we're starting with people, not a finished
                 platform.
               </p>
             </div>
@@ -759,7 +798,7 @@ const NonprofitGrowthStudy = () => {
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
               If your organization is doing meaningful work and wants practical insight into how to
-              communicate it more clearly, we'd love to learn from you — and support you.
+              communicate it more clearly, we'd love to learn from you, and support you.
             </p>
           </Reveal>
 
