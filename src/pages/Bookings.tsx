@@ -62,6 +62,7 @@ const Bookings = () => {
   }, [preselectedCallType]);
 
   const selectedCallConfig = selectedCallType ? getCallTypeConfig(selectedCallType) : null;
+  const isSnapshot = (selectedCallType ?? preselectedCallType) === "strategy";
 
   const handleSelectCallType = (callType: BookingCallType) => {
     setSelectedCallType(callType);
@@ -221,10 +222,20 @@ const Bookings = () => {
               Start Here
             </p>
             <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-              Book Your <span className="text-gradient">Impact Strategy Call</span>
+              {isSnapshot ? (
+                <>
+                  Get Your Free <span className="text-gradient">Impact Readiness Snapshot</span>
+                </>
+              ) : (
+                <>
+                  Book Your <span className="text-gradient">Impact Loop Call</span>
+                </>
+              )}
             </h1>
             <p className="text-white/70 text-lg leading-relaxed">
-              Choose the starting point that matches your needs, share context, and reserve a time with real availability.
+              {isSnapshot
+                ? "Forty-five minutes on how you prove impact today — what you can already show funders, where the gaps are, and your shortest path to auditable evidence. You leave with a roadmap, whether we work together or not."
+                : "Choose the starting point that matches your needs, share context, and reserve a time with real availability."}
             </p>
           </motion.div>
         </div>
@@ -244,33 +255,26 @@ const Bookings = () => {
               What to Expect
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-              <div>
-                <div className="w-8 h-8 rounded-full bg-impact-blue text-white flex items-center justify-center font-bold mb-4">
-                  1
+              {(isSnapshot
+                ? [
+                    ["We Listen", "Your programs, your funders, and how you report today — in your words."],
+                    ["We Assess", "Your current evidence against what funders actually require — where you're strong, where the gaps are."],
+                    ["You Keep the Snapshot", "Gaps, quick wins, and a measurement roadmap that's yours whether we work together or not."],
+                  ]
+                : [
+                    ["We Listen", "You share your current goals, context, and what your team is trying to move forward."],
+                    ["We Explore", "Together, we look at whether capture, visibility, ADAPT, or a combined path makes the most sense."],
+                    ["We Recommend", "You leave with clear next steps and a practical direction forward."],
+                  ]
+              ).map(([title, body], i) => (
+                <div key={title}>
+                  <div className="w-8 h-8 rounded-full bg-impact-blue text-white flex items-center justify-center font-bold mb-4">
+                    {i + 1}
+                  </div>
+                  <h4 className="font-semibold text-impact-dark mb-2">{title}</h4>
+                  <p className="text-impact-dark/60 text-sm">{body}</p>
                 </div>
-                <h4 className="font-semibold text-impact-dark mb-2">We Listen</h4>
-                <p className="text-impact-dark/60 text-sm">
-                  You share your current goals, context, and what your team is trying to move forward.
-                </p>
-              </div>
-              <div>
-                <div className="w-8 h-8 rounded-full bg-impact-blue text-white flex items-center justify-center font-bold mb-4">
-                  2
-                </div>
-                <h4 className="font-semibold text-impact-dark mb-2">We Explore</h4>
-                <p className="text-impact-dark/60 text-sm">
-                  Together, we look at whether capture, visibility, ADAPT, or a combined path makes the most sense.
-                </p>
-              </div>
-              <div>
-                <div className="w-8 h-8 rounded-full bg-impact-blue text-white flex items-center justify-center font-bold mb-4">
-                  3
-                </div>
-                <h4 className="font-semibold text-impact-dark mb-2">We Recommend</h4>
-                <p className="text-impact-dark/60 text-sm">
-                  You leave with clear next steps and a practical direction forward.
-                </p>
-              </div>
+              ))}
             </div>
           </div>
         </div>

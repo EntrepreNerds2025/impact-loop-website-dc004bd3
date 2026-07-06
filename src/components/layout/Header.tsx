@@ -12,7 +12,6 @@ const servicesDropdown = [
 ];
 
 const resourcesDropdown = [
-  { href: "/impact-standard", label: "The Impact Loop Standard" },
   { href: "/research", label: "Research" },
   { href: "/nonprofit-growth-study", label: "Nonprofit Growth Study" },
 ];
@@ -87,7 +86,7 @@ const Header = () => {
     location.pathname.startsWith("/adapt") ||
     location.pathname.startsWith("/impact-visibility");
 
-  const isResourcesActive = location.pathname.startsWith("/research") || location.pathname.startsWith("/blog") || location.pathname.startsWith("/nonprofit-growth-study") || location.pathname.startsWith("/impact-standard");
+  const isResourcesActive = location.pathname.startsWith("/research") || location.pathname.startsWith("/blog") || location.pathname.startsWith("/nonprofit-growth-study");
 
   const isHubsActive = location.pathname.startsWith("/hub");
 
@@ -223,6 +222,9 @@ const Header = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
           <Link to="/" className={navLinkClass(location.pathname === "/")}>Home</Link>
+          <Link to="/impact-standard" className={navLinkClass(location.pathname === "/impact-standard")}>
+            The Standard
+          </Link>
           <Link to="/work" className={navLinkClass(location.pathname === "/work")}>Work</Link>
 
           <DesktopDropdown
@@ -259,7 +261,7 @@ const Header = () => {
           <Link to="/contact" className={navLinkClass(location.pathname === "/contact")}>Contact</Link>
 
           <Link to="/bookings?type=strategy" className="btn-primary text-xs !px-5 !py-2">
-            Book a Strategy Call
+            Free Impact Snapshot
           </Link>
         </nav>
 
@@ -286,6 +288,7 @@ const Header = () => {
           >
             <nav className="container mx-auto px-6 py-6 flex flex-col gap-1">
               <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium py-2 text-foreground/60 hover:text-foreground">Home</Link>
+              <Link to="/impact-standard" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium py-2 text-foreground/60 hover:text-foreground">The Standard</Link>
               <Link to="/work" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium py-2 text-foreground/60 hover:text-foreground">Work</Link>
 
               <MobileAccordion items={servicesDropdown} isOpen={isMobileServicesOpen} setOpen={setIsMobileServicesOpen} label="Services" />
@@ -300,7 +303,7 @@ const Header = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="btn-primary text-center mt-4"
               >
-                Book a Strategy Call
+                Free Impact Snapshot
               </Link>
             </nav>
           </motion.div>

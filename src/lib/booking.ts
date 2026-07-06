@@ -19,13 +19,13 @@ export type BookingCallTypeConfig = {
 export const BOOKING_CALL_TYPES: BookingCallTypeConfig[] = [
   {
     id: "strategy",
-    title: "Impact Strategy Call",
+    title: "Impact Readiness Snapshot",
     durationMinutes: 45,
-    durationLabel: "45 minutes",
+    durationLabel: "45 minutes · Free",
     description:
-      "A focused conversation to understand what your team needs most: capture, visibility, ADAPT, or a mix of support.",
+      "A working session on how you prove impact today: what you can already show funders, where the gaps are, and your shortest path to auditable evidence.",
     ideal:
-      "Leaders who know something needs to improve but want help choosing the right starting point.",
+      "Nonprofits and mission-driven teams who want to turn the impact they create into fundable data — you leave with a roadmap either way.",
   },
   {
     id: "story-capture",
@@ -67,9 +67,11 @@ export const LEGACY_CALL_TYPE_MAP: Record<string, BookingCallType> = {
 
 export const CHALLENGE_TYPE_OPTIONS_BY_CALL_TYPE: Record<BookingCallType, readonly string[]> = {
   strategy: [
+    "We need to prove our impact to funders",
+    "Our reports are counts and stories, not evidence",
+    "We want to become a Standard pilot partner",
     "We need to capture a program, event, or story",
     "We need more consistent visibility",
-    "We need help using AI and workflows better",
     "We need help deciding where to start",
     "Something else",
   ],
@@ -171,6 +173,18 @@ export const normalizeCallType = (value: string | null): BookingCallType | null 
 };
 
 export const CASE_STUDY_BY_CHALLENGE: Record<string, { title: string; href: string }> = {
+  "We need to prove our impact to funders": {
+    title: "The Impact Loop Standard",
+    href: "/impact-standard",
+  },
+  "Our reports are counts and stories, not evidence": {
+    title: "The Impact Loop Standard",
+    href: "/impact-standard",
+  },
+  "We want to become a Standard pilot partner": {
+    title: "The Impact Loop Standard",
+    href: "/impact-standard",
+  },
   "We need to capture a program, event, or story": {
     title: "Black Creek: Black History Month",
     href: "/work",

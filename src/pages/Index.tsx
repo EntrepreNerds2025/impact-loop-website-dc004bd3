@@ -16,8 +16,8 @@ import FounderSection from "@/components/home/FounderSection";
 const Index = () => {
   useEffect(() => {
     setSEO({
-      title: "Impact Loop: Cinematic Storytelling for Nonprofits & Changemakers",
-      description: "Impact Loop designs storytelling systems that protect human stories in an AI-saturated world. Cinematic video production, workshops, and strategy for nonprofits and corporate teams.",
+      title: "Impact Loop: Prove Your Impact. Tell Your Story.",
+      description: "Impact Loop helps mission-driven organizations prove their impact with the Impact Loop Standard — auditable, funder-ready measurement — and tell it through cinematic storytelling systems. Toronto-based, working with nonprofits and changemakers.",
       ogType: "website",
     });
     return resetSEO;
@@ -27,13 +27,13 @@ const Index = () => {
     <Layout>
       <HeroSection />
       <ClientLogosSection />
+      <ImpactStandardSection />
       <PrinciplesSection />
       <VideoPortfolioSection />
       <ImpactStatsSection />
       <ServicesPreviewSection />
       <ImpactMediaHubSection />
       <TechSolutionsSection />
-      <ImpactStandardSection />
       <FrameworkPreviewSection />
       <FounderSection />
     </Layout>

@@ -25,8 +25,13 @@ const ImpactStandardSection = () => {
           animate={isInView ? "visible" : "hidden"}
           className="mb-16 text-center"
         >
-          <p className="mb-4 text-sm font-medium uppercase tracking-widest text-white/60">
-            The Impact Loop Standard
+          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-white/70">
+            <motion.span
+              className="h-1.5 w-1.5 flex-none rounded-full bg-emerald-400"
+              animate={{ opacity: [1, 0.3, 1] }}
+              transition={{ duration: 1.8, repeat: Infinity }}
+            />
+            The Impact Loop Standard · Partner applications open
           </p>
           <h2 className="mb-4 font-serif text-3xl font-bold md:text-4xl lg:text-5xl">
             Turn the impact you create into data funders trust
@@ -65,13 +70,21 @@ const ImpactStandardSection = () => {
           animate={isInView ? "visible" : "hidden"}
           className="mt-12 text-center"
         >
-          <Link
-            to="/impact-standard"
-            className="inline-flex items-center justify-center gap-2 rounded-sm bg-white px-8 py-3.5 text-sm font-medium uppercase tracking-widest text-[hsl(var(--impact-dark))] transition hover:bg-white/90"
-          >
-            Explore the Standard
-            <ArrowRight size={16} />
-          </Link>
+          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Link
+              to="/impact-standard"
+              className="inline-flex items-center justify-center gap-2 rounded-sm bg-white px-8 py-3.5 text-sm font-medium uppercase tracking-widest text-[hsl(var(--impact-dark))] transition hover:bg-white/90"
+            >
+              Explore the Standard
+              <ArrowRight size={16} />
+            </Link>
+            <Link
+              to="/bookings?type=strategy"
+              className="inline-flex items-center justify-center rounded-sm border border-white/30 px-8 py-3.5 text-sm font-medium uppercase tracking-widest text-white transition hover:bg-white hover:text-[hsl(var(--impact-dark))]"
+            >
+              Get a free Impact Readiness snapshot
+            </Link>
+          </div>
         </motion.div>
       </div>
     </section>

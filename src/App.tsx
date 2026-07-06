@@ -26,6 +26,7 @@ import AdaptAITraining from "./pages/AdaptAITraining";
 import NonprofitAIWorkbook from "./pages/NonprofitAIWorkbook";
 import ImpactVisibilitySystem from "./pages/ImpactVisibilitySystem";
 import ImpactStandard from "./pages/ImpactStandard";
+import StandardSpec from "./pages/StandardSpec";
 import ImpactPage from "./pages/ImpactPage";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
@@ -91,6 +92,7 @@ const App = () => (
           <Route path="/workbook" element={<Navigate to="/nonprofit-ai-workbook" replace />} />
           <Route path="/impact-visibility-system" element={<ImpactVisibilitySystem />} />
           <Route path="/impact-standard" element={<ImpactStandard />} />
+          <Route path="/impact-standard/spec" element={<StandardSpec />} />
           <Route path="/the-impact-standard" element={<Navigate to="/impact-standard" replace />} />
           <Route path="/impact/:slug" element={<ImpactPage />} />
           <Route path="/admin/sample-content-requests" element={<SampleContentRequests />} />

@@ -194,6 +194,7 @@ const orgTypes = [
 ];
 
 const challenges = [
+  "Proving our impact to funders with real evidence",
   "Content creation",
   "Social media engagement",
   "Reporting impact",
@@ -814,6 +815,31 @@ const NonprofitGrowthStudy = () => {
                     Impact Loop will review your organization's information and follow up if there's a fit
                     for the current study. Keep an eye on your inbox.
                   </p>
+                  <div className="mx-auto mt-8 max-w-md rounded-2xl border border-[hsl(var(--impact-blue))]/25 bg-[hsl(var(--impact-blue))]/5 p-6 text-left">
+                    <p className="text-xs font-bold uppercase tracking-widest text-[hsl(var(--impact-blue))]">
+                      While you wait
+                    </p>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      If proving your impact to funders is on your mind, grab a free{" "}
+                      <strong className="text-foreground">Impact Readiness snapshot</strong> — 45
+                      minutes on what you can already show, where the gaps are, and your shortest
+                      path to auditable evidence. You leave with a roadmap either way.
+                    </p>
+                    <div className="mt-4 flex flex-col gap-2 sm:flex-row">
+                      <Link
+                        to="/bookings?type=strategy"
+                        className="btn-primary inline-flex items-center justify-center !px-5 !py-2.5 text-xs"
+                      >
+                        Book my free snapshot
+                      </Link>
+                      <Link
+                        to="/impact-standard"
+                        className="inline-flex items-center justify-center rounded-sm border border-border px-5 py-2.5 text-xs font-semibold text-foreground transition hover:bg-muted"
+                      >
+                        Learn about the Standard
+                      </Link>
+                    </div>
+                  </div>
                 </div>
               ) : (
                 <Form {...form}>
