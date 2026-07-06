@@ -246,6 +246,11 @@ export function trackBookingEvent(eventName: string, payload?: Record<string, un
   win.gtag?.("event", eventName, payload || {});
   win.plausible?.(eventName, payload ? { props: payload } : undefined);
   win.dataLayer?.push({ event: eventName, ...(payload || {}) });
+
+  // first-party: also record to our own site_events table
+  import("@/lib/analytics")
+    .then(({ trackEvent }) => trackEvent(eventName, payload || {}))
+    .catch(() => undefined);
 }
 
 export const formatBookingDateTime = (iso: string, timeZone?: string) =>

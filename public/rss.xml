@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Impact Loop Blog</title>
+    <link>https://impactloop.ca/blog</link>
+    <atom:link href="https://impactloop.ca/rss.xml" rel="self" type="application/rss+xml" />
+    <description>Storytelling, strategy, and practical AI for nonprofits, foundations, and CSR teams. ADAPT cycles in motion, written by Rovonn Russell.</description>
+    <language>en-ca</language>
+    <lastBuildDate>Mon, 06 Jul 2026 22:21:21 GMT</lastBuildDate>
+
+  </channel>
+</rss>
