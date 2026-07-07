@@ -27,6 +27,12 @@ import {
 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { setSEO, resetSEO } from "@/lib/seo";
+import {
+  CinematicBand,
+  FormulaAnatomy,
+  LedgerChain,
+  MomentPhoto,
+} from "@/components/standard/StandardVisuals";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -576,6 +582,9 @@ const ImpactStandard = () => {
           </div>
         </section>
 
+        {/* CINEMATIC PHOTO BAND */}
+        <CinematicBand />
+
         {/* PROBLEM -> PROMISE */}
         <section className="container mx-auto px-6 py-20 md:py-28">
           <div className="mx-auto max-w-3xl text-center">
@@ -821,7 +830,8 @@ const ImpactStandard = () => {
                 How a moment becomes a score
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-white/70">
-                No equation to memorize. A score is just many small observations, added up honestly.
+                The formula below is published and deliberately simple, so a funder can audit it. A
+                score is just many small observations, added up honestly.
                 A staff member rates each moment from 1 to 5. Growth counts fully, a steady day
                 counts for less, and a setback pulls the score down. Recent moments matter more than
                 older ones, so a score reflects who a young person is now, not who they were a year
@@ -838,6 +848,9 @@ const ImpactStandard = () => {
             </div>
           </div>
         </section>
+
+        {/* THE FORMULA, VISUALIZED */}
+        <FormulaAnatomy />
 
         {/* THE LOOP ENGINE — the layers behind the score */}
         <section className="bg-[hsl(var(--impact-cream))] py-20 md:py-28">
@@ -856,6 +869,7 @@ const ImpactStandard = () => {
                 honestly.
               </p>
             </div>
+            <LedgerChain />
             <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               {ENGINE_LAYERS.map((l, i) => (
                 <motion.div
@@ -1055,6 +1069,7 @@ const ImpactStandard = () => {
                   </div>
                 </div>
                 <div className="rounded-xl border border-border bg-[hsl(var(--impact-cream))] p-5">
+                  <div className="mb-4"><MomentPhoto /></div>
                   <p className="text-[0.65rem] font-bold uppercase tracking-wider text-muted-foreground">The moment behind the number</p>
                   <p className="mt-2 text-sm italic leading-relaxed text-foreground">
                     "Led the check-in circle for the first time and stayed after to help a newcomer
