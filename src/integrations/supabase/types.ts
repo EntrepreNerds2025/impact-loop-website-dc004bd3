@@ -338,6 +338,66 @@ export type Database = {
         }
         Relationships: []
       }
+      site_events: {
+        Row: {
+          event: string
+          id: number
+          occurred_at: string
+          path: string
+          props: Json
+          referrer: string | null
+          utm: Json
+          visitor: string | null
+        }
+        Insert: {
+          event?: string
+          id?: never
+          occurred_at?: string
+          path: string
+          props?: Json
+          referrer?: string | null
+          utm?: Json
+          visitor?: string | null
+        }
+        Update: {
+          event?: string
+          id?: never
+          occurred_at?: string
+          path?: string
+          props?: Json
+          referrer?: string | null
+          utm?: Json
+          visitor?: string | null
+        }
+        Relationships: []
+      }
+      study_leads: {
+        Row: {
+          created_at: string
+          email: string
+          full_name: string | null
+          id: string
+          organization: string | null
+          source: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          full_name?: string | null
+          id?: string
+          organization?: string | null
+          source?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          full_name?: string | null
+          id?: string
+          organization?: string | null
+          source?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
