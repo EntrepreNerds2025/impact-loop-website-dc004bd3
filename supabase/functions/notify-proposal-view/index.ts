@@ -7,7 +7,7 @@ const ALLOWED_ORIGINS = new Set([
   "https://impactloop.ca",
   "https://www.impactloop.ca",
 ]);
-const DEFAULT_FROM = "Impact Loop <onboarding@resend.dev>";
+const DEFAULT_FROM = "Impact Loop <hello@impactloop.ca>";
 
 const escapeHtml = (value: string) =>
   value

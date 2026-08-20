@@ -191,6 +191,54 @@ export type Database = {
         }
         Relationships: []
       }
+      proposal_view_events: {
+        Row: {
+          city: string | null
+          country: string | null
+          created_at: string
+          id: string
+          notified_at: string | null
+          page_url: string
+          proposal_slug: string
+          referrer: string | null
+          region: string | null
+          user_agent: string | null
+          view_bucket: string
+          viewer_timezone: string | null
+          visitor_hash: string
+        }
+        Insert: {
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          id?: string
+          notified_at?: string | null
+          page_url: string
+          proposal_slug: string
+          referrer?: string | null
+          region?: string | null
+          user_agent?: string | null
+          view_bucket: string
+          viewer_timezone?: string | null
+          visitor_hash: string
+        }
+        Update: {
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          id?: string
+          notified_at?: string | null
+          page_url?: string
+          proposal_slug?: string
+          referrer?: string | null
+          region?: string | null
+          user_agent?: string | null
+          view_bucket?: string
+          viewer_timezone?: string | null
+          visitor_hash?: string
+        }
+        Relationships: []
+      }
       research_leads: {
         Row: {
           created_at: string
