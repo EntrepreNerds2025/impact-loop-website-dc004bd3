@@ -29,7 +29,7 @@ const ImpactStandardSection = () => {
             <motion.span
               className="h-1.5 w-1.5 flex-none rounded-full bg-emerald-400"
               animate={{ opacity: [1, 0.3, 1] }}
-              transition={{ duration: 1.8, repeat: Infinite }}
+              transition={{ duration: 1.8, repeat: Infinity }}
             />
             The Impact Loop Standard · Partner applications open
           </p>
