@@ -10,7 +10,39 @@ import { slideFromLeft, slideFromRight, scaleIn } from "@/hooks/useScrollAnimati
 
 const categories = ["All", "Impact Stories", "Initiatives", "Program Highlights", "Event Recaps", "Promo & Hero Videos"];
 
-const projects = [
+type CaseStudy = {
+  problem: string;
+  process: string;
+  result: string;
+  resultStat: string;
+};
+
+type Project = {
+  id: number;
+  title: string;
+  category: string;
+  description: string;
+  vimeoId: string;
+  previewStart?: number;
+  caseStudySlug?: string;
+  caseStudy?: CaseStudy;
+};
+
+const projects: Project[] = [
+  {
+    id: 15,
+    title: "Jean Augustine Centre — When a Girl Is Empowered",
+    category: "Impact Stories",
+    description: "The Jean Augustine Centre for Young Women's Empowerment creates spaces where girls can hear their own voices, build confidence, and see leadership as something that belongs to them. This story highlights the mentorship, programs, and moments of encouragement that help young women step into what is possible.",
+    vimeoId: "1219684603",
+  },
+  {
+    id: 16,
+    title: "Jean Augustine Centre — Where Girls Belong",
+    category: "Impact Stories",
+    description: "A warm portrait of belonging at the Jean Augustine Centre, where girls are supported through mentorship, community, and programs designed to help them feel seen. The film centers young women's voices and the affirming environment that helps them grow with confidence.",
+    vimeoId: "1219684687",
+  },
   {
     id: 13,
     title: "EmployNext \u2014 Youth Trades Program",
@@ -190,7 +222,7 @@ const projects = [
 
 const VISIBLE_COUNT = 6;
 
-const CaseStudySection = ({ caseStudy }: { caseStudy: typeof projects[0]["caseStudy"] }) => {
+const CaseStudySection = ({ caseStudy }: { caseStudy: CaseStudy }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
@@ -228,7 +260,7 @@ const ProjectRow = ({
   index,
   onPlay,
 }: {
-  project: typeof projects[0];
+  project: Project;
   index: number;
   onPlay: (id: string) => void;
 }) => {
@@ -341,7 +373,7 @@ const ProjectRow = ({
       </div>
 
       {/* Case Study */}
-      <CaseStudySection caseStudy={project.caseStudy} />
+      {project.caseStudy && <CaseStudySection caseStudy={project.caseStudy} />}
 
       {/* Post-project CTA */}
       <motion.div

@@ -4,7 +4,6 @@ import HeroSection from "@/components/home/HeroSection";
 import { setSEO, resetSEO } from "@/lib/seo";
 import PrinciplesSection from "@/components/home/PrinciplesSection";
 import VideoPortfolioSection from "@/components/home/VideoPortfolioSection";
-import FrameworkPreviewSection from "@/components/home/FrameworkPreviewSection";
 import ClientLogosSection from "@/components/home/ClientLogosSection";
 import ImpactStatsSection from "@/components/home/ImpactStatsSection";
 import ServicesPreviewSection from "@/components/home/ServicesPreviewSection";
@@ -27,14 +26,13 @@ const Index = () => {
     <Layout>
       <HeroSection />
       <ClientLogosSection />
-      <ImpactStandardSection />
       <PrinciplesSection />
       <VideoPortfolioSection />
       <ImpactStatsSection />
       <ServicesPreviewSection />
       <ImpactMediaHubSection />
+      <ImpactStandardSection />
       <TechSolutionsSection />
-      <FrameworkPreviewSection />
       <FounderSection />
     </Layout>
   );

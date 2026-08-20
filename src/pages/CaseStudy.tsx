@@ -283,8 +283,46 @@ const CaseStudy = () => {
         </div>
       </section>
 
-      {/* The Process section removed — behind-the-scenes/how-we-built content stripped from case studies */}
-
+      {/* ─── The Process ─── */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-6">
+          <div className="max-w-6xl mx-auto">
+            <AnimatedSection className="mb-12 max-w-2xl">
+              <p className="text-primary text-xs font-semibold uppercase tracking-widest mb-3">03 • The Process</p>
+              <h2 className="font-serif text-2xl md:text-4xl font-bold text-foreground leading-tight">
+                How we built the piece, step by step.
+              </h2>
+            </AnimatedSection>
+            <motion.div
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="space-y-6"
+            >
+              {study.theProcess.map((step, idx) => (
+                <motion.div
+                  key={step.title}
+                  variants={slideUp}
+                  className="grid grid-cols-[auto_1fr] gap-6 md:gap-10 items-start p-6 md:p-8 bg-card border border-border rounded-xl"
+                >
+                  <div className="shrink-0">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary/10 flex items-center justify-center">
+                      <span className="font-serif text-xl md:text-2xl font-bold text-primary">
+                        {String(idx + 1).padStart(2, "0")}
+                      </span>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="font-serif text-lg md:text-2xl font-bold text-foreground mb-3">{step.title}</h3>
+                    <p className="text-muted-foreground text-base leading-relaxed">{step.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
       {/* ─── The Deliverables ─── */}
       <section className="py-24 bg-[hsl(var(--impact-cream))]">

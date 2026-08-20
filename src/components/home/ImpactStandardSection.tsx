@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import { slideFromLeft, staggerContainer, scaleIn } from "@/hooks/useScrollAnimation";
 
 const steps = [
-  { icon: ClipboardCheck, title: "Capture", description: "Staff log a Pillar Moment in three taps and a voice note — about fifteen seconds." },
+  { icon: ClipboardCheck, title: "Capture", description: "Staff log a Pillar Moment in three taps and a voice note, about fifteen seconds." },
   { icon: TrendingUp, title: "Quantify", description: "Observations become 0–100 pillar scores, weighted by direction and recency." },
   { icon: ShieldCheck, title: "Verify", description: "Confidence tiers and self-eval cross-checks keep every number auditable." },
-  { icon: FileBarChart, title: "Report", description: "Growth figures paired with real stories — funder-ready, exported on demand." },
+  { icon: FileBarChart, title: "Report", description: "Growth figures paired with real stories, funder-ready and exported on demand." },
 ];
 
 const ImpactStandardSection = () => {
@@ -29,7 +29,7 @@ const ImpactStandardSection = () => {
             <motion.span
               className="h-1.5 w-1.5 flex-none rounded-full bg-emerald-400"
               animate={{ opacity: [1, 0.3, 1] }}
-              transition={{ duration: 1.8, repeat: Infinity }}
+              transition={{ duration: 1.8, repeat: Infinite }}
             />
             The Impact Loop Standard · Partner applications open
           </p>
@@ -38,7 +38,7 @@ const ImpactStandardSection = () => {
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-white/70">
             Attendance is easy to count. Transformation isn't. Our methodology turns
-            fifteen-second frontline observations into longitudinal, auditable impact data —
+            fifteen-second frontline observations into longitudinal, auditable impact data,
             so the people doing the work can prove it, and the funders backing them can trust it.
           </p>
         </motion.div>
