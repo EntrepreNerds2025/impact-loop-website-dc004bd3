@@ -1,36 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { setSEO, resetSEO } from "@/lib/seo";
 import {
   ArrowRight,
-  Users,
-  MapPin,
-  Zap,
-  Globe2,
   Sparkles,
   Layers,
   CheckCircle2,
-  PlayCircle,
   Award,
-  Camera,
   Video,
   Radio,
   Image as ImageIcon,
-  Music,
-  Palette,
   Mail,
   Download,
   Play,
 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
-import VimeoLightbox from "@/components/shared/VimeoLightbox";
+import ClientLogosSection from "@/components/home/ClientLogosSection";
 import btsInterviewSetup from "@/assets/tropicana/bts-interview-setup.jpg";
 import fullProductionGear from "@/assets/tropicana/full-production-gear.jpg";
-import rovonnOnSet from "@/assets/tropicana/rovonn-on-set.jpg";
-import scoreSample1 from "@/assets/tropicana/sample-1.mp3";
-import scoreSample2 from "@/assets/tropicana/sample-2.mp3";
-import scoreSample3 from "@/assets/tropicana/sample-3.mp3";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -40,29 +28,6 @@ const fadeIn = {
     transition: { duration: 0.6, delay: i * 0.1 },
   }),
 };
-
-const understandingPoints = [
-  {
-    icon: Users,
-    title: "Delegates Are the Story",
-    desc: "The Kenyan trade delegation is the asset. Coverage has to honour that presence without turning it into stock photography of handshakes.",
-  },
-  {
-    icon: MapPin,
-    title: "Toronto and Ottawa, One Narrative",
-    desc: "Three venues, two cities, five days. The photo library and Mission Film must feel like one continuous story, not three disconnected event recaps.",
-  },
-  {
-    icon: Zap,
-    title: "Real-Time or It's Late",
-    desc: "Trade missions live on social while they happen. Same-day selects and Live Social Desk cutdowns are not a bonus. They are the deliverable that keeps the momentum going.",
-  },
-  {
-    icon: Globe2,
-    title: "Diaspora Economic Ties",
-    desc: "This mission is part of a larger story about Kenya-Canada partnership and Black diaspora capital flows. The film should signal that scale without losing the intimacy of one delegate's face.",
-  },
-];
 
 const timeline = [
   {
@@ -149,7 +114,15 @@ const packageThree = [
   "Delivery: film 3 weeks from the final interview, everything else as Packages One and Two",
 ];
 
-const portfolio = [
+type PortfolioItem = {
+  title: string;
+  category: string;
+  desc: string;
+  vimeoId: string;
+  slug?: string;
+};
+
+const portfolio: PortfolioItem[] = [
   {
     title: "EmployNext - Youth Trades Program",
     category: "Workforce Development",
@@ -172,32 +145,10 @@ const portfolio = [
     slug: "lakeridge-i-belong",
   },
   {
-    title: "Black Creek - Black History Month",
-    category: "Community Initiative",
-    desc: "Event film and program documentation for a flagship community moment. The kind of work that makes the next year of programming easier to fund.",
-    vimeoId: "1174716851",
-    slug: "black-creek-bhm",
-  },
-];
-
-const scoreSamples = [
-  {
-    label: "Sample 01",
-    title: "Hybrid Cinematic Warm",
-    note: "Soft piano open, warm strings build, subtle hybrid pulse underneath. Inspirational and safe for a full Mission Film runtime.",
-    src: scoreSample1,
-  },
-  {
-    label: "Sample 02",
-    title: "Hybrid Cinematic Soulful",
-    note: "Soft piano with subtle gospel roots, warm Hammond pad, gentle modern beat under the orchestral lift. Bridges elder and youth delegates in the room.",
-    src: scoreSample2,
-  },
-  {
-    label: "Sample 03",
-    title: "Hybrid Cinematic Rising",
-    note: "Soft piano arpeggios into ascending strings and rising horn swell over driving hybrid groove. Built for the closing beat where a mission becomes a partnership.",
-    src: scoreSample3,
+    title: "Jean Augustine Centre - When a Girl Is Empowered",
+    category: "Young Women's Empowerment",
+    desc: "Documentary portrait of a Black-serving young women's empowerment centre in Toronto. Built around real voices from mentors and program participants. Closest cultural analogue to the diaspora leadership and youth empowerment threads a trade mission carries.",
+    vimeoId: "1219684603",
   },
 ];
 
@@ -247,63 +198,6 @@ const socialDeskCards = [
   },
 ];
 
-const crewRoles = [
-  {
-    role: "Lead Photographer",
-    initials: "PH",
-    tier: "All Packages",
-    desc: "Editorial and event photography across all five days. Runs the same-day select delivery workflow so images are in your hands within 24 hours of each shoot.",
-  },
-  {
-    role: "Lead Videographer",
-    initials: "VG",
-    tier: "All Packages",
-    desc: "Cinematic video capture for event recap films and Mission Film footage. Multi-camera setups for keynote, panel, and reception moments.",
-  },
-  {
-    role: "Social Editor",
-    initials: "SE",
-    tier: "Packages 2 & 3",
-    desc: "On site all five days, cutting vertical Stories, Reels, and daily carousels between sessions. Remote-editing capable for the Ottawa leg so travel does not increase across packages.",
-  },
-  {
-    role: "Sound Recordist",
-    initials: "SR",
-    tier: "Package 3",
-    desc: "Broadcast-grade audio capture for the six leadership interviews. Individual lav mics per delegate. Critical for delivery of clean transcripts and Mission Film dialogue.",
-  },
-  {
-    role: "Production Assistant",
-    initials: "PA",
-    tier: "All Packages",
-    desc: "Scheduling, delegate release forms, gear logistics, and venue coordination across all three sites. Keeps the crew moving on schedule between sessions.",
-  },
-  {
-    role: "Interview Producer",
-    initials: "IP",
-    tier: "Package 3",
-    desc: "Prepares interview subjects, runs the on-set flow, and handles post-transcript review with Rovonn. Ensures every delegate speaks freely and on-story.",
-  },
-];
-
-const supportingRoles = [
-  { role: "Colorist", tier: "Package 3" },
-  { role: "Motion Designer", tier: "As needed" },
-  { role: "Second Camera", tier: "Package 3" },
-  { role: "Grip", tier: "Package 3" },
-  { role: "DP Assistant", tier: "Package 3" },
-  { role: "Still Photographer, second unit", tier: "As needed" },
-];
-
-const trustedBy = [
-  "EmployNext",
-  "Bell / Fibe TV",
-  "Employment Ontario",
-  "Black Creek Community Centre",
-  "Jean Augustine Centre for Young Women's Empowerment",
-  "CAFCAN (Caribbean African Canadian Social Services)",
-];
-
 const references = [
   {
     org: "Black Creek Community Health Centre",
@@ -337,12 +231,10 @@ const turnaround = [
 ];
 
 const ProposalCbccKenyaCanada = () => {
-  const [lightboxVideo, setLightboxVideo] = useState<string | null>(null);
-
   useEffect(() => {
     setSEO({
-      title: "Kenya-Canada Trade Mission 2026 - Impact Loop Proposal for CBCC",
-      description: "Cinematic photo and video proposal for the Kenya-Canada Trade and Investment Mission, September 5-11, 2026. Toronto and Ottawa. Prepared by Impact Loop for the Canadian Black Chamber of Commerce.",
+      title: "Kenya-Canada Trade Mission Proposal - Impact Loop for CBCC",
+      description: "Photo and video proposal for the Kenya-Canada Trade and Investment Mission, September 5-11, 2026. Toronto and Ottawa. Prepared by Impact Loop for the Canadian Black Chamber of Commerce.",
       ogType: "website",
     });
     let robotsMeta = document.querySelector('meta[name="robots"]') as HTMLMetaElement | null;
@@ -361,8 +253,6 @@ const ProposalCbccKenyaCanada = () => {
 
   return (
     <Layout>
-      <VimeoLightbox vimeoId={lightboxVideo} isOpen={lightboxVideo !== null} onClose={() => setLightboxVideo(null)} />
-
       {/* Confidential banner */}
       <div className="bg-impact-blue/10 border-b border-impact-blue/20">
         <div className="container mx-auto px-6 py-3">
@@ -373,31 +263,24 @@ const ProposalCbccKenyaCanada = () => {
       </div>
 
       {/* Section 1: Hero */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-impact-dark">
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-impact-dark">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-impact-blue/10 via-impact-dark to-impact-dark" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(56,189,248,0.12),transparent_55%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(255,255,255,0.04),transparent_60%)]" />
         </div>
-        <div className="container mx-auto px-6 relative z-10 pt-16 pb-20">
+        <div className="container mx-auto px-6 relative z-10 pt-16 pb-16">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-4xl mx-auto text-center">
             <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">
               CBCC Kenya-Canada Mission &middot; Photo + Video &middot; Quotation IL-2026-000
             </p>
             <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-              The Trade Mission, <span className="text-gradient">Documented</span>
+              Kenya-Canada Trade Mission <span className="text-gradient">Proposal</span>
             </h1>
-            <p className="text-white/80 text-xl leading-relaxed mb-8">
+            <p className="text-white/80 text-xl leading-relaxed mb-10">
               Five days of cinematic photography and video capturing the Kenya-Canada Trade &amp; Investment Mission across Toronto and Ottawa, September 5, 8-9, and 10-11, 2026. Prepared for Sheares Benjamin, Canadian Black Chamber of Commerce, on behalf of the Kenya National Chamber of Commerce &amp; Industry, Nexus Global Strategies, and the CBCC.
             </p>
-            <div className="aspect-video w-full max-w-3xl mx-auto bg-black/40 border border-white/10 rounded-sm flex items-center justify-center my-12 group hover:border-impact-blue/40 transition-colors">
-              <div className="text-center">
-                <PlayCircle className="w-16 h-16 text-white/40 group-hover:text-impact-blue mx-auto mb-3 transition-colors" />
-                <p className="text-white/70 text-sm uppercase tracking-widest">90-Second Pitch from Rovonn</p>
-                <p className="text-white/40 text-xs mt-2">Coming soon &middot; walkthrough of how we would approach the mission</p>
-              </div>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10">
               <a
                 href="/proposals/impact-loop-cbcc-kenya-canada.pdf"
                 className="btn-secondary inline-flex items-center gap-2"
@@ -433,7 +316,7 @@ const ProposalCbccKenyaCanada = () => {
             ))}
           </div>
           <p className="text-center text-white/40 text-[10px] uppercase tracking-[0.25em] mt-5 italic">
-            Full case studies linked in Section 10 below
+            Full case studies linked below
           </p>
         </div>
       </section>
@@ -455,45 +338,13 @@ const ProposalCbccKenyaCanada = () => {
         </div>
       </section>
 
-      {/* Section 4: Understanding the Brief */}
-      <section className="py-24 bg-white relative overflow-hidden">
-        <div className="container mx-auto px-6 relative">
-          <div className="max-w-5xl mx-auto">
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">01 &middot; What We Heard</p>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Understanding the Brief</h2>
-              <p className="text-impact-dark/70 text-lg max-w-3xl mx-auto leading-relaxed">
-                This is not a photo shoot. It is a five-day economic-diplomacy moment that has to work in the room AND on the feed.
-              </p>
-            </motion.div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {understandingPoints.map((point, i) => (
-                <motion.div
-                  key={point.title}
-                  custom={i}
-                  variants={fadeIn}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  className="p-8 border border-impact-dark/10 rounded-sm hover:border-primary/30 transition-colors bg-white"
-                >
-                  <point.icon className="w-8 h-8 text-primary mb-4" />
-                  <h3 className="font-serif text-xl font-semibold text-impact-dark mb-3">{point.title}</h3>
-                  <p className="text-impact-dark/70 leading-relaxed">{point.desc}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 5: Creative Approach */}
+      {/* Section 4: Creative Approach */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
               <Sparkles className="w-10 h-10 text-primary mx-auto mb-4" />
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">02 &middot; Creative Approach</p>
+              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">01 &middot; Creative Approach</p>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">How We Turn Five Days Into a Story That Earns Partners</h2>
               <p className="text-impact-dark/70 text-lg max-w-3xl mx-auto leading-relaxed">
                 The brief is clear: cover the mission comprehensively, deliver in real time, and produce a legacy film that outlasts the week. Here is the creative thinking that drives every decision.
@@ -539,86 +390,13 @@ const ProposalCbccKenyaCanada = () => {
         </div>
       </section>
 
-      {/* Section 6: Sound & Score */}
-      <section className="py-24 bg-impact-dark text-white">
-        <div className="container mx-auto px-6">
-          <div className="max-w-6xl mx-auto">
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <Music className="w-10 h-10 text-impact-blue mx-auto mb-4" />
-              <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">03 &middot; Sound &amp; Score</p>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">The Sound Carries the Story.</h2>
-              <p className="text-white/70 text-lg max-w-3xl mx-auto leading-relaxed">
-                For the Mission Film in Package Three, score does the emotional lifting. Below are three Hybrid Cinematic samples in the register we would bring to Kenya-Canada. Press play on each to compare.
-              </p>
-            </motion.div>
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 items-stretch">
-              <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="lg:col-span-5 flex flex-col gap-4">
-                <div className="relative bg-white/5 border border-white/10 rounded-sm overflow-hidden flex-1 min-h-[480px] p-6">
-                  <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-impact-blue/20" />
-                  <div className="relative h-full w-full flex items-center justify-center gap-[4px]">
-                    {Array.from({ length: 44 }).map((_, idx) => (
-                      <motion.span
-                        key={idx}
-                        className="block w-[5px] bg-gradient-to-b from-impact-blue via-impact-blue/80 to-impact-blue rounded-full"
-                        initial={{ scaleY: 0.2 }}
-                        animate={{ scaleY: [0.15, 0.95, 0.4, 0.85, 0.25, 0.75, 0.35, 0.9, 0.2] }}
-                        transition={{
-                          duration: 2.8 + (idx % 5) * 0.18,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: (idx % 14) * 0.06,
-                        }}
-                        style={{ height: "88%", transformOrigin: "center" }}
-                      />
-                    ))}
-                  </div>
-                  <p className="absolute top-3 left-4 text-impact-blue/80 text-[10px] uppercase tracking-[0.25em] font-medium">Broadcast Audio Signature</p>
-                  <p className="absolute bottom-3 right-4 text-impact-blue/60 text-[10px] uppercase tracking-[0.2em] font-mono">Live waveform</p>
-                </div>
-                <p className="text-white/50 text-xs italic leading-relaxed">
-                  Broadcast-grade audio capture is the foundation every score sits on. Interviews in Package Three are captured with individual lav mics on each delegate.
-                </p>
-              </motion.div>
-              <div className="lg:col-span-7 space-y-4">
-                {scoreSamples.map((sample, i) => (
-                  <motion.div
-                    key={sample.label}
-                    custom={i}
-                    variants={fadeIn}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    className="bg-white/5 border border-white/10 rounded-sm p-5 hover:border-impact-blue/40 transition-colors"
-                  >
-                    <div className="flex items-start justify-between gap-4 mb-2">
-                      <div>
-                        <p className="text-impact-blue text-xs uppercase tracking-widest font-medium">{sample.label}</p>
-                        <h3 className="font-serif text-lg font-semibold text-white mt-1">{sample.title}</h3>
-                      </div>
-                    </div>
-                    <p className="text-white/70 text-sm leading-relaxed mb-4">{sample.note}</p>
-                    <audio controls preload="none" className="w-full" style={{ filter: "invert(0.85) hue-rotate(180deg)" }}>
-                      <source src={sample.src} type="audio/mpeg" />
-                      Your browser does not support audio playback.
-                    </audio>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-            <p className="text-white/60 text-sm text-center max-w-2xl mx-auto italic">
-              Sound design and licensed score included in all three packages. Package Three includes original composition by a credited composer, built specifically for the Mission Film&rsquo;s emotional arc.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 7: Live Social Desk */}
+      {/* Section 5: Live Social Desk */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
               <Radio className="w-10 h-10 text-primary mx-auto mb-4" />
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">04 &middot; Live Social Desk</p>
+              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">02 &middot; Live Social Desk</p>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">The Mission on the Feed, While It Is Still Happening.</h2>
               <p className="text-impact-dark/70 text-lg max-w-3xl mx-auto leading-relaxed">
                 For Packages Two and Three, a Social Editor is on site all five days, cutting vertical Stories, Reels, and daily carousels between sessions. Content goes live the same day, not the next week.
@@ -645,7 +423,7 @@ const ProposalCbccKenyaCanada = () => {
         </div>
       </section>
 
-      {/* Section 8: Production Plan */}
+      {/* Section 6: Production Plan */}
       <section
         className="py-24 bg-impact-dark text-white relative"
         style={{
@@ -658,7 +436,7 @@ const ProposalCbccKenyaCanada = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">05 &middot; Mission Coverage Plan</p>
+              <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">03 &middot; Mission Coverage Plan</p>
               <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">Five Days, Two Cities, One Continuous Story</h2>
               <p className="text-white/80 text-lg max-w-3xl mx-auto leading-relaxed">
                 Built around your mission agenda: three venues across Toronto and Ottawa, September 5 through 11.
@@ -697,12 +475,12 @@ const ProposalCbccKenyaCanada = () => {
         </div>
       </section>
 
-      {/* Section 9: Investment */}
+      {/* Section 7: Investment */}
       <section className="py-24 section-blue">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <p className="text-white/70 font-medium text-sm uppercase tracking-widest mb-4">06 &middot; Investment</p>
+              <p className="text-white/70 font-medium text-sm uppercase tracking-widest mb-4">04 &middot; Investment</p>
               <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">Three Packages, Same Photography &amp; Video Standard</h2>
               <p className="text-white/80 text-lg max-w-3xl mx-auto leading-relaxed">
                 Every package includes photography and video across all five mission days. Package Two adds live social. Package Three adds the Mission Film and delegate interviews.
@@ -813,12 +591,12 @@ const ProposalCbccKenyaCanada = () => {
         </div>
       </section>
 
-      {/* Section 10: Add-Ons */}
+      {/* Section 8: Add-Ons */}
       <section className="py-24 section-cream">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12">
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">07 &middot; Add-Ons</p>
+              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">05 &middot; Add-Ons</p>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Two Ways to Extend Package One or Two</h2>
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -841,13 +619,13 @@ const ProposalCbccKenyaCanada = () => {
         </div>
       </section>
 
-      {/* Section 11: Travel Breakdown */}
+      {/* Section 9: Travel Line Items */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12">
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">08 &middot; Ottawa Travel, At Cost</p>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Travel Line Items, No Markup</h2>
+              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">06 &middot; Ottawa Travel, At Cost</p>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Travel Line Items</h2>
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="border border-impact-dark/10 rounded-sm overflow-hidden">
@@ -872,12 +650,12 @@ const ProposalCbccKenyaCanada = () => {
         </div>
       </section>
 
-      {/* Section 12: Turnaround */}
+      {/* Section 10: Turnaround */}
       <section className="py-24 section-cream">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12">
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">09 &middot; Turnaround</p>
+              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">07 &middot; Turnaround</p>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">What You Get, When You Get It</h2>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white border border-impact-dark/10 rounded-sm overflow-hidden">
@@ -905,12 +683,12 @@ const ProposalCbccKenyaCanada = () => {
         </div>
       </section>
 
-      {/* Section 13: Portfolio (clickable) */}
+      {/* Section 11: Example of Our Work */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">10 &middot; Portfolio</p>
+              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">08 &middot; Example of Our Work</p>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Closest Reference Work</h2>
               <p className="text-impact-dark/70 text-lg max-w-3xl mx-auto leading-relaxed">
                 Each of these projects shares meaningful DNA with the Kenya-Canada mission: multi-stakeholder, community-rooted, Black-led or Black-serving, built to hold up in front of institutional audiences. Click any tile to read the full case study.
@@ -919,7 +697,7 @@ const ProposalCbccKenyaCanada = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {portfolio.map((p, i) => (
                 <motion.div key={p.title} custom={i} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                  <Link to={`/work/${p.slug}`} className="group block">
+                  <Link to={p.slug ? `/work/${p.slug}` : "/work"} className="group block">
                     <div className="relative aspect-video bg-black rounded-sm overflow-hidden mb-4">
                       <iframe
                         src={`https://player.vimeo.com/video/${p.vimeoId}?background=1&autoplay=1&loop=1&muted=1`}
@@ -930,7 +708,9 @@ const ProposalCbccKenyaCanada = () => {
                       <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
                         <ArrowRight className="w-12 h-12 text-white/0 group-hover:text-white transition-all" />
                       </div>
-                      <div className="absolute bottom-3 right-3 bg-white/90 text-impact-dark text-[10px] uppercase tracking-widest px-2 py-1 rounded-sm font-medium">View case study &rarr;</div>
+                      <div className="absolute bottom-3 right-3 bg-white/90 text-impact-dark text-[10px] uppercase tracking-widest px-2 py-1 rounded-sm font-medium">
+                        {p.slug ? "View case study →" : "View on Work →"}
+                      </div>
                     </div>
                     <p className="text-primary text-xs uppercase tracking-widest mb-2 font-medium">{p.category}</p>
                     <h3 className="font-serif text-xl font-semibold text-impact-dark mb-2 group-hover:text-primary transition-colors">{p.title}</h3>
@@ -949,126 +729,15 @@ const ProposalCbccKenyaCanada = () => {
         </div>
       </section>
 
-      {/* Section 14: Planned Crew */}
-      <section className="py-24 bg-impact-cream">
-        <div className="container mx-auto px-6">
-          <div className="max-w-6xl mx-auto">
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">11 &middot; Planned Crew</p>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Planned Crew for Kenya-Canada</h2>
-              <p className="text-impact-dark/70 text-lg max-w-3xl mx-auto leading-relaxed">
-                Every Impact Loop project is directed by Rovonn Russell. Below is the crew composition planned for the mission.
-              </p>
-            </motion.div>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-              {/* Rovonn direct contact */}
-              <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="lg:sticky lg:top-24">
-                <div className="aspect-[4/5] rounded-sm overflow-hidden mb-4 relative">
-                  <img src={rovonnOnSet} alt="Rovonn Russell, Creative Director, on set with cinema camera" className="w-full h-full object-cover object-center" />
-                  <div className="absolute -bottom-3 -right-3 w-24 h-24 bg-primary/10 rounded-sm -z-10" />
-                </div>
-                <p className="text-primary text-xs uppercase tracking-widest mb-2 font-medium">Direct Contact for CBCC</p>
-                <h3 className="font-serif text-2xl font-bold text-impact-dark mb-1">Rovonn Russell</h3>
-                <p className="text-impact-dark/60 italic text-sm mb-4">Creative Director &amp; Director &middot; Founder of Impact Loop</p>
-                <p className="text-impact-dark/70 text-sm leading-relaxed">
-                  Documentary filmmaker and storytelling strategist. Toronto-based. Designs the coverage strategy, leads every interview, directs every shoot, oversees every cut. No account managers. No handoffs. Recent Signature Productions for Lakeridge Health, CAFCAN, Black Creek BHM, and the Muamba Foundation.
-                </p>
-              </motion.div>
-              {/* Crew grid */}
-              <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {crewRoles.map((member, i) => (
-                  <motion.div
-                    key={member.role}
-                    custom={i}
-                    variants={fadeIn}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    className="p-5 bg-white rounded-sm flex flex-col"
-                  >
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
-                        <span className="text-primary font-serif font-semibold text-sm tracking-wider">{member.initials}</span>
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-serif text-base font-semibold text-impact-dark leading-tight">{member.role}</h3>
-                      </div>
-                    </div>
-                    <p className="text-impact-dark/70 text-[13px] leading-relaxed mb-4 flex-1">{member.desc}</p>
-                    <div className="pt-3 border-t border-impact-dark/10">
-                      <span
-                        className={`inline-block text-[10px] uppercase tracking-widest font-medium px-2 py-1 rounded-sm ${
-                          member.tier === "Package 3"
-                            ? "bg-impact-purple/10 text-impact-purple"
-                            : member.tier === "Packages 2 & 3"
-                            ? "bg-impact-blue/10 text-impact-blue"
-                            : "bg-primary/10 text-primary"
-                        }`}
-                      >
-                        {member.tier}
-                      </span>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-              {/* Supporting roles card */}
-              <div className="lg:col-span-3 mt-8">
-                <div className="bg-white border border-impact-dark/10 rounded-sm p-6">
-                  <p className="text-primary text-[11px] uppercase tracking-widest font-medium mb-4">Supporting Roles &middot; Assembled Per Project</p>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-x-6 gap-y-3">
-                    {supportingRoles.map((r) => (
-                      <div key={r.role} className="flex items-baseline gap-2">
-                        <span className="w-1 h-1 rounded-full bg-primary flex-shrink-0" />
-                        <div className="flex-1 min-w-0">
-                          <p className="text-impact-dark text-[13px] font-medium leading-tight">{r.role}</p>
-                          <p className="text-impact-dark/50 text-[10px] italic leading-tight mt-0.5">{r.tier}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="text-impact-dark/50 text-[11px] italic mt-5 pt-4 border-t border-impact-dark/5">
-                    Every supporting role is filled by a vetted Toronto-based specialist Rovonn has directly worked with. Names confirmed at contract sign.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Section 12: Trusted By (imported from homepage) */}
+      <ClientLogosSection />
 
-      {/* Section 15: Trusted By */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="max-w-5xl mx-auto">
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12">
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">12 &middot; Trusted By</p>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Trusted by Organisations Doing the Work</h2>
-            </motion.div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {trustedBy.map((name, i) => (
-                <motion.div
-                  key={name}
-                  custom={i}
-                  variants={fadeIn}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  className="p-6 bg-impact-cream rounded-sm border border-impact-dark/5 text-center flex items-center justify-center min-h-[80px]"
-                >
-                  <p className="text-impact-dark/80 font-serif font-medium text-sm md:text-base leading-tight">{name}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 16: References */}
+      {/* Section 13: References */}
       <section className="py-24 section-cream">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">13 &middot; References</p>
+              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">09 &middot; References</p>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Two Past Clients Available for Reference Calls</h2>
               <p className="text-impact-dark/70 text-lg max-w-3xl mx-auto leading-relaxed">
                 Direct contact information shared upon request to protect their inboxes. We are happy to schedule a 15-minute call with either reference before contract sign.
@@ -1100,7 +769,7 @@ const ProposalCbccKenyaCanada = () => {
         </div>
       </section>
 
-      {/* Section 17: Closing */}
+      {/* Section 14: Closing */}
       <section className="py-24 bg-impact-dark relative overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-25">
           <iframe
