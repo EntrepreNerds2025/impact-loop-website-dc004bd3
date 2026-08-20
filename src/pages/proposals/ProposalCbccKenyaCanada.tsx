@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { setSEO, resetSEO } from "@/lib/seo";
+import { supabase } from "@/integrations/supabase/client";
 import {
   ArrowRight,
   Sparkles,
@@ -14,6 +15,7 @@ import {
   Mail,
   Download,
   Play,
+  Users,
 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import ClientLogosSection from "@/components/home/ClientLogosSection";
@@ -87,7 +89,7 @@ const timeline = [
 ];
 
 const packageOne = [
-  "2-3 person crew, photographer and videographer, across all five days",
+  "Core 3-person crew: 2 photographers + 1 videographer, across all five days",
   "500-750 edited images, colour-corrected, web and print",
   "One 1-2 minute recap film for each of the three events (Metro Hall, York Civic Centre, Bayview Yards)",
   "10 vertical social cutdowns",
@@ -251,6 +253,41 @@ const ProposalCbccKenyaCanada = () => {
     };
   }, []);
 
+  // View tracking - the Resend credential stays inside the Supabase Edge Function.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!["impactloop.ca", "www.impactloop.ca"].includes(window.location.hostname)) return;
+
+    const sessionKey = "cbcc_proposal_viewed";
+    if (sessionStorage.getItem(sessionKey)) return;
+    sessionStorage.setItem(sessionKey, "1");
+
+    const visitorStorageKey = "impact_loop_proposal_viewer_id";
+    let visitorId = localStorage.getItem(visitorStorageKey);
+    if (!visitorId) {
+      visitorId = crypto.randomUUID();
+      localStorage.setItem(visitorStorageKey, visitorId);
+    }
+
+    void supabase.functions
+      .invoke("notify-proposal-view", {
+        body: {
+          proposal_slug: "cbcc-kenya-canada",
+          visitor_id: visitorId,
+          page_url: window.location.href,
+          referrer: document.referrer || "(direct)",
+          viewer_timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        },
+      })
+      .then(({ error }) => {
+        if (error) sessionStorage.removeItem(sessionKey);
+      })
+      .catch(() => {
+        // Tracking is best-effort and must never block the proposal page.
+        sessionStorage.removeItem(sessionKey);
+      });
+  }, []);
+
   return (
     <Layout>
       {/* Confidential banner */}
@@ -292,6 +329,58 @@ const ProposalCbccKenyaCanada = () => {
             <p className="text-white/60 text-xs md:text-sm uppercase tracking-[0.25em]">
               Submitted by Impact Loop &middot; Toronto-based &middot; Founder-led production
             </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Section 1.5: Quick Look - at-a-glance pricing snapshot */}
+      <section className="py-16 md:py-20 bg-impact-dark border-t border-white/5">
+        <div className="container mx-auto px-6">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="max-w-5xl mx-auto">
+            <div className="text-center mb-10">
+              <p className="text-impact-blue text-xs uppercase tracking-[0.25em] font-semibold mb-3">Quick Look</p>
+              <h2 className="font-serif text-2xl md:text-3xl font-bold text-white mb-3">Three Ways to Cover the Mission</h2>
+              <p className="text-white/60 text-sm max-w-2xl mx-auto">Prices at a glance. Full details on scope, crew, timeline, and delivery are below.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <a href="#investment" className="block group bg-white/5 border border-white/10 hover:border-impact-blue/50 rounded-sm p-5 transition-colors">
+                <p className="text-white/50 text-[10px] uppercase tracking-widest mb-1">Package One</p>
+                <p className="font-serif text-2xl font-bold text-white mb-1">$17,700</p>
+                <p className="text-white/50 text-[11px] mb-3">+ $1,807 travel &middot; CAD</p>
+                <div className="inline-flex items-center gap-1.5 mb-3">
+                  <Users className="w-3 h-3 text-impact-blue" />
+                  <span className="text-impact-blue text-[10px] font-semibold tracking-wider uppercase">3 Crew</span>
+                </div>
+                <p className="text-white/70 text-xs leading-relaxed">Full 5-day photo + video, three event recap films, same-day selects.</p>
+              </a>
+              <a href="#investment" className="block group bg-white/5 border border-white/10 hover:border-impact-blue/50 rounded-sm p-5 transition-colors">
+                <p className="text-white/50 text-[10px] uppercase tracking-widest mb-1">Package Two</p>
+                <p className="font-serif text-2xl font-bold text-white mb-1">$24,200</p>
+                <p className="text-white/50 text-[11px] mb-3">+ $1,807 travel &middot; CAD</p>
+                <div className="inline-flex items-center gap-1.5 mb-3">
+                  <Users className="w-3 h-3 text-impact-blue" />
+                  <span className="text-impact-blue text-[10px] font-semibold tracking-wider uppercase">3-4 Crew</span>
+                </div>
+                <p className="text-white/70 text-xs leading-relaxed">Everything in Package One + Live Social Desk running while the mission runs.</p>
+              </a>
+              <a href="#investment" className="block group bg-white text-impact-dark rounded-sm p-5 relative shadow-lg border-2 border-impact-purple hover:shadow-xl transition-shadow">
+                <div className="absolute -top-2 right-4 bg-impact-purple text-white text-[9px] uppercase tracking-widest px-2 py-0.5 rounded-sm">Recommended</div>
+                <p className="text-impact-dark/60 text-[10px] uppercase tracking-widest mb-1">Package Three</p>
+                <p className="font-serif text-2xl font-bold text-impact-purple mb-1">$27,000</p>
+                <p className="text-impact-dark/60 text-[11px] mb-3">+ $1,807 travel &middot; CAD</p>
+                <div className="inline-flex items-center gap-1.5 mb-3">
+                  <Users className="w-3 h-3 text-impact-purple" />
+                  <span className="text-impact-purple text-[10px] font-semibold tracking-wider uppercase">5+ Crew</span>
+                </div>
+                <p className="text-impact-dark/70 text-xs leading-relaxed">Everything in Package Two + six leadership interviews and a 3-4 min Mission Film.</p>
+              </a>
+            </div>
+            <div className="text-center mt-8">
+              <a href="#investment" className="inline-flex items-center gap-2 text-impact-blue text-xs uppercase tracking-widest font-semibold hover:text-white transition-colors">
+                Scroll down for the full breakdown of what our team can do for you
+                <ArrowRight className="w-4 h-4 rotate-90" />
+              </a>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -476,7 +565,7 @@ const ProposalCbccKenyaCanada = () => {
       </section>
 
       {/* Section 7: Investment */}
-      <section className="py-24 section-blue">
+      <section id="investment" className="py-24 section-blue scroll-mt-16">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
@@ -492,7 +581,12 @@ const ProposalCbccKenyaCanada = () => {
                 <div className="mb-6">
                   <p className="text-white/60 text-xs uppercase tracking-widest mb-2">Package One</p>
                   <h3 className="font-serif text-2xl md:text-3xl font-bold mb-2">Mission Coverage</h3>
-                  <p className="text-white/70 text-sm italic">Lean crew, full five days, photo and video</p>
+                  <p className="text-white/70 text-sm italic mb-4">Lean crew, full five days, photo and video</p>
+                  <div className="inline-flex items-center gap-2 bg-impact-blue/10 border border-impact-blue/30 rounded-full px-3 py-1.5">
+                    <Users className="w-3.5 h-3.5 text-impact-blue" />
+                    <span className="text-impact-blue text-[11px] font-semibold tracking-wider uppercase">3 Crew</span>
+                    <span className="text-white/60 text-[11px]">&middot; 2 photographers + 1 videographer</span>
+                  </div>
                 </div>
                 <div className="border-t border-b border-white/10 py-6 mb-6">
                   <p className="text-4xl md:text-5xl font-serif font-bold mb-1">$17,700</p>
@@ -512,7 +606,12 @@ const ProposalCbccKenyaCanada = () => {
                 <div className="mb-6">
                   <p className="text-white/60 text-xs uppercase tracking-widest mb-2">Package Two</p>
                   <h3 className="font-serif text-2xl md:text-3xl font-bold mb-2">Coverage + Live Content</h3>
-                  <p className="text-white/70 text-sm italic">Adds Live Social Desk across all five days</p>
+                  <p className="text-white/70 text-sm italic mb-4">Adds Live Social Desk across all five days</p>
+                  <div className="inline-flex items-center gap-2 bg-impact-blue/10 border border-impact-blue/30 rounded-full px-3 py-1.5">
+                    <Users className="w-3.5 h-3.5 text-impact-blue" />
+                    <span className="text-impact-blue text-[11px] font-semibold tracking-wider uppercase">3-4 Crew</span>
+                    <span className="text-white/60 text-[11px]">&middot; adds Social Editor</span>
+                  </div>
                 </div>
                 <div className="border-t border-b border-white/10 py-6 mb-6">
                   <p className="text-4xl md:text-5xl font-serif font-bold mb-1">$24,200</p>
@@ -533,7 +632,12 @@ const ProposalCbccKenyaCanada = () => {
                 <div className="mb-6">
                   <p className="text-impact-dark/60 text-xs uppercase tracking-widest mb-2">Package Three</p>
                   <h3 className="font-serif text-2xl md:text-3xl font-bold mb-2">Full Mission Story</h3>
-                  <p className="text-impact-dark/70 text-sm italic">Adds interviews and a 3-4 minute Mission Film</p>
+                  <p className="text-impact-dark/70 text-sm italic mb-4">Adds interviews and a 3-4 minute Mission Film</p>
+                  <div className="inline-flex items-center gap-2 bg-impact-purple/10 border border-impact-purple/30 rounded-full px-3 py-1.5">
+                    <Users className="w-3.5 h-3.5 text-impact-purple" />
+                    <span className="text-impact-purple text-[11px] font-semibold tracking-wider uppercase">5+ Crew</span>
+                    <span className="text-impact-dark/60 text-[11px]">&middot; adds Sound, Interview Producer, 2nd Camera</span>
+                  </div>
                 </div>
                 <div className="border-t border-b border-impact-dark/10 py-6 mb-6">
                   <p className="text-4xl md:text-5xl font-serif font-bold mb-1 text-impact-purple">$27,000</p>
