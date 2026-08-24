@@ -6,15 +6,10 @@ import { supabase } from "@/integrations/supabase/client";
 import {
   ArrowRight,
   Sparkles,
-  Layers,
   CheckCircle2,
   Award,
-  Video,
-  Radio,
-  Image as ImageIcon,
   Mail,
   Download,
-  Play,
   Users,
 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
@@ -34,53 +29,43 @@ const fadeIn = {
 const timeline = [
   {
     phase: "Day 1",
-    dates: "Sept 5, 2026",
-    title: "Opening Reception, Metro Hall, Toronto",
+    dates: "Sat, Sept 5, 2026",
+    title: "Toronto Metro Hall, Rooms 308-310 · 9:00-17:00",
     items: [
       "Full crew on site (photographer + videographer)",
       "Delegation welcome and opening remarks captured",
-      "Delegate arrival portraits",
+      "Delegate arrival portraits and B-roll",
       "Same-day selects: 15-20 finished images within 24 hours",
     ],
   },
   {
-    phase: "Days 2-3",
-    dates: "Sept 8-9, 2026",
-    title: "Business Track Sessions, York Civic Centre, Toronto",
+    phase: "Day 2",
+    dates: "Tue, Sept 8, 2026",
+    title: "York Civic Centre · 9:00-17:00",
     items: [
-      "Panel and roundtable coverage across both days",
+      "Panel and roundtable coverage",
       "Delegate breakout captures and B-roll of sessions in motion",
-      "Live Social Desk running (Packages 2 & 3): Stories, Reels, daily carousels published same day",
       "Continued same-day photo selects delivered nightly",
+      "Setup for next-day leadership interviews (Package 3)",
     ],
   },
   {
-    phase: "Travel",
-    dates: "Sept 9 evening",
-    title: "Toronto to Ottawa Move",
+    phase: "Day 3",
+    dates: "Wed, Sept 9, 2026",
+    title: "York Civic Centre · 9:00-17:00",
     items: [
-      "Crew drives with full lighting and backup camera gear",
-      "Social Editor works remotely from Toronto so no downtime in social deliverables",
-      "Ottawa venue walkthrough day-before setup",
-    ],
-  },
-  {
-    phase: "Days 4-5",
-    dates: "Sept 10-11, 2026",
-    title: "Ottawa Programme, Bayview Yards",
-    items: [
-      "Government and institutional meetings covered",
+      "Continued business track coverage",
       "Delegate interviews (Package 3) captured seated, lit, individually mic'd",
-      "Keynote and reception coverage",
+      "Closing remarks and reception captures",
       "Final Mission Film footage secured",
     ],
   },
   {
     phase: "Post",
-    dates: "Sept 12 onward",
+    dates: "Sept 10 onward",
     title: "Delivery Rolling",
     items: [
-      "Full photo gallery (500-750 images): 7 business days",
+      "Full photo gallery (300-450 images): 7 business days",
       "Event recap films and vertical cutdowns: 10 business days",
       "Full session recordings archived: 5 business days",
       "The Mission Film, 3-4 minutes (Package 3): 3 weeks from final interview",
@@ -89,31 +74,22 @@ const timeline = [
 ];
 
 const packageOne = [
-  "Core 3-person crew: 2 photographers + 1 videographer, across all five days",
-  "500-750 edited images, colour-corrected, web and print",
-  "One 1-2 minute recap film for each of the three events (Metro Hall, York Civic Centre, Bayview Yards)",
+  "Two- to three-person crew: photographer and videographer across all three days",
+  "300-450 edited images, colour-corrected, web and print",
+  "A 1-2 minute recap film for each event: one for Metro Hall, one for York Civic Centre",
   "10 vertical social cutdowns",
   "Full session recordings, archived and organised",
   "Same-day selects: 15-20 finished images within 24 hours of each day",
   "Delivery: gallery in 7 business days, recap films and cutdowns in 10",
 ];
 
-const packageTwo = [
-  "Everything in Package One, plus:",
-  "Live Social Desk, all five days: an editor on site cutting while the mission runs",
-  "35-50 vertical Stories per day for Instagram and LinkedIn",
-  "5-10 Reels per day, edited to trending audio or licensed music",
-  "A daily carousel with suggested copy, sized for every channel you post to",
-  "Delivery: live content during the mission, everything else as Package One",
-];
-
 const packageThree = [
-  "Everything in Packages One and Two, plus:",
-  "Six seated leadership interviews, lit, individually mic'd and fully transcribed",
+  "Everything in Package One, plus:",
+  "Five seated leadership interviews, lit, individually mic'd and fully transcribed",
   "The Mission Film, 3-4 minutes: why this mission mattered, in the words of the people who made it",
   "Licensed music and burned-in captions",
   "One round of revisions included",
-  "Delivery: film 3 weeks from the final interview, everything else as Packages One and Two",
+  "Delivery: film 3 weeks from the final interview, everything else as Package One",
 ];
 
 type PortfolioItem = {
@@ -140,17 +116,11 @@ const portfolio: PortfolioItem[] = [
     slug: "cafcan-opkt",
   },
   {
-    title: "Lakeridge Health - I Belong",
-    category: "Healthcare Institution",
-    desc: "Cinematic film built around Lakeridge Health's I Belong IDEAA Action Plan. Made to hold up in front of board, government, and patient-family audiences simultaneously.",
-    vimeoId: "1140641190",
-    slug: "lakeridge-i-belong",
-  },
-  {
-    title: "Jean Augustine Centre - When a Girl Is Empowered",
-    category: "Young Women's Empowerment",
-    desc: "Documentary portrait of a Black-serving young women's empowerment centre in Toronto. Built around real voices from mentors and program participants. Closest cultural analogue to the diaspora leadership and youth empowerment threads a trade mission carries.",
-    vimeoId: "1219684603",
+    title: "Black Creek - Black History Month",
+    category: "Community Initiative",
+    desc: "Event film and program documentation for a flagship community moment. Closest event-format analogue to a multi-day mission with keynote and reception coverage.",
+    vimeoId: "1174716851",
+    slug: "black-creek-bhm",
   },
 ];
 
@@ -177,35 +147,12 @@ const creativeApproach = [
   },
 ];
 
-const socialDeskCards = [
-  {
-    icon: Video,
-    label: "Stories",
-    desc: "35-50 vertical clips per day, 9:16, ready for Instagram and LinkedIn Stories.",
-  },
-  {
-    icon: Play,
-    label: "Reels",
-    desc: "5-10 Reels per day, edited to trending audio or licensed music.",
-  },
-  {
-    icon: Layers,
-    label: "Daily Carousel",
-    desc: "3-5 image carousel with suggested copy, sized per platform.",
-  },
-  {
-    icon: ImageIcon,
-    label: "Same-Day Selects",
-    desc: "15-20 finished photos within 24 hours of each shoot day.",
-  },
-];
-
 const references = [
   {
     org: "Black Creek Community Health Centre",
     person: "Cheryl Prescod",
     title: "Executive Director",
-    note: "Reference for community-centered storytelling, multi-stakeholder coordination, and event-anchored video work. The closest format match to a five-day mission.",
+    note: "Reference for community-centered storytelling, multi-stakeholder coordination, and event-anchored video work. The closest format match to a multi-day mission.",
   },
   {
     org: "CAFCAN Social Services (Caribbean African Canadian)",
@@ -215,19 +162,17 @@ const references = [
   },
 ];
 
-const travelLines = [
-  { item: "Vehicle, Toronto to Ottawa, 900 km @ $0.73/km", amount: "$657" },
-  { item: "Hotel, 1 room x 2 nights", amount: "$460" },
-  { item: "Meals, 2 crew x 3 days", amount: "$510" },
-  { item: "Parking, three venues", amount: "$180" },
-  { item: "Total", amount: "$1,807", bold: true },
+const missionDates = [
+  { date: "Sat 5 Sept", venue: "Toronto Metro Hall, Rooms 308-310", hours: "9:00-17:00" },
+  { date: "Tue 8 Sept", venue: "York Civic Centre", hours: "9:00-17:00" },
+  { date: "Wed 9 Sept", venue: "York Civic Centre", hours: "9:00-17:00" },
+  { date: "Travel and accommodation", venue: "None", hours: "" },
 ];
 
 const turnaround = [
   { item: "Same-day selects, 15-20 finished images", when: "Within 24 hours" },
-  { item: "Live Social Desk content (Packages 2 & 3)", when: "Same day" },
   { item: "Full session recordings, archived", when: "5 business days" },
-  { item: "Full photo gallery, 500-750 images", when: "7 business days" },
+  { item: "Full photo gallery, 300-450 images", when: "7 business days" },
   { item: "Event recap films and social cutdowns", when: "10 business days" },
   { item: "The Mission Film, 3-4 minutes (Package 3)", when: "3 weeks" },
 ];
@@ -236,7 +181,7 @@ const ProposalCbccKenyaCanada = () => {
   useEffect(() => {
     setSEO({
       title: "Kenya-Canada Trade Mission Proposal - Impact Loop for CBCC",
-      description: "Photo and video proposal for the Kenya-Canada Trade and Investment Mission, September 5-11, 2026. Toronto and Ottawa. Prepared by Impact Loop for the Canadian Black Chamber of Commerce.",
+      description: "Photo and video proposal for the Kenya-Canada Trade and Investment Mission, Toronto dates September 5, 8-9, 2026. Prepared by Impact Loop for the Canadian Black Chamber of Commerce.",
       ogType: "website",
     });
     let robotsMeta = document.querySelector('meta[name="robots"]') as HTMLMetaElement | null;
@@ -294,7 +239,7 @@ const ProposalCbccKenyaCanada = () => {
       <div className="bg-impact-blue/10 border-b border-impact-blue/20">
         <div className="container mx-auto px-6 py-3">
           <p className="text-impact-blue text-xs uppercase tracking-[0.25em] text-center">
-            Confidential Proposal &middot; Prepared for Canadian Black Chamber of Commerce &middot; September 2026
+            Confidential Proposal &middot; Revised Toronto Quotation &middot; Prepared for Canadian Black Chamber of Commerce
           </p>
         </div>
       </div>
@@ -309,21 +254,21 @@ const ProposalCbccKenyaCanada = () => {
         <div className="container mx-auto px-6 relative z-10 pt-16 pb-16">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-4xl mx-auto text-center">
             <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">
-              CBCC Kenya-Canada Mission &middot; Photo + Video &middot; Quotation IL-2026-000
+              CBCC Kenya-Canada Mission &middot; Toronto Photo + Video &middot; Quotation IL-2026-000 (Revised)
             </p>
             <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
               Kenya-Canada Trade Mission <span className="text-gradient">Proposal</span>
             </h1>
             <p className="text-white/80 text-xl leading-relaxed mb-10">
-              Five days of cinematic photography and video capturing the Kenya-Canada Trade &amp; Investment Mission across Toronto and Ottawa, September 5, 8-9, and 10-11, 2026. Prepared for Sheares Benjamin, Canadian Black Chamber of Commerce, on behalf of the Kenya National Chamber of Commerce &amp; Industry, Nexus Global Strategies, and the CBCC.
+              Toronto dates only. Three days of cinematic photography and video across Toronto Metro Hall and York Civic Centre, September 5 and 8-9, 2026. Prepared for Sheares Benjamin, Canadian Black Chamber of Commerce, on behalf of the Kenya National Chamber of Commerce &amp; Industry, Nexus Global Strategies, and the CBCC.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10">
               <a
-                href="/proposals/impact-loop-cbcc-kenya-canada.pdf"
+                href="/proposals/Impact-Loop-CBCC-Toronto-Proposal.pdf"
                 className="btn-secondary inline-flex items-center gap-2"
               >
                 <Download className="w-4 h-4" />
-                Download as PDF
+                Download One-Page PDF
               </a>
             </div>
             <p className="text-white/60 text-xs md:text-sm uppercase tracking-[0.25em]">
@@ -336,43 +281,33 @@ const ProposalCbccKenyaCanada = () => {
       {/* Section 1.5: Quick Look - at-a-glance pricing snapshot */}
       <section className="py-16 md:py-20 bg-impact-dark border-t border-white/5">
         <div className="container mx-auto px-6">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="max-w-5xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="max-w-4xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-impact-blue text-xs uppercase tracking-[0.25em] font-semibold mb-3">Quick Look</p>
-              <h2 className="font-serif text-2xl md:text-3xl font-bold text-white mb-3">Three Ways to Cover the Mission</h2>
-              <p className="text-white/60 text-sm max-w-2xl mx-auto">Prices at a glance. Full details on scope, crew, timeline, and delivery are below.</p>
+              <h2 className="font-serif text-2xl md:text-3xl font-bold text-white mb-3">Two Ways to Cover the Mission</h2>
+              <p className="text-white/60 text-sm max-w-2xl mx-auto">Prices at a glance. All three days are in Toronto — no travel costs. Full details on scope, crew, timeline, and delivery are below.</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <a href="#investment" className="block group bg-white/5 border border-white/10 hover:border-impact-blue/50 rounded-sm p-5 transition-colors">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <a href="#investment" className="block group bg-white/5 border border-white/10 hover:border-impact-blue/50 rounded-sm p-6 transition-colors">
                 <p className="text-white/50 text-[10px] uppercase tracking-widest mb-1">Package One</p>
-                <p className="font-serif text-2xl font-bold text-white mb-1">$17,700</p>
-                <p className="text-white/50 text-[11px] mb-3">+ $1,807 travel &middot; CAD</p>
+                <p className="font-serif text-3xl font-bold text-white mb-1">$12,400</p>
+                <p className="text-white/50 text-[11px] mb-3">3 days &middot; no travel costs &middot; CAD</p>
                 <div className="inline-flex items-center gap-1.5 mb-3">
                   <Users className="w-3 h-3 text-impact-blue" />
-                  <span className="text-impact-blue text-[10px] font-semibold tracking-wider uppercase">3 Crew</span>
+                  <span className="text-impact-blue text-[10px] font-semibold tracking-wider uppercase">2-3 Crew</span>
                 </div>
-                <p className="text-white/70 text-xs leading-relaxed">Full 5-day photo + video, three event recap films, same-day selects.</p>
+                <p className="text-white/70 text-xs leading-relaxed">Mission Coverage. Full 3-day photo + video, two event recap films, same-day selects, gallery of 300-450 edited images.</p>
               </a>
-              <a href="#investment" className="block group bg-white/5 border border-white/10 hover:border-impact-blue/50 rounded-sm p-5 transition-colors">
-                <p className="text-white/50 text-[10px] uppercase tracking-widest mb-1">Package Two</p>
-                <p className="font-serif text-2xl font-bold text-white mb-1">$24,200</p>
-                <p className="text-white/50 text-[11px] mb-3">+ $1,807 travel &middot; CAD</p>
-                <div className="inline-flex items-center gap-1.5 mb-3">
-                  <Users className="w-3 h-3 text-impact-blue" />
-                  <span className="text-impact-blue text-[10px] font-semibold tracking-wider uppercase">3-4 Crew</span>
-                </div>
-                <p className="text-white/70 text-xs leading-relaxed">Everything in Package One + Live Social Desk running while the mission runs.</p>
-              </a>
-              <a href="#investment" className="block group bg-white text-impact-dark rounded-sm p-5 relative shadow-lg border-2 border-impact-purple hover:shadow-xl transition-shadow">
+              <a href="#investment" className="block group bg-white text-impact-dark rounded-sm p-6 relative shadow-lg border-2 border-impact-purple hover:shadow-xl transition-shadow">
                 <div className="absolute -top-2 right-4 bg-impact-purple text-white text-[9px] uppercase tracking-widest px-2 py-0.5 rounded-sm">Recommended</div>
                 <p className="text-impact-dark/60 text-[10px] uppercase tracking-widest mb-1">Package Three</p>
-                <p className="font-serif text-2xl font-bold text-impact-purple mb-1">$27,000</p>
-                <p className="text-impact-dark/60 text-[11px] mb-3">+ $1,807 travel &middot; CAD</p>
+                <p className="font-serif text-3xl font-bold text-impact-purple mb-1">$15,200</p>
+                <p className="text-impact-dark/60 text-[11px] mb-3">3 days &middot; no travel costs &middot; CAD</p>
                 <div className="inline-flex items-center gap-1.5 mb-3">
                   <Users className="w-3 h-3 text-impact-purple" />
                   <span className="text-impact-purple text-[10px] font-semibold tracking-wider uppercase">5+ Crew</span>
                 </div>
-                <p className="text-impact-dark/70 text-xs leading-relaxed">Everything in Package Two + six leadership interviews and a 3-4 min Mission Film.</p>
+                <p className="text-impact-dark/70 text-xs leading-relaxed">Full Mission Story. Everything in Package One + five leadership interviews and a 3-4 min Mission Film with licensed score.</p>
               </a>
             </div>
             <div className="text-center mt-8">
@@ -391,7 +326,7 @@ const ProposalCbccKenyaCanada = () => {
           <p className="text-center text-white/50 text-xs uppercase tracking-[0.25em] mb-8">
             Recent work in the same emotional register as Kenya-Canada
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-4xl mx-auto">
             {portfolio.map((p) => (
               <div key={p.vimeoId} className="relative aspect-video bg-black/40 overflow-hidden rounded-sm pointer-events-none">
                 <iframe
@@ -418,9 +353,9 @@ const ProposalCbccKenyaCanada = () => {
               <Sparkles className="w-10 h-10 text-impact-blue mx-auto mb-6" />
               <h2 className="font-serif text-3xl md:text-4xl font-bold mb-8">Why Impact Loop for Kenya-Canada</h2>
               <div className="space-y-6 text-white/85 text-lg leading-relaxed text-left max-w-3xl mx-auto">
-                <p>Most production companies will treat a five-day trade mission like a shoot list. Capture the room, edit the recap, deliver. We don't, and that's the difference.</p>
+                <p>Most production companies will treat a three-day trade mission like a shoot list. Capture the room, edit the recap, deliver. We don't, and that's the difference.</p>
                 <p>Impact Loop builds storytelling systems for institutions whose work has to earn trust before it can earn deals. Chambers of commerce. Trade delegations. Diaspora economic development. Black-led and Black-serving organizations. The exact territory this mission operates in.</p>
-                <p>We bring three things to Kenya-Canada that matter more than gear: a director who understands why the delegation itself is the story, not just the signed MOUs; a community first interview practice that makes Kenyan and Canadian delegates feel safe enough to give you the moments that actually earn partners; and a same-day content mindset that means the mission is on socials while it is still happening, not two weeks after everyone flew home.</p>
+                <p>We bring two things to Kenya-Canada that matter more than gear: a director who understands why the delegation itself is the story, not just the signed MOUs, and a community first interview practice that makes Kenyan and Canadian delegates feel safe enough to give you the moments that actually earn partners.</p>
               </div>
             </motion.div>
           </div>
@@ -434,9 +369,9 @@ const ProposalCbccKenyaCanada = () => {
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
               <Sparkles className="w-10 h-10 text-primary mx-auto mb-4" />
               <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">01 &middot; Creative Approach</p>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">How We Turn Five Days Into a Story That Earns Partners</h2>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">How We Turn Three Days Into a Story That Earns Partners</h2>
               <p className="text-impact-dark/70 text-lg max-w-3xl mx-auto leading-relaxed">
-                The brief is clear: cover the mission comprehensively, deliver in real time, and produce a legacy film that outlasts the week. Here is the creative thinking that drives every decision.
+                The brief is clear: cover the Toronto portion of the mission comprehensively, and produce a legacy film that outlasts the week. Here is the creative thinking that drives every decision.
               </p>
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -468,7 +403,7 @@ const ProposalCbccKenyaCanada = () => {
                 <div className="md:col-span-3">
                   <p className="text-primary text-xs uppercase tracking-widest mb-3 font-medium">A Note From the Director</p>
                   <p className="text-impact-dark/80 text-lg italic leading-relaxed mb-4">
-                    &ldquo;Trade missions are one of the last real venues where economic diplomacy is done face to face. Our job as filmmakers is to stay out of the way when it matters and be ready when the moment needs a witness. We don&rsquo;t set out to make a marketing film. We set out to make an honest record of five days that mattered, and trust that the partnerships follow.&rdquo;
+                    &ldquo;Trade missions are one of the last real venues where economic diplomacy is done face to face. Our job as filmmakers is to stay out of the way when it matters and be ready when the moment needs a witness. We don&rsquo;t set out to make a marketing film. We set out to make an honest record of the days that mattered, and trust that the partnerships follow.&rdquo;
                   </p>
                   <p className="text-impact-dark/60 text-sm uppercase tracking-widest font-medium">Rovonn Russell</p>
                   <p className="text-impact-dark/50 text-xs italic">Creative Director &amp; Director</p>
@@ -479,40 +414,7 @@ const ProposalCbccKenyaCanada = () => {
         </div>
       </section>
 
-      {/* Section 5: Live Social Desk */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="max-w-6xl mx-auto">
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <Radio className="w-10 h-10 text-primary mx-auto mb-4" />
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">02 &middot; Live Social Desk</p>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">The Mission on the Feed, While It Is Still Happening.</h2>
-              <p className="text-impact-dark/70 text-lg max-w-3xl mx-auto leading-relaxed">
-                For Packages Two and Three, a Social Editor is on site all five days, cutting vertical Stories, Reels, and daily carousels between sessions. Content goes live the same day, not the next week.
-              </p>
-            </motion.div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {socialDeskCards.map((card, i) => (
-                <motion.div
-                  key={card.label}
-                  custom={i}
-                  variants={fadeIn}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  className="p-6 bg-impact-cream rounded-sm text-center border border-impact-dark/5"
-                >
-                  <card.icon className="w-8 h-8 text-primary mx-auto mb-3" />
-                  <h3 className="font-serif text-base font-semibold text-impact-dark mb-2">{card.label}</h3>
-                  <p className="text-impact-dark/70 text-sm leading-relaxed">{card.desc}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 6: Production Plan */}
+      {/* Section 5: Production Plan */}
       <section
         className="py-24 bg-impact-dark text-white relative"
         style={{
@@ -525,10 +427,10 @@ const ProposalCbccKenyaCanada = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">03 &middot; Mission Coverage Plan</p>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">Five Days, Two Cities, One Continuous Story</h2>
+              <p className="text-impact-blue font-medium text-sm uppercase tracking-widest mb-4">02 &middot; Mission Coverage Plan</p>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">Three Days, Two Toronto Venues</h2>
               <p className="text-white/80 text-lg max-w-3xl mx-auto leading-relaxed">
-                Built around your mission agenda: three venues across Toronto and Ottawa, September 5 through 11.
+                Built around your mission agenda: Toronto Metro Hall on September 5, then York Civic Centre on September 8-9. All venues walking or short-drive distance from downtown.
               </p>
             </motion.div>
             <div className="space-y-4">
@@ -564,33 +466,33 @@ const ProposalCbccKenyaCanada = () => {
         </div>
       </section>
 
-      {/* Section 7: Investment */}
+      {/* Section 6: Investment */}
       <section id="investment" className="py-24 section-blue scroll-mt-16">
         <div className="container mx-auto px-6">
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <p className="text-white/70 font-medium text-sm uppercase tracking-widest mb-4">04 &middot; Investment</p>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">Three Packages, Same Photography &amp; Video Standard</h2>
+              <p className="text-white/70 font-medium text-sm uppercase tracking-widest mb-4">03 &middot; Investment</p>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">Two Packages, Same Photography &amp; Video Standard</h2>
               <p className="text-white/80 text-lg max-w-3xl mx-auto leading-relaxed">
-                Every package includes photography and video across all five mission days. Package Two adds live social. Package Three adds the Mission Film and delegate interviews.
+                Every package includes photography and video across all three Toronto mission days. Package Three adds the Mission Film and delegate interviews. No travel costs on either tier.
               </p>
             </motion.div>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch max-w-4xl mx-auto">
               {/* Package 1 */}
               <motion.div custom={0} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-white/5 border border-white/20 rounded-sm p-8 backdrop-blur-sm flex flex-col">
                 <div className="mb-6">
                   <p className="text-white/60 text-xs uppercase tracking-widest mb-2">Package One</p>
                   <h3 className="font-serif text-2xl md:text-3xl font-bold mb-2">Mission Coverage</h3>
-                  <p className="text-white/70 text-sm italic mb-4">Lean crew, full five days, photo and video</p>
+                  <p className="text-white/70 text-sm italic mb-4">Lean crew, full three days, photo and video</p>
                   <div className="inline-flex items-center gap-2 bg-impact-blue/10 border border-impact-blue/30 rounded-full px-3 py-1.5">
                     <Users className="w-3.5 h-3.5 text-impact-blue" />
-                    <span className="text-impact-blue text-[11px] font-semibold tracking-wider uppercase">3 Crew</span>
-                    <span className="text-white/60 text-[11px]">&middot; 2 photographers + 1 videographer</span>
+                    <span className="text-impact-blue text-[11px] font-semibold tracking-wider uppercase">2-3 Crew</span>
+                    <span className="text-white/60 text-[11px]">&middot; photographer + videographer</span>
                   </div>
                 </div>
                 <div className="border-t border-b border-white/10 py-6 mb-6">
-                  <p className="text-4xl md:text-5xl font-serif font-bold mb-1">$17,700</p>
-                  <p className="text-white/60 text-sm">+ $1,807 travel &middot; CAD &middot; taxes additional</p>
+                  <p className="text-4xl md:text-5xl font-serif font-bold mb-1">$12,400</p>
+                  <p className="text-white/60 text-sm">3 days &middot; no travel costs &middot; CAD &middot; taxes additional</p>
                 </div>
                 <ul className="space-y-3 flex-1">
                   {packageOne.map((item) => (
@@ -601,33 +503,8 @@ const ProposalCbccKenyaCanada = () => {
                   ))}
                 </ul>
               </motion.div>
-              {/* Package 2 */}
-              <motion.div custom={1} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-white/5 border border-white/20 rounded-sm p-8 backdrop-blur-sm flex flex-col">
-                <div className="mb-6">
-                  <p className="text-white/60 text-xs uppercase tracking-widest mb-2">Package Two</p>
-                  <h3 className="font-serif text-2xl md:text-3xl font-bold mb-2">Coverage + Live Content</h3>
-                  <p className="text-white/70 text-sm italic mb-4">Adds Live Social Desk across all five days</p>
-                  <div className="inline-flex items-center gap-2 bg-impact-blue/10 border border-impact-blue/30 rounded-full px-3 py-1.5">
-                    <Users className="w-3.5 h-3.5 text-impact-blue" />
-                    <span className="text-impact-blue text-[11px] font-semibold tracking-wider uppercase">3-4 Crew</span>
-                    <span className="text-white/60 text-[11px]">&middot; adds Social Editor</span>
-                  </div>
-                </div>
-                <div className="border-t border-b border-white/10 py-6 mb-6">
-                  <p className="text-4xl md:text-5xl font-serif font-bold mb-1">$24,200</p>
-                  <p className="text-white/60 text-sm">+ $1,807 travel &middot; CAD &middot; taxes additional</p>
-                </div>
-                <ul className="space-y-3 flex-1">
-                  {packageTwo.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-white/80 text-sm">
-                      <CheckCircle2 className="w-5 h-5 text-impact-blue flex-shrink-0 mt-0.5" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
               {/* Package 3 - Recommended */}
-              <motion.div custom={2} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-white text-impact-dark rounded-sm p-8 relative shadow-2xl border-2 border-impact-purple flex flex-col">
+              <motion.div custom={1} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-white text-impact-dark rounded-sm p-8 relative shadow-2xl border-2 border-impact-purple flex flex-col">
                 <div className="absolute -top-3 right-8 bg-impact-purple text-white text-xs uppercase tracking-widest px-3 py-1 rounded-sm">Recommended</div>
                 <div className="mb-6">
                   <p className="text-impact-dark/60 text-xs uppercase tracking-widest mb-2">Package Three</p>
@@ -636,12 +513,12 @@ const ProposalCbccKenyaCanada = () => {
                   <div className="inline-flex items-center gap-2 bg-impact-purple/10 border border-impact-purple/30 rounded-full px-3 py-1.5">
                     <Users className="w-3.5 h-3.5 text-impact-purple" />
                     <span className="text-impact-purple text-[11px] font-semibold tracking-wider uppercase">5+ Crew</span>
-                    <span className="text-impact-dark/60 text-[11px]">&middot; adds Sound, Interview Producer, 2nd Camera</span>
+                    <span className="text-impact-dark/60 text-[11px]">&middot; adds Sound + Interview Producer</span>
                   </div>
                 </div>
                 <div className="border-t border-b border-impact-dark/10 py-6 mb-6">
-                  <p className="text-4xl md:text-5xl font-serif font-bold mb-1 text-impact-purple">$27,000</p>
-                  <p className="text-impact-dark/60 text-sm">+ $1,807 travel &middot; CAD &middot; taxes additional</p>
+                  <p className="text-4xl md:text-5xl font-serif font-bold mb-1 text-impact-purple">$15,200</p>
+                  <p className="text-impact-dark/60 text-sm">3 days &middot; no travel costs &middot; CAD &middot; taxes additional</p>
                 </div>
                 <ul className="space-y-3 flex-1">
                   {packageThree.map((item) => (
@@ -658,28 +535,21 @@ const ProposalCbccKenyaCanada = () => {
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mt-14 max-w-4xl mx-auto bg-white/5 border border-impact-purple/30 border-l-4 border-l-impact-purple rounded-sm p-8">
               <p className="text-impact-purple text-[11px] uppercase tracking-[0.25em] font-semibold mb-4">What the Extra Buys You</p>
               <p className="text-white/85 text-base leading-relaxed mb-5">
-                Every package delivers the same photography and video standard across all five days. The differences are where the mission gets amplified.
+                Both packages deliver the same photography and video standard across all three days. Package Three bundles the Mission Film add-on so you know the legacy piece is locked in.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-4 h-4 text-impact-purple flex-shrink-0 mt-1" />
                   <div>
-                    <p className="text-white font-semibold text-[13px]">Package Two vs One &middot; +$6,500</p>
-                    <p className="text-white/60 text-[12px] leading-snug">Five days of on-site social editing, 175-250 Stories, 25-50 Reels, and daily branded carousels. Standalone social editor rates run $1,200-$1,800/day in Toronto.</p>
+                    <p className="text-white font-semibold text-[13px]">Package Three vs One &middot; +$2,800</p>
+                    <p className="text-white/60 text-[12px] leading-snug">Five seated executive interviews with full transcripts, plus a 3-4 min Mission Film with licensed score and captions. Standalone film production of that spec runs $4,500-$8,000.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-4 h-4 text-impact-purple flex-shrink-0 mt-1" />
                   <div>
-                    <p className="text-white font-semibold text-[13px]">Package Three vs Two &middot; +$2,800</p>
-                    <p className="text-white/60 text-[12px] leading-snug">Six seated executive interviews with full transcripts, plus a 3-4 min Mission Film with licensed score and captions. Standalone film production of that spec runs $4,500-$8,000.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="w-4 h-4 text-impact-purple flex-shrink-0 mt-1" />
-                  <div>
-                    <p className="text-white font-semibold text-[13px]">Travel &middot; $1,807 flat, at cost</p>
-                    <p className="text-white/60 text-[12px] leading-snug">Vehicle to Ottawa, hotel, meals, parking. Reconciled against receipts. Same across all three packages because our social editor works remotely from Toronto for the Ottawa dates.</p>
+                    <p className="text-white font-semibold text-[13px]">No Travel Costs</p>
+                    <p className="text-white/60 text-[12px] leading-snug">All three venues are in Toronto. No mileage, accommodation, or per diem. Parking is absorbed in our rate.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
@@ -689,26 +559,33 @@ const ProposalCbccKenyaCanada = () => {
                     <p className="text-white/60 text-[12px] leading-snug">40% on signed agreement, 40% at first day of shooting, 20% on final delivery. Prices held for 30 days from proposal date.</p>
                   </div>
                 </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-4 h-4 text-impact-purple flex-shrink-0 mt-1" />
+                  <div>
+                    <p className="text-white font-semibold text-[13px]">Ottawa Availability</p>
+                    <p className="text-white/60 text-[12px] leading-snug">The original Ottawa dates of 10-11 September remain available at the rates originally quoted should plans change.</p>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Section 8: Add-Ons */}
+      {/* Section 7: Add-Ons */}
       <section className="py-24 section-cream">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12">
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">05 &middot; Add-Ons</p>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Two Ways to Extend Package One or Two</h2>
+              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">04 &middot; Add-Ons</p>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Two Ways to Extend Package One</h2>
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <motion.div custom={0} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-white p-8 rounded-sm border-l-4 border-amber-500">
                 <p className="text-amber-600 text-xs uppercase tracking-widest font-semibold mb-3">Add-On &middot; +$2,800</p>
                 <h3 className="font-serif text-xl font-semibold text-impact-dark mb-3">The Mission Film + Leadership Interviews</h3>
                 <p className="text-impact-dark/70 leading-relaxed">
-                  Six seated interviews with mission leadership and delegates, captured on site and fully transcribed, cut into a 3-4 minute film. Automatically included in Package Three.
+                  Five seated interviews with mission leadership and delegates, captured on site and fully transcribed, cut into a 3-4 minute film. Automatically included in Package Three.
                 </p>
               </motion.div>
               <motion.div custom={1} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-white p-8 rounded-sm border-l-4 border-amber-500">
@@ -723,22 +600,23 @@ const ProposalCbccKenyaCanada = () => {
         </div>
       </section>
 
-      {/* Section 9: Travel Line Items */}
+      {/* Section 8: The Three Dates · No Travel Costs */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12">
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">06 &middot; Ottawa Travel, At Cost</p>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Travel Line Items</h2>
+              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">05 &middot; The Three Dates</p>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Toronto Only &middot; No Travel Costs</h2>
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="border border-impact-dark/10 rounded-sm overflow-hidden">
                 <table className="w-full text-sm">
                   <tbody>
-                    {travelLines.map((line, idx) => (
-                      <tr key={line.item} className={`${line.bold ? "bg-impact-cream font-semibold text-impact-dark" : "text-impact-dark/80"} ${idx !== travelLines.length - 1 ? "border-b border-impact-dark/10" : ""}`}>
-                        <td className="px-4 py-3">{line.item}</td>
-                        <td className="px-4 py-3 text-right">{line.amount}</td>
+                    {missionDates.map((d, idx) => (
+                      <tr key={d.date + d.venue} className={`${idx === missionDates.length - 1 ? "bg-impact-cream font-semibold text-impact-dark" : "text-impact-dark/80"} ${idx !== missionDates.length - 1 ? "border-b border-impact-dark/10" : ""}`}>
+                        <td className="px-4 py-3 font-medium">{d.date}</td>
+                        <td className="px-4 py-3">{d.venue}</td>
+                        <td className="px-4 py-3 text-right text-impact-dark/60 text-xs uppercase tracking-widest">{d.hours}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -746,7 +624,7 @@ const ProposalCbccKenyaCanada = () => {
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-impact-cream p-6 rounded-sm">
                 <p className="text-impact-dark/70 text-sm leading-relaxed italic">
-                  Billed at cost with no markup, and reconciled against receipts after the mission. Driving rather than flying lets us bring full lighting and backup equipment. Our Social Editor works remotely from Toronto for the Ottawa dates, so travel does not increase across packages.
+                  All three venues are in Toronto, so no mileage, accommodation or per diem applies. Parking is absorbed in our rate. September 5 is quoted at our standard rate with no long-weekend premium, and can be booked or dropped independently of the 8-9 block. The Ottawa dates of 10-11 September remain available at the rates originally quoted should plans change.
                 </p>
               </motion.div>
             </div>
@@ -754,12 +632,12 @@ const ProposalCbccKenyaCanada = () => {
         </div>
       </section>
 
-      {/* Section 10: Turnaround */}
+      {/* Section 9: Turnaround */}
       <section className="py-24 section-cream">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12">
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">07 &middot; Turnaround</p>
+              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">06 &middot; Turnaround</p>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">What You Get, When You Get It</h2>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white border border-impact-dark/10 rounded-sm overflow-hidden">
@@ -787,18 +665,18 @@ const ProposalCbccKenyaCanada = () => {
         </div>
       </section>
 
-      {/* Section 11: Example of Our Work */}
+      {/* Section 10: Example of Our Work */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">08 &middot; Example of Our Work</p>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Closest Reference Work</h2>
+              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">07 &middot; Example of Our Work</p>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Selected Work</h2>
               <p className="text-impact-dark/70 text-lg max-w-3xl mx-auto leading-relaxed">
                 Each of these projects shares meaningful DNA with the Kenya-Canada mission: multi-stakeholder, community-rooted, Black-led or Black-serving, built to hold up in front of institutional audiences. Click any tile to read the full case study.
               </p>
             </motion.div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {portfolio.map((p, i) => (
                 <motion.div key={p.title} custom={i} variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
                   <Link to={p.slug ? `/work/${p.slug}` : "/work"} className="group block">
@@ -833,15 +711,15 @@ const ProposalCbccKenyaCanada = () => {
         </div>
       </section>
 
-      {/* Section 12: Trusted By (imported from homepage) */}
+      {/* Section 11: Trusted By (imported from homepage) */}
       <ClientLogosSection />
 
-      {/* Section 13: References */}
+      {/* Section 12: References */}
       <section className="py-24 section-cream">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">09 &middot; References</p>
+              <p className="text-primary font-medium text-sm uppercase tracking-widest mb-4">08 &middot; References</p>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-impact-dark mb-6">Two Past Clients Available for Reference Calls</h2>
               <p className="text-impact-dark/70 text-lg max-w-3xl mx-auto leading-relaxed">
                 Direct contact information shared upon request to protect their inboxes. We are happy to schedule a 15-minute call with either reference before contract sign.
@@ -873,7 +751,7 @@ const ProposalCbccKenyaCanada = () => {
         </div>
       </section>
 
-      {/* Section 14: Closing */}
+      {/* Section 13: Closing */}
       <section className="py-24 bg-impact-dark relative overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-25">
           <iframe
@@ -910,7 +788,7 @@ const ProposalCbccKenyaCanada = () => {
               </Link>
             </div>
             <p className="text-white/40 text-xs uppercase tracking-widest mt-12">
-              Quotation IL-2026-000 &middot; Valid 30 days from proposal date &middot; Impact Loop &middot; Toronto &middot; impactloop.ca &middot; All figures CAD, before applicable taxes
+              Quotation IL-2026-000 (Revised) &middot; Valid 30 days from proposal date &middot; Impact Loop &middot; Toronto &middot; impactloop.ca &middot; All figures CAD, before applicable taxes
             </p>
           </motion.div>
         </div>
