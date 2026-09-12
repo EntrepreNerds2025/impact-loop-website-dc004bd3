@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1789221392796,
+      "tag": "0000_restrict_lead_pii_to_admins_and_hide_unpublished_reports",
+      "breakpoints": true
+    }
+  ]
+}
